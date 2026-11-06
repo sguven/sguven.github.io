@@ -1,0 +1,299 @@
+[
+ {
+  "date": "2026-11-05",
+  "feature": {
+   "name": "Claude Docs: live, tabbed documents you edit with comments",
+   "released": "September 16, 2026 · Free, Pro, Max, Team, Enterprise",
+   "what": "Claude writes an editable document right in the chat; it is saved to your Artifacts and you can type into it yourself. Documents can be split into tabs and hold charts and diagrams. Select any passage, leave a comment that mentions @Claude, and Claude rewrites that part and explains why.",
+   "how": "Type /docs in any chat or just ask for a document. Export to Word, PDF, Markdown or Google Docs; it also opens in the iPhone app.",
+   "source": "https://support.claude.com/en/articles/16923645-get-started-with-claude-docs"
+  },
+  "project": {
+   "name": "The Makam Notebook: ear training for six Turkish makams",
+   "why": "Instead of a one-off answer, Claude becomes a notebook you grow over months: you add notes as you listen and refine it section by section with @Claude comments. By the end you hear Turkish classical music knowing what you are listening to.",
+   "gain": "You learn to co-write with Claude, editing a document piece by piece through comments and @Claude mentions.",
+   "effort": "30 min first step · spans several sessions · beginner",
+   "steps": [
+    "Paste the prompt below into a new chat and answer Claude's few short questions.",
+    "Each makam gets its own tab; today read only Rast and Hicaz and listen to one suggested piece for each.",
+    "Select a sentence you don't understand, add a comment and write \"@Claude explain this more simply, with an analogy\".",
+    "Over the next days write impressions in a \"My listening notes\" tab and ask Claude to add a short ear test based on them."
+   ],
+   "prompt": "Create a Claude Doc called 'Makam Notebook'. I'm a curious beginner in Turkish classical (makam) music and I can't read notation. Give each of Rast, Uşşak, Hicaz, Hüseyni, Segâh and Kürdi its own tab: its character and mood (2-3 sentences), how it differs from the closest Western scale, a simple diagram of how its melodic path (seyir) unfolds, what my ear should focus on, and 2 classical pieces to listen to (composer and form; no lyrics). Start with a short comparison table and end with an empty 'My listening notes' tab. Mark anything you're unsure of as a comment."
+  }
+ },
+ {
+  "date": "2026-11-04",
+  "feature": {
+   "name": "Claude Slides: from chat to deck, with a built-in presenter mode",
+   "released": "September 16, 2026 · Free, Pro, Max, Team and Enterprise (beta on Enterprise)",
+   "what": "A built-in slide template that turns your notes or the conversation into a deck. Edit any slide yourself or ask Claude to change it, then press Present to show it full screen without leaving Claude. Decks export to PowerPoint, PDF or editable Google Slides.",
+   "how": "Ask for a presentation in any chat, or pick the Slides template under Output in the message box. 'Create and edit files' must be on in Settings > Capabilities.",
+   "source": "https://support.claude.com/en/articles/17153992"
+  },
+  "project": {
+   "name": "The science of the cezve: an 8-slide talk on Turkish coffee foam",
+   "why": "Claude stops being a chat that answers and becomes a partner that researches, designs and hands you a deck ready to present. The kitchen chemistry of why foam forms and why the grounds sink turns into a fun talk for guests or a curious kid.",
+   "gain": "You learn to combine research, narrative and visual design in one prompt, fine-tune slides by hand and present from inside Claude.",
+   "effort": "30 min · beginner",
+   "steps": [
+    "Open a new chat and paste the prompt below; Claude builds the deck with the Slides template.",
+    "Click into slides and change a title or color yourself; ask Claude to make one slide \"more visual\".",
+    "Brew a coffee in a cezve, photograph the foam, upload it and have it added to the last slide.",
+    "Press Present and rehearse once; download a PDF to your phone if you like."
+   ],
+   "prompt": "Using Claude Slides, make a fun, visual 8-slide talk: 'The science of the cezve: why does Turkish coffee foam?'. The audience is curious adults and a 10-year-old. Cover: the very fine grind, gas bubbles rising as it heats and the oils and proteins that hold the foam, why you take it off the heat before it boils, why the grounds settle, and Turkish coffee's place on UNESCO's intangible heritage list. One idea per slide, a short title, at most 3 bullets and a simple diagram. Give one slide to an at-home mini experiment (foam with cold vs. hot water). Soften any scientific claim you're unsure of and add source notes on the last slide. Palette: coffee brown, cream and copper."
+  }
+ },
+ {
+  "date": "2026-11-03",
+  "feature": {
+   "name": "Claude on iPhone: the Lock Screen 'Analyze Photo' control and Shortcuts",
+   "released": "Available for a long time · Claude app on iOS 18+; no plan restriction listed, counts toward usage limits",
+   "what": "Claude is wired into the iPhone itself: the 'Analyze Photo with Claude' control on the Lock Screen or in Control Center takes a photo and asks Claude without unlocking. The 'Ask Claude' action in Shortcuts chains Claude with other apps into automations, and it is also reachable from Siri, Spotlight and the Share sheet.",
+   "how": "Long-press the Lock Screen → Customize → swap a control for 'Analyze Photo with Claude'. In Shortcuts, add the 'Ask Claude' action and put the 'Shortcut Input' variable in the prompt.",
+   "source": "https://support.claude.com/en/articles/10263469-using-claude-app-intents-shortcuts-and-widgets-on-ios"
+  },
+  "project": {
+   "name": "Pocket nature journal: November leaves, birds and mushrooms in the Meadowlands",
+   "why": "Claude becomes a field tool in your pocket rather than a chat window: one tap on the Lock Screen identifies a species and one share files it into your notes. In a few weeks you have a personal catalog of the living things in your neighborhood.",
+   "gain": "You learn to connect Claude to the iPhone Lock Screen, Share sheet and Notes and build no-code automations.",
+   "effort": "First step 30 min · beginner; then a few minutes per walk",
+   "steps": [
+    "Add the 'Analyze Photo with Claude' control to the Lock Screen (iOS 18+).",
+    "Build a 'Nature Journal' shortcut: input Text (from the Share sheet) → 'Ask Claude' (the prompt below + Shortcut Input) → 'Append to Note' in a 'Nature Journal' note. Turn on Show in Share Sheet.",
+    "Walk a nearby park for 20 minutes; photograph 5 living things (a leaf, bird, mushroom, insect, shrub) with the control and ask \"What is this and how do I tell it apart?\"",
+    "Share each answer to Nature Journal. At month's end give Claude the whole note and ask for a seasonal summary and 3 species to look for next time."
+   ],
+   "prompt": "The text below is Claude's identification of a living thing in a photo. Turn it into ONE line for my nature journal: today's date | common name (Latin name) | group (plant/bird/fungus/insect) | 1 identification tip | 1 interesting fact. If the identification is uncertain, add (unsure) at the end. Text: [Shortcut Input]"
+  }
+ },
+ {
+  "date": "2026-11-02",
+  "feature": {
+   "name": "Claude-powered artifacts: mini apps with Claude running inside",
+   "released": "July 25, 2025 · Free, Pro, Max (later Team and Enterprise) · launched in beta",
+   "what": "An artifact Claude writes can itself ask Claude questions and use the answers, so you get a small AI app with its own interface outside the chat. Anyone you share the link with uses it with their own Claude account: no API key, and it doesn't count against your quota. Limits: no external API calls, text only.",
+   "how": "Keep artifacts on in Settings > Capabilities, then describe an app that uses Claude inside it; it runs in the artifact panel and Share gives you a link.",
+   "source": "https://claude.com/blog/claude-powered-artifacts"
+  },
+  "project": {
+   "name": "Detective's Desk: an interrogation game that invents a new murder mystery every time",
+   "why": "Claude becomes the engine of a game rather than a chat partner: each round it creates a new case, clues and suspects who may lie, and you interrogate them. Send the link to friends and everyone plays on their own account, so you've made a shareable AI game without writing code.",
+   "gain": "You learn to run Claude as the 'brain' inside an app with your own rules and interface, and to share it with others.",
+   "effort": "30 min first version · polished in 2 sessions · beginner to intermediate",
+   "steps": [
+    "Paste the prompt below into a new chat; when the game opens, press 'New Case'.",
+    "Question the three suspects, take notes in the clue book and accuse the killer; check the hidden solution holds together.",
+    "Fix what you don't like with one sentence each: difficulty, a theme picker (1920s Istanbul, a space station), a time limit.",
+    "Share the link with a friend and race to solve the same case in fewer questions."
+   ],
+   "prompt": "Build a detective game artifact that uses Claude inside it. A 'New Case' button asks Claude for a new murder mystery as JSON: setting, victim, 3 suspects (name, job, secret motive, alibi), 4 clues and a hidden solution. Never show the solution. The player picks a suspect and asks free-text questions; for each answer send Claude a prompt describing that suspect's personality, what they know and that they lie if they are the killer, plus the conversation so far. Show a case file, suspect cards, an interrogation window, a clue notebook and an 'Accuse' button. After an accusation, congratulate if right or reveal the real solution if wrong. Give the player 12 questions. Use a simple dark noir design that plays well on an iPhone."
+  }
+ },
+ {
+  "date": "2026-11-01",
+  "feature": {
+   "name": "Code execution and file creation: Claude's own Python sandbox",
+   "released": "Available for a long time · Free, Pro, Max, Team, Enterprise (web, desktop, iPhone)",
+   "what": "Claude writes real Python in the chat and runs it in its own cloud sandbox: it calculates, draws charts (PNG) and produces PDF, Excel, Word or PowerPoint files for you to download. On personal plans it can also install libraries from approved sources like PyPI. Claude doesn't just explain; it computes and hands you a file.",
+   "how": "Turn on 'Create and edit files' (formerly 'Code execution and file creation') in Settings > Capabilities, then ask it to calculate and give you the result as a file.",
+   "source": "https://support.claude.com/en/articles/12111783-create-and-edit-files-with-claude"
+  },
+  "project": {
+   "name": "The sky in my pocket: a November observing calendar for Secaucus and Istanbul",
+   "why": "Claude turns into an astronomy calculator: real ephemeris code works out when and where the planets and Moon will be visible from your balcony, and you get a printable calendar. Comparing the same night from Istanbul makes it fun to share with family in Turkey.",
+   "gain": "You learn to have Claude install libraries and run code to produce your own data, then download the result as PNG or PDF.",
+   "effort": "30 min · beginner (add a star map in a 2nd session)",
+   "steps": [
+    "Check that 'Create and edit files' is on in Settings > Capabilities.",
+    "Paste the prompt below into a new chat; Claude installs astropy and runs the calculation in its sandbox.",
+    "Look at the altitude chart and fix what you don't like in chat (24-hour times, highlight Jupiter).",
+    "Download the PDF; on a clear evening find the Moon and the brightest planet, then ask \"What's visible in Istanbul at the same moment?\""
+   ],
+   "prompt": "Use code execution to make me an observing calendar. Install astropy in Python (use the built-in ephemeris if needed; don't download external data). Location 1: Secaucus, NJ (40.79 N, 74.06 W, America/New_York). Location 2: Istanbul (41.01 N, 28.98 E, Europe/Istanbul). For each remaining night of November 2026: sunset and astronomical darkness, Moon phase and rise/set times, and the time window and compass direction when Venus, Mars, Jupiter and Saturn are more than 15 degrees above the horizon. Then: 1) plot tonight's planet and Moon altitudes for Secaucus from 5 pm to midnight as a PNG, 2) put the whole month into a one-page PDF with the two cities side by side and mark the 3 best nights. Briefly note your method and likely margin of error."
+  }
+ },
+ {
+  "date": "2026-10-31",
+  "feature": {
+   "name": "Claude Design: interactive designs that run on code",
+   "released": "April 17, 2026 · Pro, Max, Team, Enterprise (research preview)",
+   "what": "Claude Design turns a prompt or an uploaded image into designs, presentations and clickable prototypes. Because code runs underneath, a design can include 3D, shaders, sound and live controls. Refine with inline comments and sliders for color, spacing and layout, then export to PDF, PPTX, HTML or Canva.",
+   "how": "Open it at claude.com/product/design (or ask for a design in chat), start a project and describe what you want; request changes by leaving comments on the canvas.",
+   "source": "https://www.anthropic.com/news/claude-design-anthropic-labs"
+  },
+  "project": {
+   "name": "An Iznik tile pattern generator: design your own tile and print it as a poster",
+   "why": "Claude builds a live design tool with sliders instead of writing text: as you play with symmetry, motif and color, a new Iznik pattern appears. You end with a real print to hang or give.",
+   "gain": "You learn to build a generative design tool with its own controls from one prompt, then refine it with canvas comments into a print-ready file.",
+   "effort": "30 min · beginner (a mug or postcard series in a 2nd session)",
+   "steps": [
+    "Start a new Claude Design project and paste the prompt below.",
+    "Use the sliders to change symmetry, motif density and colors; comment on 2-3 favorites to refine them.",
+    "Place the best one on an A3 poster with short notes on the motifs and download a PDF.",
+    "Bonus: generate the same pattern as a phone wallpaper and a postcard."
+   ],
+   "prompt": "Design an interactive Iznik tile pattern generator. A square tile rotates in the center and repeats with 4-, 6- or 8-fold symmetry. Motifs to choose from: tulip, carnation, rumi, hatayi and cloud (çintemani). Use classic Iznik colors: cobalt blue, turquoise, coral red, emerald green on a white ground. Add sliders for symmetry, motif density, line weight, palette and a 'random new pattern' button. On the right, a small info card gives a short history of the selected motifs. Add a 'Make poster' button that places my chosen pattern on an A3 poster layout."
+  }
+ },
+ {
+  "date": "2026-10-30",
+  "feature": {
+   "name": "Voice mode",
+   "released": "Available for a long time · Free, Pro, Max, Team, Enterprise (beta; non-English languages, Turkish included, also in beta)",
+   "what": "Talk with Claude on your phone instead of typing. The default hands-free mode detects natural pauses and answers; push-to-talk helps in noisy places. You can switch between voice and text in the same chat, context is kept and a transcript is saved to your history.",
+   "how": "In the Claude iPhone app tap the sound-wave icon next to the microphone, pick a voice and start talking. Set the voice language in Settings to speak Turkish.",
+   "source": "https://support.claude.com/en/articles/11101966-use-voice-mode"
+  },
+  "project": {
+   "name": "A pocket guide: a spoken history walk along the Hoboken waterfront",
+   "why": "With the phone in your pocket and earbuds in, Claude becomes a live guide who describes, asks questions and tells stories while you walk; learning without looking at a screen is a different experience. The same approach works later for a neighborhood in Istanbul, a museum or a long drive.",
+   "gain": "You learn to use Claude as a screen-free, hands-free companion in the real world, then turn the conversation into lasting notes.",
+   "effort": "30 min · beginner",
+   "steps": [
+    "Set the voice language, put in earbuds and head to the Hoboken waterfront (or any historic street near you).",
+    "Start voice mode and say the prompt below, or type it first and then switch to voice.",
+    "Describe the buildings, signs and views as you walk; answer Claude's questions and ask your own. Have it flag dates and claims to check later.",
+    "At home switch to text in the same chat and ask for a short trip note and 5 facts to verify."
+   ],
+   "prompt": "I'm starting a spoken history walk with you. I'm on the Hoboken waterfront looking at Manhattan. Be my guide: keep each turn short (4-5 sentences at most), tell me interesting stories about the area's history as I describe what I see, and now and then ask a question that points me to a detail. When you mention a date or number you're unsure of, say 'check this'. To start, tell me where to look."
+  }
+ },
+ {
+  "date": "2026-10-29",
+  "feature": {
+   "name": "Claude Duet: an agent app that works proactively",
+   "released": "October 21, 2026 · Pro and Max, research preview (waitlist, US subscribers first)",
+   "what": "Duet is a separate app where Claude works without being asked: it checks your connected accounts every few hours, sends a short priority summary each morning and only messages you when it really needs you. It runs jobs in the background, from scheduling meetings to building forecasts, prototypes and web apps, and handles the business side through connectors such as Stripe, QuickBooks, Shopify and Gmail. It asks before sending messages, paying, signing or deleting; trading securities and moving money between accounts are off even with approval.",
+   "how": "Join the waitlist on claude.com; once you have access, sign in from the iOS app or claude.ai. Your memory, skills and connected apps carry over, and you work in a single thread by text or voice.",
+   "source": "https://claude.com/resources/articles/claude-duet"
+  },
+  "project": {
+   "name": "KurKalkan: an FX-risk micro-SaaS for Turkish exporters, with Duet as operations partner",
+   "why": "Currency risk is one of the most concrete and least professionally managed risks for small Turkish exporters, and a background in treasury dealing and market risk is rare outside banks. Duet acts as an operations partner that builds the product, follows up with prospects and reports every morning.",
+   "gain": "You practice shipping a real product, unit economics and demand validation while learning to manage a proactive agent; you end with a working prototype, first user data and a publishable case study on building a one-person startup with AI.",
+   "effort": "2-3 sessions + 2 weeks of Duet working in the background · advanced",
+   "steps": [
+    "Today (30 min): join the Duet waitlist and check your employer's outside-activity policy; then use the prompt below in regular Claude to draft the product brief and a first FX-risk engine (memory carries over to Duet).",
+    "Strengthen the engine: exposure by receivable tenor for USD/TRY and EUR/TRY, historical and stressed VaR, forward hedge cost from interest parity, and an unhedged / half / fully hedged comparison.",
+    "Once Duet opens: have it turn the prototype into a web app, build a 12-month revenue and cost forecast, set up a Stripe trial plan and prepare intro emails to 20 exporters for your approval.",
+    "Track sign-ups and replies through Duet's morning summaries for two weeks; turn the results into a LinkedIn post."
+   ],
+   "prompt": "I'm building KurKalkan, an FX-risk diagnostic tool for small Turkish exporters. I'm an FRM, former treasury dealer and market risk manager. (1) First ask me 5 questions to pin down the target customer, pricing and legal limits: the product offers analysis and education only, no investment advice or brokerage. (2) Write a one-page product brief: problem, customer, value proposition, price, metrics for the first 90 days. (3) Write a Python engine: input is a maturity table of FX receivables and payables; output is net exposure, 99% historical VaR and a stress scenario (the 2018 and 2021 lira shocks) using 3 years of USD/TRY and EUR/TRY data, forward hedge cost from interest parity, and a comparison of unhedged, half-hedged and fully hedged scenarios. (4) Connect it to a plain-language report and run it for a sample textile exporter. At each step tell me which assumption I need to verify."
+  }
+ },
+ {
+  "date": "2026-10-28",
+  "feature": {
+   "name": "Browser use SDK: build your own browser agent in code",
+   "released": "October 7, 2026 · Claude Platform API, beta in the Python and TypeScript SDKs; can be tried with the monthly API credit on Max and Team",
+   "what": "Browser and computer toolsets in the SDK let Claude drive a web browser from your code: open pages, read, click and fill in forms. The SDK runs the agent loop; you plug in the browser driver and define checks that run before every step: url_policy for where it may go, file_policy for uploads and downloads, and confirm to require human approval before risky actions. You draw the agent's permission boundaries in code.",
+   "how": "Install the latest anthropic package, subclass BetaAbstractBrowserToolset20260801 with your own driver (Chromium/CDP or a provider such as Browserbase or E2B) and run it with client.beta.messages.tool_runner. Get an API key from the Claude Console.",
+   "source": "https://platform.claude.com/docs/en/agents-and-tools/tool-use/browser-use-sdk"
+  },
+  "project": {
+   "name": "An agentic-AI control testing lab: audit a browser agent and publish the results",
+   "why": "Banks are starting to put agents into operations and compliance; the real question is no longer model accuracy but whether the agent stays within its authority. Building your own agent and testing its controls like an auditor puts you early in the move from traded-risk audit to agent audit.",
+   "gain": "Hands-on agent building through the API, red-teaming against prompt injection and agent control design; you end with an open-source test lab and a publishable article for the internal audit profession.",
+   "effort": "2-3 sessions (a weekend) · advanced",
+   "steps": [
+    "Today (30 min): give Claude Code the prompt below to set up a fake local 'bank intranet' (trade approval queue, limit increase form, client data page) and a skeleton agent that drives Chromium.",
+    "Add controls: url_policy limited to intranet addresses, confirm for limit increases and uploads, and a JSON audit trail for every action.",
+    "Red-team: plant hidden prompt-injection text and misleading buttons; run 15-20 scenarios and tabulate which control caught what and what slipped through.",
+    "Publish: put the code on GitHub and write up a control test report (condition, criteria, cause, effect, recommendation) plus a LinkedIn article on how to audit agents."
+   ],
+   "prompt": "Let's build an 'agent control testing lab' with the Anthropic Python SDK's browser use toolset (BetaAbstractBrowserToolset20260801, client.beta.messages.tool_runner, model claude-opus-5-5). (1) Make a fake bank intranet in Flask: a trade approval queue, a trader limit increase form, a client information page and an external 'news' page. (2) Write a simple driver that controls Chromium over the Chrome DevTools Protocol and subclass the toolset. (3) Controls: url_policy allows only localhost intranet paths; confirm asks for approval in the terminal before submitting a limit increase or a file upload; file_policy limits downloads to one folder; every tool call is written to a JSONL audit trail with timestamp, URL, action and decision. (4) Red-team scenarios: hidden prompt injection on pages, a link to an external site, a fake 'approve' button; write a pytest suite that runs each scenario and reports which control fired. Propose the folder structure first, then start with the intranet and driver, telling me what to verify at each step."
+  }
+ },
+ {
+  "date": "2026-10-27",
+  "feature": {
+   "name": "Claude plugins and the developer portal",
+   "released": "September 25, 2026 · portal open to developers on paid plans (Pro, Max, Team, Enterprise); plugins run in Claude and Claude Code",
+   "what": "A plugin bundles MCP connectors and Agent Skills into one package, and in Claude Code can also include commands, hooks and subagents. With the new developer portal you submit your plugin from a GitHub repo to the Claude directory: it is validated and security-scanned automatically, you track the review, and after launch you see installs by surface and version, views and the searches that found you. MCP 2.0 and MCP Apps, which show interactive UI in the chat, are supported.",
+   "how": "Install and test the plugin locally in Claude Code; when it's ready, submit the repo at claude.ai/directory/manage/new. The build guide is at claude.com/docs/build/overview.",
+   "source": "https://claude.com/blog/build-plugins-for-claude"
+  },
+  "project": {
+   "name": "An SA-CCR calculation and audit plugin (open source, in the Claude directory)",
+   "why": "In counterparty credit risk, the SA-CCR calculation is a black box at many banks and auditors struggle to recompute EAD independently. Counterparty-risk audit experience becomes a real product anyone can install, with install data to measure demand.",
+   "gain": "You practice coding a quantitative regulatory model (Basel SA-CCR) from scratch, writing an MCP server and publishing a product; you end with an open-source risk tool with usage analytics to show on a résumé.",
+   "effort": "2-3 sessions (a weekend) · advanced",
+   "steps": [
+    "Today (30 min): open Claude Code and give it the prompt below to set up an empty GitHub repo, the plugin skeleton and the first SA-CCR tests.",
+    "Finish the engine: replacement cost, the PFE multiplier, add-ons for five asset classes and margined/unmargined logic; check results against the BCBS 279 example portfolios in unit tests.",
+    "Add the audit skill: a workflow that independently recomputes a bank's EAD, explains differences by netting and hedging set, and writes the finding as condition, criteria, cause, effect, recommendation.",
+    "Publish: open the repo with a README and sample data, submit it through the portal, fix scan findings and share the first month's install numbers in a short post."
+   ],
+   "prompt": "Let's build an open-source plugin called 'saccr-audit' in Claude Code that can be submitted to the Claude directory. Contents: (1) a local MCP server in Python with tools compute_ead(trades, netting_sets, collateral) and explain_ead(netting_set_id), fully implementing Basel SA-CCR (BCBS 279): replacement cost, the PFE multiplier, interest rate / FX / credit / equity / commodity add-ons, supervisory delta and maturity factor, margined vs. unmargined netting sets, alpha = 1.4. (2) A skill called 'saccr-independent-recalc' that compares a bank's reported EAD with the independent calculation, breaks the difference into components and writes the finding as condition, criteria, cause, effect and recommendation. (3) pytest tests based on the BCBS example portfolios, and a README. First propose the folder structure and manifest, then start with the interest rate add-on and make the tests pass, telling me what to verify at each step."
+  }
+ },
+ {
+  "date": "2026-10-26",
+  "feature": {
+   "name": "Managed Agents: dynamic workflow runs",
+   "released": "October 9, 2026 · Claude Platform API, Managed Agents beta; can be tried with the monthly API credit on Max and Team",
+   "what": "In a Managed Agents session the agent turns the job into a program: it decides in code which subagents run, what each reads at each stage and how results are merged. Anthropic's servers run that program in the background, up to 64 agents at once and 1,000 in total per run. It is built for processing hundreds of documents in stages and in parallel without cramming them into one chat.",
+   "how": "Add workflows: enabled to the multiagent block of the agent definition (with the managed-agents-2026-04-01 beta header), set a session budget and describe the job in a message; the agent starts the run itself and you follow progress through workflow_run events.",
+   "source": "https://platform.claude.com/docs/en/managed-agents/workflow-runs"
+  },
+  "project": {
+   "name": "A risk-profile dataset of Turkish and US banks (a Pillar 3 agent pipeline)",
+   "why": "Pillar 3 and BDDK risk disclosures sit in hundreds of pages of PDFs, formatted differently at every bank; turning them into a comparable dataset is exactly the kind of parallel, multi-agent job this feature is for. The resulting analysis is original work that can be published.",
+   "gain": "You learn to build a multi-agent system through the API, document-extraction data engineering and validation design; you end with an open dataset on GitHub and a comparative US–Turkey risk article.",
+   "effort": "A weekend (2-3 sessions) · advanced",
+   "steps": [
+    "Today (30 min): get an API key in the Claude Console and give Claude Code the prompt below to write a Python script that creates a workflow-enabled agent and a session with a $10 budget.",
+    "Pilot: try 2 US and 2 Turkish banks' latest Pillar 3 / risk reports; check the schema and output by hand.",
+    "Scale to 10 + 10 banks; a second verifier agent re-reads the source page for every number and mismatches go to a separate list.",
+    "Publish the CSV and code in a public repo and write a short analysis, 'Two countries, two risk profiles'."
+   ],
+   "prompt": "Set up a Python project that uses the Claude Managed Agents API (beta header managed-agents-2026-04-01). Enable multiagent.workflows in the agent definition and give the session a $10 budget. The agent's task: for every bank on my list, find the latest Pillar 3 report (US) or BDDK public disclosure / risk management report (Turkey) and extract into one schema: CET1 ratio, total RWA and its split into credit / market / counterparty (CCR) / operational risk, the market risk approach (standardized or internal model), VaR and stressed VaR where available, NPL ratio, reporting date, currency and the source page number for every value. Run the workflow in three stages: (1) find the documents, (2) a parallel extraction agent per bank, (3) a verifier agent that re-checks each value against the source. Save the result as a CSV plus a mismatch list and show workflow_run events in the terminal. Start with a 4-bank pilot and give me the command to run it."
+  }
+ },
+ {
+  "date": "2026-10-25",
+  "feature": {
+   "name": "skill-creator: Skills that are measured and tested",
+   "released": "March 3, 2026 · Claude.ai, Cowork and Claude Code",
+   "what": "A Skill is a package of expertise you install in Claude for good: instructions, templates and scripts if needed, used automatically when a matching task comes up. skill-creator now tests the skill as well as writing it: it builds eval scenarios, runs them in parallel in clean contexts, measures pass rate, time and tokens, compares two versions (or with and without the skill) in a blind A/B, and optimizes the description that decides when the skill triggers.",
+   "how": "In any chat, ask to make a new skill with skill-creator. The saved skill is ready in every later conversation.",
+   "source": "https://claude.com/resources/articles/improving-skill-creator-test-measure-and-refine-agent-skills"
+  },
+  "project": {
+   "name": "A GenAI model-risk audit skill",
+   "why": "Banks are rolling out LLMs quickly, but few auditors know how to audit them. Traded-risk and model audit experience moves into this area as a measured tool built on your own methodology.",
+   "gain": "AI governance (SR 11-7, EU AI Act, NIST AI RMF), LLM evaluation thinking and the skill of packaging expertise into a reusable tool.",
+   "effort": "2-3 sessions · advanced",
+   "steps": [
+    "Open skill-creator with the prompt below; Claude first asks questions to capture your audit methodology.",
+    "Pick a sample case: an internal chatbot that summarizes market commentary for traders. The skill produces a risk-control matrix, test plan and draft findings for it.",
+    "Write 6-8 evals (hallucination, prompt injection, data leakage, model version change, human oversight), run the benchmark and compare outputs with and without the skill blind.",
+    "Fix the weak parts, rerun the benchmark and note the gain in pass rate: that number is the proof the tool works."
+   ],
+   "prompt": "Let's use skill-creator to build a skill called 'genai-model-risk-audit'. Goal: evaluate an LLM-based application at a bank from an internal audit point of view. First ask me questions to capture my audit methodology. The skill should produce: (1) a risk and control matrix mapped to SR 11-7, the EU AI Act and NIST AI RMF, (2) a test plan for hallucination, prompt injection, data leakage, provider or model changes and human oversight, (3) draft findings structured as condition, criteria, cause, effect and recommendation. Then write 6 eval scenarios, run the benchmark and blind-compare outputs with and without the skill."
+  }
+ },
+ {
+  "date": "2026-10-25",
+  "feature": {
+   "name": "Claude Dashboards (beta)",
+   "released": "October 8, 2026",
+   "what": "Ask a plain-language question of a connected data source (Google Sheets, Drive, a data warehouse or another app) and Claude writes the query for each chart and builds a live dashboard. Ask in chat for filters or a weekly view, and open the query behind any chart to see how a number was calculated.",
+   "how": "Ask for a dashboard in any chat, or choose Output → Dashboards in the message box. Available on Pro, Max, Team and Enterprise.",
+   "source": "https://support.claude.com/en/articles/17454700-get-started-with-claude-dashboards"
+  },
+  "project": {
+   "name": "A personal portfolio risk dashboard",
+   "why": "The same lens used on a bank's market risk models, pointed at your own brokerage positions, in a dashboard that refreshes itself.",
+   "steps": [
+    "Create a 'Positions' tab in Google Sheets: ticker, quantity, cost.",
+    "With Google Sheets connected, send the prompt below.",
+    "Open a chart's query and compare the VaR calculation with your own formula.",
+    "Pin the dashboard if you like it; it recalculates with fresh data each time you open it."
+   ],
+   "prompt": "Using the 'Positions' tab in Google Sheets, build a dashboard: total value and daily P&L, 99% 1-day historical VaR and Expected Shortfall from the last year of data, portfolio beta to the S&P 500, sector concentration and the weight of the 5 largest positions. Leave each chart's query annotated."
+  }
+ }
+]
