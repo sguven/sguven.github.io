@@ -4,231 +4,130 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Serhat Guven, FRM — Project Portfolio</title>
-<meta name="description" content="Side projects by Serhat Guven, FRM: automated news and film briefings, personal finance forecasting tools, everyday apps, learning programs and more — built with Claude.">
+<meta name="description" content="Side projects by Serhat Guven, FRM: automated research and publishing workflows, personal finance forecasting tools, everyday apps and learning programs.">
 <meta property="og:title" content="Serhat Guven, FRM — Project Portfolio">
-<meta property="og:description" content="Automations, finance tools, everyday apps and learning projects built with Claude.">
+<meta property="og:description" content="Automation, personal finance tools, everyday apps and learning projects built with AI.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://sguven.github.io/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
 <style>
-body{margin:0;background:#F4F4F1;color:#16181D;font-family:'Inter Tight',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-a{color:#1D4ED8;text-decoration:none}a:hover{color:#1E3A8A;text-decoration:underline}
-.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
-.card{background:#FFFFFF;border:1px solid #DEDED8;border-radius:14px;padding:28px;display:flex;flex-direction:column;gap:14px}
-.tagrow{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.tag{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#4B5160}
-.status{font-family:'IBM Plex Mono',monospace;font-size:12px;padding:4px 10px;border-radius:999px;background:#EEF2FF;color:#1E3A8A;white-space:nowrap}
-.status.local{background:#F1F1EC;color:#3A3F4B}
-.status.wip{background:#FFF4E5;color:#8A4B08}
-.title{margin:0;font-size:24px;font-weight:600;letter-spacing:-.01em;line-height:1.2}
-.lede{margin:0;font-size:16px;line-height:1.55;color:#3A3F4B}
-.list{margin:0;padding-left:18px;font-size:15px;line-height:1.6;color:#3A3F4B}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:6px}
-.chip{font-family:'IBM Plex Mono',monospace;font-size:12px;color:#3A3F4B;border:1px solid #DEDED8;border-radius:6px;padding:4px 8px}
-.link{font-family:'IBM Plex Mono',monospace;font-size:13px}
-.sec{display:flex;flex-direction:column;gap:24px;padding:56px 0 8px}
-.sechead{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;border-top:1px solid #16181D;padding-top:20px}
-.secnum{font-family:'IBM Plex Mono',monospace;font-size:14px;color:#1D4ED8}
-.sectitle{margin:0;font-size:32px;font-weight:600;letter-spacing:-.02em}
-.secsub{margin:0;font-size:16px;color:#4B5160}
-.nav{display:flex;flex-wrap:wrap;gap:10px}
-.nav a{font-family:'IBM Plex Mono',monospace;font-size:13px;color:#16181D;border:1px solid #C9C9C2;border-radius:999px;padding:8px 14px}
-.nav a:hover{border-color:#1D4ED8;color:#1D4ED8;text-decoration:none}
-.handle{display:flex;flex-direction:column;gap:6px;padding:18px;border:1px solid #DEDED8;border-radius:10px}
+body{margin:0;background:#FFFFFF;color:#111827;font-family:'Inter',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.6}
+a{color:#1F3A68;text-decoration:underline;text-underline-offset:2px;text-decoration-color:#C5CDDA}a:hover{color:#0F2547;text-decoration-color:#0F2547}
+.wrap{max-width:880px;margin:0 auto;padding:96px 28px 72px}
+.hero h1{margin:0;font-size:44px;line-height:1.1;font-weight:600;letter-spacing:-.02em}
+.role{margin:10px 0 0;font-size:17px;color:#4B5563}
+.intro{margin:28px 0 0;max-width:680px;font-size:18px;color:#374151}
+.nav{display:flex;flex-wrap:wrap;gap:8px 24px;margin-top:36px;padding-top:20px;border-top:1px solid #E5E7EB}
+.nav a{font-size:14px;font-weight:500;color:#374151;text-decoration:none}.nav a:hover{color:#1F3A68}
+.sec{margin-top:72px}
+.sec h2{margin:0 0 8px;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#6B7280}
+.row{display:flex;flex-wrap:wrap;gap:8px 40px;padding:24px 0;border-top:1px solid #E5E7EB}
+.name{flex:1 1 240px;display:flex;flex-direction:column;gap:4px}
+.name h3{margin:0;font-size:17px;font-weight:600;line-height:1.35}
+.meta{font-size:13px;color:#6B7280}
+.desc{flex:999 1 420px;min-width:0}
+.desc p{margin:0;font-size:16px;color:#374151}
+.desc .tools{margin-top:8px;font-size:13px;color:#6B7280}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:96px;padding-top:20px;border-top:1px solid #E5E7EB;font-size:14px;color:#6B7280}
+@media(max-width:600px){.wrap{padding-top:56px}.hero h1{font-size:34px}.sec{margin-top:56px}}
+html{scroll-behavior:smooth}
 </style>
-<style>html{scroll-behavior:smooth}@media(max-width:640px){h1{font-size:48px!important}.sectitle{font-size:26px}}</style>
 </head>
 <body>
-<div style="box-sizing: border-box; width: 100%; padding: 0 24px 96px">
-<div style="max-width: 1200px; margin: 0 auto">
+<div class="wrap">
 
-<header style="display: flex; flex-direction: column; gap: 28px; padding: 88px 0 24px">
-<div class="mono" style="font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: #4B5160">Project portfolio · New York</div>
-<h1 style="margin: 0; font-size: 72px; line-height: 1.02; font-weight: 700; letter-spacing: -.035em">Serhat Guven, FRM</h1>
-<p style="margin: 0; max-width: 760px; font-size: 22px; line-height: 1.5; color: #3A3F4B">Risk professional by day. In my own time I build small, useful systems with AI — automated news and film briefings, personal apps I use every day, learning programs, and a few things for family.</p>
-<div style="display: flex; flex-wrap: wrap; gap: 40px; padding: 8px 0">
-<div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 40px; font-weight: 600; color: #1D4ED8">12</span><span class="mono" style="font-size: 13px; color: #4B5160">projects</span></div>
-<div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 40px; font-weight: 600; color: #1D4ED8">6</span><span class="mono" style="font-size: 13px; color: #4B5160">areas</span></div>
-<div style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 40px; font-weight: 600; color: #1D4ED8">3</span><span class="mono" style="font-size: 13px; color: #4B5160">live social accounts</span></div>
-</div>
+<header class="hero">
+<h1>Serhat Guven, FRM</h1>
+<p class="role">Risk professional · New York</p>
+<p class="intro">A selection of side projects I have designed and built with AI: automated research and publishing workflows, personal finance tools, everyday apps, and learning programs.</p>
 <nav class="nav" aria-label="Sections">
 <a href="#automation">Automation</a>
-<a href="#finance">Personal finance</a>
-<a href="#apps">Everyday apps</a>
+<a href="#finance">Finance</a>
+<a href="#apps">Apps</a>
 <a href="#learning">Learning</a>
 <a href="#content">Content</a>
-<a href="#family">Family and heritage</a>
+<a href="#personal">Personal</a>
 </nav>
 </header>
 
 <section id="automation" class="sec">
-<div class="sechead"><span class="secnum">01</span><h2 class="sectitle">Automation and publishing</h2><p class="secsub">Briefings that research, write and deliver themselves on a schedule.</p></div>
-<div class="grid">
-<article class="card">
-<div class="tagrow"><span class="tag">News · Markets</span><span class="status">Live · daily</span></div>
-<h3 class="title">Gündem — Daily News Briefs</h3>
-<p class="lede">An evening brief plus short intraday flashes covering world and Turkey news, markets and New York / New Jersey local news.</p>
-<ul class="list">
-<li>Market snapshot: S&amp;P 500, Nasdaq, USD/TRY, EUR/USD, BIST 100, BTC, gold</li>
-<li>Full brief delivered to my inbox every evening</li>
-<li>Website with today's flashes and a searchable archive, updated on every run</li>
-</ul>
-<div class="chips"><span class="chip">Scheduled tasks</span><span class="chip">Gmail</span><span class="chip">GitHub Pages</span></div>
-<a class="link" href="https://github.com/sguven/bulten">github.com/sguven/bulten →</a>
-</article>
-<article class="card">
-<div class="tagrow"><span class="tag">Film</span><span class="status">Live · weekly</span></div>
-<h3 class="title">Weekly Cinema Bulletin</h3>
-<p class="lede">Every Wednesday: the notable films in New York theaters for the coming week, each with a short summary, early reactions and why it's worth seeing.</p>
-<ul class="list">
-<li>Heads-up on major releases 3–4 weeks out</li>
-<li>Prioritizes the theaters I actually go to</li>
-</ul>
-<div class="chips"><span class="chip">Scheduled tasks</span><span class="chip">Web research</span><span class="chip">Gmail</span></div>
-</article>
-<article class="card">
-<div class="tagrow"><span class="tag">AI · Self-development</span><span class="status">Live · daily</span></div>
-<h3 class="title">Claude Project of the Day</h3>
-<p class="lede">A daily midday drop: one lesser-known AI feature and one ambitious project idea I'm not already doing.</p>
-<ul class="list">
-<li>Favors the newest features and horizon-opening ideas</li>
-<li>Published to a living web page and emailed</li>
-</ul>
-<div class="chips"><span class="chip">Scheduled tasks</span><span class="chip">Web page</span><span class="chip">Gmail</span></div>
-</article>
+<h2>Automation and publishing</h2>
+<div class="row">
+<div class="name"><h3>Gündem — Daily News Briefs</h3><span class="meta">Daily · Live</span></div>
+<div class="desc"><p>Scheduled evening brief and intraday updates covering world and Turkey news, US and Turkish markets, and New York / New Jersey local news. Delivered by email and published to a website with a searchable archive.</p><p class="tools">Scheduled AI tasks · Gmail · GitHub Pages · <a href="https://github.com/sguven/bulten">Repository</a></p></div>
+</div>
+<div class="row">
+<div class="name"><h3>Weekly Cinema Bulletin</h3><span class="meta">Weekly · Live</span></div>
+<div class="desc"><p>Every Wednesday, a summary of notable films in New York theaters for the coming week, with early reactions and advance notice of major upcoming releases.</p><p class="tools">Scheduled AI tasks · Web research · Gmail</p></div>
+</div>
+<div class="row">
+<div class="name"><h3>Claude Project of the Day</h3><span class="meta">Daily · Live</span></div>
+<div class="desc"><p>A daily briefing on one lesser-known AI capability and one project idea, published to a living web page and sent by email.</p><p class="tools">Scheduled AI tasks · Web page · Gmail</p></div>
 </div>
 </section>
 
 <section id="finance" class="sec">
-<div class="sechead"><span class="secnum">02</span><h2 class="sectitle">Personal finance</h2><p class="secsub">Tools that run offline on my own computer — the data never leaves the machine.</p></div>
-<div class="grid">
-<article class="card">
-<div class="tagrow"><span class="tag">Desktop · Offline</span><span class="status local">Runs locally</span></div>
-<h3 class="title">Investment Portfolio and Forecast App</h3>
-<p class="lede">An offline app that shows all of my investments in one place, in detail, and projects where they are heading.</p>
-<ul class="list">
-<li>Detailed view of every holding and account</li>
-<li>Forecasts future portfolio value from historical data</li>
-<li>Runs fully offline; data stays on my computer</li>
-</ul>
-<div class="chips"><span class="chip">Desktop app</span><span class="chip">Forecasting</span><span class="chip">Local storage</span></div>
-</article>
-<article class="card">
-<div class="tagrow"><span class="tag">Desktop · Offline</span><span class="status local">Runs locally</span></div>
-<h3 class="title">Cash Flow Tracker</h3>
-<p class="lede">Turns past credit card payments and bank inflows and outflows into a cash flow analysis, then forecasts what's ahead.</p>
-<ul class="list">
-<li>Analyzes historical card and bank transactions</li>
-<li>Produces a forward-looking cash flow forecast</li>
-<li>Installed and running locally on my computer</li>
-</ul>
-<div class="chips"><span class="chip">Desktop app</span><span class="chip">Cash flow analysis</span><span class="chip">Forecasting</span></div>
-</article>
+<h2>Personal finance</h2>
+<div class="row">
+<div class="name"><h3>Investment Portfolio and Forecast App</h3><span class="meta">Desktop · Offline</span></div>
+<div class="desc"><p>Consolidates all of my investments into a single detailed view and forecasts future portfolio value from historical data. Runs fully offline; data never leaves my computer.</p><p class="tools">Desktop application · Forecasting · Local storage</p></div>
+</div>
+<div class="row">
+<div class="name"><h3>Cash Flow Tracker</h3><span class="meta">Desktop · Offline</span></div>
+<div class="desc"><p>Analyzes historical credit card payments and bank inflows and outflows, then produces a forward-looking cash flow forecast.</p><p class="tools">Desktop application · Cash flow analysis · Forecasting</p></div>
 </div>
 </section>
 
 <section id="apps" class="sec">
-<div class="sechead"><span class="secnum">03</span><h2 class="sectitle">Everyday apps</h2><p class="secsub">Things I open on my phone every day, with an AI layer on top.</p></div>
-<div class="grid">
-<article class="card">
-<div class="tagrow"><span class="tag">Nutrition</span><span class="status">In daily use</span></div>
-<h3 class="title">KaloriLog</h3>
-<p class="lede">A fast meal and calorie logger that lives on my phone's home screen.</p>
-<ul class="list">
-<li>Auto-updating dashboard of eating habits</li>
-<li>Weekly Sunday email with AI recommendations: what to eat, buy and watch</li>
-</ul>
-<div class="chips"><span class="chip">Web app</span><span class="chip">Dashboard</span><span class="chip">Scheduled tasks</span></div>
-</article>
-<article class="card">
-<div class="tagrow"><span class="tag">Fitness</span><span class="status">In daily use</span></div>
-<h3 class="title">SporLog Pro</h3>
-<p class="lede">A gym workout logger built for quick entry between sets.</p>
-<ul class="list">
-<li>Every Sunday an AI coach reviews the week</li>
-<li>Feedback on progress, what to add and which moves to update</li>
-</ul>
-<div class="chips"><span class="chip">Web app</span><span class="chip">AI coaching</span><span class="chip">Gmail</span></div>
-</article>
-<article class="card">
-<div class="tagrow"><span class="tag">Film · iOS</span><span class="status wip">In progress</span></div>
-<h3 class="title">Movie Watchlist</h3>
-<p class="lede">An iPhone watchlist: save a film and it automatically records the IMDb rating, release year and director.</p>
-<ul class="list">
-<li>Mark films as watched</li>
-<li>Built with Claude Code</li>
-</ul>
-<div class="chips"><span class="chip">iOS</span><span class="chip">Claude Code</span></div>
-</article>
+<h2>Everyday apps</h2>
+<div class="row">
+<div class="name"><h3>KaloriLog</h3><span class="meta">Mobile web · In use</span></div>
+<div class="desc"><p>Meal and calorie logging with an automatically updated habits dashboard and weekly AI-generated nutrition recommendations.</p><p class="tools">Web app · Dashboard · Scheduled AI tasks</p></div>
+</div>
+<div class="row">
+<div class="name"><h3>SporLog Pro</h3><span class="meta">Mobile web · In use</span></div>
+<div class="desc"><p>Workout logging with a weekly AI coaching review of progress and suggested adjustments.</p><p class="tools">Web app · Scheduled AI tasks · Gmail</p></div>
+</div>
+<div class="row">
+<div class="name"><h3>Movie Watchlist</h3><span class="meta">iOS · In progress</span></div>
+<div class="desc"><p>An iPhone watchlist that automatically records each film's IMDb rating, release year and director.</p><p class="tools">iOS · Claude Code</p></div>
 </div>
 </section>
 
 <section id="learning" class="sec">
-<div class="sechead"><span class="secnum">04</span><h2 class="sectitle">Learning</h2><p class="secsub">Structured self-study, taught daily.</p></div>
-<div class="grid">
-<article class="card">
-<div class="tagrow"><span class="tag">Film theory</span><span class="status">Ongoing</span></div>
-<h3 class="title">Film Theory Curriculum</h3>
-<p class="lede">A 52-week self-study program in film theory, with an AI tutor that teaches a new topic every evening.</p>
-<ul class="list">
-<li>Daily ~15-minute lesson by email, plus logged readings</li>
-<li>Weekly tests, analyses and film assignments</li>
-</ul>
-<div class="chips"><span class="chip">Claude Projects</span><span class="chip">Scheduled tasks</span><span class="chip">Google Drive</span></div>
-<a class="link" href="https://github.com/sguven/film-teorisi">github.com/sguven/film-teorisi →</a>
-</article>
+<h2>Learning</h2>
+<div class="row">
+<div class="name"><h3>Film Theory Curriculum</h3><span class="meta">52 weeks · Ongoing</span></div>
+<div class="desc"><p>A structured self-study program with a daily AI-taught lesson, assigned readings and films, and weekly assessments.</p><p class="tools">Claude Projects · Scheduled AI tasks · <a href="https://github.com/sguven/film-teorisi">Repository</a></p></div>
 </div>
 </section>
 
 <section id="content" class="sec">
-<div class="sechead"><span class="secnum">05</span><h2 class="sectitle">Content</h2><p class="secsub">Faceless social accounts where AI writes, produces and posts on schedule.</p></div>
-<article class="card">
-<div class="tagrow"><span class="tag">Social media · Automated</span><span class="status">Live</span></div>
-<h3 class="title">Three automated accounts</h3>
-<div class="grid">
-<div class="handle"><span class="tag">Instagram · Reels</span><a href="https://www.instagram.com/cleaneverycorner" style="font-size: 20px; font-weight: 600">@cleaneverycorner</a><p class="lede" style="font-size: 15px">Home and car cleaning tips, one Reel a day at peak engagement times.</p></div>
-<div class="handle"><span class="tag">Instagram · Reels</span><a href="https://www.instagram.com/cellbycell1" style="font-size: 20px; font-weight: 600">@cellbycell1</a><p class="lede" style="font-size: 15px">Excel and Google Sheets tips, posted daily.</p></div>
-<div class="handle"><span class="tag">X</span><a href="https://x.com/TheDayInBrief" style="font-size: 20px; font-weight: 600">@TheDayInBrief</a><p class="lede" style="font-size: 15px">A witty one-tweet "note to history" on what happened in the world, every few days.</p></div>
-</div>
-<div class="chips"><span class="chip">Windsor.ai</span><span class="chip">Typefully</span><span class="chip">GitHub-hosted media</span><span class="chip">No-approval autoposting</span></div>
-</article>
-</section>
-
-<section id="family" class="sec">
-<div class="sechead"><span class="secnum">06</span><h2 class="sectitle">Family and heritage</h2><p class="secsub">Projects made for people and places I care about.</p></div>
-<div class="grid">
-<article class="card">
-<div class="tagrow"><span class="tag">Education · Kids</span><span class="status">Live · growing</span></div>
-<h3 class="title">İpek's Games</h3>
-<p class="lede">A site of bilingual (Turkish / English) learning games for my 4-year-old niece, personalized with her name.</p>
-<ul class="list">
-<li>Numbers, colors and shapes, a unicorn game, butterfly catching, a helping game and a kid-friendly driving game</li>
-<li>Voice narration and rewards; new games added regularly</li>
-</ul>
-<div class="chips"><span class="chip">Web games</span><span class="chip">TR / EN</span><span class="chip">GitHub Pages</span></div>
-<a class="link" href="https://github.com/sguven/ipek-oyunlari">github.com/sguven/ipek-oyunlari →</a>
-</article>
-<article class="card">
-<div class="tagrow"><span class="tag">3D · Heritage</span><span class="status wip">In progress</span></div>
-<h3 class="title">Köprüköy 3D</h3>
-<p class="lede">A 3D model of Köprüköy, a town in Keskin, Kırıkkale, including the area around the historic Çeşnigir Bridge — explorable in the browser.</p>
-<ul class="list">
-<li>First draft built; adding detail over time</li>
-</ul>
-<div class="chips"><span class="chip">3D / WebGL</span><span class="chip">GitHub Pages</span></div>
-<a class="link" href="https://github.com/sguven/koprukoy-3d">github.com/sguven/koprukoy-3d →</a>
-</article>
+<h2>Content</h2>
+<div class="row">
+<div class="name"><h3>Automated Social Accounts</h3><span class="meta">Social · Live</span></div>
+<div class="desc"><p>Three faceless accounts where content is researched, produced and posted on a schedule: <a href="https://www.instagram.com/cleaneverycorner">@cleaneverycorner</a> (home and car cleaning), <a href="https://www.instagram.com/cellbycell1">@cellbycell1</a> (Excel and Google Sheets tips) and <a href="https://x.com/TheDayInBrief">@TheDayInBrief</a> (world events in one post).</p><p class="tools">Instagram · X · Windsor.ai · Typefully</p></div>
 </div>
 </section>
 
-<footer style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; margin-top: 72px; padding-top: 24px; border-top: 1px solid #16181D">
-<span class="mono" style="font-size: 13px; color: #4B5160">Serhat Guven, FRM · Built with Claude</span>
-<a class="mono" href="https://github.com/sguven" style="font-size: 13px">github.com/sguven</a>
+<section id="personal" class="sec">
+<h2>Personal</h2>
+<div class="row">
+<div class="name"><h3>İpek's Games</h3><span class="meta">Web · Live</span></div>
+<div class="desc"><p>A collection of bilingual (Turkish / English) educational games for a young child, with voice narration and rewards.</p><p class="tools">Web games · GitHub Pages · <a href="https://github.com/sguven/ipek-oyunlari">Repository</a></p></div>
+</div>
+<div class="row">
+<div class="name"><h3>Köprüköy 3D</h3><span class="meta">3D · In progress</span></div>
+<div class="desc"><p>A browser-based 3D model of Köprüköy in Kırıkkale, Turkey, including the area around the historic Çeşnigir Bridge.</p><p class="tools">3D / WebGL · GitHub Pages · <a href="https://github.com/sguven/koprukoy-3d">Repository</a></p></div>
+</div>
+</section>
+
+<footer class="foot">
+<span>Serhat Guven, FRM</span>
+<span><a href="https://www.linkedin.com/in/serhatguven35/">LinkedIn</a> · <a href="https://github.com/sguven">GitHub</a></span>
 </footer>
 
-</div>
 </div>
 </body>
 </html>
