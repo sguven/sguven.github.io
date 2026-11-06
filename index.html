@@ -4,43 +4,71 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Serhat Guven, FRM — Project Portfolio</title>
-<meta name="description" content="Side projects by Serhat Guven, FRM: automated research and publishing workflows, personal finance forecasting tools, everyday apps and learning programs.">
+<meta name="description" content="Side projects by Serhat Guven, FRM, a risk and audit professional in New York: automated briefings, personal finance forecasting tools, everyday apps and learning programs.">
 <meta property="og:title" content="Serhat Guven, FRM — Project Portfolio">
 <meta property="og:description" content="Automation, personal finance tools, everyday apps and learning projects built with AI.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://sguven.github.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121212'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='17' font-weight='700' fill='white' text-anchor='middle'%3ESG%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;1,8..60,400&amp;family=Libre+Franklin:wght@500;600;700&amp;display=swap" rel="stylesheet">
 <style>
-body{margin:0;background:#FFFFFF;color:#111827;font-family:'Inter',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.6}
-a{color:#1F3A68;text-decoration:underline;text-underline-offset:2px;text-decoration-color:#C5CDDA}a:hover{color:#0F2547;text-decoration-color:#0F2547}
-.wrap{max-width:880px;margin:0 auto;padding:96px 28px 72px}
-.hero h1{margin:0;font-size:44px;line-height:1.1;font-weight:600;letter-spacing:-.02em}
-.role{margin:10px 0 0;font-size:17px;color:#4B5563}
-.intro{margin:28px 0 0;max-width:680px;font-size:18px;color:#374151}
-.nav{display:flex;flex-wrap:wrap;gap:8px 24px;margin-top:36px;padding-top:20px;border-top:1px solid #E5E7EB}
-.nav a{font-size:14px;font-weight:500;color:#374151;text-decoration:none}.nav a:hover{color:#1F3A68}
-.sec{margin-top:72px}
-.sec h2{margin:0 0 8px;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#6B7280}
-.row{display:flex;flex-wrap:wrap;gap:8px 40px;padding:24px 0;border-top:1px solid #E5E7EB}
-.name{flex:1 1 240px;display:flex;flex-direction:column;gap:4px}
-.name h3{margin:0;font-size:17px;font-weight:600;line-height:1.35}
-.meta{font-size:13px;color:#6B7280}
-.desc{flex:999 1 420px;min-width:0}
-.desc p{margin:0;font-size:16px;color:#374151}
-.desc .tools{margin-top:8px;font-size:13px;color:#6B7280}
-.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:96px;padding-top:20px;border-top:1px solid #E5E7EB;font-size:14px;color:#6B7280}
-@media(max-width:600px){.wrap{padding-top:56px}.hero h1{font-size:34px}.sec{margin-top:56px}}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:#FFFFFF;color:#121212;font-family:'Source Serif 4',Georgia,'Times New Roman',serif;-webkit-font-smoothing:antialiased}
+a{color:#326891;text-decoration:none}a:hover{text-decoration:underline}
+.page{max-width:1120px;margin:0 auto;padding:0 24px 64px}
+.topbar{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid #E2E2E2;font-family:'Libre Franklin',Arial,sans-serif;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#5A5A5A}
+.masthead{text-align:center;padding:40px 0 22px}
+.masthead h1{margin:0;font-size:56px;line-height:1.05;font-weight:700;letter-spacing:-.01em}
+.tagline{margin:12px 0 0;font-size:19px;font-style:italic;color:#5A5A5A}
+.nav{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 28px;padding:12px 0;border-top:1px solid #121212;border-bottom:3px double #121212;font-family:'Libre Franklin',Arial,sans-serif;font-size:14px;font-weight:500}
+.nav a{color:#121212;padding:6px 0}
+.lede{max-width:680px;margin:36px auto 0;text-align:center;font-size:21px;line-height:1.55;color:#363636}
+.sec{margin-top:56px}
+.sechead{margin:0 0 4px;padding-top:10px;border-top:2px solid #121212;font-family:'Libre Franklin',Arial,sans-serif;font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.grid{display:grid;gap:0 40px}
+.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+.pair{gap:0 40px}
+.pair .sec{margin-top:56px}
+.story{padding:20px 0 24px;border-bottom:1px solid #E2E2E2}
+.head{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.logo{flex:none;width:44px;height:44px;padding:9px;box-sizing:border-box;border:1px solid #D6D6D6;border-radius:10px;color:#121212;background:#F7F7F5}
+.kicker{margin:0;font-family:'Libre Franklin',Arial,sans-serif;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#5A5A5A}
+.story h3{margin:0;font-size:26px;line-height:1.2;font-weight:700}
+.summary{margin:10px 0 0;font-size:18px;line-height:1.6;color:#363636}
+.built{margin:14px 0 0;font-family:'Libre Franklin',Arial,sans-serif;font-size:13px;color:#727272}
+.built::before{content:"Built with: ";font-weight:600;color:#5A5A5A}
+.more{display:inline-block;margin-top:10px;font-family:'Libre Franklin',Arial,sans-serif;font-size:14px;font-weight:600;padding:6px 0}
+.more::after{content:" →"}
+.foot{margin-top:72px;padding-top:20px;border-top:3px double #121212;text-align:center;font-family:'Libre Franklin',Arial,sans-serif;font-size:14px;color:#5A5A5A}
+.foot p{margin:6px 0}
+.footname{font-family:'Source Serif 4',Georgia,serif;font-size:20px;font-weight:700;color:#121212}
+@media (max-width:900px){.three{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:680px){
+.page{padding:0 20px 48px}
+.masthead{padding:28px 0 18px}
+.masthead h1{font-size:38px}
+.tagline{font-size:17px}
+.nav{gap:2px 20px;font-size:15px}
+.lede{font-size:19px;text-align:left;margin-top:28px}
+.three,.two{grid-template-columns:minmax(0,1fr)}
+.sec,.pair .sec{margin-top:44px}
+.story h3{font-size:23px}
+.summary{font-size:18px}
+}
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="page">
 
-<header class="hero">
+<div class="topbar"><span>Project Portfolio</span><span>New York</span></div>
+
+<header class="masthead">
 <h1>Serhat Guven, FRM</h1>
-<p class="role">Risk professional · New York</p>
-<p class="intro">A selection of side projects I have designed and built with AI: automated research and publishing workflows, personal finance tools, everyday apps, and learning programs.</p>
+<p class="tagline">Risk and audit professional. Builder of small, useful systems.</p>
+</header>
+
 <nav class="nav" aria-label="Sections">
 <a href="#automation">Automation</a>
 <a href="#finance">Finance</a>
@@ -49,83 +77,122 @@ html{scroll-behavior:smooth}
 <a href="#content">Content</a>
 <a href="#personal">Personal</a>
 </nav>
-</header>
+
+<p class="lede">A selection of side projects I have designed and built with AI — from briefings that research and publish themselves every day, to offline tools that forecast my own finances.</p>
 
 <section id="automation" class="sec">
-<h2>Automation and publishing</h2>
-<div class="row">
-<div class="name"><h3>Gündem — Daily News Briefs</h3><span class="meta">Daily · Live</span></div>
-<div class="desc"><p>Scheduled evening brief and intraday updates covering world and Turkey news, US and Turkish markets, and New York / New Jersey local news. Delivered by email and published to a website with a searchable archive.</p><p class="tools">Scheduled AI tasks · Gmail · GitHub Pages · <a href="https://github.com/sguven/bulten">Repository</a></p></div>
-</div>
-<div class="row">
-<div class="name"><h3>Weekly Cinema Bulletin</h3><span class="meta">Weekly · Live</span></div>
-<div class="desc"><p>Every Wednesday, a summary of notable films in New York theaters for the coming week, with early reactions and advance notice of major upcoming releases.</p><p class="tools">Scheduled AI tasks · Web research · Gmail</p></div>
-</div>
-<div class="row">
-<div class="name"><h3>Claude Project of the Day</h3><span class="meta">Daily · Live</span></div>
-<div class="desc"><p>A daily briefing on one lesser-known AI capability and one project idea, published to a living web page and sent by email.</p><p class="tools">Scheduled AI tasks · Web page · Gmail</p></div>
+<h2 class="sechead">Automation and Publishing</h2>
+<div class="grid three">
+<article class="story">
+<div class="head"><svg class="logo" viewBox="0 0 24 24" width="44" height="44" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="15" height="16" rx="1.5"/><path d="M18 8h2a1 1 0 0 1 1 1v9a2 2 0 0 1-2 2H5"/><path d="M6 8h9M6 12h4M6 16h4M12.5 11.5h2.5v4.5h-2.5z"/></svg><p class="kicker">Daily · Live</p></div>
+<h3>Gündem: A News Brief That Writes Itself</h3>
+<p class="summary">An evening brief and intraday updates covering world and Turkey news, US and Turkish markets, and New York and New Jersey local news — delivered by email and archived on a searchable website.</p>
+<p class="built">Scheduled AI tasks, Gmail, GitHub Pages</p>
+<a class="more" href="https://github.com/sguven/bulten">View repository</a>
+</article>
+<article class="story">
+<div class="head"><svg class="logo" viewBox="0 0 24 24" width="44" height="44" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/><path d="M10.5 9.5l3.5 2.5-3.5 2.5z"/></svg><p class="kicker">Weekly · Live</p></div>
+<h3>The Wednesday Cinema Bulletin</h3>
+<p class="summary">Every Wednesday, the notable films in New York theaters for the week ahead, with early reactions, a reason to see each one and advance notice of major releases.</p>
+<p class="built">Scheduled AI tasks, web research, Gmail</p>
+</article>
+<article class="story">
+<div class="head"><svg class="logo" viewBox="0 0 24 24" width="44" height="44" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.6.5 1 1.2 1 2V16h5.2v-.2c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></svg><p class="kicker">Daily · Live</p></div>
+<h3>Claude Project of the Day</h3>
+<p class="summary">A short daily briefing on one lesser-known AI capability and one ambitious project idea, published to a living web page and sent by email.</p>
+<p class="built">Scheduled AI tasks, web page, Gmail</p>
+</article>
 </div>
 </section>
 
 <section id="finance" class="sec">
-<h2>Personal finance</h2>
-<div class="row">
-<div class="name"><h3>Investment Portfolio and Forecast App</h3><span class="meta">Desktop · Offline</span></div>
-<div class="desc"><p>Consolidates all of my investments into a single detailed view and forecasts future portfolio value from historical data. Runs fully offline; data never leaves my computer.</p><p class="tools">Desktop application · Forecasting · Local storage</p></div>
-</div>
-<div class="row">
-<div class="name"><h3>Cash Flow Tracker</h3><span class="meta">Desktop · Offline</span></div>
-<div class="desc"><p>Analyzes historical credit card payments and bank inflows and outflows, then produces a forward-looking cash flow forecast.</p><p class="tools">Desktop application · Cash flow analysis · Forecasting</p></div>
+<h2 class="sechead">Personal Finance</h2>
+<div class="grid two">
+<article class="story">
+<div class="head"><svg class="logo" viewBox="0 0 24 24" width="44" height="44" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><path d="M4 16l5-5 4 3 7-8"/><path d="M15 6h5v5"/></svg><p class="kicker">Desktop · Offline</p></div>
+<h3>An Investment Portfolio That Looks Ahead</h3>
+<p class="summary">Consolidates all of my investments into one detailed view and forecasts future portfolio value from historical data. It runs fully offline, so the data never leaves my computer.</p>
+<p class="built">Desktop application, forecasting, local storage</p>
+</article>
+<article class="story">
+<div class="head"><svg class="logo" viewBox="0 0 24 24" width="44" height="44" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13M13 4l4 4-4 4"/><path d="M20 16H7M11 12l-4 4 4 4"/></svg><p class="kicker">Desktop · Offline</p></div>
+<h3>Cash Flow Tracker and Forecast</h3>
+<p class="summary">Analyzes past credit card payments and bank inflows and outflows to show where the money goes, then projects cash flow for the months ahead.</p>
+<p class="built">Desktop application, cash flow analysis, forecasting</p>
+</article>
 </div>
 </section>
 
 <section id="apps" class="sec">
-<h2>Everyday apps</h2>
-<div class="row">
-<div class="name"><h3>KaloriLog</h3><span class="meta">Mobile web · In use</span></div>
-<div class="desc"><p>Meal and calorie logging with an automatically updated habits dashboard and weekly AI-generated nutrition recommendations.</p><p class="tools">Web app · Dashboard · Scheduled AI tasks</p></div>
-</div>
-<div class="row">
-<div class="name"><h3>SporLog Pro</h3><span class="meta">Mobile web · In use</span></div>
-<div class="desc"><p>Workout logging with a weekly AI coaching review of progress and suggested adjustments.</p><p class="tools">Web app · Scheduled AI tasks · Gmail</p></div>
-</div>
-<div class="row">
-<div class="name"><h3>Movie Watchlist</h3><span class="meta">iOS · In progress</span></div>
-<div class="desc"><p>An iPhone watchlist that automatically records each film's IMDb rating, release year and director.</p><p class="tools">iOS · Claude Code</p></div>
+<h2 class="sechead">Everyday Apps</h2>
+<div class="grid three">
+<article class="story">
+<div class="head"><svg class="logo" viewBox="0 0 24 24" width="44" height="44" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10"/><path d="M17 21V3c-2 1-3 4-3 7h3"/></svg><p class="kicker">Mobile · In daily use</p></div>
+<h3>KaloriLog</h3>
+<p class="summary">Quick meal and calorie logging with an automatically updated habits dashboard and a weekly AI-written set of nutrition recommendations.</p>
+<p class="built">Web app, dashboard, scheduled AI tasks</p>
+</article>
+<article class="story">
+<div class="head"><svg class="logo" viewBox="0 0 24 24" width="44" height="44" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 7v10M17.5 7v10M3.5 9.5v5M20.5 9.5v5M6.5 12h11"/></svg><p class="kicker">Mobile · In daily use</p></div>
+<h3>SporLog Pro</h3>
+<p class="summary">A workout log built for entry between sets, with a weekly AI coaching review of progress and suggested adjustments.</p>
+<p class="built">Web app, scheduled AI tasks, Gmail</p>
+</article>
+<article class="story">
+<div class="head"><svg class="logo" viewBox="0 0 24 24" width="44" height="44" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4z"/><path d="M10.5 7.5l3.5 2-3.5 2z"/></svg><p class="kicker">iOS · In progress</p></div>
+<h3>Movie Watchlist</h3>
+<p class="summary">An iPhone watchlist that records each film's IMDb rating, release year and director the moment it is saved.</p>
+<p class="built">iOS, Claude Code</p>
+</article>
 </div>
 </section>
 
+<div class="grid two pair">
 <section id="learning" class="sec">
-<h2>Learning</h2>
-<div class="row">
-<div class="name"><h3>Film Theory Curriculum</h3><span class="meta">52 weeks · Ongoing</span></div>
-<div class="desc"><p>A structured self-study program with a daily AI-taught lesson, assigned readings and films, and weekly assessments.</p><p class="tools">Claude Projects · Scheduled AI tasks · <a href="https://github.com/sguven/film-teorisi">Repository</a></p></div>
-</div>
+<h2 class="sechead">Learning</h2>
+<article class="story">
+<div class="head"><svg class="logo" viewBox="0 0 24 24" width="44" height="44" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6c-2-1.5-5-2-8-1.5V19c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V4.5c-3-.5-6 0-8 1.5z"/><path d="M12 6v14.5"/></svg><p class="kicker">52 weeks · Ongoing</p></div>
+<h3>A Year of Film Theory</h3>
+<p class="summary">A structured self-study program with a daily AI-taught lesson, assigned readings and films, and weekly assessments.</p>
+<p class="built">Claude Projects, scheduled AI tasks</p>
+<a class="more" href="https://github.com/sguven/film-teorisi">View repository</a>
+</article>
 </section>
 
 <section id="content" class="sec">
-<h2>Content</h2>
-<div class="row">
-<div class="name"><h3>Automated Social Accounts</h3><span class="meta">Social · Live</span></div>
-<div class="desc"><p>Three faceless accounts where content is researched, produced and posted on a schedule: <a href="https://www.instagram.com/cleaneverycorner">@cleaneverycorner</a> (home and car cleaning), <a href="https://www.instagram.com/cellbycell1">@cellbycell1</a> (Excel and Google Sheets tips) and <a href="https://x.com/TheDayInBrief">@TheDayInBrief</a> (world events in one post).</p><p class="tools">Instagram · X · Windsor.ai · Typefully</p></div>
-</div>
+<h2 class="sechead">Content</h2>
+<article class="story">
+<div class="head"><svg class="logo" viewBox="0 0 24 24" width="44" height="44" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4a1 1 0 0 0 1 1h3l8 4V5L7 9H4a1 1 0 0 0-1 1z"/><path d="M7 15l1.5 5h2.5L10 16M18.5 9.5a3.5 3.5 0 0 1 0 5"/></svg><p class="kicker">Social · Live</p></div>
+<h3>Three Accounts, Run on Autopilot</h3>
+<p class="summary">Faceless accounts where posts are researched, produced and published on a schedule: <a href="https://www.instagram.com/cleaneverycorner">@cleaneverycorner</a> for cleaning tips, <a href="https://www.instagram.com/cellbycell1">@cellbycell1</a> for spreadsheet tips and <a href="https://x.com/TheDayInBrief">@TheDayInBrief</a> for world events in a single post.</p>
+<p class="built">Instagram, X, Windsor.ai, Typefully</p>
+</article>
 </section>
+</div>
 
 <section id="personal" class="sec">
-<h2>Personal</h2>
-<div class="row">
-<div class="name"><h3>İpek's Games</h3><span class="meta">Web · Live</span></div>
-<div class="desc"><p>A collection of bilingual (Turkish / English) educational games for a young child, with voice narration and rewards.</p><p class="tools">Web games · GitHub Pages · <a href="https://github.com/sguven/ipek-oyunlari">Repository</a></p></div>
-</div>
-<div class="row">
-<div class="name"><h3>Köprüköy 3D</h3><span class="meta">3D · In progress</span></div>
-<div class="desc"><p>A browser-based 3D model of Köprüköy in Kırıkkale, Turkey, including the area around the historic Çeşnigir Bridge.</p><p class="tools">3D / WebGL · GitHub Pages · <a href="https://github.com/sguven/koprukoy-3d">Repository</a></p></div>
+<h2 class="sechead">Personal</h2>
+<div class="grid two">
+<article class="story">
+<div class="head"><svg class="logo" viewBox="0 0 24 24" width="44" height="44" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg><p class="kicker">Web · Live</p></div>
+<h3>İpek's Games</h3>
+<p class="summary">A growing collection of bilingual Turkish and English learning games for a young child, with voice narration and rewards.</p>
+<p class="built">Web games, GitHub Pages</p>
+<a class="more" href="https://github.com/sguven/ipek-oyunlari">View repository</a>
+</article>
+<article class="story">
+<div class="head"><svg class="logo" viewBox="0 0 24 24" width="44" height="44" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 17h20"/><path d="M3 17v-3a9 9 0 0 1 18 0v3"/><path d="M8 17v-3a4 4 0 0 1 8 0v3"/><path d="M2 20h20"/></svg><p class="kicker">3D · In progress</p></div>
+<h3>Köprüköy, Rebuilt in 3D</h3>
+<p class="summary">A browser-based 3D model of a small town in Kırıkkale, Turkey, including the area around the historic Çeşnigir Bridge.</p>
+<p class="built">3D / WebGL, GitHub Pages</p>
+<a class="more" href="https://github.com/sguven/koprukoy-3d">View repository</a>
+</article>
 </div>
 </section>
 
 <footer class="foot">
-<span>Serhat Guven, FRM</span>
-<span><a href="https://www.linkedin.com/in/serhatguven35/">LinkedIn</a> · <a href="https://github.com/sguven">GitHub</a></span>
+<p class="footname">Serhat Guven, FRM</p>
+<p><a href="https://www.linkedin.com/in/serhatguven35/">LinkedIn</a><span aria-hidden="true"> · </span><a href="https://github.com/sguven">GitHub</a></p>
 </footer>
 
 </div>
