@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2C4A8F"/>
+      <stop offset="1" stop-color="#5BA4F0"/>
+    </linearGradient>
+    <linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="url(#bg)"/>
+  <rect width="64" height="32" rx="15" fill="url(#gloss)"/>
+  <!-- orbiting cash-flow arrows -->
+  <path d="M11 30 A21 21 0 0 1 47 15" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="3.6" stroke-linecap="round"/>
+  <path d="M46.5 8.5 L48.5 16.5 L40.5 15.5" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M53 34 A21 21 0 0 1 17 49" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="3.6" stroke-linecap="round"/>
+  <path d="M17.5 55.5 L15.5 47.5 L23.5 48.5" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- dollar sign -->
+  <path d="M32 17 V47 M38.5 25 C38.5 20.5 25.5 20.5 25.5 27 C25.5 33 38.5 31 38.5 37 C38.5 43.5 25.5 43.5 25.5 39" fill="none" stroke="#fff" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

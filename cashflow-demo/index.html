@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CashFlow · Live demo</title>
+  <meta name="description" content="Interactive demo of a personal cash flow tracker and forecast, with fictional sample data.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <aside class="sidebar">
+      <div class="brand"><img class="logo" src="favicon.svg" alt="" width="30" height="30"> CashFlow</div>
+      <nav id="nav" aria-label="Sections"></nav>
+      <div class="sidebar-foot">
+        <div class="demo-note"><strong>Live demo</strong><span> Fictional figures. Edit anything: changes stay in your browser. Reset in Settings.</span></div>
+        <a class="back-link" href="https://sguven.github.io/#finance">← Back to portfolio</a>
+        <div id="status" class="status" aria-live="polite"></div>
+      </div>
+    </aside>
+    <div class="content">
+      <div id="banner" class="banner" hidden></div>
+      <main id="view"></main>
+    </div>
+  </div>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
