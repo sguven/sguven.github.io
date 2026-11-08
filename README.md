@@ -2,7 +2,7 @@
 
 **Live:** https://sguven.github.io
 
-Project portfolio of Serhat Guven: fourteen projects designed and built with AI across six fields — finance, automation, everyday apps, learning, content and personal.
+Project portfolio of Serhat Guven: fourteen projects designed and built with AI across six fields — finance, everyday apps, content, personal, automation and learning.
 
 | Path | What it is |
 |---|---|
