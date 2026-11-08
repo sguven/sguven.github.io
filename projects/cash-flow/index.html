@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cash Flow Tracker and Forecast — Case study · Serhat Guven</title>
+<meta name="description" content="A private app that projects my checking balance day by day from card statements, income and recurring payments, and flags the lowest point weeks before it happens.">
+<meta property="og:title" content="Cash Flow Tracker and Forecast — Case study">
+<meta property="og:description" content="A private app that projects my checking balance day by day from card statements, income and recurring payments, and flags the lowest point weeks before it happens.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://sguven.github.io/projects/cash-flow/">
+<meta property="og:image" content="https://sguven.github.io/img/cashflow.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121212'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='17' font-weight='700' fill='white' text-anchor='middle'%3ESG%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;1,8..60,400&amp;family=Libre+Franklin:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../../assets/case.css">
+</head>
+<body>
+<a class="skip" href="#problem">Skip to the case study</a>
+<header class="top">
+<div class="wrap">
+<a class="brand" href="../../"><span class="mono">SG</span>Serhat Guven</a>
+<nav class="nav" aria-label="Main">
+<a class="keep" href="../../#work">Projects</a>
+<a href="../../#about">About</a>
+<a href="https://github.com/sguven" target="_blank" rel="noopener">GitHub</a>
+<a href="https://www.linkedin.com/in/serhat35/" target="_blank" rel="noopener">LinkedIn</a>
+<a class="cv" href="https://www.linkedin.com/in/serhat35/" target="_blank" rel="noopener">Resume</a>
+</nav>
+</div>
+</header>
+
+<main class="wrap" data-id="cashflow">
+<a class="back" href="../../#cashflow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4"/></svg> All projects</a>
+<header class="cs-hero">
+<p class="meta"><span class="status live">Live</span><span>Finance &amp; Fintech</span><span class="plat">Case study</span></p>
+<h1>Cash Flow Tracker and Forecast</h1>
+<p class="cs-lede">A private app that projects my checking balance day by day from card statements, income and recurring payments, and flags the lowest point weeks before it happens.</p>
+<div class="cs-actions">
+<a class="btn accent" href="https://sguven.github.io/cashflow-demo/" target="_blank" rel="noopener">Live demo <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a>
+<a class="btn" href="https://github.com/sguven/sguven.github.io/tree/main/cashflow-demo" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> Source on GitHub</a>
+</div>
+<dl class="facts"><div><dt>Role</dt><dd>Product, design and build, with Claude as coding partner</dd></div><div><dt>Platform</dt><dd>Mac (web app) and iPhone (SwiftUI, Face ID lock)</dd></div><div><dt>Data</dt><dd>Local only; the public demo uses fictional figures</dd></div><div><dt>Status</dt><dd>In daily use; live demo available</dd></div></dl>
+</header>
+
+<figure class="cs-cover"><a class="frame" href="../../img/cashflow.jpg" data-lightbox data-cap="Dashboard: balance today, lowest projected balance, next income and payment, and the 90-day projection. Fictional figures."><img src="../../img/cashflow.jpg" alt="Dashboard: balance today, lowest projected balance, next income and payment, and the 90-day projection. Fictional figures."></a><figcaption>Dashboard: balance today, lowest projected balance, next income and payment, and the 90-day projection. Fictional figures.</figcaption></figure>
+
+<div class="cs-layout">
+<nav class="toc" aria-label="On this page"><p class="label">On this page</p><a href="#problem"><span>01</span>Problem</a><a href="#solution"><span>02</span>Solution</a><a href="#architecture"><span>03</span>Architecture</a><a href="#technology"><span>04</span>Technology</a><a href="#challenges"><span>05</span>Challenges</a><a href="#results"><span>06</span>Results</a></nav>
+<div class="cs-body">
+
+<section id="problem"><header class="cs-h"><p class="label accent">01 · Problem</p><h2>What need does it solve?</h2></header><p>A bank balance only describes today. Card bills, rent, insurance and income all arrive on different schedules, and a card bill is not even known until its statement closes.</p><p>The real risk is a day a few weeks out when several payments land before payday and the balance drops lower than expected. I wanted to see that day in advance, not discover it.</p></section>
+
+<section id="solution"><header class="cs-h"><p class="label accent">02 · Solution</p><h2>How it works</h2></header><p>I enter today&#x27;s balance and the schedules for income, recurring payments and cards once. From then on the app:</p><ul><li>Projects the balance for every day of the next 90 days (the horizon is adjustable)</li><li>Highlights the lowest projected balance and its date, against a minimum-balance threshold</li><li>Uses the real statement amount when it exists, and an estimate marked EST until then</li><li>Reports card payments by month with 3-, 6- and 12-month averages</li></ul><div class="gallery" style="grid-template-columns:minmax(0,1.6fr)"><figure class="shot wide"><a href="../../img/cases/cf-payments.jpg" data-lightbox data-cap="Recurring payments with their schedules."><img src="../../img/cases/cf-payments.jpg" loading="lazy" alt="Recurring payments with their schedules."></a><figcaption>Recurring payments with their schedules.</figcaption></figure></div><div class="gallery" style="grid-template-columns:minmax(0,1.6fr) minmax(0,0.5625fr)"><figure class="shot wide"><a href="../../img/cases/cf-report.jpg" data-lightbox data-cap="Payments by month, with rolling averages."><img src="../../img/cases/cf-report.jpg" loading="lazy" alt="Payments by month, with rolling averages."></a><figcaption>Payments by month, with rolling averages.</figcaption></figure><figure class="shot phone"><a href="../../img/cases/cf-mobile.jpg" data-lightbox data-cap="The dashboard on a phone."><img src="../../img/cases/cf-mobile.jpg" loading="lazy" alt="The dashboard on a phone."></a><figcaption>The dashboard on a phone.</figcaption></figure></div></section>
+
+<section id="architecture"><header class="cs-h"><p class="label accent">03 · Architecture</p><h2>How the system fits together</h2></header><div class="diagram"><svg viewBox="0 0 960 460" role="img" aria-label="Architecture: balance, income, payments and card statements feed a forecast engine that produces a 90-day balance, the lowest point, upcoming events and a monthly payments report; data is saved locally" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8E8E8A"/></marker></defs><style>.t{font:600 15px "Libre Franklin",Arial,sans-serif;fill:#121212;text-anchor:middle}.s{font:500 12.5px "Libre Franklin",Arial,sans-serif;fill:#6B6B6B;text-anchor:middle}.l{font:600 11.5px "Libre Franklin",Arial,sans-serif;fill:#6B6B6B}.g{font:600 11px "Libre Franklin",Arial,sans-serif;fill:#8E8E8A;letter-spacing:.08em}</style><text x="20" y="18" class="g">INPUTS</text><text x="350" y="18" class="g">ENGINE</text><text x="720" y="18" class="g">OUTPUTS</text><rect x="20" y="30" width="230" height="72" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="135.0" y="62.0" class="t">Balance today</text><text x="135.0" y="82.0" class="s">Entered or adjusted</text><line x1="252" y1="66" x2="346" y2="165" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><rect x="20" y="122" width="230" height="72" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="135.0" y="154.0" class="t">Income schedules</text><text x="135.0" y="174.0" class="s">Monthly, biweekly, early pay</text><line x1="252" y1="158" x2="346" y2="192" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><rect x="20" y="214" width="230" height="72" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="135.0" y="246.0" class="t">Recurring payments</text><text x="135.0" y="266.0" class="s">Rent, insurance, utilities</text><line x1="252" y1="250" x2="346" y2="219" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><rect x="20" y="306" width="230" height="72" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="135.0" y="338.0" class="t">Card statements</text><text x="135.0" y="358.0" class="s">History per card</text><line x1="252" y1="342" x2="346" y2="246" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><rect x="350" y="110" width="260" height="190" rx="10" fill="#EEF2FB" stroke="#2350B8" stroke-width="1.6"/><text x="480.0" y="165.0" class="t">Forecast engine</text><text x="480.0" y="185.0" class="s">Recurrence rules</text><text x="480.0" y="203.0" class="s">Business-day and</text><text x="480.0" y="221.0" class="s">US holiday shifts</text><text x="480.0" y="239.0" class="s">Card bill estimates (EST)</text><text x="480.0" y="257.0" class="s">Day-by-day projection</text><rect x="710" y="30" width="230" height="72" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="825.0" y="62.0" class="t">Daily balance, 90 days</text><text x="825.0" y="82.0" class="s">Chart with threshold line</text><line x1="612" y1="165" x2="706" y2="66" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><rect x="710" y="122" width="230" height="72" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="825.0" y="154.0" class="t">Lowest projected point</text><text x="825.0" y="174.0" class="s">Amount and date</text><line x1="612" y1="192" x2="706" y2="158" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><rect x="710" y="214" width="230" height="72" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="825.0" y="246.0" class="t">Upcoming events</text><text x="825.0" y="266.0" class="s">Balance after each one</text><line x1="612" y1="219" x2="706" y2="250" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><rect x="710" y="306" width="230" height="72" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="825.0" y="338.0" class="t">Payments by month</text><text x="825.0" y="358.0" class="s">3-, 6- and 12-month averages</text><line x1="612" y1="246" x2="706" y2="342" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><rect x="350" y="380" width="260" height="70" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="480.0" y="402.0" class="t">Local storage</text><text x="480.0" y="422.0" class="s">Python server on 127.0.0.1,</text><text x="480.0" y="440.0" class="s">backups to a private repo</text><line x1="480" y1="302" x2="480" y2="376" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><text x="490" y="344" class="l" text-anchor="start">save / load</text></svg></div><p>Four kinds of input feed a single forecast engine. The engine expands every schedule into dated events, moves them off weekends and holidays, estimates card bills that are not known yet, and walks the balance forward one day at a time. The private version saves to a local file through a Python server that only listens on the computer itself and backs up to a repository it has confirmed is private. The iPhone app applies the same rules, so both show the same forecast.</p></section>
+
+<section id="technology"><header class="cs-h"><p class="label accent">04 · Technology</p><h2>What it is built with</h2></header>
+<ul class="tags"><li>JavaScript</li><li>SVG</li><li>Python</li><li>SwiftUI</li></ul>
+<table class="tech"><tbody><tr><th scope='row'>Interface</th><td>Plain JavaScript modules; no framework and no build step</td></tr><tr><th scope='row'>Charts</th><td>Hand-built SVG charts with hover and touch details</td></tr><tr><th scope='row'>Engine</th><td>engine.js: recurrence rules, business-day and holiday adjustment, card bill estimation, projection</td></tr><tr><th scope='row'>Storage</th><td>Local file through a Python server bound to 127.0.0.1; backups to a private repository</td></tr><tr><th scope='row'>iPhone</th><td>SwiftUI app with the same rules and a Face ID lock</td></tr><tr><th scope='row'>Public demo</th><td>Same engine and screens, browser storage, fictional data with dates relative to today</td></tr></tbody></table>
+</section>
+
+<section id="challenges"><header class="cs-h"><p class="label accent">05 · Challenges</p><h2>Hard parts and how they were solved</h2></header>
+<ol class="challenges"><li><h3>Calendars are messy</h3><p>A payment due on a Saturday or on the Fourth of July does not leave the account that day. Each schedule says whether it moves to the previous or the next business day, the engine computes US federal holidays including observed dates, and income can be set to arrive a few business days early.</p></li><li><h3>Which statement pays which bill</h3><p>A statement closes in one month and is usually paid the next, unless the due day falls later in the same month. The engine maps every due date to the statement period it pays, so an estimate and an actual statement are never counted twice.</p></li><li><h3>Bills that cannot be known yet</h3><p>Until a statement closes, the bill is estimated from the card&#x27;s 12- or 3-month average (or an expected amount) and labeled EST. The estimate is replaced as soon as the real statement is entered.</p></li><li><h3>One set of rules, two apps</h3><p>The JavaScript engine follows the same rules as the iPhone app, so the Mac and the phone always show the same numbers.</p></li></ol>
+</section>
+
+<section id="results"><header class="cs-h"><p class="label accent">06 · Results</p><h2>What came out of it</h2></header>
+<ul class="results"><li>The lowest point of the coming months is visible weeks ahead, with its date, leaving time to move money before the balance dips under the threshold.</li><li>Card spending is tracked month by month, with averages that make unusual months stand out.</li><li>Runs privately on Mac and iPhone; the public demo shows the same engine with fictional data.</li></ul>
+<div class="cs-actions">
+<a class="btn accent" href="https://sguven.github.io/cashflow-demo/" target="_blank" rel="noopener">Live demo <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a>
+<a class="btn" href="https://github.com/sguven/sguven.github.io/tree/main/cashflow-demo" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> Source on GitHub</a>
+</div>
+</section>
+
+</div>
+</div>
+
+<a class="next-case" href="../world-brief/"><span><small class="label">Next case study</small><strong>World Brief</strong></span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+</main>
+
+<footer class="foot"><div class="wrap"><span>© 2026 Serhat Guven · <a href="../../">All projects</a></span><span><a href="https://www.linkedin.com/in/serhat35/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/sguven" target="_blank" rel="noopener">GitHub</a></span></div></footer>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Image preview"><div class="lb-box"><button class="lb-x" type="button" aria-label="Close">×</button><img alt=""><p class="lb-cap"></p></div></div>
+<script src="../../assets/site.js"></script>
+<script>
+(function(){var K='sg-portfolio-viewed-v3',s=SG.loadSeen(K);s['cashflow']=1;SG.saveSeen(K,s);
+var links=[].slice.call(document.querySelectorAll('.toc a'));
+if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+en.target.id);});}});},{rootMargin:'-30% 0px -60% 0px'});
+document.querySelectorAll('.cs-body section').forEach(function(s){io.observe(s);});}})();
+</script>
+</body>
+</html>

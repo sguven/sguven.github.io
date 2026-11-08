@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>World Brief — Case study · Serhat Guven</title>
+<meta name="description" content="A scheduled AI pipeline that researches the day&#x27;s news every evening, emails a full brief, and publishes the world section to a public, phone-first site with a searchable archive.">
+<meta property="og:title" content="World Brief — Case study">
+<meta property="og:description" content="A scheduled AI pipeline that researches the day&#x27;s news every evening, emails a full brief, and publishes the world section to a public, phone-first site with a searchable archive.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://sguven.github.io/projects/world-brief/">
+<meta property="og:image" content="https://sguven.github.io/img/worldbrief.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121212'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='17' font-weight='700' fill='white' text-anchor='middle'%3ESG%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;1,8..60,400&amp;family=Libre+Franklin:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../../assets/case.css">
+</head>
+<body>
+<a class="skip" href="#problem">Skip to the case study</a>
+<header class="top">
+<div class="wrap">
+<a class="brand" href="../../"><span class="mono">SG</span>Serhat Guven</a>
+<nav class="nav" aria-label="Main">
+<a class="keep" href="../../#work">Projects</a>
+<a href="../../#about">About</a>
+<a href="https://github.com/sguven" target="_blank" rel="noopener">GitHub</a>
+<a href="https://www.linkedin.com/in/serhat35/" target="_blank" rel="noopener">LinkedIn</a>
+<a class="cv" href="https://www.linkedin.com/in/serhat35/" target="_blank" rel="noopener">Resume</a>
+</nav>
+</div>
+</header>
+
+<main class="wrap" data-id="worldbrief">
+<a class="back" href="../../#worldbrief"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4"/></svg> All projects</a>
+<header class="cs-hero">
+<p class="meta"><span class="status live">Live</span><span>AI &amp; Automation</span><span class="plat">Case study</span></p>
+<h1>World Brief</h1>
+<p class="cs-lede">A scheduled AI pipeline that researches the day&#x27;s news every evening, emails a full brief, and publishes the world section to a public, phone-first site with a searchable archive.</p>
+<div class="cs-actions">
+<a class="btn accent" href="https://sguven.github.io/bulten/" target="_blank" rel="noopener">Live site <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a>
+<a class="btn" href="https://github.com/sguven/bulten" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> Source on GitHub</a>
+</div>
+<dl class="facts"><div><dt>Role</dt><dd>Design of the pipeline, prompts, validation and site, built with Claude</dd></div><div><dt>Runs</dt><dd>Every evening around 7 pm New York time, plus intraday updates</dd></div><div><dt>Output</dt><dd>Turkish brief by email; English world section on the web</dd></div><div><dt>Status</dt><dd>Live, fully automated</dd></div></dl>
+</header>
+
+<figure class="cs-cover"><a class="frame" href="../../img/worldbrief.jpg" data-lightbox data-cap="An evening issue on the live site."><img src="../../img/worldbrief.jpg" alt="An evening issue on the live site."></a><figcaption>An evening issue on the live site.</figcaption></figure>
+
+<div class="cs-layout">
+<nav class="toc" aria-label="On this page"><p class="label">On this page</p><a href="#problem"><span>01</span>Problem</a><a href="#solution"><span>02</span>Solution</a><a href="#architecture"><span>03</span>Architecture</a><a href="#technology"><span>04</span>Technology</a><a href="#challenges"><span>05</span>Challenges</a><a href="#results"><span>06</span>Results</a></nav>
+<div class="cs-body">
+
+<section id="problem"><header class="cs-h"><p class="label accent">01 · Problem</p><h2>What need does it solve?</h2></header><p>Keeping up with world news, markets, Turkey and local New York and New Jersey news meant checking many sources every day, and most of what they publish is noise.</p><p>I wanted one short, reliable brief each evening: the few stories that matter, why they matter, the sources behind them, and clear labels on anything unconfirmed. And I did not want to do any of it by hand.</p></section>
+
+<section id="solution"><header class="cs-h"><p class="label accent">02 · Solution</p><h2>How it works</h2></header><p>A scheduled Claude task runs every evening. It researches, writes and delivers the brief with no manual steps:</p><ul><li>The full brief, in Turkish, arrives by email: world news, markets, Turkey and local news</li><li>The world section is written in English and published to a public site</li><li>Each issue has 4–5 headlines, a sentence or two on why each one matters, and links to its sources</li><li>The site shows today&#x27;s issue with a marker for the next one, and an archive with search</li></ul><div class="gallery" style="grid-template-columns:minmax(0,0.8fr) minmax(0,0.8fr) minmax(0,0.5625fr)"><figure class="shot tall"><a href="../../img/cases/wb-today.jpg" data-lightbox data-cap="Today view: the latest issue and the time of the next one."><img src="../../img/cases/wb-today.jpg" loading="lazy" alt="Today view: the latest issue and the time of the next one."></a><figcaption>Today view: the latest issue and the time of the next one.</figcaption></figure><figure class="shot tall"><a href="../../img/cases/wb-archive.jpg" data-lightbox data-cap="Archive: every issue by day, with headline search."><img src="../../img/cases/wb-archive.jpg" loading="lazy" alt="Archive: every issue by day, with headline search."></a><figcaption>Archive: every issue by day, with headline search.</figcaption></figure><figure class="shot phone"><a href="../../img/cases/wb-mobile.jpg" data-lightbox data-cap="On a phone."><img src="../../img/cases/wb-mobile.jpg" loading="lazy" alt="On a phone."></a><figcaption>On a phone.</figcaption></figure></div></section>
+
+<section id="architecture"><header class="cs-h"><p class="label accent">03 · Architecture</p><h2>How the system fits together</h2></header><div class="diagram"><svg viewBox="0 0 960 450" role="img" aria-label="Architecture: a scheduled Claude task writes the brief; the full Turkish brief goes to email, the English world section is validated by publish.py, saved as issue files, pushed to GitHub and served by GitHub Pages" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8E8E8A"/></marker></defs><style>.t{font:600 15px "Libre Franklin",Arial,sans-serif;fill:#121212;text-anchor:middle}.s{font:500 12.5px "Libre Franklin",Arial,sans-serif;fill:#6B6B6B;text-anchor:middle}.l{font:600 11.5px "Libre Franklin",Arial,sans-serif;fill:#6B6B6B}.g{font:600 11px "Libre Franklin",Arial,sans-serif;fill:#8E8E8A;letter-spacing:.08em}</style><rect x="20" y="30" width="180" height="80" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="110.0" y="57.0" class="t">Schedule</text><text x="110.0" y="77.0" class="s">Every evening</text><text x="110.0" y="95.0" class="s">around 7 pm ET</text><rect x="260" y="30" width="220" height="80" rx="10" fill="#EEF2FB" stroke="#2350B8" stroke-width="1.6"/><text x="370.0" y="57.0" class="t">Claude task</text><text x="370.0" y="77.0" class="s">Researches sources,</text><text x="370.0" y="95.0" class="s">writes the brief</text><rect x="560" y="30" width="380" height="80" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="750.0" y="66.0" class="t">Full brief by email</text><text x="750.0" y="86.0" class="s">Turkish: world, markets, Turkey, NY/NJ</text><line x1="202" y1="70" x2="256" y2="70" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><line x1="482" y1="70" x2="556" y2="70" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><text x="519.0" y="62.0" class="l" text-anchor="middle">private</text><rect x="260" y="190" width="220" height="80" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="370.0" y="217.0" class="t">veri.json</text><text x="370.0" y="237.0" class="s">World section,</text><text x="370.0" y="255.0" class="s">written in English</text><rect x="560" y="190" width="170" height="80" rx="10" fill="#EEF2FB" stroke="#2350B8" stroke-width="1.6"/><text x="645.0" y="226.0" class="t">publish.py</text><text x="645.0" y="246.0" class="s">Validates the issue</text><rect x="770" y="190" width="170" height="80" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="855.0" y="226.0" class="t">Issue files</text><text x="855.0" y="246.0" class="s">Rebuilds world.json</text><line x1="370" y1="112" x2="370" y2="186" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><text x="380" y="154" class="l" text-anchor="start">public</text><line x1="482" y1="230" x2="556" y2="230" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><line x1="732" y1="230" x2="766" y2="230" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><rect x="770" y="350" width="170" height="80" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="855.0" y="377.0" class="t">git push</text><text x="855.0" y="397.0" class="s">Rebase and retry</text><text x="855.0" y="415.0" class="s">up to 3 times</text><rect x="560" y="350" width="170" height="80" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="645.0" y="386.0" class="t">GitHub Pages</text><text x="645.0" y="406.0" class="s">Static site, no build</text><rect x="260" y="350" width="220" height="80" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="370.0" y="377.0" class="t">Readers</text><text x="370.0" y="397.0" class="s">Today, Archive, search;</text><text x="370.0" y="415.0" class="s">checks every 5 minutes</text><line x1="855" y1="272" x2="855" y2="346" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><line x1="768" y1="390" x2="734" y2="390" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><line x1="558" y1="390" x2="484" y2="390" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/></svg></div><p>One run produces two outputs. The private brief goes to email. The public part is written to a small JSON file, checked by a validation script, saved as a dated issue file, and the index of all issues is rebuilt. The script then commits and pushes to GitHub, and GitHub Pages serves the static site, which needs no build step and checks for a new issue every few minutes.</p></section>
+
+<section id="technology"><header class="cs-h"><p class="label accent">04 · Technology</p><h2>What it is built with</h2></header>
+<ul class="tags"><li>Claude</li><li>Scheduled tasks</li><li>Python</li><li>Bash</li><li>GitHub Pages</li><li>Gmail</li></ul>
+<table class="tech"><tbody><tr><th scope='row'>Agent</th><td>Scheduled Claude task with web research</td></tr><tr><th scope='row'>Delivery</th><td>Gmail for the full brief</td></tr><tr><th scope='row'>Publishing</th><td>publish.py (Python standard library only) and a bash script that commits and pushes</td></tr><tr><th scope='row'>Hosting</th><td>GitHub Pages: index.html plus data/world.json, no build step</td></tr><tr><th scope='row'>Site</th><td>Plain JavaScript; follows the system dark theme; can be added to the home screen</td></tr></tbody></table>
+</section>
+
+<section id="challenges"><header class="cs-h"><p class="label accent">05 · Challenges</p><h2>Hard parts and how they were solved</h2></header>
+<ol class="challenges"><li><h3>Two audiences from one run</h3><p>The private brief is in Turkish and covers everything; the public site is English and world news only. The validator accepts exactly one section, headed World, and rejects any Turkish text. Turkish letters inside proper names are transliterated automatically instead of failing the whole issue.</p></li><li><h3>Publishing with nobody watching</h3><p>Two runs can try to push at the same time. The script pulls and rebases first, rebuilds the index if needed and retries up to three times, so a collision never leaves the site half-updated.</p></li><li><h3>Earning trust</h3><p>Every issue lists its sources, and the validator only accepts secure links. Widely shared but unconfirmed reports are included only when clearly labeled as unverified.</p></li><li><h3>Built for a phone at the end of the day</h3><p>Short issues, a phone-first layout, the system dark theme, home-screen install, and an automatic check for the next issue.</p></li></ol>
+</section>
+
+<section id="results"><header class="cs-h"><p class="label accent">06 · Results</p><h2>What came out of it</h2></header>
+<ul class="results"><li>Live since November 2, 2026, with an issue every evening and no manual steps.</li><li>An archive of every issue, searchable by headline.</li><li>The full brief arrives by email each evening, alongside shorter intraday updates.</li></ul>
+<div class="cs-actions">
+<a class="btn accent" href="https://sguven.github.io/bulten/" target="_blank" rel="noopener">Live site <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a>
+<a class="btn" href="https://github.com/sguven/bulten" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> Source on GitHub</a>
+</div>
+</section>
+
+</div>
+</div>
+
+<a class="next-case" href="../investment-portfolio/"><span><small class="label">Next case study</small><strong>Investment Portfolio Tracker</strong></span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+</main>
+
+<footer class="foot"><div class="wrap"><span>© 2026 Serhat Guven · <a href="../../">All projects</a></span><span><a href="https://www.linkedin.com/in/serhat35/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/sguven" target="_blank" rel="noopener">GitHub</a></span></div></footer>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Image preview"><div class="lb-box"><button class="lb-x" type="button" aria-label="Close">×</button><img alt=""><p class="lb-cap"></p></div></div>
+<script src="../../assets/site.js"></script>
+<script>
+(function(){var K='sg-portfolio-viewed-v3',s=SG.loadSeen(K);s['worldbrief']=1;SG.saveSeen(K,s);
+var links=[].slice.call(document.querySelectorAll('.toc a'));
+if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+en.target.id);});}});},{rootMargin:'-30% 0px -60% 0px'});
+document.querySelectorAll('.cs-body section').forEach(function(s){io.observe(s);});}})();
+</script>
+</body>
+</html>
