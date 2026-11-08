@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WorkoutLog Pro — Case study · Serhat Guven</title>
+<meta name="description" content="A mobile web app for logging gym sessions between sets, with an AI-written program, a rest timer, a weekly muscle map and a Sunday coaching email.">
+<meta property="og:title" content="WorkoutLog Pro — Case study">
+<meta property="og:description" content="A mobile web app for logging gym sessions between sets, with an AI-written program, a rest timer, a weekly muscle map and a Sunday coaching email.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://sguven.github.io/projects/workoutlog/">
+<meta property="og:image" content="https://sguven.github.io/img/workoutlog.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121212'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='17' font-weight='700' fill='white' text-anchor='middle'%3ESG%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;1,8..60,400&amp;family=Libre+Franklin:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../../assets/case.css">
+</head>
+<body>
+<a class="skip" href="#problem">Skip to the case study</a>
+<header class="top">
+<div class="wrap">
+<a class="brand" href="../../"><span class="mono">SG</span>Serhat Guven</a>
+<nav class="nav" aria-label="Main">
+<a class="keep" href="../../#work">Projects</a>
+<a class="keep" href="../../#about">About</a>
+</nav>
+</div>
+</header>
+
+<main class="wrap" data-id="workoutlog">
+<a class="back" href="../../#workoutlog"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4"/></svg> All projects</a>
+<header class="cs-hero">
+<p class="meta"><span class="status live">Live</span><span>Applications</span><span class="plat">Case study</span></p>
+<h1>WorkoutLog Pro</h1>
+<p class="cs-lede">A mobile web app for logging gym sessions between sets: it shows last time's numbers, suggests when to add weight, keeps a rest timer and turns the history into a weekly muscle map and a Sunday coaching email.</p>
+<div class="cs-actions">
+<a class="btn accent" href="https://sguven.github.io/workoutlog-demo/" target="_blank" rel="noopener">Live demo <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a>
+<a class="btn" href="https://github.com/sguven/sguven.github.io/tree/main/workoutlog-demo" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> Source on GitHub</a>
+</div>
+<dl class="facts"><div><dt>Role</dt><dd>Idea, design and build, with Claude as coding partner</dd></div><div><dt>Platform</dt><dd>Mobile web app, kept on the phone home screen</dd></div><div><dt>Input</dt><dd>Quick taps between sets</dd></div><div><dt>Status</dt><dd>Live; browser demo available with sample data</dd></div></dl>
+</header>
+
+<figure class="cs-cover"><a class="frame" href="../../img/workoutlog.jpg" data-lightbox data-cap="Next workout and muscle map screens, with sample data."><img src="../../img/workoutlog.jpg" alt="WorkoutLog Pro on a phone: next workout card with a weekly tracker, and a muscle map showing sets per muscle"></a><figcaption>Next workout and muscle map screens, with sample data.</figcaption></figure>
+
+<div class="cs-layout">
+<nav class="toc" aria-label="On this page"><p class="label">On this page</p><a href="#problem"><span>01</span>Problem</a><a href="#solution"><span>02</span>Solution</a><a href="#architecture"><span>03</span>Architecture</a><a href="#technology"><span>04</span>Technology</a><a href="#challenges"><span>05</span>Challenges</a><a href="#results"><span>06</span>Results</a></nav>
+<div class="cs-body">
+
+<section id="problem"><header class="cs-h"><p class="label accent">01 · Problem</p><h2>What need does it solve?</h2></header><p>Most workout apps are built around browsing: programs, videos, feeds. In the gym the need is smaller. I want to see what I lifted last time, enter the next set with one hand, and not lose my place while I rest.</p><p>I also wanted the history to say something: whether each muscle is getting enough work in a week, and when a lift is ready to go heavier, without keeping a spreadsheet.</p></section>
+
+<section id="solution"><header class="cs-h"><p class="label accent">02 · Solution</p><h2>How it works</h2></header><p>The app opens on the next session in the program. From there it:</p><ul><li>Shows last time's sets for each exercise, so the next entry starts from known numbers</li><li>Suggests a heavier weight when every set reached the top of the rep range</li><li>Starts a rest timer when a set is ticked off</li><li>Shows weekly sets per muscle on a muscle map, with personal records and a chart for each exercise</li><li>Keeps a library of 40+ exercises with form cues and the muscles they work, and lets any exercise in the program be swapped</li><li>Sends a coaching email every Sunday from a scheduled AI task, covering how the week went and what to adjust</li></ul></section>
+
+<section id="architecture"><header class="cs-h"><p class="label accent">03 · Architecture</p><h2>How the system fits together</h2></header><div class="diagram"><svg viewBox="0 0 960 400" role="img" aria-label="Architecture: a goal, schedule and equipment are turned into a program by AI; each workout shows last time's sets, suggests weights and runs a rest timer; sets are saved to the history on the device, which feeds the muscle map, personal records, exercise charts and a weekly coaching email" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8E8E8A"/></marker></defs><style>.t{font:600 15px "Libre Franklin",Arial,sans-serif;fill:#121212;text-anchor:middle}.s{font:500 12.5px "Libre Franklin",Arial,sans-serif;fill:#6B6B6B;text-anchor:middle}.l{font:600 11.5px "Libre Franklin",Arial,sans-serif;fill:#6B6B6B}.g{font:600 11px "Libre Franklin",Arial,sans-serif;fill:#8E8E8A;letter-spacing:.08em}</style><rect x="20" y="60" width="230" height="72" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="135" y="92" class="t">Goal and schedule</text><text x="135" y="112" class="s">Days per week, target</text><rect x="20" y="170" width="230" height="72" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="135" y="202" class="t">Equipment</text><text x="135" y="222" class="s">What the gym has</text><line x1="252" y1="96" x2="346" y2="140" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><line x1="252" y1="206" x2="346" y2="170" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><rect x="350" y="60" width="260" height="190" rx="10" fill="#EEF2FB" stroke="#2350B8" stroke-width="1.6"/><text x="480" y="104" class="t">Workout</text><text x="480" y="128" class="s">Program written by AI</text><text x="480" y="146" class="s">Last time's sets shown</text><text x="480" y="170" class="s">Heavier weight suggested</text><text x="480" y="188" class="s">when every set tops the range</text><text x="480" y="212" class="s">Rest timer after each set</text><rect x="710" y="30" width="230" height="64" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="825" y="58" class="t">Muscle map</text><text x="825" y="78" class="s">Weekly sets per muscle</text><rect x="710" y="110" width="230" height="64" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="825" y="138" class="t">Personal records</text><text x="825" y="158" class="s">Best lifts by exercise</text><rect x="710" y="190" width="230" height="64" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="825" y="218" class="t">Exercise charts</text><text x="825" y="238" class="s">Progress over time</text><rect x="710" y="270" width="230" height="64" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="825" y="298" class="t">Coaching email</text><text x="825" y="318" class="s">Scheduled AI task, Sundays</text><line x1="612" y1="130" x2="706" y2="64" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><line x1="612" y1="150" x2="706" y2="140" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><line x1="612" y1="170" x2="706" y2="220" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><line x1="612" y1="190" x2="706" y2="296" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><rect x="350" y="310" width="260" height="70" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="480" y="334" class="t">Workout history</text><text x="480" y="354" class="s">Sets by date and exercise,</text><text x="480" y="370" class="s">kept with the app</text><line x1="480" y1="252" x2="480" y2="306" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><text x="490" y="284" class="l" text-anchor="start">save</text></svg></div></section>
+
+<section id="technology"><header class="cs-h"><p class="label accent">04 · Technology</p><h2>What it is built with</h2></header><ul class="tags"><li>JavaScript</li><li>AI programming</li><li>Scheduled AI tasks</li></ul><table class="tech"><tbody><tr><th scope='row'>Interface</th><td>Single-page mobile web app in plain JavaScript; no framework and no build step</td></tr><tr><th scope='row'>Program</th><td>Written by AI from a goal, schedule and equipment; any exercise can be swapped</td></tr><tr><th scope='row'>Library</th><td>40+ exercises with form cues and the muscles each one works</td></tr><tr><th scope='row'>Progress</th><td>Weekly sets per muscle, personal records and a chart per exercise</td></tr><tr><th scope='row'>Coaching</th><td>Scheduled AI task that reads the logged workouts and emails feedback every Sunday</td></tr><tr><th scope='row'>Public demo</th><td>Runs fully in the browser with four weeks of sample history generated relative to today; anything logged is saved in browser storage</td></tr></tbody></table></section>
+
+<section id="challenges"><header class="cs-h"><p class="label accent">05 · Challenges</p><h2>Hard parts and how they were solved</h2></header><ol class="challenges"><li><h3>Logging with one hand, mid-workout</h3><p>Between sets there is little attention to spare. Last time's numbers are shown for each exercise, a set is ticked rather than typed out, and ticking it starts the rest timer, so the screen needs few taps.</p></li><li><h3>Knowing when to go heavier</h3><p>Progress usually stalls because nobody checks the numbers. The app applies a simple rule: when every set reaches the top of the rep range, it suggests a heavier weight for the next session.</p></li><li><h3>A program that fits the person</h3><p>A generic plan ignores the schedule and the equipment available. The program is written by AI from a goal, the days available and the equipment, and any exercise can be swapped from the library without breaking the rest of the plan.</p></li><li><h3>A public demo without a real history</h3><p>The live demo cannot use private workouts. It opens with four weeks of sample history generated relative to today, so the progress screens always look current, and a double tap on Reset restores it.</p></li></ol></section>
+
+<section id="results"><header class="cs-h"><p class="label accent">06 · Results</p><h2>What came out of it</h2></header><ul class="results"><li>A session can be logged between sets with a few taps, starting from the previous numbers.</li><li>The muscle map shows at a glance which muscles are getting enough weekly sets and which are not.</li><li>The Sunday email turns the week's workouts into feedback on how it went and what to change.</li></ul><div class="cs-actions">
+<a class="btn accent" href="https://sguven.github.io/workoutlog-demo/" target="_blank" rel="noopener">Live demo <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a>
+<a class="btn" href="https://github.com/sguven/sguven.github.io/tree/main/workoutlog-demo" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> Source on GitHub</a>
+</div>
+</section>
+
+</div>
+</div>
+
+<a class="next-case" href="../world-brief/"><span><small class="label">Next case study</small><strong>World Brief</strong></span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+</main>
+
+<footer class="foot"><div class="wrap"><span>© 2026 Serhat Guven · <a href="../../">All projects</a></span><span><a href="../../#contact">Contact</a></span></div></footer>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Image preview"><div class="lb-box"><button class="lb-x" type="button" aria-label="Close">×</button><img alt=""><p class="lb-cap"></p></div></div>
+<script src="../../assets/site.js"></script>
+<script>
+(function(){var K='sg-portfolio-viewed-v3',s=SG.loadSeen(K);s['workoutlog']=1;SG.saveSeen(K,s);
+var links=[].slice.call(document.querySelectorAll('.toc a'));
+if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+en.target.id);});}});},{rootMargin:'-30% 0px -60% 0px'});
+document.querySelectorAll('.cs-body section').forEach(function(s){io.observe(s);});}})();
+</script>
+</body>
+</html>
