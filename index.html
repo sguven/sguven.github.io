@@ -93,6 +93,8 @@ a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
 .lb-url{font-size:13px;color:#5A5A5A;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .lb-arrow{font-size:22px;line-height:1;flex:none}
 .repo{align-self:flex-start;margin-top:8px;font-family:var(--ui);font-size:13px;color:#5A5A5A;padding:6px 0}
+.shot ~ .livebox{margin-top:0}
+.shot ~ .repo{margin-top:4px;padding-bottom:0}
 .story > .built:last-child{margin-bottom:0}
 
 /* Next-field teaser */
@@ -138,7 +140,7 @@ a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
 .lb-cap{margin:8px 4px 0;font-family:var(--ui);font-size:13px;color:#5A5A5A}
 .lb-x{position:absolute;top:-14px;right:-14px;width:34px;height:34px;border-radius:50%;border:0;background:var(--ink);color:#fff;font-size:20px;line-height:34px;cursor:pointer}
 
-@media (min-width:901px){#automation .story h3{min-height:2.4em}#automation .shot.real img{aspect-ratio:6/5;object-fit:cover;object-position:center top}}
+@media (min-width:901px){#automation .story h3{min-height:2.4em}#automation .shot.real img{aspect-ratio:6/5;object-fit:cover;object-position:center top}#finance .shot.real img{aspect-ratio:1600/937;object-fit:cover;object-position:center top}}
 @media (max-width:900px){.three{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:680px){
   .page{padding:0 18px 130px}
@@ -192,6 +194,8 @@ a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
 <h3>An Investment Portfolio That Looks Ahead</h3>
 <a class="shot real" href="img/investments.jpg" data-lightbox><img src="img/investments.jpg" width="1600" height="937" loading="lazy" alt="Investment app overview: total net worth, growth cards, net worth chart with a dashed forecast, and allocation donut"></a>
 <p class="cap">Overview screen, illustrative figures.</p>
+<a class="livebox" href="https://sguven.github.io/investments-demo/" target="_blank" rel="noopener"><span class="lb-text"><span class="lb-label">Try me</span><span class="lb-url">sguven.github.io/investments-demo · live demo, fictional data</span></span><span class="lb-arrow" aria-hidden="true">→</span></a>
+<a class="repo" href="https://github.com/sguven/sguven.github.io/tree/main/investments-demo" target="_blank" rel="noopener">Source code</a>
 <p class="summary">All my accounts in one view, with a forecast of where the total is heading.</p>
 <ul class="feats">
 <li>Net worth chart with a forecast line</li>
@@ -200,14 +204,14 @@ a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
 <li>Data never leaves the device</li>
 </ul>
 <p class="built">SwiftUI, JavaScript, Chart.js, local storage</p>
-<a class="livebox" href="https://sguven.github.io/investments-demo/" target="_blank" rel="noopener"><span class="lb-text"><span class="lb-label">Try me</span><span class="lb-url">sguven.github.io/investments-demo · live demo, fictional data</span></span><span class="lb-arrow" aria-hidden="true">→</span></a>
-<a class="repo" href="https://github.com/sguven/sguven.github.io/tree/main/investments-demo" target="_blank" rel="noopener">Source code</a>
 </article>
 <article class="story" data-id="cashflow">
 <div class="head"><svg class="logo" viewBox="0 0 24 24" width="42" height="42" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13M13 4l4 4-4 4"/><path d="M20 16H7M11 12l-4 4 4 4"/></svg><p class="kicker">Mac and iPhone · Live demo</p><span class="num"></span></div>
 <h3>Cash Flow Tracker and Forecast</h3>
 <a class="shot real" href="img/cashflow.jpg" data-lightbox><img src="img/cashflow.jpg" width="1600" height="975" loading="lazy" alt="Cash flow dashboard: balance today, lowest projected balance, next income and payment, a 90-day projected balance chart and upcoming payments"></a>
 <p class="cap">Dashboard, illustrative figures.</p>
+<a class="livebox" href="https://sguven.github.io/cashflow-demo/" target="_blank" rel="noopener"><span class="lb-text"><span class="lb-label">Try me</span><span class="lb-url">sguven.github.io/cashflow-demo · live demo, fictional data</span></span><span class="lb-arrow" aria-hidden="true">→</span></a>
+<a class="repo" href="https://github.com/sguven/sguven.github.io/tree/main/cashflow-demo" target="_blank" rel="noopener">Source code</a>
 <p class="summary">Forecasts my checking balance day by day from past card statements and bank activity.</p>
 <ul class="feats">
 <li>90-day forecast that flags the lowest point</li>
@@ -215,8 +219,6 @@ a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
 <li>Face ID lock and private local backups</li>
 </ul>
 <p class="built">SwiftUI, JavaScript, Python, local storage</p>
-<a class="livebox" href="https://sguven.github.io/cashflow-demo/" target="_blank" rel="noopener"><span class="lb-text"><span class="lb-label">Try me</span><span class="lb-url">sguven.github.io/cashflow-demo · live demo, fictional data</span></span><span class="lb-arrow" aria-hidden="true">→</span></a>
-<a class="repo" href="https://github.com/sguven/sguven.github.io/tree/main/cashflow-demo" target="_blank" rel="noopener">Source code</a>
 </article>
 </div>
 <a class="next" href="#apps" style="--c:var(--apps)"><span><small>Up next · Field 2 of 6</small><strong><i></i>Everyday apps · 3 projects</strong></span><span class="arr" aria-hidden="true">→</span></a>
@@ -230,6 +232,8 @@ a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
 <h3>CalorieLog</h3>
 <a class="shot real" href="img/calorielog.jpg" data-lightbox><img src="img/calorielog.jpg" width="1400" height="1454" loading="lazy" alt="CalorieLog on a phone: daily calorie ring with macros, and a trends screen with a 7-day calorie chart and weight log"></a>
 <p class="cap">Sample data.</p>
+<a class="livebox" href="https://sguven.github.io/calorie-demo/" target="_blank" rel="noopener"><span class="lb-text"><span class="lb-label">Try me</span><span class="lb-url">sguven.github.io/calorie-demo · live demo</span></span><span class="lb-arrow" aria-hidden="true">→</span></a>
+<a class="repo" href="https://github.com/sguven/sguven.github.io/tree/main/calorie-demo" target="_blank" rel="noopener">Source code</a>
 <p class="summary">Type or photograph a meal; AI estimates the calories and nutrients.</p>
 <ul class="feats">
 <li>Daily calorie and macro tracking</li>
@@ -237,14 +241,14 @@ a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
 <li>Trends, weight log and a weekly advice email</li>
 </ul>
 <p class="built">Web app, AI estimation, scheduled AI tasks</p>
-<a class="livebox" href="https://sguven.github.io/calorie-demo/" target="_blank" rel="noopener"><span class="lb-text"><span class="lb-label">Try me</span><span class="lb-url">sguven.github.io/calorie-demo · live demo</span></span><span class="lb-arrow" aria-hidden="true">→</span></a>
-<a class="repo" href="https://github.com/sguven/sguven.github.io/tree/main/calorie-demo" target="_blank" rel="noopener">Source code</a>
 </article>
 <article class="story" data-id="workoutlog">
 <div class="head"><svg class="logo" viewBox="0 0 24 24" width="42" height="42" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 7v10M17.5 7v10M3.5 9.5v5M20.5 9.5v5M6.5 12h11"/></svg><p class="kicker">Mobile · Live demo</p><span class="num"></span></div>
 <h3>WorkoutLog Pro</h3>
 <a class="shot real" href="img/workoutlog.jpg" data-lightbox><img src="img/workoutlog.jpg" width="1400" height="1454" loading="lazy" alt="WorkoutLog Pro on a phone: next workout card with a weekly tracker, and a muscle map showing sets per muscle this week"></a>
 <p class="cap">Sample data.</p>
+<a class="livebox" href="https://sguven.github.io/workoutlog-demo/" target="_blank" rel="noopener"><span class="lb-text"><span class="lb-label">Try me</span><span class="lb-url">sguven.github.io/workoutlog-demo · live demo, sample workouts</span></span><span class="lb-arrow" aria-hidden="true">→</span></a>
+<a class="repo" href="https://github.com/sguven/sguven.github.io/tree/main/workoutlog-demo" target="_blank" rel="noopener">Source code</a>
 <p class="summary">A quick gym log with an AI-built program around my goal and schedule.</p>
 <ul class="feats">
 <li>Guided workouts with a rest timer</li>
@@ -253,8 +257,6 @@ a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
 <li>Sunday coaching email</li>
 </ul>
 <p class="built">Web app, AI programming, scheduled AI tasks</p>
-<a class="livebox" href="https://sguven.github.io/workoutlog-demo/" target="_blank" rel="noopener"><span class="lb-text"><span class="lb-label">Try me</span><span class="lb-url">sguven.github.io/workoutlog-demo · live demo, sample workouts</span></span><span class="lb-arrow" aria-hidden="true">→</span></a>
-<a class="repo" href="https://github.com/sguven/sguven.github.io/tree/main/workoutlog-demo" target="_blank" rel="noopener">Source code</a>
 </article>
 <article class="story" data-id="watchlist">
 <div class="head"><svg class="logo" viewBox="0 0 24 24" width="42" height="42" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4z"/><path d="M10.5 7.5l3.5 2-3.5 2z"/></svg><p class="kicker">iOS · In progress</p><span class="num"></span></div>
@@ -278,6 +280,7 @@ a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
 <h3>@cleaneverycorner</h3>
 <a class="shot real" href="img/social-cleaneverycorner.jpg" data-lightbox><img src="img/social-cleaneverycorner.jpg" width="540" height="860" loading="lazy" alt="cleaneverycorner Reel from November 6, 2026: Clean your oven, no harsh chemicals, 2 pantry items and 6 steps, with a before and after split"></a>
 <p class="cap">A real Reel.</p>
+<a class="livebox" href="https://www.instagram.com/cleaneverycorner" target="_blank" rel="noopener"><span class="lb-text"><span class="lb-label">See the account</span><span class="lb-url">instagram.com/cleaneverycorner</span></span><span class="lb-arrow" aria-hidden="true">→</span></a>
 <p class="summary">A short cleaning tip for the home or car, every day.</p>
 <ul class="feats">
 <li>Before-and-after visuals with music</li>
@@ -285,13 +288,13 @@ a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
 <li>Posted automatically at peak times</li>
 </ul>
 <p class="built">Instagram Reels, Windsor.ai, GitHub-hosted video</p>
-<a class="livebox" href="https://www.instagram.com/cleaneverycorner" target="_blank" rel="noopener"><span class="lb-text"><span class="lb-label">See the account</span><span class="lb-url">instagram.com/cleaneverycorner</span></span><span class="lb-arrow" aria-hidden="true">→</span></a>
 </article>
 <article class="story" data-id="cellbycell1">
 <div class="head"><svg class="logo" viewBox="0 0 24 24" width="42" height="42" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M3 9h18M3 14.5h18M9 4v16M15 4v16"/></svg><p class="kicker">Instagram · Daily Reels</p><span class="num"></span></div>
 <h3>@cellbycell1</h3>
 <a class="shot real" href="img/social-cellbycell1.jpg" data-lightbox><img src="img/social-cellbycell1.jpg" width="540" height="860" loading="lazy" alt="cellbycell1 Reel from November 5, 2026: Stop using VLOOKUP, 3 problems and 1 fix, showing the XLOOKUP formula that replaces it"></a>
 <p class="cap">The first Reel.</p>
+<a class="livebox" href="https://www.instagram.com/cellbycell1" target="_blank" rel="noopener"><span class="lb-text"><span class="lb-label">See the account</span><span class="lb-url">instagram.com/cellbycell1</span></span><span class="lb-arrow" aria-hidden="true">→</span></a>
 <p class="summary">One Excel or Google Sheets tip per Reel, explained in seconds.</p>
 <ul class="feats">
 <li>A common mistake and its fix</li>
@@ -299,13 +302,13 @@ a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
 <li>Posted daily, fully automated</li>
 </ul>
 <p class="built">Instagram Reels, Windsor.ai, GitHub-hosted video</p>
-<a class="livebox" href="https://www.instagram.com/cellbycell1" target="_blank" rel="noopener"><span class="lb-text"><span class="lb-label">See the account</span><span class="lb-url">instagram.com/cellbycell1</span></span><span class="lb-arrow" aria-hidden="true">→</span></a>
 </article>
 <article class="story" data-id="thedayinbrief">
 <div class="head"><svg class="logo" viewBox="0 0 24 24" width="42" height="42" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.5 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.5-3.8-9S9.5 5.5 12 3z"/></svg><p class="kicker">X · Every 2–3 days</p><span class="num"></span></div>
 <h3>@TheDayInBrief</h3>
 <a class="shot real" href="img/social-thedayinbrief.jpg" data-lightbox><img src="img/social-thedayinbrief.jpg" width="540" height="860" loading="lazy" alt="The Day in Brief post from November 6, 2026 summarizing November 3 to 5: election results, a market sell-off in AI stocks, oil and a Bank of England rate hike"></a>
 <p class="cap">The first post.</p>
+<a class="livebox" href="https://x.com/TheDayInBrief" target="_blank" rel="noopener"><span class="lb-text"><span class="lb-label">See the account</span><span class="lb-url">x.com/TheDayInBrief</span></span><span class="lb-arrow" aria-hidden="true">→</span></a>
 <p class="summary">The last few days of world news, summed up in one witty post.</p>
 <ul class="feats">
 <li>Politics, markets and culture</li>
@@ -313,7 +316,6 @@ a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
 <li>Written in Turkish</li>
 </ul>
 <p class="built">X, Typefully, web research</p>
-<a class="livebox" href="https://x.com/TheDayInBrief" target="_blank" rel="noopener"><span class="lb-text"><span class="lb-label">See the account</span><span class="lb-url">x.com/TheDayInBrief</span></span><span class="lb-arrow" aria-hidden="true">→</span></a>
 </article>
 </div>
 <a class="next" href="#personal" style="--c:var(--personal)"><span><small>Up next · Field 4 of 6</small><strong><i></i>Personal · 2 projects</strong></span><span class="arr" aria-hidden="true">→</span></a>
@@ -358,6 +360,8 @@ a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
 <h3>The Daily Agenda and the World Brief</h3>
 <a class="shot real" href="img/worldbrief.jpg" data-lightbox><img src="img/worldbrief.jpg" width="1200" height="1000" loading="lazy" alt="World Brief site: the evening issue for Thursday, November 5, 2026, with world headlines"></a>
 <p class="cap">A real issue on the live site.</p>
+<a class="livebox" href="https://sguven.github.io/bulten/" target="_blank" rel="noopener"><span class="lb-text"><span class="lb-label">Visit the live site</span><span class="lb-url">sguven.github.io/bulten · World Brief</span></span><span class="lb-arrow" aria-hidden="true">→</span></a>
+<a class="repo" href="https://github.com/sguven/bulten" target="_blank" rel="noopener">Source code</a>
 <p class="summary">Evening and intraday news briefs by email, plus a public site with the day's world news.</p>
 <ul class="feats">
 <li>Fully automated, no manual steps</li>
@@ -366,35 +370,33 @@ a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
 <li>Searchable archive</li>
 </ul>
 <p class="built">Scheduled AI tasks, Gmail, GitHub Pages</p>
-<a class="livebox" href="https://sguven.github.io/bulten/" target="_blank" rel="noopener"><span class="lb-text"><span class="lb-label">Visit the live site</span><span class="lb-url">sguven.github.io/bulten · World Brief</span></span><span class="lb-arrow" aria-hidden="true">→</span></a>
-<a class="repo" href="https://github.com/sguven/bulten" target="_blank" rel="noopener">Source code</a>
 </article>
 <article class="story" data-id="cinema">
 <div class="head"><svg class="logo" viewBox="0 0 24 24" width="42" height="42" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/><path d="M10.5 9.5l3.5 2.5-3.5 2.5z"/></svg><p class="kicker">Weekly · Live</p><span class="num"></span></div>
 <h3>The Wednesday Cinema Bulletin</h3>
 <a class="shot real" href="img/cinema.jpg" data-lightbox><img src="img/cinema.jpg" width="1200" height="1000" loading="lazy" alt="Cinema Bulletin email for November 4 to 11, 2026: this week's three picks and film cards with story, why see it and critics' reaction"></a>
 <p class="cap">A real issue, translated from Turkish.</p>
+<a class="livebox" href="https://sguven.github.io/cinema-sample/" target="_blank" rel="noopener"><span class="lb-text"><span class="lb-label">See sample email</span><span class="lb-url">sguven.github.io/cinema-sample · a real issue</span></span><span class="lb-arrow" aria-hidden="true">→</span></a>
 <p class="summary">Every Wednesday: the week's notable films in New York theaters, with reviews and a reason to see each one.</p>
 <ul class="feats">
 <li>Covers the week ahead</li>
 <li>Heads-up on big releases 3–4 weeks out</li>
 </ul>
 <p class="built">Scheduled AI tasks, web research, Gmail</p>
-<a class="livebox" href="https://sguven.github.io/cinema-sample/" target="_blank" rel="noopener"><span class="lb-text"><span class="lb-label">See sample email</span><span class="lb-url">sguven.github.io/cinema-sample · a real issue</span></span><span class="lb-arrow" aria-hidden="true">→</span></a>
 </article>
 <article class="story" data-id="dailyclaude">
 <div class="head"><svg class="logo" viewBox="0 0 24 24" width="42" height="42" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.6.5 1 1.2 1 2V16h5.2v-.2c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></svg><p class="kicker">Daily · Live</p><span class="num"></span></div>
 <h3>Daily Claude Idea</h3>
 <a class="shot real" href="img/daily-claude.jpg" data-lightbox><img src="img/daily-claude.jpg" width="1600" height="1192" loading="lazy" alt="Daily Claude Idea page: today's feature and today's project, with steps and a ready-to-copy prompt"></a>
 <p class="cap">A real entry on the live page.</p>
+<a class="livebox" href="https://sguven.github.io/daily-claude/" target="_blank" rel="noopener"><span class="lb-text"><span class="lb-label">Visit the live site</span><span class="lb-url">sguven.github.io/daily-claude</span></span><span class="lb-arrow" aria-hidden="true">→</span></a>
+<a class="repo" href="https://github.com/sguven/sguven.github.io/tree/main/daily-claude" target="_blank" rel="noopener">Source code</a>
 <p class="summary">Every day, one lesser-known Claude feature and one project that puts it to work, published with an archive.</p>
 <ul class="feats">
 <li>Focuses on the newest features</li>
 <li>Each project comes with steps and a ready-to-copy prompt</li>
 </ul>
 <p class="built">Scheduled AI tasks, web research, GitHub Pages, Gmail</p>
-<a class="livebox" href="https://sguven.github.io/daily-claude/" target="_blank" rel="noopener"><span class="lb-text"><span class="lb-label">Visit the live site</span><span class="lb-url">sguven.github.io/daily-claude</span></span><span class="lb-arrow" aria-hidden="true">→</span></a>
-<a class="repo" href="https://github.com/sguven/sguven.github.io/tree/main/daily-claude" target="_blank" rel="noopener">Source code</a>
 </article>
 </div>
 <a class="next" href="#learning" style="--c:var(--learning)"><span><small>Last field · 6 of 6</small><strong><i></i>Learning · 1 project</strong></span><span class="arr" aria-hidden="true">→</span></a>
