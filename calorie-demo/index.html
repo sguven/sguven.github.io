@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CalorieLog — Live demo · Serhat Guven</title>
+<meta name="description" content="Try CalorieLog: analyze a sample food photo or describe a meal in words, and see calories, protein, carbs and fat added to a daily diary.">
+<meta property="og:title" content="CalorieLog — Live demo">
+<meta property="og:description" content="Log a meal from a photo or a sentence. A browser demo of a personal calorie tracker built with AI.">
+<meta property="og:image" content="https://sguven.github.io/calorie-demo/photos/omelette.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%23E8611A' stroke-width='5' stroke-dasharray='52 100' transform='rotate(120 16 16)' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Source+Serif+4:opsz,wght@8..60,700&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#121212;--body:#3d3d3d;--muted:#6b6b6b;--line:#E3E5E2;--bg:#F7F7F4;
+  --accent:#E8611A;--accent-soft:#FDEBDD;--p:#2F6FDB;--c:#E0A010;--f:#D6457A;--app:#EEF0EE;--bad:#C2410C;
+  --ui:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;--serif:'Source Serif 4',Georgia,serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ui);-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit}
+a{color:inherit}
+
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:1160px;margin:0 auto;padding:18px 24px;font-size:14px}
+.top a{display:inline-flex;align-items:center;gap:8px;font-weight:600;text-decoration:none;color:var(--ink)}
+.top a:hover{text-decoration:underline}
+.top span{color:var(--muted)}
+
+.wrap{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:56px;align-items:start;max-width:1160px;margin:0 auto;padding:12px 24px 64px}
+.intro{padding-top:28px;max-width:600px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;margin:0;font-size:13px;font-weight:600;color:var(--accent)}
+.eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+h1{margin:12px 0 0;font-family:var(--serif);font-size:50px;line-height:1.05;letter-spacing:-.015em}
+.lede{margin:16px 0 0;font-size:18px;line-height:1.6;color:var(--body)}
+.step{margin-top:30px}
+.step h2{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-size:16px;font-weight:700}
+.step h2 span{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;font-size:13px}
+.thumbs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.thumb{position:relative;display:block;padding:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;cursor:pointer;text-align:left;transition:transform .2s,box-shadow .2s,border-color .2s}
+.thumb:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.1);border-color:#d3d5d1}
+.thumb img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover}
+.thumb b{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:11px 13px;font-size:14px}
+.thumb b em{font-style:normal;font-weight:600;color:var(--accent);font-size:13px}
+.chips{display:flex;flex-direction:column;gap:8px}
+.chip{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;cursor:pointer;text-align:left;font-size:15px;line-height:1.4;transition:border-color .2s,background .2s}
+.chip:hover{border-color:var(--accent);background:#FFF8F3}
+.chip span::before{content:"“"}.chip span::after{content:"”"}
+.chip i{flex:none;font-style:normal;color:var(--accent);font-weight:700}
+.tip{margin:10px 0 0;font-size:14px;color:var(--muted)}
+.how{margin-top:30px;padding:16px 18px;border-radius:14px;background:#fff;border:1px solid var(--line);font-size:14px;line-height:1.6;color:var(--body)}
+.how strong{display:block;margin-bottom:4px;color:var(--ink)}
+.how button{border:0;background:none;padding:0;color:var(--muted);text-decoration:underline;cursor:pointer;font-size:13px;margin-top:8px}
+
+/* Phone */
+.device{position:sticky;top:20px}
+.phone{position:relative;width:400px;height:820px;border:10px solid #151515;border-radius:54px;background:var(--app);overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.18),0 0 0 1px #000}
+.phone::before{content:"";position:absolute;top:10px;left:50%;width:110px;height:30px;margin-left:-55px;border-radius:20px;background:#151515;z-index:30}
+.app{position:absolute;inset:0;display:flex;flex-direction:column}
+.scroll{flex:1;overflow-y:auto;padding:52px 16px 16px;scrollbar-width:none}
+.scroll::-webkit-scrollbar{display:none}
+.brand{display:flex;align-items:center;gap:9px;margin:4px 4px 0;font-size:24px;font-weight:800;letter-spacing:-.02em}
+.brand svg{width:28px;height:28px}
+.day{display:grid;grid-template-columns:36px 1fr 36px;align-items:center;margin:12px 0 12px}
+.day .nav{width:36px;height:36px;border-radius:50%;background:#fff;display:grid;place-items:center;color:#999;font-size:16px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.day div{text-align:center}
+.day b{display:block;font-size:19px}
+.day small{font-size:13px;color:var(--muted)}
+.card{background:#fff;border-radius:22px;padding:18px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.sum-top{display:grid;grid-template-columns:128px 1fr;gap:16px;align-items:center}
+.ringwrap{position:relative;width:128px;height:128px}
+.ringwrap svg{width:128px;height:128px;transform:rotate(-90deg)}
+.ringwrap circle{fill:none;stroke-width:11}
+.ringwrap .track{stroke:#E6E9E6}
+.ringwrap .prog{stroke:var(--accent);stroke-linecap:round;transition:stroke-dashoffset .9s cubic-bezier(.3,.8,.3,1)}
+.ringtext{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.ringtext b{font-size:27px;font-weight:800;letter-spacing:-.02em;line-height:1}
+.ringtext small{font-size:11px;color:var(--muted);margin-top:3px}
+.ringtext span{font-size:12px;font-weight:700;margin-top:4px}
+.ringtext span.over{color:var(--bad)}
+.mac{margin:0 0 11px}.mac:last-child{margin:0}
+.mac div{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px}
+.mac div b{font-weight:600}
+.mac div span{color:var(--muted)}
+.bar-t{height:7px;border-radius:4px;background:#E6E9E6;overflow:hidden}
+.bar-t i{display:block;height:100%;width:0;border-radius:4px;background:var(--m);transition:width .8s cubic-bezier(.3,.8,.3,1)}
+.micro{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:14px;padding-top:12px;border-top:1px solid #EEE;font-size:12.5px;color:var(--muted)}
+.micro b{color:var(--ink);font-weight:700}
+.micro b.over{color:var(--bad)}
+.mealsh{display:flex;justify-content:space-between;align-items:baseline;margin:20px 4px 8px}
+.mealsh h3{margin:0;font-size:17px}
+.mealsh span{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.empty{padding:22px 18px;border:1.5px dashed #CDD1CC;border-radius:18px;text-align:center;font-size:13px;line-height:1.5;color:var(--muted)}
+.empty b{display:block;margin-bottom:4px;font-size:14px;color:var(--ink)}
+.meal{background:#fff;border-radius:18px;overflow:hidden;margin-bottom:10px}
+.meal-h{display:flex;justify-content:space-between;padding:11px 14px;background:#F6F7F5;font-size:13.5px}
+.meal-h span{font-weight:600}
+.entry{display:grid;grid-template-columns:42px 1fr auto 22px;gap:10px;align-items:center;padding:10px 10px 10px 12px;border-top:1px solid #F0F1EF}
+.entry:first-of-type{border-top:0}
+.entry.new{animation:flash 1.6s ease}
+@keyframes flash{0%{background:#FFF1E6}100%{background:#fff}}
+.e-ic{width:42px;height:42px;border-radius:11px;overflow:hidden;background:#EEF0EE;display:grid;place-items:center;color:#777}
+.e-ic img{width:100%;height:100%;object-fit:cover}
+.e-ic svg{width:20px;height:20px}
+.e-t{min-width:0}
+.e-t small{display:block;font-size:11px;color:var(--muted)}
+.e-t span{display:block;font-size:13.5px;line-height:1.3;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.e-k{font-size:15px;white-space:nowrap}
+.e-k small{font-weight:500;font-size:11px;color:var(--muted)}
+.e-x{width:22px;height:22px;border:0;border-radius:50%;background:none;color:#aaa;cursor:pointer;font-size:17px;line-height:1}
+.e-x:hover{background:#F1F1F1;color:var(--ink)}
+
+.bar{display:flex;align-items:center;gap:8px;margin:0 12px 22px;padding:6px;border-radius:999px;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,.1)}
+.bar .cam{flex:none;width:44px;height:44px;border:0;border-radius:50%;background:#EEF0EE;display:grid;place-items:center;cursor:pointer;color:#333}
+.bar .cam:hover{background:#E3E6E2}
+.bar .cam svg{width:22px;height:22px}
+.bar input{flex:1;min-width:0;border:0;outline:0;font:inherit;font-size:15px;padding:8px 4px;background:transparent}
+.bar .go{flex:none;width:44px;height:44px;border:0;border-radius:50%;background:var(--accent);color:#fff;font-size:20px;cursor:pointer}
+.bar .go:hover{background:#D5540F}
+
+/* Sheet */
+.sheet{position:absolute;inset:0;z-index:20;display:flex;flex-direction:column;justify-content:flex-end;background:rgba(20,20,20,0);transition:background .2s}
+.sheet.on{background:rgba(20,20,20,.38)}
+.sheet[hidden]{display:none}
+.s-in{max-height:93%;overflow-y:auto;background:#fff;border-radius:26px 26px 0 0;padding:18px 16px 22px;transform:translateY(100%);transition:transform .28s cubic-bezier(.3,.8,.3,1);scrollbar-width:thin}
+.sheet.on .s-in{transform:translateY(0)}
+.s-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.s-head b{font-size:18px}
+.s-x{width:32px;height:32px;border:0;border-radius:50%;background:#F0F1EF;font-size:20px;line-height:1;cursor:pointer}
+.s-sub{margin:0 0 14px;font-size:13.5px;color:var(--muted);line-height:1.5}
+.pick{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pick-b{display:flex;flex-direction:column;padding:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;cursor:pointer;text-align:left}
+.pick-b:hover{border-color:var(--accent)}
+.pick-b img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.pick-b span{padding:9px 10px;font-size:13px;font-weight:600}
+.pick-b.own{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;align-items:center;gap:0 10px;padding:12px;cursor:default;background:#FAFAF8;border-style:dashed;color:var(--muted)}
+.pick-b.own svg{width:22px;height:22px}
+.pick-b.own span{padding:0;color:var(--ink)}
+.pick-b.own small{flex-basis:100%;margin-top:4px;font-size:12px;line-height:1.45}
+.photo{position:relative;border-radius:16px;overflow:hidden;background:#ddd}
+.photo img{display:block;width:100%;height:auto}
+.scan{position:absolute;left:0;right:0;top:0;height:30%;background:linear-gradient(to bottom,rgba(232,97,26,0),rgba(232,97,26,.35));border-bottom:2px solid #FFB27D;opacity:0}
+.photo.scanning .scan{opacity:1;animation:scan 1.1s ease-in-out infinite alternate}
+.photo.scanning img{filter:saturate(.75) brightness(.92)}
+@keyframes scan{from{transform:translateY(-100%)}to{transform:translateY(340%)}}
+.box{position:absolute;border:2px solid #fff;border-radius:10px;box-shadow:0 0 0 1px rgba(0,0,0,.25),inset 0 0 0 1px rgba(0,0,0,.1);opacity:0;transform:scale(.92);transition:opacity .25s,transform .3s cubic-bezier(.3,1.5,.5,1),background .2s,border-color .2s}
+.box.in{opacity:1;transform:scale(1)}
+.box.hot{border-color:var(--accent);background:rgba(232,97,26,.18)}
+.box span{position:absolute;left:-2px;top:-2px;padding:3px 7px;border-radius:8px 0 8px 0;background:#fff;color:var(--ink);font-size:10.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.box.info{border-style:dashed;border-color:rgba(255,255,255,.85);box-shadow:none}
+.box.info span{top:auto;bottom:-2px;left:auto;right:-2px;border-radius:8px 0 8px 0;background:rgba(18,18,18,.72);color:#fff;font-weight:600}
+.said{margin:0;padding:12px 14px;border-radius:14px;background:#F6F7F5;font-size:15px;line-height:1.5}
+.status{display:flex;align-items:center;gap:10px;margin:14px 2px 4px;font-size:14px;color:var(--muted)}
+.spin{width:16px;height:16px;border-radius:50%;border:2.5px solid #F3D3BF;border-top-color:var(--accent);animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.items{list-style:none;margin:12px 0 0;padding:0}
+.item{display:grid;grid-template-columns:1fr auto;grid-template-areas:"t k" "q q";gap:6px 10px;padding:11px 2px;border-bottom:1px solid #F0F1EF}
+.item.rise{animation:rise .35s both}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}}
+.i-t{grid-area:t;min-width:0}
+.i-t b{display:block;font-size:14.5px}
+.i-t small{display:block;margin-top:2px;font-size:12px;color:var(--muted);line-height:1.4}
+.i-k{grid-area:k;font-size:15px;font-weight:700;white-space:nowrap}
+.i-k small{font-weight:500;font-size:11px;color:var(--muted)}
+.i-q{grid-area:q;display:inline-flex;align-items:center;gap:2px;justify-self:start;padding:3px;border-radius:999px;background:#F3F4F2}
+.i-q button{width:28px;height:28px;border:0;border-radius:50%;background:#fff;font-size:16px;line-height:1;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.i-q button:hover{color:var(--accent)}
+.i-q span{min-width:86px;padding:0 6px;text-align:center;font-size:13px;font-weight:600}
+.unk{margin:10px 0 0;padding:10px 12px;border-radius:12px;background:#FFF6EE;font-size:12.5px;line-height:1.5;color:#7A4A26}
+.unk q{font-weight:600}
+.tot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:14px 0 0;padding:14px;border-radius:16px;background:var(--accent-soft)}
+.tot small{display:block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#9A4A1C}
+.tot div b{font-size:28px;font-weight:800;letter-spacing:-.02em}
+.tot div span{margin-left:4px;font-size:13px;color:#7a5a46}
+.tot ul{list-style:none;margin:0;padding:0;font-size:12.5px;color:#5c4a3f}
+.tot li{display:flex;align-items:center;gap:6px;margin:2px 0}
+.tot li i{width:8px;height:8px;border-radius:50%;background:var(--m)}
+.tot li b{margin-left:auto;padding-left:8px;color:var(--ink)}
+.meal-pick{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:12px 0 0;padding:4px;border-radius:12px;background:#F3F4F2}
+.meal-pick button{border:0;border-radius:9px;padding:8px 0;background:none;font-size:12.5px;font-weight:600;color:var(--muted);cursor:pointer}
+.meal-pick button.on{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.add{width:100%;margin-top:12px;padding:15px;border:0;border-radius:14px;background:var(--accent);color:#fff;font-size:16px;font-weight:700;cursor:pointer}
+.add:hover{background:#D5540F}
+.add:disabled{background:#ccc;cursor:default}
+.fine{margin:8px 0 0;text-align:center;font-size:11.5px;color:var(--muted)}
+.miss{font-size:14px;line-height:1.55;color:var(--body)}
+.miss p{margin:12px 0 0}
+.ex-in{border:0;background:none;padding:0;color:var(--accent);font-weight:600;text-decoration:underline;cursor:pointer;text-align:left}
+
+.foot{max-width:1160px;margin:0 auto;padding:0 24px 40px;font-size:13px;color:var(--muted)}
+
+@media (max-width:959px){
+  .wrap{grid-template-columns:minmax(0,1fr);gap:28px;padding-top:0}
+  .intro{padding-top:8px;max-width:none}
+  h1{font-size:38px}
+  .lede{font-size:17px}
+  .device{position:static;scroll-margin-top:12px}
+  .phone{width:100%;max-width:440px;height:min(820px,calc(100svh - 24px));min-height:620px;margin:0 auto;border-width:8px;border-radius:40px}
+  .phone::before{width:90px;height:24px;margin-left:-45px;top:8px}
+}
+@media (max-width:520px){.thumb b{flex-direction:column;align-items:flex-start;gap:3px}}
+@media (max-width:420px){
+  .top{padding:14px 16px}.wrap{padding-left:16px;padding-right:16px}
+  .thumbs{gap:10px}
+  .phone{border-width:6px;border-radius:34px}
+  .scroll{padding:44px 12px 12px}
+  .sum-top{grid-template-columns:112px 1fr;gap:12px}
+  .ringwrap,.ringwrap svg{width:112px;height:112px}
+  .ringtext b{font-size:23px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <a href="https://sguven.github.io/#apps"><span aria-hidden="true">←</span> Serhat Guven · Portfolio</a>
+  <span>Live demo</span>
+</header>
+
+<main class="wrap">
+<section class="intro">
+  <p class="eyebrow"><i></i>Try me · CalorieLog</p>
+  <h1>Log a meal from a photo or a sentence.</h1>
+  <p class="lede">Show it a photo or describe what you ate in your own words. CalorieLog picks out each food, estimates the portion, and adds the calories, protein, carbs and fat to today’s diary.</p>
+
+  <div class="step">
+    <h2><span>1</span>Analyze a photo</h2>
+    <div class="thumbs">
+      <button class="thumb" type="button" data-photo="omelette"><img src="photos/omelette.jpg" alt="Sample photo: omelette breakfast with coffee and orange juice" width="1200" height="655"><b>Breakfast table <em>Analyze →</em></b></button>
+      <button class="thumb" type="button" data-photo="pizza"><img src="photos/pizza.jpg" alt="Sample photo: pepperoni pizza with one slice lifted" width="1200" height="900"><b>Pepperoni pizza <em>Analyze →</em></b></button>
+    </div>
+  </div>
+
+  <div class="step">
+    <h2><span>2</span>Or describe it in words</h2>
+    <div class="chips">
+      <button class="chip" type="button" data-text="2 scrambled eggs, a slice of whole wheat toast with butter and a latte"><span>2 scrambled eggs, a slice of whole wheat toast with butter and a latte</span><i>→</i></button>
+      <button class="chip" type="button" data-text="Chicken burrito bowl with guacamole and a diet coke for lunch"><span>Chicken burrito bowl with guacamole and a diet coke for lunch</span><i>→</i></button>
+      <button class="chip" type="button" data-text="Half a cup of greek yogurt, a handful of blueberries and 1 tbsp honey"><span>Half a cup of greek yogurt, a handful of blueberries and 1 tbsp honey</span><i>→</i></button>
+      <button class="chip" type="button" data-text="200g grilled salmon, 1.5 cups brown rice and a large salad with ranch"><span>200g grilled salmon, 1.5 cups brown rice and a large salad with ranch</span><i>→</i></button>
+    </div>
+    <p class="tip">Or type your own in the app’s “What did you eat?” box.</p>
+  </div>
+
+  <div class="how">
+    <strong>How this demo works</strong>
+    The real CalorieLog sends your photo or sentence to an AI model. This public demo runs entirely in your browser: the results for the two sample photos were prepared in advance, and typed meals are read by a built-in parser with a table of about 160 common foods. Nothing you type leaves this page, and your demo diary stays in this browser.
+    <br><button type="button" id="reset">Clear the demo diary</button>
+  </div>
+</section>
+
+<section class="device" id="device" aria-label="CalorieLog app">
+  <div class="phone">
+    <div class="app">
+      <div class="scroll" id="scroll">
+        <div class="brand"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="11" fill="none" stroke="#E8611A" stroke-width="5" stroke-dasharray="52 100" transform="rotate(120 16 16)" stroke-linecap="round"/></svg>CalorieLog</div>
+        <div class="day"><span class="nav" aria-hidden="true">‹</span><div><b>Today</b><small id="date"></small></div><span class="nav" aria-hidden="true" style="opacity:.5">›</span></div>
+        <div class="card">
+          <div class="sum-top">
+            <div class="ringwrap"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="track" cx="60" cy="60" r="50"/><circle class="prog" id="ring" cx="60" cy="60" r="50"/></svg>
+              <div class="ringtext"><b id="kcal">0</b><small>of 2,200 kcal</small><span id="left">2,200 left</span></div></div>
+            <div>
+              <div class="mac"><div><b>Protein</b><span><span id="v-p">0</span> / 140 g</span></div><div class="bar-t"><i id="b-p" style="--m:var(--p)"></i></div></div>
+              <div class="mac"><div><b>Carbs</b><span><span id="v-c">0</span> / 230 g</span></div><div class="bar-t"><i id="b-c" style="--m:var(--c)"></i></div></div>
+              <div class="mac"><div><b>Fat</b><span><span id="v-f">0</span> / 75 g</span></div><div class="bar-t"><i id="b-f" style="--m:var(--f)"></i></div></div>
+            </div>
+          </div>
+          <div class="micro"><span>Fiber <b id="v-fib">0</b> / 30 g</span><span>Sugar <b id="v-sug">0</b> / 50 g</span><span>Sodium <b id="v-na">0</b> / 2,300 mg</span></div>
+        </div>
+        <div class="mealsh"><h3>Meals</h3><span id="logged">0 logged</span></div>
+        <div id="meals"></div>
+      </div>
+      <form class="bar" id="bar" autocomplete="off">
+        <button type="button" class="cam" id="cam" aria-label="Analyze a photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.6"/></svg></button>
+        <input id="q" type="text" placeholder="What did you eat?" aria-label="What did you eat?" enterkeyhint="go">
+        <button class="go" type="submit" aria-label="Analyze">→</button>
+      </form>
+      <div class="sheet" id="sheet" hidden></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">CalorieLog demo · Sample estimates for illustration, not dietary advice · <a href="https://github.com/sguven/sguven.github.io/tree/main/calorie-demo" target="_blank" rel="noopener">Source code</a></footer>
+
+<script src="foods.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

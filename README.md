@@ -12,6 +12,7 @@ Project portfolio of Serhat Guven: fourteen projects designed and built with AI 
 | `cashflow-demo/` | [Cash flow tracker live demo](https://sguven.github.io/cashflow-demo/): the private app's forecast engine and interface running in the browser with fictional data |
 | `investments-demo/` | [Investment portfolio live demo](https://sguven.github.io/investments-demo/): the private net worth app's engine and interface running in the browser with fictional data |
 | `workoutlog-demo/` | [WorkoutLog Pro live demo](https://sguven.github.io/workoutlog-demo/): the gym log running in the browser with sample workout history |
+| `calorie-demo/` | [CalorieLog live demo](https://sguven.github.io/calorie-demo/): analyze a sample food photo or type a meal in plain English; results add up in a daily diary. Runs fully in the browser (sample-photo results prepared in advance, typed meals read by a built-in parser and food table) |
 | `daily-claude/` | [Daily Claude Idea](https://sguven.github.io/daily-claude/): one Claude feature and one project a day. A scheduled Claude task adds each entry to `entries.json` |
 
 Static site served by GitHub Pages from `main`; no build step.
