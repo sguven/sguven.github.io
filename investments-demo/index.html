@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a2e24">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Finance demo">
+  <meta name="description" content="Interactive demo of a personal investment and net worth tracker with a forecast, using fictional sample data.">
+  <link rel="icon" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="styles.css?v=demo1">
+  <title>Finance · Live demo</title>
+</head>
+<body>
+  <div id="app">
+    <aside id="sidebar" class="sidebar" aria-label="Menu">
+      <div class="brand"><img src="apple-touch-icon.png" alt=""><span>Finance</span></div>
+      <nav class="side-nav">
+        <button data-action="tab" data-tab="overview" class="side-link is-active"><span>◧</span>Overview</button>
+        <button data-action="tab" data-tab="accounts" class="side-link"><span>🏦</span>Accounts</button>
+        <button data-action="tab" data-tab="records" class="side-link"><span>☰</span>Records</button>
+        <button data-action="tab" data-tab="analysis" class="side-link"><span>📊</span>Analysis</button>
+        <button data-action="tab" data-tab="settings" class="side-link"><span>⚙️</span>Settings</button>
+      </nav>
+      <button class="btn primary block side-cta" data-action="new">＋ New entry</button>
+      <div class="demo-note"><strong>Live demo</strong>Fictional figures. Add, edit or delete anything: changes stay in your browser. Reset in Settings.</div>
+      <a class="back-link" href="https://sguven.github.io/#finance">← Back to portfolio</a>
+      <div class="side-foot" id="side-foot"></div>
+    </aside>
+    <div class="demo-bar"><span><b>Live demo</b> · fictional figures, edits stay in your browser</span><a href="https://sguven.github.io/#finance">Portfolio</a></div>
+    <main id="view" aria-live="polite"><div class="loading">Loading…</div></main>
+    <nav id="tabs" class="tabbar" aria-label="Tabs">
+      <button data-action="tab" data-tab="overview" class="tab is-active"><span class="tab-icon">◧</span><span>Overview</span></button>
+      <button data-action="tab" data-tab="accounts" class="tab"><span class="tab-icon">🏦</span><span>Accounts</span></button>
+      <button data-action="tab" data-tab="records" class="tab"><span class="tab-icon">☰</span><span>Records</span></button>
+      <button data-action="tab" data-tab="analysis" class="tab"><span class="tab-icon">📊</span><span>Analysis</span></button>
+      <button data-action="tab" data-tab="settings" class="tab"><span class="tab-icon">⚙️</span><span>Settings</span></button>
+    </nav>
+  </div>
+  <div id="sheet" class="sheet" hidden></div>
+  <div id="toast" class="toast" hidden></div>
+  <input id="file" type="file" accept=".csv,.json,text/csv,application/json" hidden>
+
+  <script src="vendor/chart.umd.min.js"></script>
+  <script src="js/engine.js?v=demo1"></script>
+  <script src="js/store.js?v=demo1"></script>
+  <script src="js/app.js?v=demo1"></script>
+</body>
+</html>
