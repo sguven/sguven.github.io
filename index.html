@@ -51,6 +51,11 @@
 .proj[hidden]{display:none}
 
 /* Featured */
+.duo{padding:24px;border:1px solid var(--line);border-radius:18px;background:#FAFAF8}
+.duo[hidden]{display:none}
+.duo-head{max-width:760px;margin:0 0 22px;padding:0 4px}
+.duo-head h3{margin:12px 0 0;font-size:32px;line-height:1.12;letter-spacing:-.01em}
+.duo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
 .features{display:flex;flex-direction:column;gap:28px}
 .feature{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:36px;align-items:center;padding:24px;border:1px solid var(--line);border-radius:18px;background:#fff;transition:border-color .2s,box-shadow .2s}
 .feature:hover{border-color:#D4D4CF;box-shadow:0 14px 40px rgba(18,18,18,.06)}
@@ -111,6 +116,7 @@ figure.frame{margin:0}
 .dock-b:hover{background:#2A2A2A}
 
 @media (max-width:980px){
+  .duo-grid{grid-template-columns:minmax(0,1fr)}
   .feature{grid-template-columns:minmax(0,1fr);gap:22px}
   .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .focus{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -132,6 +138,8 @@ figure.frame{margin:0}
   .filters::-webkit-scrollbar{display:none}
   .chip{flex:none}
   .feature{padding:14px;border-radius:16px}
+  .duo{padding:14px;border-radius:16px}
+  .duo-head h3{font-size:26px}
   .feature h3{font-size:26px}
   .grid{grid-template-columns:minmax(0,1fr)}
   .principles{grid-template-columns:minmax(0,1fr)}
@@ -176,7 +184,7 @@ figure.frame{margin:0}
 
 <section class="sec" id="work" aria-labelledby="work-h">
 <div class="sec-head">
-<div><p class="label accent">Selected work</p><h2 id="work-h">Projects</h2><p class="sub">Seven projects with a closer look, then the rest.</p></div>
+<div><p class="label accent">Selected work</p><h2 id="work-h">Projects</h2><p class="sub">Featured projects with a closer look, then the rest.</p></div>
 <p class="progress" aria-live="polite"><span class="bar"><i id="bar1"></i></span><span><span class="n-seen">0</span> of 16 viewed</span></p>
 </div>
 <div class="filters" role="group" aria-label="Filter projects by category"><button type="button" class="chip on" data-filter="all" aria-pressed="true">All <b>16</b></button><button type="button" class="chip" data-filter="finance" aria-pressed="false">Finance &amp; Fintech <b>4</b></button><button type="button" class="chip" data-filter="ai" aria-pressed="false">AI &amp; Automation <b>3</b></button><button type="button" class="chip" data-filter="apps" aria-pressed="false">Applications <b>3</b></button><button type="button" class="chip" data-filter="content" aria-pressed="false">Content &amp; Publishing <b>3</b></button><button type="button" class="chip" data-filter="personal" aria-pressed="false">Personal Projects <b>3</b></button></div>
@@ -239,29 +247,35 @@ figure.frame{margin:0}
 <ul class="tags" aria-label="Technologies"><li>Scheduled AI tasks</li><li>Python</li><li>GitHub Pages</li><li>Gmail</li></ul>
 <div class="f-actions"><a class="btn accent sm" href="projects/world-brief/">Read case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="btn sm" href="https://sguven.github.io/bulten/" target="_blank" rel="noopener">Live site <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a><a class="btn sm" href="https://github.com/sguven/bulten" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> GitHub</a></div>
 </div>
-</article><article class="feature proj" id="blackscholes" data-id="blackscholes" data-cat="finance">
-<div class="f-media"><a class="frame" href="img/blackscholes.jpg" data-lightbox data-cap="Home page of the live course, with three of its result charts."><img src="img/thumbs/blackscholes.jpg" width="1600" height="1000" loading="lazy" alt="Home page of the live course, with three of its result charts."><span class="seen-badge"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>Viewed</span></a></div>
-<div class="f-body">
+</article><section class="duo" aria-labelledby="duo-h">
+<div class="duo-head">
 <p class="f-num">06</p>
-<p class="meta"><span class="status live">Live</span><span>Finance & Fintech</span><span class="plat">Web course · Python</span></p>
-<h3>Black-Scholes Laboratory</h3>
-<p class="f-desc">An online course with a Python library behind it: from the Black-Scholes formula and the Greeks to exotic options and the FRTB capital charge on an options book.</p>
-<ul class="f-points"><li>Seven chapters, each backed by tested code</li><li>Exotic options priced in closed form and by Monte Carlo</li><li>FRTB, VaR and Expected Shortfall worked for an options book</li></ul>
-<ul class="tags" aria-label="Technologies"><li>Python</li><li>NumPy / SciPy</li><li>MkDocs</li><li>GitHub Pages</li></ul>
-<div class="f-actions"><a class="btn accent sm" href="projects/black-scholes-lab/">Read case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="btn sm" href="https://sguven.github.io/market-risk-toolkit/black-scholes-lab/" target="_blank" rel="noopener">Live site <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a><a class="btn sm" href="https://github.com/sguven/market-risk-toolkit/tree/main/black_scholes_lab" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> GitHub</a></div>
+<p class="meta"><span>Finance &amp; Fintech</span><span class="plat">2 projects · market-risk-toolkit</span></p>
+<h3 id="duo-h">Financial / Risk Projects</h3>
+<p class="f-desc">Two online courses, each with a tested Python library behind it, that take a topic from the pricing model to the bank capital rules.</p>
 </div>
-</article><article class="feature proj" id="xva" data-id="xva" data-cat="finance">
-<div class="f-media"><a class="frame" href="img/xva.jpg" data-lightbox data-cap="Home page of the live course, with four exposure charts."><img src="img/thumbs/xva.jpg" width="1600" height="1000" loading="lazy" alt="Home page of the live course, with four exposure charts."><span class="seen-badge"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>Viewed</span></a></div>
-<div class="f-body">
-<p class="f-num">07</p>
-<p class="meta"><span class="status live">Live</span><span>Finance & Fintech</span><span class="plat">Web course · Python</span></p>
+<div class="duo-grid">
+<article class="card proj" id="blackscholes" data-id="blackscholes" data-cat="finance">
+<a class="frame" href="img/blackscholes.jpg" data-lightbox data-cap="Home page of the live course, with three of its result charts."><img src="img/thumbs/blackscholes.jpg" width="1600" height="1000" loading="lazy" alt="Home page of the live course, with three of its result charts."><span class="seen-badge"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>Viewed</span></a>
+<div class="c-body">
+<p class="meta"><span class="status live">Live</span><span class="plat">Web course · Python</span></p>
+<h3>Black-Scholes Laboratory</h3>
+<p class="c-desc">From the Black-Scholes formula and the Greeks to exotic options, Monte Carlo and the FRTB capital charge on an options book.</p>
+<ul class="tags" aria-label="Technologies"><li>Python</li><li>NumPy / SciPy</li><li>MkDocs</li></ul>
+<div class="c-links"><a class="icon-link" href="projects/black-scholes-lab/">Case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="icon-link" href="https://sguven.github.io/market-risk-toolkit/black-scholes-lab/" target="_blank" rel="noopener">Live site <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a><a class="icon-link" href="https://github.com/sguven/market-risk-toolkit/tree/main/black_scholes_lab" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> GitHub</a></div>
+</div>
+</article><article class="card proj" id="xva" data-id="xva" data-cat="finance">
+<a class="frame" href="img/xva.jpg" data-lightbox data-cap="Home page of the live course, with four exposure charts."><img src="img/thumbs/xva.jpg" width="1600" height="1000" loading="lazy" alt="Home page of the live course, with four exposure charts."><span class="seen-badge"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>Viewed</span></a>
+<div class="c-body">
+<p class="meta"><span class="status live">Live</span><span class="plat">Web course · Python</span></p>
 <h3>XVA Laboratory</h3>
-<p class="f-desc">An online course with a Python library behind it on counterparty credit risk: exposure simulation, netting and collateral, CVA to KVA, and the Basel rules.</p>
-<ul class="f-points"><li>Exposure simulated with Hull-White rates and FX</li><li>Netting, CSA terms and initial margin modelled explicitly</li><li>SA-CCR checked against the Basel worked example</li></ul>
-<ul class="tags" aria-label="Technologies"><li>Python</li><li>NumPy / SciPy</li><li>MkDocs</li><li>GitHub Pages</li></ul>
-<div class="f-actions"><a class="btn accent sm" href="projects/xva-lab/">Read case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="btn sm" href="https://sguven.github.io/market-risk-toolkit/xva-lab/" target="_blank" rel="noopener">Live site <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a><a class="btn sm" href="https://github.com/sguven/market-risk-toolkit/tree/main/xva_lab" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> GitHub</a></div>
+<p class="c-desc">Counterparty credit risk: exposure simulation, netting and collateral, CVA to KVA, wrong-way risk and SA-CCR.</p>
+<ul class="tags" aria-label="Technologies"><li>Python</li><li>NumPy / SciPy</li><li>MkDocs</li></ul>
+<div class="c-links"><a class="icon-link" href="projects/xva-lab/">Case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="icon-link" href="https://sguven.github.io/market-risk-toolkit/xva-lab/" target="_blank" rel="noopener">Live site <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a><a class="icon-link" href="https://github.com/sguven/market-risk-toolkit/tree/main/xva_lab" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> GitHub</a></div>
 </div>
 </article>
+</div>
+</section>
 </div>
 </div>
 
@@ -402,7 +416,7 @@ figure.frame{margin:0}
   function filter(cat){
     chips.forEach(function(c){var on=c.dataset.filter===cat;c.classList.toggle('on',on);c.setAttribute('aria-pressed',on);});
     cards.forEach(function(c){c.hidden=!(cat==='all'||c.dataset.cat===cat);});
-    document.querySelectorAll('.group').forEach(function(g){g.hidden=!g.querySelector('.proj:not([hidden])');});
+    document.querySelectorAll('.duo,.group').forEach(function(g){g.hidden=!g.querySelector('.proj:not([hidden])');});
   }
   chips.forEach(function(c){c.addEventListener('click',function(){filter(c.dataset.filter);});});
 
