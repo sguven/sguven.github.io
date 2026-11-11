@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>@cellbycell1: Daily Spreadsheet Reels — Case study · Serhat Guven</title>
+<meta name="description" content="An Instagram account of Excel and Google Sheets tips that runs on its own: AI picks the topic, animates the Reel, writes the caption and posts it at prime time every day.">
+<meta property="og:title" content="@cellbycell1: Daily Spreadsheet Reels — Case study">
+<meta property="og:description" content="An Instagram account of Excel and Google Sheets tips that runs on its own: AI picks the topic, animates the Reel, writes the caption and posts it at prime time every day.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://sguven.github.io/projects/cellbycell1/">
+<meta property="og:image" content="https://sguven.github.io/img/thumbs/social-cellbycell1.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121212'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='17' font-weight='700' fill='white' text-anchor='middle'%3ESG%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;1,8..60,400&amp;family=Libre+Franklin:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../../assets/case.css">
+</head>
+<body>
+<a class="skip" href="#problem">Skip to the case study</a>
+<header class="top">
+<div class="wrap">
+<a class="brand" href="../../"><span class="mono">SG</span>Serhat Guven</a>
+<nav class="nav" aria-label="Main">
+<a class="keep" href="../../#work">Projects</a>
+<a class="keep" href="../../#about">About</a>
+</nav>
+</div>
+</header>
+
+<main class="wrap" data-id="cellbycell1">
+<a class="back" href="../../#cellbycell1"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4"/></svg> All projects</a>
+<header class="cs-hero">
+<p class="meta"><span class="status live">Live</span><span>Content &amp; Publishing</span><span class="plat">Case study</span></p>
+<h1>@cellbycell1: Daily Spreadsheet Reels</h1>
+<p class="cs-lede">An Instagram account of Excel and Google Sheets tips that runs on its own: AI picks the topic, animates the Reel, writes the caption and posts it at prime time every day.</p>
+<div class="cs-actions">
+<a class="btn" href="https://www.instagram.com/cellbycell1" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2" y="2" width="12" height="12" rx="3.5"/><circle cx="8" cy="8" r="2.8"/><circle cx="11.6" cy="4.4" r=".5" fill="currentColor" stroke="none"/></svg> @cellbycell1 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a>
+</div>
+<dl class="facts"><div><dt>Role</dt><dd>Idea, account setup and prompts, built with Claude</dd></div><div><dt>Runs</dt><dd>One Reel a day at prime time</dd></div><div><dt>Output</dt><dd>Animated 25 to 40 second Reels with original music</dd></div><div><dt>Status</dt><dd>Live since November 5, 2026</dd></div></dl>
+</header>
+
+<figure class="cs-cover"><a class="frame" href="../../img/social-cellbycell1.jpg" data-lightbox data-cap="The @cellbycell1 grid: every Reel was made and posted automatically."><img src="../../img/thumbs/social-cellbycell1.jpg" alt="The @cellbycell1 grid: every Reel was made and posted automatically."></a><figcaption>The @cellbycell1 grid: every Reel was made and posted automatically.</figcaption></figure>
+
+<div class="cs-layout">
+<nav class="toc" aria-label="On this page"><p class="label">On this page</p><a href="#problem"><span>01</span>Problem</a><a href="#solution"><span>02</span>Solution</a><a href="#architecture"><span>03</span>Architecture</a><a href="#technology"><span>04</span>Technology</a><a href="#challenges"><span>05</span>Challenges</a><a href="#results"><span>06</span>Results</a></nav>
+<div class="cs-body">
+
+<section id="problem"><header class="cs-h"><p class="label accent">01 · Problem</p><h2>What need does it solve?</h2></header><p>Short spreadsheet tips are useful, but turning each one into a video is slow: a small table to animate, a formula to show, a cover, music, a caption and the right hour to post.</p><p>The aim was to hand that whole loop to AI after the first setup, while keeping every formula on screen correct.</p></section>
+
+<section id="solution"><header class="cs-h"><p class="label accent">02 · Solution</p><h2>How it works</h2></header><p>A scheduled Claude task runs once a day. On every run it:</p><ul><li>Takes the next topic from a four-week calendar with a fixed weekly mix: formulas, shortcuts, data cleaning and visual tricks such as checkboxes</li><li>Checks the formula, shortcut or menu path against Microsoft and Google help pages, and computes every result shown on screen from the table</li><li>Renders the Reel in code: a mini spreadsheet, the formula typed into the formula bar, a check mark on the result, and a closing &ldquo;Works in&rdquo; note for Excel and Google Sheets</li><li>Opens with a bold hook and shows the payoff within the first second or two</li><li>Adds original music generated in code, rotating between styles so no two Reels sound alike</li><li>Writes the caption and hashtags and publishes at the prime-time slot for that day, with no approval step</li></ul><div class="gallery" style="grid-template-columns:repeat(3,minmax(0,1fr))"><figure class="shot phone"><a href="../../img/cases/cbc-xlookup.jpg" data-lightbox data-cap="First Reel: why XLOOKUP beats VLOOKUP."><img src="../../img/cases/cbc-xlookup.jpg" loading="lazy" alt="First Reel: why XLOOKUP beats VLOOKUP."></a><figcaption>First Reel: why XLOOKUP beats VLOOKUP.</figcaption></figure><figure class="shot phone"><a href="../../img/cases/cbc-duplicates.jpg" data-lightbox data-cap="Data cleaning: removing duplicates, before and after."><img src="../../img/cases/cbc-duplicates.jpg" loading="lazy" alt="Data cleaning: removing duplicates, before and after."></a><figcaption>Data cleaning: removing duplicates, before and after.</figcaption></figure><figure class="shot phone"><a href="../../img/cases/cbc-iferror.jpg" data-lightbox data-cap="Formulas: hiding #DIV/0! errors with one wrapper."><img src="../../img/cases/cbc-iferror.jpg" loading="lazy" alt="Formulas: hiding #DIV/0! errors with one wrapper."></a><figcaption>Formulas: hiding #DIV/0! errors with one wrapper.</figcaption></figure></div></section>
+
+<section id="architecture"><header class="cs-h"><p class="label accent">03 · Architecture</p><h2>How the system fits together</h2></header><div class="diagram"><svg viewBox="0 0 960 400" role="img" aria-label="Architecture: a scheduled Claude task picks the next topic from a content calendar, checks the formula, renders the Reel in code with original music, hosts the video in a public repository and publishes it to Instagram through Windsor.ai" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8E8E8A"/></marker></defs><style>.t{font:600 15px "Libre Franklin",Arial,sans-serif;fill:#121212;text-anchor:middle}.s{font:500 12.5px "Libre Franklin",Arial,sans-serif;fill:#6B6B6B;text-anchor:middle}.l{font:600 11.5px "Libre Franklin",Arial,sans-serif;fill:#6B6B6B}</style><rect x="20" y="30" width="200" height="80" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="120.0" y="58.0" class="t">Schedule</text><text x="120.0" y="78.0" class="s">Prime-time slot,</text><text x="120.0" y="96.0" class="s">US Eastern</text><rect x="290" y="30" width="290" height="80" rx="10" fill="#EEF2FB" stroke="#2350B8" stroke-width="1.6"/><text x="435.0" y="58.0" class="t">Claude task</text><text x="435.0" y="78.0" class="s">Picks the next topic from</text><text x="435.0" y="96.0" class="s">a four-week calendar</text><rect x="650" y="30" width="290" height="80" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="795.0" y="58.0" class="t">Accuracy check</text><text x="795.0" y="78.0" class="s">Formula checked against official</text><text x="795.0" y="96.0" class="s">help; results computed</text><line x1="222" y1="70" x2="286" y2="70" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><line x1="582" y1="70" x2="646" y2="70" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><rect x="20" y="220" width="280" height="90" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="160.0" y="253.0" class="t">Render engine</text><text x="160.0" y="273.0" class="s">Python: animated sheet, hook,</text><text x="160.0" y="291.0" class="s">cover and original music</text><rect x="370" y="220" width="220" height="90" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="480.0" y="253.0" class="t">Media host</text><text x="480.0" y="273.0" class="s">Public repository</text><text x="480.0" y="291.0" class="s">serves the video</text><rect x="660" y="220" width="280" height="90" rx="10" fill="#EEF2FB" stroke="#2350B8" stroke-width="1.6"/><text x="800.0" y="253.0" class="t">Windsor.ai</text><text x="800.0" y="273.0" class="s">Posts the Reel with its</text><text x="800.0" y="291.0" class="s">caption to Instagram</text><line x1="795" y1="112" x2="170" y2="216" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><text x="330" y="172" class="l" text-anchor="middle">script for the Reel</text><line x1="302" y1="265" x2="366" y2="265" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><line x1="592" y1="265" x2="656" y2="265" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><rect x="20" y="340" width="920" height="44" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="480.0" y="368.0" class="t"></text><text x="480" y="367" class="s">Every post is logged, so a topic is never repeated and the calendar is refilled four weeks at a time</text></svg></div><p>The task reads the content calendar, checks the topic, then runs a shared render engine that draws every frame, builds the cover and generates the soundtrack. The finished video goes to a public repository so the publishing service can fetch it, and Windsor.ai posts it to Instagram. Each post is logged so topics never repeat.</p></section>
+
+<section id="technology"><header class="cs-h"><p class="label accent">04 · Technology</p><h2>What it is built with</h2></header>
+<ul class="tags"><li>Claude</li><li>Scheduled tasks</li><li>Python</li><li>Pillow</li><li>FFmpeg</li><li>GitHub</li><li>Windsor.ai</li><li>Instagram</li></ul>
+<table class="tech"><tbody><tr><th scope='row'>Agent</th><td>A scheduled Claude task that plans, checks, renders and posts each Reel</td></tr><tr><th scope='row'>Video</th><td>Python and Pillow draw each frame; FFmpeg encodes a 1080×1920 Reel</td></tr><tr><th scope='row'>Music</th><td>Original tracks generated in code, with a style rotation per video</td></tr><tr><th scope='row'>Media hosting</th><td>A public GitHub repository serves the videos and keeps the content calendar</td></tr><tr><th scope='row'>Publishing</th><td>Windsor.ai connector for Instagram</td></tr><tr><th scope='row'>Timing</th><td>Fixed prime-time slots by weekday, US Eastern</td></tr></tbody></table>
+</section>
+
+<section id="challenges"><header class="cs-h"><p class="label accent">05 · Challenges</p><h2>Hard parts and how they were solved</h2></header>
+<ol class="challenges"><li><h3>Every formula must be right</h3><p>Each tip is checked against the official help pages before rendering, and the numbers on screen are computed from the table rather than typed in.</p></li><li><h3>Stopping the scroll</h3><p>Every Reel opens with a large one-word hook and shows the bad and good versions side by side within the first second or two.</p></li><li><h3>Music without licensing or repetition</h3><p>The soundtrack is generated in code for each video. A picker rotates styles and never reuses the last two; after feedback that early tracks sounded harsh, the sounds were switched to cleaner piano, marimba and guitar tones.</p></li><li><h3>A consistent look, made new each day</h3><p>A shared engine and style guide fix the colours, fonts and layout, while each Reel gets its own table, formula and cover.</p></li></ol>
+</section>
+
+<section id="results"><header class="cs-h"><p class="label accent">06 · Results</p><h2>What came out of it</h2></header>
+<ul class="results"><li>Live since November 5, 2026, posting a new Reel every day on its own.</li><li>Every Reel is original: its own animation, cover, caption and music.</li><li>No manual step between the topic plan and the published post.</li></ul>
+<div class="cs-actions">
+<a class="btn" href="https://www.instagram.com/cellbycell1" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2" y="2" width="12" height="12" rx="3.5"/><circle cx="8" cy="8" r="2.8"/><circle cx="11.6" cy="4.4" r=".5" fill="currentColor" stroke="none"/></svg> @cellbycell1 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a>
+</div>
+</section>
+
+</div>
+</div>
+
+<a class="next-case" href="../thedayinbrief/"><span><small class="label">Next case study</small><strong>@TheDayInBrief</strong></span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+</main>
+
+<footer class="foot"><div class="wrap"><span>© 2026 Serhat Guven · <a href="../../">All projects</a></span><span><a href="../../#contact">Contact</a></span></div></footer>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Image preview"><div class="lb-box"><button class="lb-x" type="button" aria-label="Close">×</button><img alt=""><p class="lb-cap"></p></div></div>
+<script src="../../assets/site.js"></script>
+<script>
+(function(){var K='sg-portfolio-viewed-v3',s=SG.loadSeen(K);s['cellbycell1']=1;SG.saveSeen(K,s);
+var links=[].slice.call(document.querySelectorAll('.toc a'));
+if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+en.target.id);});}});},{rootMargin:'-30% 0px -60% 0px'});
+document.querySelectorAll('.cs-body section').forEach(function(s){io.observe(s);});}})();
+</script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>@TheDayInBrief: The News in One Post — Case study · Serhat Guven</title>
+<meta name="description" content="An X account that keeps a short running record of world events: every two to three days AI reads the news since the last post and sums it up in one witty, 280-character post.">
+<meta property="og:title" content="@TheDayInBrief: The News in One Post — Case study">
+<meta property="og:description" content="An X account that keeps a short running record of world events: every two to three days AI reads the news since the last post and sums it up in one witty, 280-character post.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://sguven.github.io/projects/thedayinbrief/">
+<meta property="og:image" content="https://sguven.github.io/img/thumbs/social-thedayinbrief.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121212'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='17' font-weight='700' fill='white' text-anchor='middle'%3ESG%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;1,8..60,400&amp;family=Libre+Franklin:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../../assets/case.css">
+</head>
+<body>
+<a class="skip" href="#problem">Skip to the case study</a>
+<header class="top">
+<div class="wrap">
+<a class="brand" href="../../"><span class="mono">SG</span>Serhat Guven</a>
+<nav class="nav" aria-label="Main">
+<a class="keep" href="../../#work">Projects</a>
+<a class="keep" href="../../#about">About</a>
+</nav>
+</div>
+</header>
+
+<main class="wrap" data-id="thedayinbrief">
+<a class="back" href="../../#thedayinbrief"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4"/></svg> All projects</a>
+<header class="cs-hero">
+<p class="meta"><span class="status live">Live</span><span>Content &amp; Publishing</span><span class="plat">Case study</span></p>
+<h1>@TheDayInBrief: The News in One Post</h1>
+<p class="cs-lede">An X account that keeps a short running record of world events: every two to three days AI reads the news since the last post and sums it up in one witty, 280-character post.</p>
+<div class="cs-actions">
+<a class="btn" href="https://x.com/TheDayInBrief" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M12.2 1.5h2.2L9.6 7l5.6 7.5h-4.4L7.4 9.9 3.4 14.5H1.2l5.2-5.9L1 1.5h4.5l3.1 4.1zm-.8 11.7h1.2L4.8 2.7H3.5z"/></svg> @TheDayInBrief <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a>
+</div>
+<dl class="facts"><div><dt>Role</dt><dd>Idea, account setup and prompts, built with Claude</dd></div><div><dt>Runs</dt><dd>Every 2 to 3 days, in the evening</dd></div><div><dt>Output</dt><dd>One English post of up to 280 characters</dd></div><div><dt>Status</dt><dd>Live since November 6, 2026</dd></div></dl>
+</header>
+
+<figure class="cs-cover"><a class="frame" href="../../img/social-thedayinbrief.jpg" data-lightbox data-cap="The @TheDayInBrief profile with a recent post, written and published automatically."><img src="../../img/thumbs/social-thedayinbrief.jpg" alt="The @TheDayInBrief profile with a recent post, written and published automatically."></a><figcaption>The @TheDayInBrief profile with a recent post, written and published automatically.</figcaption></figure>
+
+<div class="cs-layout">
+<nav class="toc" aria-label="On this page"><p class="label">On this page</p><a href="#problem"><span>01</span>Problem</a><a href="#solution"><span>02</span>Solution</a><a href="#architecture"><span>03</span>Architecture</a><a href="#technology"><span>04</span>Technology</a><a href="#challenges"><span>05</span>Challenges</a><a href="#results"><span>06</span>Results</a></nav>
+<div class="cs-body">
+
+<section id="problem"><header class="cs-h"><p class="label accent">01 · Problem</p><h2>What need does it solve?</h2></header><p>Most news is forgotten within a week. The idea was a small &ldquo;note to history&rdquo;: a timeline where each post says what actually happened in a few days, from politics and the economy to history-making events or a notable film, readable in seconds.</p><p>The aim was for the account to run on its own, from reading the news to publishing the post.</p></section>
+
+<section id="solution"><header class="cs-h"><p class="label accent">02 · Solution</p><h2>How it works</h2></header><p>A scheduled Claude task runs every two to three days. On every run it:</p><ul><li>Researches the news since the last post across politics, the economy, science and culture</li><li>Picks the few events most likely to matter later, not only market moves</li><li>Writes one clever English summary that keeps the essential details: who, what and the key numbers</li><li>Checks the facts against its sources and keeps the post to a single tweet of 280 characters or less, with no threads</li><li>Schedules it through Typefully for the evening slot, with no approval step</li></ul><p>A real post from the account:</p><blockquote class="post-quote"><p>Nov 6–9: Israel&#x27;s president passed over Netanyahu and tapped Gadi Eisenkot, backed by 67 lawmakers, Arab-led parties included; he has 28 days to find 61 seats. COP31 opened in Antalya, agenda courtesy of Copernicus: 2026 is set to be the second-hottest year on record.</p><footer>@TheDayInBrief · November 10, 2026</footer></blockquote></section>
+
+<section id="architecture"><header class="cs-h"><p class="label accent">03 · Architecture</p><h2>How the system fits together</h2></header><div class="diagram"><svg viewBox="0 0 960 320" role="img" aria-label="Architecture: a scheduled Claude task researches the news since the last post, writes and checks one 280-character summary, and schedules it on X through Typefully" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8E8E8A"/></marker></defs><style>.t{font:600 15px "Libre Franklin",Arial,sans-serif;fill:#121212;text-anchor:middle}.s{font:500 12.5px "Libre Franklin",Arial,sans-serif;fill:#6B6B6B;text-anchor:middle}.l{font:600 11.5px "Libre Franklin",Arial,sans-serif;fill:#6B6B6B}</style><rect x="20" y="30" width="200" height="80" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="120.0" y="58.0" class="t">Schedule</text><text x="120.0" y="78.0" class="s">Every 2 to 3 days,</text><text x="120.0" y="96.0" class="s">evening slot</text><rect x="290" y="30" width="290" height="80" rx="10" fill="#EEF2FB" stroke="#2350B8" stroke-width="1.6"/><text x="435.0" y="58.0" class="t">Claude task</text><text x="435.0" y="78.0" class="s">Researches the news</text><text x="435.0" y="96.0" class="s">since the last post</text><rect x="650" y="30" width="290" height="80" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="795.0" y="58.0" class="t">Write and check</text><text x="795.0" y="78.0" class="s">One English summary,</text><text x="795.0" y="96.0" class="s">facts and length verified</text><line x1="222" y1="70" x2="286" y2="70" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><line x1="582" y1="70" x2="646" y2="70" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><rect x="370" y="210" width="260" height="80" rx="10" fill="#EEF2FB" stroke="#2350B8" stroke-width="1.6"/><text x="500.0" y="238.0" class="t">Typefully</text><text x="500.0" y="258.0" class="s">Schedules and</text><text x="500.0" y="276.0" class="s">publishes the post</text><rect x="700" y="210" width="240" height="80" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="820.0" y="238.0" class="t">X</text><text x="820.0" y="258.0" class="s">@TheDayInBrief</text><text x="820.0" y="276.0" class="s">timeline</text><line x1="795" y1="112" x2="520" y2="206" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><text x="700" y="165" class="l" text-anchor="start">max 280 characters</text><line x1="632" y1="250" x2="696" y2="250" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/></svg></div><p>One routine runs on a schedule. It researches the period since the previous post, writes the summary and checks it, then hands it to Typefully, which publishes it on X. Nothing waits for a manual approval.</p></section>
+
+<section id="technology"><header class="cs-h"><p class="label accent">04 · Technology</p><h2>What it is built with</h2></header>
+<ul class="tags"><li>Claude</li><li>Scheduled tasks</li><li>Web search</li><li>Typefully</li><li>X</li></ul>
+<table class="tech"><tbody><tr><th scope='row'>Agent</th><td>A scheduled Claude task with web research</td></tr><tr><th scope='row'>Writing</th><td>One English post per run, up to 280 characters, no threads</td></tr><tr><th scope='row'>Publishing</th><td>Typefully connector, which posts to X</td></tr><tr><th scope='row'>Timing</th><td>Every 2 to 3 days, in the evening</td></tr></tbody></table>
+</section>
+
+<section id="challenges"><header class="cs-h"><p class="label accent">05 · Challenges</p><h2>Hard parts and how they were solved</h2></header>
+<ol class="challenges"><li><h3>Several days in one post</h3><p>The publishing tool&#x27;s free plan allows ten posts a month, so the account posts every two to three days and each post covers everything since the last one.</p></li><li><h3>A lot of news in 280 characters</h3><p>The post keeps names and numbers and drops filler, so it stays a single tweet without losing what matters.</p></li><li><h3>Choosing what matters</h3><p>The brief is a record for later, so it favours events with lasting weight over the day&#x27;s noise.</p></li><li><h3>Accuracy with nobody watching</h3><p>Every fact and number in the post comes from the sources found in that run, and the length is checked before scheduling.</p></li></ol>
+</section>
+
+<section id="results"><header class="cs-h"><p class="label accent">06 · Results</p><h2>What came out of it</h2></header>
+<ul class="results"><li>Live since November 6, 2026, posting on its own every two to three days.</li><li>Stays within the publishing tool&#x27;s free plan.</li><li>A growing timeline of world events, each period summed up in one post.</li></ul>
+<div class="cs-actions">
+<a class="btn" href="https://x.com/TheDayInBrief" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M12.2 1.5h2.2L9.6 7l5.6 7.5h-4.4L7.4 9.9 3.4 14.5H1.2l5.2-5.9L1 1.5h4.5l3.1 4.1zm-.8 11.7h1.2L4.8 2.7H3.5z"/></svg> @TheDayInBrief <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a>
+</div>
+</section>
+
+</div>
+</div>
+
+<a class="next-case" href="../world-brief/"><span><small class="label">Next case study</small><strong>World Brief</strong></span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+</main>
+
+<footer class="foot"><div class="wrap"><span>© 2026 Serhat Guven · <a href="../../">All projects</a></span><span><a href="../../#contact">Contact</a></span></div></footer>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Image preview"><div class="lb-box"><button class="lb-x" type="button" aria-label="Close">×</button><img alt=""><p class="lb-cap"></p></div></div>
+<script src="../../assets/site.js"></script>
+<script>
+(function(){var K='sg-portfolio-viewed-v3',s=SG.loadSeen(K);s['thedayinbrief']=1;SG.saveSeen(K,s);
+var links=[].slice.call(document.querySelectorAll('.toc a'));
+if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+en.target.id);});}});},{rootMargin:'-30% 0px -60% 0px'});
+document.querySelectorAll('.cs-body section').forEach(function(s){io.observe(s);});}})();
+</script>
+</body>
+</html>

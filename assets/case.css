@@ -96,3 +96,6 @@
   .diagram{padding:14px;margin-left:-4px;margin-right:-4px}
   .diagram::after{content:"Swipe to see the full diagram →";display:block;margin-top:10px;font-family:var(--ui);font-size:12px;color:var(--faint);position:sticky;left:0}
 }
+.post-quote{margin:8px 0 0;padding:20px 24px;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;background:var(--soft)}
+.cs-body .post-quote p{margin:0;font-size:18px;line-height:1.6;color:var(--ink)}
+.post-quote footer{margin-top:10px;font-family:var(--ui);font-size:13px;color:var(--muted)}
