@@ -60,6 +60,14 @@
 .duo-head h3{margin:12px 0 0;font-size:32px;line-height:1.12;letter-spacing:-.01em}
 .duo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
 .duo-grid.pair{grid-template-columns:repeat(2,minmax(0,1fr))}
+.duo-grid.quad{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.duo-grid.quad .card{padding:10px;border-radius:14px}
+.duo-grid.quad .c-body{padding:12px 4px 2px}
+.duo-grid.quad .card h3{font-size:17px}
+.duo-grid.quad .c-desc{font-size:14px;line-height:1.5;margin:6px 0 12px}
+.duo-grid.quad .meta{font-size:11.5px}
+.duo-grid.quad .tags li{font-size:11px;padding:3px 7px}
+.duo-grid.quad .icon-link{font-size:13px}
 .features{display:flex;flex-direction:column;gap:28px}
 .feature{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:36px;align-items:center;padding:24px;border:1px solid var(--line);border-radius:18px;background:#fff;transition:border-color .2s,box-shadow .2s}
 .feature:hover{border-color:#D4D4CF;box-shadow:0 14px 40px rgba(18,18,18,.06)}
@@ -120,7 +128,7 @@ figure.frame{margin:0}
 .dock-b:hover{background:#2A2A2A}
 
 @media (max-width:980px){
-  .duo-grid,.duo-grid.pair{grid-template-columns:minmax(0,1fr)}
+  .duo-grid,.duo-grid.pair,.duo-grid.quad{grid-template-columns:minmax(0,1fr)}
   .feature{grid-template-columns:minmax(0,1fr);gap:22px}
   .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .focus{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -188,7 +196,7 @@ figure.frame{margin:0}
 
 <section class="sec" id="work" aria-labelledby="work-h">
 <div class="sec-head">
-<div><p class="label accent">Selected work</p><h2 id="work-h">Projects</h2><p class="sub">Featured projects with a closer look, then the rest grouped by theme.</p></div>
+<div><p class="label accent">Selected work</p><h2 id="work-h">Projects</h2><p class="sub">Grouped by theme, with a closer look at each.</p></div>
 <p class="progress" aria-live="polite"><span class="bar"><i id="bar1"></i></span><span><span class="n-seen">0</span> of 16 viewed</span></p>
 </div>
 <div class="filters" role="group" aria-label="Filter projects by category"><button type="button" class="chip on" data-filter="all" aria-pressed="true">All <b>16</b></button><button type="button" class="chip" data-filter="finance" aria-pressed="false">Finance &amp; Fintech <b>5</b></button><button type="button" class="chip" data-filter="ai" aria-pressed="false">AI &amp; Automation <b>3</b></button><button type="button" class="chip" data-filter="apps" aria-pressed="false">Applications <b>2</b></button><button type="button" class="chip" data-filter="content" aria-pressed="false">Content &amp; Publishing <b>3</b></button><button type="button" class="chip" data-filter="personal" aria-pressed="false">Personal Projects <b>3</b></button></div>
@@ -196,55 +204,39 @@ figure.frame{margin:0}
 <div class="group" id="g-featured">
 <p class="group-label label">Featured</p>
 <div class="features">
-<article class="feature proj" id="investments" data-id="investments" data-cat="finance">
-<div class="f-media"><a class="frame" href="img/investments.jpg" data-lightbox data-cap="Overview screen of the live demo, fictional figures."><img src="img/thumbs/investments.jpg" width="1600" height="1000" loading="lazy" alt="Investment tracker overview: total net worth, growth cards, net worth chart with a dashed forecast, and allocation donut"><span class="seen-badge"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>Viewed</span></a></div>
-<div class="f-body">
-<p class="f-num">01</p>
-<p class="meta"><span class="status live">Live</span><span>Finance & Fintech</span><span class="plat">Mac and iPhone</span></p>
-<h3>Investment Portfolio Tracker</h3>
-<p class="f-desc">Every account in one view, with growth by period and a forecast of where net worth is heading, learned from its own history.</p>
-<ul class="f-points"><li>Net worth chart with a dashed forecast line</li><li>Trend model fitted to past growth, plus planned contributions</li><li>Data stays on the device; every change is versioned</li></ul>
-<ul class="tags" aria-label="Technologies"><li>JavaScript</li><li>Chart.js</li><li>SwiftUI</li><li>Python</li></ul>
-<div class="f-actions"><a class="btn accent sm" href="projects/investment-portfolio/">Read case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="btn sm" href="https://sguven.github.io/investments-demo/" target="_blank" rel="noopener">Live demo <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a><a class="btn sm" href="https://github.com/sguven/sguven.github.io/tree/main/investments-demo" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> GitHub</a></div>
-</div>
-</article><article class="feature proj" id="cashflow" data-id="cashflow" data-cat="finance">
-<div class="f-media"><a class="frame" href="img/cashflow.jpg" data-lightbox data-cap="Dashboard of the live demo, fictional figures."><img src="img/thumbs/cashflow.jpg" width="1600" height="1000" loading="lazy" alt="Cash flow dashboard: balance today, lowest projected balance, next income and payment, a 90-day projected balance chart and upcoming payments"><span class="seen-badge"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>Viewed</span></a></div>
-<div class="f-body">
-<p class="f-num">02</p>
-<p class="meta"><span class="status live">Live</span><span>Finance & Fintech</span><span class="plat">Mac and iPhone</span></p>
-<h3>Cash Flow Tracker and Forecast</h3>
-<p class="f-desc">Projects the checking balance day by day from card statements, income and recurring payments, and flags the lowest point before it happens.</p>
-<ul class="f-points"><li>90-day forecast with a minimum-balance alert</li><li>Card bills estimated until the statement arrives</li><li>Weekend and US holiday date rules built in</li></ul>
-<ul class="tags" aria-label="Technologies"><li>JavaScript</li><li>SVG charts</li><li>SwiftUI</li><li>Python</li></ul>
-<div class="f-actions"><a class="btn accent sm" href="projects/cash-flow/">Read case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="btn sm" href="https://sguven.github.io/cashflow-demo/" target="_blank" rel="noopener">Live demo <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a><a class="btn sm" href="https://github.com/sguven/sguven.github.io/tree/main/cashflow-demo" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> GitHub</a></div>
-</div>
-</article><article class="feature proj" id="calorielog" data-id="calorielog" data-cat="apps">
-<div class="f-media"><a class="frame" href="img/calorielog.jpg" data-lightbox data-cap="Sample data."><img src="img/thumbs/calorielog.jpg" width="1600" height="1000" loading="lazy" alt="CalorieLog on a phone: daily calorie ring with macros, and a trends screen with a 7-day calorie chart and weight log"><span class="seen-badge"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>Viewed</span></a></div>
-<div class="f-body">
-<p class="f-num">03</p>
-<p class="meta"><span class="status live">Live</span><span>Applications</span><span class="plat">Mobile web app</span></p>
-<h3>CalorieLog</h3>
-<p class="f-desc">Photograph or type a meal and AI estimates the calories and macros; the day adds up in a simple diary with trends and a weight log.</p>
-<ul class="f-points"><li>One box takes a photo or a plain-English sentence</li><li>Portions can be corrected with a tap before saving</li><li>7- and 30-day trends against a daily target</li></ul>
-<ul class="tags" aria-label="Technologies"><li>JavaScript</li><li>AI vision</li><li>Scheduled AI tasks</li></ul>
-<div class="f-actions"><a class="btn accent sm" href="projects/calorielog/">Read case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="btn sm" href="https://sguven.github.io/calorie-demo/" target="_blank" rel="noopener">Live demo <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a><a class="btn sm" href="https://github.com/sguven/sguven.github.io/tree/main/calorie-demo" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> GitHub</a></div>
-</div>
-</article><article class="feature proj" id="workoutlog" data-id="workoutlog" data-cat="apps">
-<div class="f-media"><a class="frame" href="img/workoutlog.jpg" data-lightbox data-cap="Next workout and muscle map screens, with sample data."><img src="img/thumbs/workoutlog.jpg" width="1600" height="1000" loading="lazy" alt="WorkoutLog Pro on a phone: next workout card with a weekly tracker, and a muscle map showing sets per muscle"><span class="seen-badge"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>Viewed</span></a></div>
-<div class="f-body">
-<p class="f-num">04</p>
-<p class="meta"><span class="status live">Live</span><span>Applications</span><span class="plat">Mobile web app</span></p>
-<h3>WorkoutLog Pro</h3>
-<p class="f-desc">A gym log built for entry between sets, with an AI-written program, a rest timer and a weekly view of sets per muscle, plus a coaching email every Sunday.</p>
-<ul class="f-points"><li>Shows last time's sets and suggests a heavier weight when every set hits the top of the rep range</li><li>Muscle map of weekly sets, personal records and a chart per exercise</li><li>Program written by AI from a goal, schedule and equipment</li></ul>
-<ul class="tags" aria-label="Technologies"><li>JavaScript</li><li>AI programming</li><li>Scheduled AI tasks</li></ul>
-<div class="f-actions"><a class="btn accent sm" href="projects/workoutlog/">Read case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="btn sm" href="https://sguven.github.io/workoutlog-demo/" target="_blank" rel="noopener">Live demo <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a><a class="btn sm" href="https://github.com/sguven/sguven.github.io/tree/main/workoutlog-demo" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> GitHub</a></div>
-</div>
-</article><section class="duo" aria-labelledby="duo-fin">
+<section class="duo" aria-labelledby="duo-money">
 <div class="duo-head">
-<p class="f-num">05</p>
+<p class="f-num">01</p>
+<p class="meta"><span>Finance &amp; Fintech</span><span class="plat">2 projects · Mac and iPhone</span></p>
+<h3 id="duo-money">Financial</h3>
+<p class="f-desc">Two personal finance tools that keep the data on the device: one tracks net worth and where it is heading, the other projects the bank balance day by day.</p>
+</div>
+<div class="duo-grid pair">
+<article class="card proj" id="investments" data-id="investments" data-cat="finance">
+<a class="frame" href="img/investments.jpg" data-lightbox data-cap="Overview screen of the live demo, fictional figures."><img src="img/thumbs/investments.jpg" width="1600" height="1000" loading="lazy" alt="Investment tracker overview: total net worth, growth cards, net worth chart with a dashed forecast, and allocation donut"><span class="seen-badge"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>Viewed</span></a>
+<div class="c-body">
+<p class="meta"><span class="status live">Live</span><span class="plat">Mac and iPhone</span></p>
+<h3>Investment Portfolio Tracker</h3>
+<p class="c-desc">Every account in one view, with growth by period and a forecast of where net worth is heading, learned from its own history.</p>
+<ul class="tags" aria-label="Technologies"><li>JavaScript</li><li>Chart.js</li><li>SwiftUI</li><li>Python</li></ul>
+<div class="c-links"><a class="icon-link" href="projects/investment-portfolio/">Case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="icon-link" href="https://sguven.github.io/investments-demo/" target="_blank" rel="noopener">Live demo <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a><a class="icon-link" href="https://github.com/sguven/sguven.github.io/tree/main/investments-demo" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> GitHub</a></div>
+</div>
+</article><article class="card proj" id="cashflow" data-id="cashflow" data-cat="finance">
+<a class="frame" href="img/cashflow.jpg" data-lightbox data-cap="Dashboard of the live demo, fictional figures."><img src="img/thumbs/cashflow.jpg" width="1600" height="1000" loading="lazy" alt="Cash flow dashboard: balance today, lowest projected balance, next income and payment, a 90-day projected balance chart and upcoming payments"><span class="seen-badge"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>Viewed</span></a>
+<div class="c-body">
+<p class="meta"><span class="status live">Live</span><span class="plat">Mac and iPhone</span></p>
+<h3>Cash Flow Tracker and Forecast</h3>
+<p class="c-desc">Projects the checking balance day by day from card statements, income and recurring payments, and flags the lowest point before it happens.</p>
+<ul class="tags" aria-label="Technologies"><li>JavaScript</li><li>SVG charts</li><li>SwiftUI</li><li>Python</li></ul>
+<div class="c-links"><a class="icon-link" href="projects/cash-flow/">Case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="icon-link" href="https://sguven.github.io/cashflow-demo/" target="_blank" rel="noopener">Live demo <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a><a class="icon-link" href="https://github.com/sguven/sguven.github.io/tree/main/cashflow-demo" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> GitHub</a></div>
+</div>
+</article>
+</div>
+</section><section class="duo" aria-labelledby="duo-fin">
+<div class="duo-head">
+<p class="f-num">02</p>
 <p class="meta"><span>Finance &amp; Fintech</span><span class="plat">3 projects · market-risk-toolkit</span></p>
-<h3 id="duo-fin">Financial / Risk Projects</h3>
+<h3 id="duo-fin">Risk Simulations</h3>
 <p class="f-desc">Three online courses, each with a tested Python library behind it, that take a topic from the pricing model to the bank capital rules.</p>
 </div>
 <div class="duo-grid">
@@ -277,12 +269,41 @@ figure.frame{margin:0}
 </div>
 </article>
 </div>
+</section><section class="duo" aria-labelledby="duo-health">
+<div class="duo-head">
+<p class="f-num">03</p>
+<p class="meta"><span>Applications</span><span class="plat">2 apps · on the phone</span></p>
+<h3 id="duo-health">Health &amp; Fitness Apps</h3>
+<p class="f-desc">Two everyday logging apps that live on the phone&#x27;s home screen: one for meals and calories, one for workouts.</p>
+</div>
+<div class="duo-grid pair">
+<article class="card proj" id="calorielog" data-id="calorielog" data-cat="apps">
+<a class="frame" href="img/calorielog.jpg" data-lightbox data-cap="Sample data."><img src="img/thumbs/calorielog.jpg" width="1600" height="1000" loading="lazy" alt="CalorieLog on a phone: daily calorie ring with macros, and a trends screen with a 7-day calorie chart and weight log"><span class="seen-badge"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>Viewed</span></a>
+<div class="c-body">
+<p class="meta"><span class="status live">Live</span><span class="plat">Mobile web app</span></p>
+<h3>CalorieLog</h3>
+<p class="c-desc">Photograph or type a meal and AI estimates the calories and macros; the day adds up in a simple diary with trends and a weight log.</p>
+<ul class="tags" aria-label="Technologies"><li>JavaScript</li><li>AI vision</li><li>Scheduled AI tasks</li></ul>
+<div class="c-links"><a class="icon-link" href="projects/calorielog/">Case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="icon-link" href="https://sguven.github.io/calorie-demo/" target="_blank" rel="noopener">Live demo <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a><a class="icon-link" href="https://github.com/sguven/sguven.github.io/tree/main/calorie-demo" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> GitHub</a></div>
+</div>
+</article><article class="card proj" id="workoutlog" data-id="workoutlog" data-cat="apps">
+<a class="frame" href="img/workoutlog.jpg" data-lightbox data-cap="Next workout and muscle map screens, with sample data."><img src="img/thumbs/workoutlog.jpg" width="1600" height="1000" loading="lazy" alt="WorkoutLog Pro on a phone: next workout card with a weekly tracker, and a muscle map showing sets per muscle"><span class="seen-badge"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>Viewed</span></a>
+<div class="c-body">
+<p class="meta"><span class="status live">Live</span><span class="plat">Mobile web app</span></p>
+<h3>WorkoutLog Pro</h3>
+<p class="c-desc">A gym log built for entry between sets, with an AI-written program, a rest timer and a weekly view of sets per muscle, plus a coaching email every Sunday.</p>
+<ul class="tags" aria-label="Technologies"><li>JavaScript</li><li>AI programming</li><li>Scheduled AI tasks</li></ul>
+<div class="c-links"><a class="icon-link" href="projects/workoutlog/">Case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="icon-link" href="https://sguven.github.io/workoutlog-demo/" target="_blank" rel="noopener">Live demo <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a><a class="icon-link" href="https://github.com/sguven/sguven.github.io/tree/main/workoutlog-demo" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> GitHub</a></div>
+</div>
+</article>
+</div>
 </section><section class="duo" aria-labelledby="duo-social">
 <div class="duo-head">
-<p class="f-num">06</p>
+<p class="f-num">04</p>
 <p class="meta"><span>Content &amp; Publishing</span><span class="plat">3 accounts · fully automated</span></p>
 <h3 id="duo-social">AI-Automated Social Media</h3>
 <p class="f-desc">Three accounts that run on their own: AI creates each original post and a scheduler publishes it at prime time, with no manual step.</p>
+<div class="f-actions"><a class="btn accent sm" href="projects/social-automation/">Read case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
 </div>
 <div class="duo-grid">
 <article class="card proj" id="cleaneverycorner" data-id="cleaneverycorner" data-cat="content">
@@ -316,12 +337,13 @@ figure.frame{margin:0}
 </div>
 </section><section class="duo" aria-labelledby="duo-brief">
 <div class="duo-head">
-<p class="f-num">07</p>
+<p class="f-num">05</p>
 <p class="meta"><span>AI &amp; Automation</span><span class="plat">4 projects · scheduled routines</span></p>
 <h3 id="duo-brief">Automated Daily Briefings</h3>
 <p class="f-desc">Scheduled AI routines that research, write and deliver a fresh issue on their own, on the web or by email.</p>
+<div class="f-actions"><a class="btn accent sm" href="projects/daily-briefings/">Read case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
 </div>
-<div class="duo-grid pair">
+<div class="duo-grid quad">
 <article class="card proj" id="worldbrief" data-id="worldbrief" data-cat="ai">
 <a class="frame" href="img/worldbrief.jpg" data-lightbox data-cap="A real issue on the live site."><img src="img/thumbs/worldbrief.jpg" width="1600" height="1000" loading="lazy" alt="World Brief site: the evening issue for Thursday, November 5, 2026, with world headlines"><span class="seen-badge"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>Viewed</span></a>
 <div class="c-body">
@@ -362,7 +384,7 @@ figure.frame{margin:0}
 </div>
 </section><section class="duo" aria-labelledby="duo-personal">
 <div class="duo-head">
-<p class="f-num">08</p>
+<p class="f-num">06</p>
 <p class="meta"><span>Personal Projects</span><span class="plat">2 projects · in the browser</span></p>
 <h3 id="duo-personal">Personal Projects</h3>
 <p class="f-desc">Two projects made for fun and for family: learning games for a young child and an interactive 3D model of a small town.</p>
@@ -384,7 +406,7 @@ figure.frame{margin:0}
 <h3>Köprüköy in 3D</h3>
 <p class="c-desc">A small town in Kırıkkale, Turkey, rebuilt from elevation data and satellite imagery around the 13th-century Çeşnigir Bridge.</p>
 <ul class="tags" aria-label="Technologies"><li>Three.js</li><li>WebGL</li><li>Blender</li><li>SRTM data</li></ul>
-<div class="c-links"><a class="icon-link" href="https://sguven.github.io/koprukoy-3d/" target="_blank" rel="noopener">Live site <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a><a class="icon-link" href="https://github.com/sguven/koprukoy-3d" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> GitHub</a></div>
+<div class="c-links"><a class="icon-link" href="projects/koprukoy-3d/">Case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="icon-link" href="https://sguven.github.io/koprukoy-3d/" target="_blank" rel="noopener">Live site <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a><a class="icon-link" href="https://github.com/sguven/koprukoy-3d" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> GitHub</a></div>
 </div>
 </article>
 </div>

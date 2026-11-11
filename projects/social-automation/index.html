@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI-Automated Social Media — Case study · Serhat Guven</title>
+<meta name="description" content="Three accounts that run on their own: AI creates each original post and a scheduled routine publishes it at prime time, with no manual step.">
+<meta property="og:title" content="AI-Automated Social Media — Case study">
+<meta property="og:description" content="Three accounts that run on their own: AI creates each original post and a scheduled routine publishes it at prime time, with no manual step.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://sguven.github.io/projects/social-automation/">
+<meta property="og:image" content="https://sguven.github.io/img/thumbs/social-cleaneverycorner.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121212'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='17' font-weight='700' fill='white' text-anchor='middle'%3ESG%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;1,8..60,400&amp;family=Libre+Franklin:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../../assets/case.css">
+</head>
+<body>
+<a class="skip" href="#problem">Skip to the case study</a>
+<header class="top">
+<div class="wrap">
+<a class="brand" href="../../"><span class="mono">SG</span>Serhat Guven</a>
+<nav class="nav" aria-label="Main">
+<a class="keep" href="../../#work">Projects</a>
+<a class="keep" href="../../#about">About</a>
+</nav>
+</div>
+</header>
+
+<main class="wrap" data-id="social">
+<a class="back" href="../../#social"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4"/></svg> All projects</a>
+<header class="cs-hero">
+<p class="meta"><span class="status live">Live</span><span>Content &amp; Publishing</span><span class="plat">Case study</span></p>
+<h1>AI-Automated Social Media</h1>
+<p class="cs-lede">Three accounts that run on their own: AI creates each original post and a scheduled routine publishes it at prime time, with no manual step.</p>
+<div class="cs-actions">
+<a class="btn accent" href="https://www.instagram.com/cleaneverycorner" target="_blank" rel="noopener">@cleaneverycorner <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a>
+<a class="btn" href="https://www.instagram.com/cellbycell1" target="_blank" rel="noopener">@cellbycell1 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a>
+<a class="btn" href="https://x.com/TheDayInBrief" target="_blank" rel="noopener">@TheDayInBrief <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a>
+</div>
+<dl class="facts"><div><dt>Role</dt><dd>Idea, account setup and prompts, built with Claude</dd></div><div><dt>Runs</dt><dd>Daily Reels; X posts every 2 to 3 days</dd></div><div><dt>Output</dt><dd>Original Reels and short news posts</dd></div><div><dt>Status</dt><dd>Live, fully automated</dd></div></dl>
+</header>
+
+<figure class="cs-cover"><a class="frame" href="../../img/thumbs/social-cleaneverycorner.jpg" data-lightbox data-cap="The @cleaneverycorner grid: every Reel was made and posted automatically."><img src="../../img/thumbs/social-cleaneverycorner.jpg" alt="The @cleaneverycorner grid: every Reel was made and posted automatically."></a><figcaption>The @cleaneverycorner grid: every Reel was made and posted automatically.</figcaption></figure>
+
+<div class="cs-layout">
+<nav class="toc" aria-label="On this page"><p class="label">On this page</p><a href="#problem"><span>01</span>Problem</a><a href="#solution"><span>02</span>Solution</a><a href="#architecture"><span>03</span>Architecture</a><a href="#technology"><span>04</span>Technology</a><a href="#challenges"><span>05</span>Challenges</a><a href="#results"><span>06</span>Results</a></nav>
+<div class="cs-body">
+
+<section id="problem"><header class="cs-h"><p class="label accent">01 · Problem</p><h2>What need does it solve?</h2></header><p>Running a content account means making something new every day and posting it at the right hour, and most of that work is routine.</p><p>I wanted to see how far the whole loop could be handed to AI: ideas, original content, timing and publishing, with nothing done by hand once it was set up.</p></section>
+
+<section id="solution"><header class="cs-h"><p class="label accent">02 · Solution</p><h2>How it works</h2></header><p>Each account has a scheduled Claude routine with its own topic and style. On every run it:</p><ul><li>Picks a topic that has not been covered yet: a home or car cleaning tip, an Excel or Google Sheets trick, or the news since the last post</li><li>Creates the post from scratch: for Reels the video, an attention-grabbing cover, the caption and hashtags; for X one witty English summary within 280 characters</li><li>Rotates between several generated music styles so the Reels do not all sound the same</li><li>Publishes at the slot when each audience is most active, with no approval step</li></ul><div class="gallery" style="grid-template-columns:repeat(3,minmax(0,1fr))"><figure class="shot"><a href="../../img/social-cleaneverycorner.jpg" data-lightbox data-cap="@cleaneverycorner: home and car cleaning tips."><img src="../../img/thumbs/social-cleaneverycorner.jpg" loading="lazy" alt="@cleaneverycorner: home and car cleaning tips."></a><figcaption>@cleaneverycorner: home and car cleaning tips.</figcaption></figure><figure class="shot"><a href="../../img/social-cellbycell1.jpg" data-lightbox data-cap="@cellbycell1: Excel and Google Sheets tricks."><img src="../../img/thumbs/social-cellbycell1.jpg" loading="lazy" alt="@cellbycell1: Excel and Google Sheets tricks."></a><figcaption>@cellbycell1: Excel and Google Sheets tricks.</figcaption></figure><figure class="shot"><a href="../../img/social-thedayinbrief.jpg" data-lightbox data-cap="@TheDayInBrief: the news in one short post."><img src="../../img/thumbs/social-thedayinbrief.jpg" loading="lazy" alt="@TheDayInBrief: the news in one short post."></a><figcaption>@TheDayInBrief: the news in one short post.</figcaption></figure></div></section>
+
+<section id="architecture"><header class="cs-h"><p class="label accent">03 · Architecture</p><h2>How the system fits together</h2></header><div class="diagram"><svg viewBox="0 0 960 460" role="img" aria-label="Architecture: a scheduled Claude task creates the posts, checks them, hosts Reel videos in a public repository and publishes through Windsor.ai for Instagram and Typefully for X" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8E8E8A"/></marker></defs><style>.t{font:600 15px "Libre Franklin",Arial,sans-serif;fill:#121212;text-anchor:middle}.s{font:500 12.5px "Libre Franklin",Arial,sans-serif;fill:#6B6B6B;text-anchor:middle}.l{font:600 11.5px "Libre Franklin",Arial,sans-serif;fill:#6B6B6B}</style><rect x="20" y="30" width="200" height="80" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="120.0" y="66.0" class="t">Schedule</text><text x="120.0" y="86.0" class="s">Prime-time slots</text><rect x="290" y="30" width="260" height="80" rx="10" fill="#EEF2FB" stroke="#2350B8" stroke-width="1.6"/><text x="420.0" y="57.0" class="t">Claude task</text><text x="420.0" y="77.0" class="s">Writes an original post</text><text x="420.0" y="95.0" class="s">for each account</text><rect x="620" y="30" width="320" height="80" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="780.0" y="57.0" class="t">Checks</text><text x="780.0" y="77.0" class="s">Format, length, captions,</text><text x="780.0" y="95.0" class="s">music rotation</text><line x1="222" y1="70" x2="286" y2="70" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><line x1="552" y1="70" x2="616" y2="70" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><rect x="80" y="200" width="380" height="80" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="270.0" y="236.0" class="t">Reels for Instagram</text><text x="270.0" y="256.0" class="s">Video, cover, music, caption, hashtags</text><rect x="540" y="200" width="360" height="80" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="720.0" y="227.0" class="t">Post for X</text><text x="720.0" y="247.0" class="s">One English news summary,</text><text x="720.0" y="265.0" class="s">280 characters</text><line x1="780" y1="112" x2="320" y2="196" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><text x="520" y="150" class="l" text-anchor="middle">two accounts, daily</text><line x1="780" y1="112" x2="720" y2="196" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><text x="800" y="160" class="l" text-anchor="start">every 2 to 3 days</text><rect x="80" y="360" width="380" height="80" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="270.0" y="396.0" class="t">Media host</text><text x="270.0" y="416.0" class="s">Public repository serves the video</text><rect x="540" y="360" width="360" height="80" rx="10" fill="#EEF2FB" stroke="#2350B8" stroke-width="1.6"/><text x="720.0" y="387.0" class="t">Publishing services</text><text x="720.0" y="407.0" class="s">Windsor.ai for Instagram,</text><text x="720.0" y="425.0" class="s">Typefully for X</text><line x1="270" y1="282" x2="270" y2="356" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><line x1="462" y1="400" x2="536" y2="400" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><line x1="720" y1="282" x2="720" y2="356" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/></svg></div><p>One routine per account runs on a schedule. It writes the post and checks it against the account&#x27;s format. Reel videos are hosted in a public repository so the publishing service can fetch them, then Windsor.ai posts them to Instagram. The X post goes out through Typefully. Nothing waits for a manual approval.</p></section>
+
+<section id="technology"><header class="cs-h"><p class="label accent">04 · Technology</p><h2>What it is built with</h2></header>
+<ul class="tags"><li>Claude</li><li>Scheduled tasks</li><li>Windsor.ai</li><li>Typefully</li><li>GitHub</li><li>Instagram</li><li>X</li></ul>
+<table class="tech"><tbody><tr><th scope='row'>Agent</th><td>Scheduled Claude tasks, one per account, with web research for the news account</td></tr><tr><th scope='row'>Content</th><td>Original Reels (video, cover, music, caption, hashtags) and short English posts</td></tr><tr><th scope='row'>Media hosting</th><td>Public GitHub repositories serve the Reel videos</td></tr><tr><th scope='row'>Publishing</th><td>Windsor.ai connector for Instagram; Typefully for X</td></tr><tr><th scope='row'>Timing</th><td>Fixed prime-time slots per account</td></tr></tbody></table>
+</section>
+
+<section id="challenges"><header class="cs-h"><p class="label accent">05 · Challenges</p><h2>Hard parts and how they were solved</h2></header>
+<ol class="challenges"><li><h3>Original content every day</h3><p>Each run checks what the account has already posted, so topics do not repeat, and every video, cover and caption is made new for that post.</p></li><li><h3>Getting attention in the first second</h3><p>Covers use a short, bold hook and a before-and-after split, and the music rotates between styles so the feed stays fresh.</p></li><li><h3>Working inside free-plan limits</h3><p>The X account posts every 2 to 3 days, and each post sums up everything since the last one, so the monthly post limit is never reached.</p></li><li><h3>Publishing with nobody watching</h3><p>Videos are hosted where the publishing service can always reach them, and each post is checked before it goes out.</p></li></ol>
+</section>
+
+<section id="results"><header class="cs-h"><p class="label accent">06 · Results</p><h2>What came out of it</h2></header>
+<ul class="results"><li>Three accounts live since November 2026, posting on their own.</li><li>One new Reel a day on each Instagram account, at its prime-time hour.</li><li>A running record of world events on X, written as a short note every few days.</li></ul>
+<div class="cs-actions">
+<a class="btn accent" href="https://www.instagram.com/cleaneverycorner" target="_blank" rel="noopener">@cleaneverycorner <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a>
+<a class="btn" href="https://www.instagram.com/cellbycell1" target="_blank" rel="noopener">@cellbycell1 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a>
+<a class="btn" href="https://x.com/TheDayInBrief" target="_blank" rel="noopener">@TheDayInBrief <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a>
+</div>
+</section>
+
+</div>
+</div>
+
+<a class="next-case" href="../daily-briefings/"><span><small class="label">Next case study</small><strong>Automated Daily Briefings</strong></span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+</main>
+
+<footer class="foot"><div class="wrap"><span>© 2026 Serhat Guven · <a href="../../">All projects</a></span><span><a href="../../#contact">Contact</a></span></div></footer>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Image preview"><div class="lb-box"><button class="lb-x" type="button" aria-label="Close">×</button><img alt=""><p class="lb-cap"></p></div></div>
+<script src="../../assets/site.js"></script>
+<script>
+(function(){var K='sg-portfolio-viewed-v3',s=SG.loadSeen(K);s['social']=1;SG.saveSeen(K,s);
+var links=[].slice.call(document.querySelectorAll('.toc a'));
+if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+en.target.id);});}});},{rootMargin:'-30% 0px -60% 0px'});
+document.querySelectorAll('.cs-body section').forEach(function(s){io.observe(s);});}})();
+</script>
+</body>
+</html>
