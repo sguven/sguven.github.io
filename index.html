@@ -25,6 +25,14 @@
 .lede{margin:20px 0 0;max-width:720px;font-size:22px;line-height:1.5;color:var(--body)}
 .hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 14px;margin-top:30px}
 
+.cats{margin:40px 0 0;padding-top:18px;border-top:1px solid var(--line);font-family:var(--ui);font-size:14px;line-height:1.9;color:var(--muted)}
+.cats-list{display:inline}
+.cats b{color:var(--ink);font-weight:700}
+.cats a{display:inline-block;color:var(--muted);white-space:nowrap}
+.cats a:hover{color:var(--accent);text-decoration:none}
+.cats-list a:not(:last-child)::after{content:"·";margin:0 9px;color:var(--faint)}
+.duo{scroll-margin-top:84px}
+
 /* Work */
 .sec{margin-top:96px}
 .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:22px}
@@ -163,6 +171,7 @@ figure.frame{margin:0}
 <a class="btn primary" href="#work">View projects <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
 <a class="btn" href="#about">About me</a>
 </div>
+<p class="cats"><b>16 projects</b> in 6 groups: <span class="cats-list"><a href="#g-risk">Risk Simulations</a> <a href="#g-health">Health &amp; Fitness</a> <a href="#g-social">Social Media</a> <a href="#g-daily">Daily Briefings</a> <a href="#g-finance">Personal Finance</a> <a href="#g-family">Family Projects</a></span></p>
 </section>
 
 <section class="sec" id="work" aria-labelledby="work-h">
@@ -174,7 +183,7 @@ figure.frame{margin:0}
 <div class="group" id="g-featured">
 <p class="group-label label">Featured</p>
 <div class="features">
-<section class="duo" aria-labelledby="duo-fin">
+<section class="duo" id="g-risk" aria-labelledby="duo-fin">
 <div class="duo-head">
 <p class="f-num">01</p>
 <p class="meta"><span>Finance &amp; Fintech</span><span class="plat">3 projects · market-risk-toolkit</span></p>
@@ -208,7 +217,7 @@ figure.frame{margin:0}
 </div>
 </article>
 </div>
-</section><section class="duo" aria-labelledby="duo-health">
+</section><section class="duo" id="g-health" aria-labelledby="duo-health">
 <div class="duo-head">
 <p class="f-num">02</p>
 <p class="meta"><span>Applications</span><span class="plat">2 apps · on the phone</span></p>
@@ -234,7 +243,7 @@ figure.frame{margin:0}
 </div>
 </article>
 </div>
-</section><section class="duo" aria-labelledby="duo-social">
+</section><section class="duo" id="g-social" aria-labelledby="duo-social">
 <div class="duo-head">
 <p class="f-num">03</p>
 <p class="meta"><span>Content &amp; Publishing</span><span class="plat">3 accounts · fully automated</span></p>
@@ -269,7 +278,7 @@ figure.frame{margin:0}
 </div>
 </article>
 </div>
-</section><section class="duo" aria-labelledby="duo-brief">
+</section><section class="duo" id="g-daily" aria-labelledby="duo-brief">
 <div class="duo-head">
 <p class="f-num">04</p>
 <p class="meta"><span>AI &amp; Automation</span><span class="plat">4 projects · scheduled routines</span></p>
@@ -311,7 +320,7 @@ figure.frame{margin:0}
 </div>
 </article>
 </div>
-</section><section class="duo" aria-labelledby="duo-money">
+</section><section class="duo" id="g-finance" aria-labelledby="duo-money">
 <div class="duo-head">
 <p class="f-num">05</p>
 <p class="meta"><span>Finance &amp; Fintech</span><span class="plat">2 projects · Mac and iPhone</span></p>
@@ -337,7 +346,7 @@ figure.frame{margin:0}
 </div>
 </article>
 </div>
-</section><section class="duo" aria-labelledby="duo-personal">
+</section><section class="duo" id="g-family" aria-labelledby="duo-personal">
 <div class="duo-head">
 <p class="f-num">06</p>
 <p class="meta"><span>Family Projects</span><span class="plat">2 projects · in the browser</span></p>
