@@ -44,6 +44,14 @@ img{max-width:100%}
 .btn svg,.icon-link svg{width:16px;height:16px;flex:none}
 .icon-link{display:inline-flex;align-items:center;gap:7px;font-family:var(--ui);font-size:14px;font-weight:600;color:var(--ink)}
 .icon-link:hover{color:var(--accent);text-decoration:none}
+.icon-link.live{gap:8px;padding:7px 14px 7px 12px;border-radius:999px;background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(35,80,184,.28);transition:background .2s,box-shadow .2s,transform .2s}
+.icon-link.live:hover{color:#fff;background:var(--accent-ink);box-shadow:0 4px 14px rgba(35,80,184,.38);transform:translateY(-1px)}
+.icon-link.live svg{transition:transform .2s}
+.icon-link.live:hover svg{transform:translate(2px,-2px)}
+.live-dot{position:relative;width:8px;height:8px;border-radius:50%;background:#4ADE80;flex:none}
+.live-dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:#4ADE80;animation:livePulse 1.8s ease-out infinite}
+@keyframes livePulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(2.6);opacity:0}}
+@media (prefers-reduced-motion:reduce){.live-dot::after{animation:none}}
 
 /* Status and tags */
 .meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin:0;font-family:var(--ui);font-size:12px;font-weight:600;color:var(--muted)}
