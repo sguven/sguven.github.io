@@ -97,5 +97,6 @@ var links=[].slice.call(document.querySelectorAll('.toc a'));
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+en.target.id);});}});},{rootMargin:'-30% 0px -60% 0px'});
 document.querySelectorAll('.cs-body section').forEach(function(s){io.observe(s);});}})();
 </script>
+<script data-goatcounter="https://sguven.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
