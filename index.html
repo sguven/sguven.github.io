@@ -59,7 +59,7 @@
 .duo-head{max-width:760px;margin:0 0 22px;padding:0 4px}
 .duo-head h3{margin:12px 0 0;font-size:32px;line-height:1.12;letter-spacing:-.01em}
 .duo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
-.duo-grid.four{grid-template-columns:repeat(2,minmax(0,1fr))}
+.duo-grid.pair{grid-template-columns:repeat(2,minmax(0,1fr))}
 .features{display:flex;flex-direction:column;gap:28px}
 .feature{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:36px;align-items:center;padding:24px;border:1px solid var(--line);border-radius:18px;background:#fff;transition:border-color .2s,box-shadow .2s}
 .feature:hover{border-color:#D4D4CF;box-shadow:0 14px 40px rgba(18,18,18,.06)}
@@ -120,7 +120,7 @@ figure.frame{margin:0}
 .dock-b:hover{background:#2A2A2A}
 
 @media (max-width:980px){
-  .duo-grid,.duo-grid.four{grid-template-columns:minmax(0,1fr)}
+  .duo-grid,.duo-grid.pair{grid-template-columns:minmax(0,1fr)}
   .feature{grid-template-columns:minmax(0,1fr);gap:22px}
   .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .focus{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -188,7 +188,7 @@ figure.frame{margin:0}
 
 <section class="sec" id="work" aria-labelledby="work-h">
 <div class="sec-head">
-<div><p class="label accent">Selected work</p><h2 id="work-h">Projects</h2><p class="sub">Featured projects with a closer look, then the rest.</p></div>
+<div><p class="label accent">Selected work</p><h2 id="work-h">Projects</h2><p class="sub">Featured projects with a closer look, then the rest grouped by theme.</p></div>
 <p class="progress" aria-live="polite"><span class="bar"><i id="bar1"></i></span><span><span class="n-seen">0</span> of 16 viewed</span></p>
 </div>
 <div class="filters" role="group" aria-label="Filter projects by category"><button type="button" class="chip on" data-filter="all" aria-pressed="true">All <b>16</b></button><button type="button" class="chip" data-filter="finance" aria-pressed="false">Finance &amp; Fintech <b>5</b></button><button type="button" class="chip" data-filter="ai" aria-pressed="false">AI &amp; Automation <b>3</b></button><button type="button" class="chip" data-filter="apps" aria-pressed="false">Applications <b>2</b></button><button type="button" class="chip" data-filter="content" aria-pressed="false">Content &amp; Publishing <b>3</b></button><button type="button" class="chip" data-filter="personal" aria-pressed="false">Personal Projects <b>3</b></button></div>
@@ -321,7 +321,7 @@ figure.frame{margin:0}
 <h3 id="duo-brief">Automated Daily Briefings</h3>
 <p class="f-desc">Scheduled AI routines that research, write and deliver a fresh issue on their own, on the web or by email.</p>
 </div>
-<div class="duo-grid four">
+<div class="duo-grid pair">
 <article class="card proj" id="worldbrief" data-id="worldbrief" data-cat="ai">
 <a class="frame" href="img/worldbrief.jpg" data-lightbox data-cap="A real issue on the live site."><img src="img/thumbs/worldbrief.jpg" width="1600" height="1000" loading="lazy" alt="World Brief site: the evening issue for Thursday, November 5, 2026, with world headlines"><span class="seen-badge"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>Viewed</span></a>
 <div class="c-body">
@@ -360,17 +360,18 @@ figure.frame{margin:0}
 </div>
 </article>
 </div>
-</section>
+</section><section class="duo" aria-labelledby="duo-personal">
+<div class="duo-head">
+<p class="f-num">08</p>
+<p class="meta"><span>Personal Projects</span><span class="plat">2 projects · in the browser</span></p>
+<h3 id="duo-personal">Personal Projects</h3>
+<p class="f-desc">Two projects made for fun and for family: learning games for a young child and an interactive 3D model of a small town.</p>
 </div>
-</div>
-
-<div class="group" id="g-more">
-<p class="group-label label">More projects</p>
-<div class="grid">
+<div class="duo-grid pair">
 <article class="card proj" id="ipek" data-id="ipek" data-cat="personal">
 <a class="frame" href="img/ipek.jpg" data-lightbox data-cap="Home screen of the live site."><img src="img/thumbs/ipek.jpg" width="1200" height="750" loading="lazy" alt="İpek&#x27;s Games home screen with three game cards: Little Explorer, a unicorn rainbow game and brain games"><span class="seen-badge"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>Viewed</span></a>
 <div class="c-body">
-<p class="meta"><span class="status live">Live</span><span>Personal Projects</span><span class="plat">Web · TR / EN</span></p>
+<p class="meta"><span class="status live">Live</span><span class="plat">Web · TR / EN</span></p>
 <h3>İpek&#x27;s Games</h3>
 <p class="c-desc">Bilingual learning games for a young child: numbers, colors, shapes, patterns and memory, with voice narration and rewards.</p>
 <ul class="tags" aria-label="Technologies"><li>JavaScript</li><li>PWA</li><li>GitHub Pages</li></ul>
@@ -379,7 +380,7 @@ figure.frame{margin:0}
 </article><article class="card proj" id="koprukoy" data-id="koprukoy" data-cat="personal">
 <a class="frame" href="img/koprukoy.jpg" data-lightbox data-cap="Orbit view of the live model."><img src="img/thumbs/koprukoy.jpg" width="1200" height="750" loading="lazy" alt="3D model of Köprüköy: the village, the reservoir and labeled landmarks seen from above"><span class="seen-badge"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>Viewed</span></a>
 <div class="c-body">
-<p class="meta"><span class="status proto">Prototype</span><span>Personal Projects</span><span class="plat">3D · in the browser</span></p>
+<p class="meta"><span class="status proto">Prototype</span><span class="plat">3D · in the browser</span></p>
 <h3>Köprüköy in 3D</h3>
 <p class="c-desc">A small town in Kırıkkale, Turkey, rebuilt from elevation data and satellite imagery around the 13th-century Çeşnigir Bridge.</p>
 <ul class="tags" aria-label="Technologies"><li>Three.js</li><li>WebGL</li><li>Blender</li><li>SRTM data</li></ul>
@@ -387,7 +388,10 @@ figure.frame{margin:0}
 </div>
 </article>
 </div>
+</section>
 </div>
+</div>
+
 </section>
 
 <section class="sec about" id="about" aria-labelledby="about-h">
