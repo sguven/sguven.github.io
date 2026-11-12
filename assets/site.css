@@ -48,6 +48,8 @@ img{max-width:100%}
 .icon-link.live:hover{color:#fff;background:var(--accent-ink);box-shadow:0 4px 14px rgba(35,80,184,.38);transform:translateY(-1px)}
 .icon-link.live svg{transition:transform .2s}
 .icon-link.live:hover svg{transform:translate(2px,-2px)}
+.icon-link.social .plat-ic{width:15px;height:15px}
+.icon-link.social:hover .plat-ic{transform:none}
 .live-dot{position:relative;width:8px;height:8px;border-radius:50%;background:#4ADE80;flex:none}
 .live-dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:#4ADE80;animation:livePulse 1.8s ease-out infinite}
 @keyframes livePulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(2.6);opacity:0}}
