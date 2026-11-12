@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Serhat Guven — Projects</title>
-<meta name="description" content="Projects Serhat Guven has made with AI: personal finance tools, automated news briefs and everyday apps. 16 projects, 15 live.">
+<meta name="description" content="Projects Serhat Guven has made with AI: personal finance tools, automated news briefs and everyday apps. 17 projects, 16 live.">
 <meta property="og:title" content="Serhat Guven — Projects">
-<meta property="og:description" content="Personal finance tools, automated news briefs and everyday apps, made with AI. 16 projects, 15 live.">
+<meta property="og:description" content="Personal finance tools, automated news briefs and everyday apps, made with AI. 17 projects, 16 live.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://sguven.github.io/">
 <meta property="og:image" content="https://sguven.github.io/img/og-cover-v2.jpg">
@@ -55,6 +55,9 @@
 .duo-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
 .duo-grid.pair{grid-template-columns:repeat(2,minmax(0,1fr))}
 .duo-grid.quad{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.duo-grid.solo{grid-template-columns:minmax(0,1fr)}
+.duo-grid.solo .card{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:0 28px;align-items:center}
+.duo-grid.solo .c-body{padding:16px 10px 12px 0;height:100%}
 .duo-grid.quad .card{padding:10px;border-radius:14px}
 .duo-grid.quad .c-body{padding:12px 4px 2px}
 .duo-grid.quad .card h3{font-size:17px}
@@ -123,6 +126,8 @@ figure.frame{margin:0}
 
 @media (max-width:980px){
   .duo-grid,.duo-grid.pair,.duo-grid.quad{grid-template-columns:minmax(0,1fr)}
+  .duo-grid.solo .card{display:flex;flex-direction:column}
+  .duo-grid.solo .c-body{padding:16px 6px 4px;height:auto}
   .feature{grid-template-columns:minmax(0,1fr);gap:22px}
   .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .about{grid-template-columns:minmax(0,1fr);gap:20px}
@@ -171,13 +176,13 @@ figure.frame{margin:0}
 <a class="btn primary" href="#work">View projects <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
 <a class="btn" href="#about">About me</a>
 </div>
-<p class="cats"><b>16 projects</b> in 6 groups: <span class="cats-list"><a href="#g-risk">Risk Simulations</a> <a href="#g-health">Health &amp; Fitness</a> <a href="#g-social">Social Media</a> <a href="#g-daily">Daily Briefings</a> <a href="#g-finance">Personal Finance</a> <a href="#g-family">Family Projects</a></span></p>
+<p class="cats"><b>17 projects</b> in 7 groups: <span class="cats-list"><a href="#g-risk">Risk Simulations</a> <a href="#g-health">Health &amp; Fitness</a> <a href="#g-social">Social Media</a> <a href="#g-daily">Daily Briefings</a> <a href="#g-finance">Personal Finance</a> <a href="#g-personal">Personal Projects</a> <a href="#g-family">Family Projects</a></span></p>
 </section>
 
 <section class="sec" id="work" aria-labelledby="work-h">
 <div class="sec-head">
 <div><p class="label accent">Selected work</p><h2 id="work-h">Projects</h2><p class="sub">Grouped by theme, with a closer look at each.</p></div>
-<p class="progress" aria-live="polite"><span class="bar"><i id="bar1"></i></span><span><span class="n-seen">0</span> of 16 viewed</span></p>
+<p class="progress" aria-live="polite"><span class="bar"><i id="bar1"></i></span><span><span class="n-seen">0</span> of 17 viewed</span></p>
 </div>
 
 <div class="group" id="g-featured">
@@ -345,9 +350,27 @@ figure.frame{margin:0}
 </div>
 </article>
 </div>
-</section><section class="duo" id="g-family" aria-labelledby="duo-personal">
+</section><section class="duo" id="g-personal" aria-labelledby="duo-own">
 <div class="duo-head">
 <p class="f-num">06</p>
+<p class="meta"><span>Personal Projects</span><span class="plat">1 project · in the browser</span></p>
+<h3 id="duo-own">Personal Projects</h3>
+<p class="f-desc">A tool made for my own learning, built chapter by chapter as I go.</p>
+</div>
+<div class="duo-grid solo">
+<article class="card proj" id="hanzi" data-id="hanzi" data-cat="personal">
+<a class="frame" href="img/hanzi.jpg" data-lightbox data-cap="Home screen of the live course: Chapter 1 lessons, progress and the calligraphy studio."><img src="img/thumbs/hanzi.jpg" width="1200" height="750" loading="lazy" alt="Hanzi Workshop home screen: Chapter 1 lessons, progress and a large brush-style 你好"><span class="seen-badge"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>Viewed</span></a>
+<div class="c-body">
+<p class="meta"><span class="status live">Live</span><span class="plat">Web · made for a tablet and pen</span></p>
+<h3>Hanzi Workshop</h3>
+<p class="c-desc">A Mandarin course for learning to write characters by hand: tones, pinyin, stroke order and handwriting checked stroke by stroke, with a chapter exam that unlocks the next chapter.</p>
+<div class="c-links"><a class="icon-link" href="projects/hanzi-workshop/">Case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="icon-link" href="https://sguven.github.io/hanzi-workshop/" target="_blank" rel="noopener">Live site <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a></div>
+</div>
+</article>
+</div>
+</section><section class="duo" id="g-family" aria-labelledby="duo-personal">
+<div class="duo-head">
+<p class="f-num">07</p>
 <p class="meta"><span>Family Projects</span><span class="plat">2 projects · in the browser</span></p>
 <h3 id="duo-personal">Family Projects</h3>
 <p class="f-desc">Two projects made for fun and for family: learning games for a young child and an interactive 3D model of a small town.</p>
@@ -405,7 +428,7 @@ figure.frame{margin:0}
 
 <div class="dock" id="dock" role="status" aria-live="polite">
 <span class="bar"><i id="bar2"></i></span>
-<span class="dock-t"><span class="n-seen">0</span> of 16 viewed <em id="dock-m"></em></span>
+<span class="dock-t"><span class="n-seen">0</span> of 17 viewed <em id="dock-m"></em></span>
 <button class="dock-b" id="dock-b" type="button">Next project →</button>
 </div>
 

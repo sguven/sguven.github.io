@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hanzi Workshop — Case study · Serhat Guven</title>
+<meta name="description" content="A Mandarin course made for a tablet and pen: tones, pinyin, stroke order and handwriting, one chapter at a time.">
+<meta property="og:title" content="Hanzi Workshop — Case study">
+<meta property="og:description" content="A Mandarin course made for a tablet and pen: tones, pinyin, stroke order and handwriting, one chapter at a time.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://sguven.github.io/projects/hanzi-workshop/">
+<meta property="og:image" content="https://sguven.github.io/img/thumbs/hanzi.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23121212'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='17' font-weight='700' fill='white' text-anchor='middle'%3ESG%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;1,8..60,400&amp;family=Libre+Franklin:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/site.css">
+<link rel="stylesheet" href="../../assets/case.css">
+</head>
+<body>
+<a class="skip" href="#problem">Skip to the case study</a>
+<header class="top">
+<div class="wrap">
+<a class="brand" href="../../"><span class="mono">SG</span>Serhat Guven</a>
+<nav class="nav" aria-label="Main">
+<a class="keep" href="../../#work">Projects</a>
+<a class="keep" href="../../#about">About</a>
+</nav>
+</div>
+</header>
+
+<main class="wrap" data-id="hanzi">
+<a class="back" href="../../#hanzi"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4"/></svg> All projects</a>
+<header class="cs-hero">
+<p class="meta"><span class="status live">Live</span><span>Personal Projects</span><span class="plat">Case study</span></p>
+<h1>Hanzi Workshop</h1>
+<p class="cs-lede">A Mandarin course made for a tablet and pen: tones, pinyin, stroke order and handwriting, one chapter at a time.</p>
+<div class="cs-actions">
+<a class="btn accent" href="https://sguven.github.io/hanzi-workshop/" target="_blank" rel="noopener">Live site <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a>
+<a class="btn" href="https://github.com/sguven/sguven.github.io/tree/main/hanzi-workshop" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> Source on GitHub</a>
+</div>
+<dl class="facts"><div><dt>Role</dt><dd>Idea, learning goals and testing, built with Claude</dd></div><div><dt>Runs</dt><dd>In the browser; made for a tablet with a pen</dd></div><div><dt>Output</dt><dd>An interactive course with handwriting practice</dd></div><div><dt>Status</dt><dd>Chapter 1 of 10 live, the rest added one by one</dd></div></dl>
+</header>
+
+<figure class="cs-cover"><a class="frame" href="../../img/hanzi.jpg" data-lightbox data-cap="Home screen: Chapter 1 lessons, progress and the calligraphy studio."><img src="../../img/thumbs/hanzi.jpg" alt="Hanzi Workshop home screen: Chapter 1 lessons, progress and a large brush-style 你好"></a><figcaption>Home screen: Chapter 1 lessons, progress and the calligraphy studio.</figcaption></figure>
+
+<div class="cs-layout">
+<nav class="toc" aria-label="On this page"><p class="label">On this page</p><a href="#problem"><span>01</span>Problem</a><a href="#solution"><span>02</span>Solution</a><a href="#architecture"><span>03</span>Architecture</a><a href="#technology"><span>04</span>Technology</a><a href="#challenges"><span>05</span>Challenges</a><a href="#results"><span>06</span>Results</a></nav>
+<div class="cs-body">
+
+<section id="problem"><header class="cs-h"><p class="label accent">01 · Problem</p><h2>What need does it solve?</h2></header><p>I wanted to learn Mandarin, including writing the characters by hand, not only recognising them on a screen.</p><p>Most language apps teach characters by tapping answers, which skips stroke order and handwriting. A fixed course also moves at its own pace, while I wanted each step to wait until I had really learned the one before.</p></section>
+
+<section id="solution"><header class="cs-h"><p class="label accent">02 · Solution</p><h2>How it works</h2></header><p>A course in a single web page, laid out for a tablet held in landscape with a pen:</p><ul><li>Eight short lessons for Chapter 1: how Chinese works, the four tones, pinyin sounds, the eight basic strokes, stroke order, first characters, greetings and review cards</li><li>Every character in four steps: watch the stroke order, trace over a grey template, write it from memory, then practise freely with a brush</li><li>Handwriting is checked stroke by stroke, so a wrong direction or order is caught on the spot</li><li>A calligraphy studio where pen pressure sets the brush width</li><li>Pinyin coloured by tone and every word spoken by the device's Chinese voice</li><li>A chapter exam of 100 points; 80 or more unlocks the next chapter</li></ul><div class="gallery" style="grid-template-columns:minmax(0,1.6fr) minmax(0,0.8fr)"><figure class="shot"><a href="../../img/cases/hz-write.jpg" data-lightbox data-cap="First characters: watch, trace, write from memory, then brush."><img src="../../img/cases/hz-write.jpg" loading="lazy" alt="Lesson 6: the character 大 in a practice box with Watch, Trace, From memory and Brush buttons"></a><figcaption>First characters: watch, trace, write from memory, then brush.</figcaption></figure><figure class="shot tall"><a href="../../img/cases/hz-studio.jpg" data-lightbox data-cap="The calligraphy studio on a tablet held upright."><img src="../../img/cases/hz-studio.jpg" loading="lazy" alt="Calligraphy studio in portrait: 十 written over the grey template with the brush"></a><figcaption>The calligraphy studio, tablet upright.</figcaption></figure></div><div class="gallery" style="grid-template-columns:minmax(0,1fr)"><figure class="shot"><a href="../../img/cases/hz-tones.jpg" data-lightbox data-cap="The four tones, drawn as pitch lines, with ma, má, mǎ, mà."><img src="../../img/cases/hz-tones.jpg" loading="lazy" alt="Lesson 2: the four tones drawn as pitch lines, with cards for mā, má, mǎ and mà"></a><figcaption>The four tones, drawn as pitch lines.</figcaption></figure></div></section>
+
+<section id="architecture"><header class="cs-h"><p class="label accent">03 · Architecture</p><h2>How the system fits together</h2></header><div class="diagram"><svg viewBox="0 0 960 470" role="img" aria-label="Architecture: lesson content, stroke data, pen input and the device voice feed a single web page that runs the lessons, writing checks and quizzes; progress is saved on the device; passing the chapter exam leads to the next chapter, prepared with Claude" xmlns="http://www.w3.org/2000/svg"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8E8E8A"/></marker></defs><style>.t{font:600 15px "Libre Franklin",Arial,sans-serif;fill:#121212;text-anchor:middle}.s{font:500 12.5px "Libre Franklin",Arial,sans-serif;fill:#6B6B6B;text-anchor:middle}</style><rect x="20" y="30" width="210" height="100" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="125.0" y="67.0" class="t">Lesson content</text><text x="125.0" y="87.0" class="s">8 lessons, 13 characters</text><text x="125.0" y="105.0" class="s">words and dialogues</text><rect x="250" y="30" width="210" height="100" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="355.0" y="67.0" class="t">Stroke data</text><text x="355.0" y="87.0" class="s">Stroke paths for each</text><text x="355.0" y="105.0" class="s">character, built in</text><rect x="480" y="30" width="210" height="100" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="585.0" y="67.0" class="t">Pen or finger</text><text x="585.0" y="87.0" class="s">Pressure for brush width,</text><text x="585.0" y="105.0" class="s">palm rejection</text><rect x="710" y="30" width="230" height="100" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="825.0" y="67.0" class="t">Device voice</text><text x="825.0" y="87.0" class="s">Chinese speech for</text><text x="825.0" y="105.0" class="s">every word and tone</text><rect x="250" y="210" width="460" height="80" rx="10" fill="#EEF2FB" stroke="#2350B8" stroke-width="1.6"/><text x="480.0" y="246.0" class="t">Hanzi Workshop page</text><text x="480.0" y="266.0" class="s">Lessons, stroke-by-stroke writing checks, quizzes</text><line x1="125" y1="132" x2="330" y2="206" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><line x1="355" y1="132" x2="430" y2="206" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><line x1="585" y1="132" x2="530" y2="206" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><line x1="825" y1="132" x2="630" y2="206" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><rect x="20" y="370" width="190" height="80" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="115.0" y="406.0" class="t">Progress</text><text x="115.0" y="426.0" class="s">Saved on the device</text><rect x="300" y="370" width="360" height="80" rx="10" fill="#EEF2FB" stroke="#2350B8" stroke-width="1.6"/><text x="480.0" y="406.0" class="t">Chapter exam</text><text x="480.0" y="426.0" class="s">100 points, 80 to pass</text><rect x="750" y="370" width="190" height="80" rx="10" fill="#FFFFFF" stroke="#D4D4CF" stroke-width="1.2"/><text x="845.0" y="397.0" class="t">Next chapter</text><text x="845.0" y="417.0" class="s">Prepared with Claude,</text><text x="845.0" y="435.0" class="s">added to the tool</text><line x1="330" y1="292" x2="150" y2="366" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><line x1="480" y1="292" x2="480" y2="366" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/><line x1="662" y1="410" x2="746" y2="410" stroke="#8E8E8A" stroke-width="1.5" marker-end="url(#ah)"/></svg></div><p>Everything runs in one page with no server. Lesson content and the stroke paths for each character are built into the page, the pen is read through the browser's pointer events, and speech comes from the device's own Chinese voice. Progress stays on the device. When a chapter exam is passed, the next chapter is prepared with Claude and added to the same page.</p></section>
+
+<section id="technology"><header class="cs-h"><p class="label accent">04 · Technology</p><h2>What it is built with</h2></header>
+<ul class="tags"><li>HTML, CSS, JavaScript</li><li>Hanzi Writer</li><li>Canvas</li><li>Pointer Events</li><li>Web Speech API</li><li>GitHub Pages</li></ul>
+<table class="tech"><tbody><tr><th scope='row'>Writing checks</th><td>Hanzi Writer with open stroke data, built into the page</td></tr><tr><th scope='row'>Brush</th><td>Canvas drawing; pen pressure sets the width, touches are ignored while a pen is in use</td></tr><tr><th scope='row'>Audio</th><td>Web Speech API with the device's Chinese voice</td></tr><tr><th scope='row'>Storage</th><td>Browser storage on the device</td></tr><tr><th scope='row'>Hosting</th><td>GitHub Pages, no build step</td></tr></tbody></table>
+</section>
+
+<section id="challenges"><header class="cs-h"><p class="label accent">05 · Challenges</p><h2>Hard parts and how they were solved</h2></header>
+<ol class="challenges"><li><h3>Writing that feels natural</h3><p>So that a resting palm leaves no marks, finger touches are ignored once a pen is detected, and pen pressure drives the brush width.</p></li><li><h3>Strict but fair checks</h3><p>Each stroke is compared with the reference path; the tolerance lets small wobbles pass but not a wrong direction or order.</p></li><li><h3>A course that keeps pace</h3><p>Questions change on every exam attempt and answers are not shown, so a pass means the chapter was learned rather than memorised.</p></li></ol>
+</section>
+
+<section id="results"><header class="cs-h"><p class="label accent">06 · Results</p><h2>What came out of it</h2></header>
+<ul class="results"><li>Chapter 1 is complete: eight lessons, 13 characters to write by hand and a 100-point exam.</li><li>A plan of ten chapters, from HSK 1 to an introduction to HSK 2.</li><li>Handwriting practice in every lesson, with a free calligraphy studio for more than twenty characters.</li></ul>
+<div class="cs-actions">
+<a class="btn accent" href="https://sguven.github.io/hanzi-workshop/" target="_blank" rel="noopener">Live site <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a>
+<a class="btn" href="https://github.com/sguven/sguven.github.io/tree/main/hanzi-workshop" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> Source on GitHub</a>
+</div>
+</section>
+
+</div>
+</div>
+
+<a class="next-case" href="../koprukoy-3d/"><span><small class="label">Next case study</small><strong>Köprüköy in 3D</strong></span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+</main>
+
+<footer class="foot"><div class="wrap"><span>© 2026 Serhat Guven · <a href="../../">All projects</a></span><span><a href="../../#contact">Contact</a></span></div></footer>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Image preview"><div class="lb-box"><button class="lb-x" type="button" aria-label="Close">×</button><img alt=""><p class="lb-cap"></p></div></div>
+<script src="../../assets/site.js"></script>
+<script>
+(function(){var K='sg-portfolio-viewed-v3',s=SG.loadSeen(K);s['hanzi']=1;SG.saveSeen(K,s);
+var links=[].slice.call(document.querySelectorAll('.toc a'));
+if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+en.target.id);});}});},{rootMargin:'-30% 0px -60% 0px'});
+document.querySelectorAll('.cs-body section').forEach(function(s){io.observe(s);});}})();
+</script>
+<script data-goatcounter="https://sguven.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
