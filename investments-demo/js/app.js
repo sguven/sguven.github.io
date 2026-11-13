@@ -1,5 +1,5 @@
 // Finance web UI (public demo) — a simple, clear finance dashboard on top of the shared engine (FE)
-// and the Store (browser storage in this demo). Pages: Overview, Accounts, Records, Analysis, Settings.
+// and the Store (browser storage in this demo). Pages: Overview, Accounts, Holdings, Records, Analysis, Settings.
 (function () {
   "use strict";
   const FE = globalThis.FE, Store = globalThis.Store;
@@ -35,7 +35,7 @@
   }
 
   // ───────────────────────── state ─────────────────────────
-  const TABS = ["overview", "accounts", "records", "analysis", "settings"];
+  const TABS = ["overview", "accounts", "fidelity", "records", "analysis", "settings"];
   const S = {
     records: [], banks: [], rows: [],
     tab: TABS.includes(ls.get("tab")) ? ls.get("tab") : "overview",
@@ -347,7 +347,7 @@
         <div class="card s4 acc-list">${list}</div>
         <div class="s8 col">
           <div class="card"><div class="card-head"><div><div class="kpi-label"><i class="swatch" style="background:${acc.color}"></i> ${esc(acc.name)}</div>
-            <div class="kpi-value big">${money(v)}</div></div>${rangeSeg("mini")}</div>
+            <div class="kpi-value big">${money(v)}</div>${acc.id === "fidelity" ? '<button class="link small" data-action="tab" data-tab="fidelity">Funds, contents and risk ›</button>' : ""}</div>${rangeSeg("mini")}</div>
             <div class="stat-row">
               <div><div class="tiny muted">Since previous entry</div><div class="bold">${pv != null && v != null ? money(v - pv, { signed: true, colored: true }) : "—"}</div><div class="tiny muted">${pv ? pctTxt(v - pv, pv) : ""}</div></div>
               <div><div class="tiny muted">Last 12 months</div><div class="bold">${av != null && v != null ? money(v - av, { signed: true, colored: true }) : "—"}</div><div class="tiny muted">${av ? pctTxt(v - av, av) : ""}</div></div>
@@ -460,12 +460,266 @@
       </div></div>`;
   }
 
+  // ───────────────────────── Holdings (funds, contents, risk) ─────────────────────────
+  const FD = globalThis.FD, FR = globalThis.FR;
+  /** Fund list + price histories for the Fidelity page. `hist` is filled lazily the first time the page opens. */
+  const F = { holdings: null, error: null, hist: {}, failed: new Set(), loading: false,
+    daily: {}, dailyFailed: new Set(), rev: null, watch: null, mode: ls.get("fid.mode") === "file" ? "file" : "est" };
+  const BUCKET = Object.fromEntries(FD.BUCKETS.map((b) => [b.id, b]));
+  const pct1 = (v, signed = false) => FE.pct(v, signed);
+
+  async function loadHoldings() {
+    try { const d = await Store.loadHoldings(); F.holdings = FR.normalizeHoldings(d.holdings); F.rev = d.rev; F.watch = d.watch || null; F.error = null; }
+    catch (e) { F.holdings = null; F.error = e.message; }
+  }
+  /** Picks up a positions file the server imported from Downloads while the page was open. */
+  async function pollHoldings() {
+    if (S.tab !== "fidelity" || document.hidden || !$("#sheet").hidden || F.error) return;
+    try {
+      const d = await Store.loadHoldings();
+      const watchChanged = JSON.stringify(d.watch && [d.watch.state, d.watch.message]) !== JSON.stringify(F.watch && [F.watch.state, F.watch.message]);
+      F.watch = d.watch || null;
+      if (d.rev !== F.rev) { F.rev = d.rev; F.holdings = FR.normalizeHoldings(d.holdings); toast("New positions file imported", 4000); render(); }
+      else if (watchChanged) render();
+    } catch { /* server restarting: try again next time */ }
+  }
+  setInterval(pollHoldings, 15000);
+  /** Fetches the weekly price history for every symbol the page needs and doesn't have yet. */
+  async function ensureHistories(force = false) {
+    if (F.loading || !F.holdings) return;
+    if (force) F.failed.clear();
+    if (force) { F.dailyFailed.clear(); F.daily = {}; }
+    // daily prices first (they drive the estimated values), then the weekly history for the risk maths
+    const queue = FR.dailySymbols(F.holdings).filter((s) => !F.daily[s] && !F.dailyFailed.has(s)).map((s) => ["d", s])
+      .concat(FR.symbolsNeeded(FR.aggregate(currentHoldings())).filter((s) => !F.hist[s] && !F.failed.has(s)).map((s) => ["w", s]));
+    if (!queue.length) return;
+    F.loading = true;
+    const worker = async () => {
+      for (let job = queue.shift(); job; job = queue.shift()) {
+        const [kind, s] = job;
+        try {
+          if (kind === "d") { const h = await Store.daily(s); if (h.length) F.daily[s] = h; else F.dailyFailed.add(s); }
+          else { const h = await Store.history(s); if (h.length > 1) F.hist[s] = h; else F.failed.add(s); }
+        } catch { (kind === "d" ? F.dailyFailed : F.failed).add(s); }
+      }
+    };
+    await Promise.all([1, 2, 3, 4].map(worker));
+    F.loading = false;
+    if (S.tab === "fidelity" && $("#sheet").hidden) render();
+  }
+
+  /** The last position file moved to today's prices plus the weekly plan (null until there is something to estimate). */
+  function currentEstimate() {
+    if (!F.holdings || !F.holdings.accounts.some((a) => a.positions.length)) return null;
+    return FR.estimate(F.holdings, F.daily, todayS());
+  }
+  /** Holdings the page is showing: the estimate, or the file as it was on its own date. */
+  function currentHoldings() {
+    const e = currentEstimate();
+    if (!e) return F.holdings;
+    return F.mode === "est" && e.changed ? e.holdings : e.base;
+  }
+
+  /** Everything the Fidelity page shows, calculated from the saved fund list and whatever prices are loaded. */
+  function fidelityModel() {
+    const est = currentEstimate();
+    const h = est ? (F.mode === "est" && est.changed ? est.holdings : est.base) : F.holdings;
+    if (!h || !h.accounts.some((a) => a.positions.length)) return null;
+    const positions = FR.aggregate(h), total = FR.totalOf(positions), lt = FR.lookThrough(positions);
+    const sectors = FR.bucketRisk(lt.buckets, F.hist);
+    const risk = FR.fundRisk(positions, F.hist);
+    const fundShares = risk ? risk.shares : FR.fundSharesFromBuckets(positions, sectors.rows);
+    const top10 = lt.companies.slice(0, 10);
+    return { h, est, isEst: !!est && F.mode === "est" && est.changed, positions, total, lt, sectors, risk, fundShares, top10, top10Share: top10.reduce((s, c) => s + c.value, 0) / (total || 1) };
+  }
+
+  function sectorChart(canvas, rows) {
+    const money$ = css("--blue"), risk$ = css("--orange"), ink = css("--muted"), grid = css("--line");
+    charts.push(new Chart(canvas, {
+      type: "bar",
+      data: { labels: rows.map((r) => BUCKET[r.id].name), datasets: [
+        { label: "Share of money", data: rows.map((r) => r.weight * 100), backgroundColor: money$, borderRadius: 3, barPercentage: 0.9, categoryPercentage: 0.72 },
+        { label: "Share of risk", data: rows.map((r) => r.share * 100), backgroundColor: risk$, borderRadius: 3, barPercentage: 0.9, categoryPercentage: 0.72 },
+      ] },
+      options: { indexAxis: "y", responsive: true, maintainAspectRatio: false, animation: { duration: 350 },
+        interaction: { mode: "index", axis: "y", intersect: false },
+        plugins: { legend: { display: true, position: "top", align: "start", labels: { boxWidth: 10, boxHeight: 10, usePointStyle: true, color: ink } },
+          tooltip: { padding: 10, cornerRadius: 10, callbacks: { label: (it) => {
+            const r = rows[it.dataIndex];
+            return it.datasetIndex === 0 ? ` Share of money: ${it.parsed.x.toFixed(1)}%${S.hide ? "" : " (" + FE.money(r.value) + ")"}` : ` Share of risk: ${it.parsed.x.toFixed(1)}%`; } } } },
+        scales: { x: { grid: { color: grid }, ticks: { color: ink, callback: (v) => v + "%" } },
+          y: { grid: { display: false }, ticks: { color: css("--text"), font: { size: 13 } } } } },
+    }));
+  }
+
+  /** One or two plain sentences about where the risk comes from. */
+  function riskStory(m) {
+    const rows = m.sectors.rows.filter((r) => r.id !== "cash").slice().sort((a, b) => b.share - a.share);
+    if (!rows.length) return "";
+    const top = rows[0], parts = [];
+    parts.push(`The biggest source of risk is <b>${BUCKET[top.id].name}</b>: ${pct1(top.weight)} of the money, ${pct1(top.share)} of the risk.`);
+    const eq = rows.filter((r) => BUCKET[r.id].group === "eq" && r.id !== top.id).sort((a, b) => b.weight - a.weight)[0];
+    if (eq) parts.push(`Among stocks the largest sector is <b>${BUCKET[eq.id].name}</b> (${pct1(eq.weight)} of the money, ${pct1(eq.share)} of the risk).`);
+    const calm = rows.filter((r) => r.weight > 0.05 && r.share < r.weight * 0.6).sort((a, b) => b.weight - a.weight)[0];
+    if (calm) parts.push(`<b>${BUCKET[calm.id].name}</b> carries little risk for its size (${pct1(calm.weight)} of the money, ${pct1(calm.share)} of the risk).`);
+    const cash = m.sectors.rows.find((r) => r.id === "cash");
+    if (cash && cash.weight > 0.02) parts.push(`Cash (${pct1(cash.weight)}) carries none.`);
+    return parts.join(" ");
+  }
+
+  function fidelityView() {
+    const editBtn = `<button class="btn small" data-action="fid-edit">✎ Update holdings</button>`;
+    if (F.error) return pageHead("Holdings", "", editBtn) + `<div class="card"><p class="muted">The holdings could not be read: ${esc(F.error)}</p></div>`;
+    const m = fidelityModel();
+    if (!m) return pageHead("Holdings", "No holdings yet", editBtn) + `<div class="card"><p class="muted">Import the positions file your broker exports (CSV) or add the funds by hand.</p>
+      <div class="row"><button class="btn primary small" data-action="fid-import">⬇️ Import positions CSV</button>${editBtn}</div></div>`;
+    const { h, est, isEst, positions, total, sectors, risk } = m;
+    const l = latest(), recGap = l ? total - l.record.fidelity : null;
+    const modeSeg = est && est.changed ? `<div class="seg mini"><button class="${isEst ? "on" : ""}" data-action="fid-mode" data-mode="est">Estimate</button><button class="${isEst ? "" : "on"}" data-action="fid-mode" data-mode="file">Last file</button></div>` : "";
+    const headSub = isEst
+      ? `<span class="pill plan">estimate</span> at ${FE.dateTR(est.priceDay)} prices · last positions file ${FE.dateTR(est.asof)} · ${positions.length} funds, ${h.accounts.length} accounts`
+      : `Positions file ${h.asof ? FE.dateTR(h.asof) : "undated"} · ${positions.length} funds, ${h.accounts.length} accounts`;
+    const sinceFile = isEst ? `${money(est.marketChange, { signed: true, colored: true })} since the file${est.buys.length ? ` · ${est.buys.length} weekly buys (${money(est.bought)}) moved from cash into funds` : ""}` : "";
+    const w = F.watch;
+    const watchLine = !w ? "" : w.state === "ok" ? `📥 Watching the Downloads folder${w.imported ? ` · last imported: ${esc(w.imported.file)}` : ""}.`
+      : w.state === "starting" ? "" : `⚠️ ${esc(w.message)}`;
+    const pricesNote = F.loading ? "Loading prices…" : risk ? `From the last ${risk.weeks} weeks of prices` : "No price data";
+    const vol = risk ? risk.vol : sectors.vol, badPct = (1.645 * vol) / Math.sqrt(12);
+    const approx = risk ? "" : ' <span class="pill plan">assumed</span>';
+    const sectorRows = sectors.rows.slice().sort((a, b) => (a.id === "cash") - (b.id === "cash") || b.share - a.share);
+    const classes = FD.CLASSES.map((c) => ({ ...c, value: m.lt.classes[c.id] || 0 })).filter((c) => c.value > 0);
+    const fundRow = (p) => { const f = FD.fundOf(p.symbol), sh = m.fundShares[p.symbol], w = p.value / total;
+      return `<tr class="row-link" data-action="fid-fund" data-symbol="${esc(p.symbol)}"><td><b>${esc(p.symbol)}</b> <span class="muted small fund-name">${esc(f.name)}</span></td>
+        <td>${money(p.value)}</td><td class="muted">${pct1(w)}</td>
+        <td class="${sh != null && sh > w * 1.5 && sh > 0.03 ? "neg bold" : ""}">${f.cash ? '<span class="faint">—</span>' : sh == null ? '<span class="faint">?</span>' : pct1(sh)}</td>
+        <td class="muted only-desktop-cell">${risk && risk.vols[p.symbol] != null ? pct1(risk.vols[p.symbol]) : '<span class="faint">—</span>'}</td></tr>`; };
+    const missing = risk ? risk.missing : [];
+    return `${pageHead("Holdings", headSub, modeSeg + hideBtn() + editBtn)}
+      <div class="grid">
+        ${w && w.state !== "ok" && w.state !== "starting" ? `<div class="s12 banner" style="margin:0">${watchLine}</div>` : ""}
+        ${kpi(isEst ? "Estimated total" : "Total of funds", money(total), [sinceFile, recGap != null ? `Latest brokerage entry ${money(l.record.fidelity)} (${FE.dateTR(l.date)})` : ""].filter(Boolean).join("<br>"), "s3 kpi-main")}
+        ${kpi("Yearly volatility" + approx, vol ? pct1(vol) : "—", "In a normal year the value moves up or down by roughly this much", "s3")}
+        ${kpi("Loss in a bad month" + approx, vol ? money(-badPct * total, { colored: true }) : "—", vol ? `${pct1(badPct)} · worse than this is expected about one month in twenty` : "", "s3")}
+        ${kpi("Sensitivity to the S&P 500", risk && risk.beta != null ? risk.beta.toFixed(2) : "—", risk && risk.beta != null ? `If the S&P falls 10% the portfolio falls about ${pct1(risk.beta * 0.1)} · largest drop ${pct1(risk.maxDrawdown)}` : pricesNote, "s3")}
+
+        <div class="card s8"><div class="card-head"><h2 class="card-title">Where the money is, and where the risk comes from</h2>
+            <div class="row"><span class="tiny muted">${sectors.assumed ? (F.loading ? "Loading prices…" : "Long-run assumptions") : `Last ${sectors.weeks} weeks · sample prices`}</span><button class="icon-btn" data-action="fid-refresh" aria-label="Refresh prices">${F.loading ? "⏳" : "↻"}</button></div></div>
+          <p class="small story">${riskStory(m)}</p>
+          <div class="chart-box" style="height:${Math.max(sectorRows.length * 34 + 70, 220)}px"><canvas id="c-sectors"></canvas></div>
+          <div class="tiny muted">Blue: the share of the money in that sector. Orange: how much of the portfolio's total swings comes from it. When orange is longer than blue, the sector carries more risk than its size.</div></div>
+
+        <div class="card s4"><h2 class="card-title">Asset class</h2>
+          <div class="donut-box"><canvas id="c-classes"></canvas><div class="donut-center"><div class="tiny muted">Total</div><b>${S.hide ? "••••••" : FE.short(total)}</b></div></div>
+          <div class="legend">${classes.map((c) => `<div class="legend-row"><i class="swatch" style="background:${c.color}"></i><span class="grow">${c.name}</span><span class="muted small">${pct1(c.value / total)}</span><span class="amt">${money(c.value)}</span></div>`).join("")}</div></div>
+
+        <div class="card s12"><div class="card-head"><h2 class="card-title">Funds</h2><span class="tiny muted">Click a fund to see what is inside and which account holds it</span></div>
+          <div class="table-scroll"><table class="mini-table"><thead><tr><th>Fund</th><th>Amount</th><th>Share</th><th>Share of risk</th><th class="only-desktop-cell">Yearly volatility</th></tr></thead>
+            <tbody>${positions.map(fundRow).join("")}</tbody>
+            <tfoot><tr><td>Total</td><td>${money(total)}</td><td>100%</td><td></td><td class="only-desktop-cell"></td></tr></tfoot></table></div>
+          ${missing.length ? `<div class="tiny muted">Left out of the risk figures because no price history was found: ${missing.map(esc).join(", ")}</div>` : ""}</div>
+
+        <div class="card s6"><h2 class="card-title">Largest companies</h2>
+          <div class="tiny muted" style="margin-top:4px">Looking inside the funds: how much of the money ends up in which companies.</div>
+<div class="table-scroll"><table class="mini-table"><thead><tr><th>Company</th><th>Amount</th><th>Share</th></tr></thead><tbody>
+            ${m.top10.map((c) => `<tr><td>${esc(c.name)} <span class="tiny faint">${c.funds.map(esc).join(", ")}</span></td><td>${money(c.value)}</td><td class="muted">${pct1(c.value / total)}</td></tr>`).join("")}
+          </tbody><tfoot><tr><td>Top 10 companies</td><td>${money(m.top10Share * total)}</td><td>${pct1(m.top10Share)}</td></tr></tfoot></table></div>
+          <div class="tiny muted">Only each fund's published largest positions are counted, so the real share may be slightly higher.</div></div>
+
+        <div class="card s6"><h2 class="card-title">Accounts</h2>
+          ${h.accounts.map((a) => { const t = a.positions.reduce((s, p) => s + p.value, 0);
+            return `<div class="acct"><div class="line"><b class="name">${esc(a.name)}</b><span class="pct">${pct1(t / total)}</span><span class="amt bold">${money(t)}</span></div>
+              ${a.positions.slice().sort((x, y) => y.value - x.value).map((p) => `<div class="line sub row-link" data-action="fid-fund" data-symbol="${esc(p.symbol)}"><span class="name">${esc(p.symbol)}</span><span class="pct">${pct1(p.value / (t || 1))}</span><span class="amt">${money(p.value)}</span></div>`).join("")}</div>`; }).join("")}</div>
+
+        <div class="s12 note">${isEst ? `Estimate: the share counts in the last positions file × current prices${h.plan.buys.length ? `, plus a ${money(h.plan.buys.filter((b) => !b.from || b.from <= todayS()).reduce((s, b) => s + b.amount, 0))} plan buy every Wednesday` : ""}. Dividends, trades outside the plan and deposits are not seen; the next file replaces the estimate with real figures.<br>` : ""}Demo: fictional holdings and generated sample prices. The private app reads the broker's positions file from the Downloads folder by itself and uses live prices. Risk figures come from ${risk ? `the funds' last ${risk.weeks} weeks of price moves` : "long-run volatility assumptions"}. Sector risk is measured with US sector funds, which also stand in for non-US stocks, so it is an approximate picture. Fund contents as of ${FE.dateTR(FD.FUND_DATA_ASOF)}. Past volatility does not guarantee the future.</div>
+      </div>`;
+  }
+
+  function openFund(symbol) {
+    const m = fidelityModel(); if (!m) return;
+    const p = m.positions.find((x) => x.symbol === symbol); if (!p) return;
+    const f = FD.fundOf(symbol), w = p.value / m.total, sh = m.fundShares[symbol];
+    const sec = Object.entries(FR.normWeights(f.sectors)).sort((a, b) => b[1] - a[1]);
+    const tile = (t, v) => `<div class="tile"><div class="tiny">${t}</div><div class="bold">${v}</div></div>`;
+    openSheet(`${bar(esc(symbol))}
+      <div class="card"><b>${esc(f.name)}</b><div class="small muted" style="margin-top:4px">${esc(f.what)}</div></div>
+      <div class="tiles">${tile("Amount", money(p.value))}${tile("Share of portfolio", pct1(w))}${tile("Share of risk", f.cash ? "—" : sh == null ? "?" : pct1(sh))}</div>
+      <div class="section-title">Held in</div><div class="list">${p.accounts.map((a) => `<div class="kv"><span>${esc(a.name)}${a.shares != null && !S.hide ? ` <span class="tiny faint">${a.shares.toFixed(3)} shares</span>` : ""}</span><span>${money(a.value)}</span></div>`).join("")}</div>
+      <div class="section-title">What is inside${f.approx ? " (approximate)" : ""}</div>
+      <div class="card"><div class="stackbar" style="margin-top:0">${sec.map(([id, v]) => `<i style="width:${v * 100}%;background:${BUCKET[id].color}"></i>`).join("")}</div>
+        ${sec.map(([id, v]) => `<div class="line"><i class="swatch" style="background:${BUCKET[id].color}"></i><span class="name">${BUCKET[id].name}</span><span class="pct">${pct1(v)}</span><span class="amt">${money(p.value * v)}</span></div>`).join("")}</div>
+      ${f.top.length ? `<div class="section-title">Largest companies</div><div class="list">${f.top.map(([n, pc]) => `<div class="kv"><span>${esc(n)} <span class="tiny faint">${pc}% of the fund</span></span><span>${money((p.value * pc) / 100)}</span></div>`).join("")}</div>` : ""}
+      ${f.fee != null ? `<div class="note">Yearly expense ratio ${f.fee}% (about ${S.hide ? "••" : FE.money((p.value * f.fee) / 100)} a year on this amount).</div>` : ""}`);
+  }
+
+  /** Editor for the fund list: amounts per account, add/remove rows, or load Fidelity's positions CSV. */
+  function openFidEdit(draft = null, imported = false) {
+    const d = draft || FR.normalizeHoldings(JSON.parse(JSON.stringify(F.holdings || { accounts: [] })));
+    if (!d.accounts.length) d.accounts.push({ id: "h1", name: "Brokerage", positions: [] });
+    if (!d.asof) d.asof = todayS();
+    const reopen = () => openFidEdit(d, imported);
+    const sum = () => d.accounts.reduce((s, a) => s + a.positions.reduce((t, p) => t + (p.value || 0), 0), 0);
+    if (!d.plan) d.plan = { weekday: 3, buys: [] };
+    const planSum = () => d.plan.buys.reduce((s, b) => s + (b.amount || 0), 0);
+    openSheet(`${bar("Holdings")}
+      ${imported ? '<div class="banner">The positions read from the file are below. Check them and press <b>Save</b>; they replace the current list.</div>' : ""}
+      <div class="list"><div class="field"><label>File date</label><input type="date" data-fid="asof" value="${esc(d.asof)}"></div></div>
+      ${d.accounts.map((a, i) => `<div class="section-title">Account</div>
+        <div class="list"><div class="field"><input class="grow" style="text-align:left;width:auto;font-weight:700" data-fid="name:${i}" value="${esc(a.name)}" placeholder="Account name">
+            <button class="icon-btn" data-action="fid-acc-del" data-i="${i}" aria-label="Delete account">✕</button></div>
+          ${a.positions.map((p, j) => `<div class="field"><input style="text-align:left;width:34%;text-transform:uppercase;font-weight:650" data-fid="sym:${i}:${j}" value="${esc(p.symbol)}" placeholder="Symbol">
+            <span class="grow tiny muted ellipsis">${esc(FD.FUNDS[p.symbol] ? FD.FUNDS[p.symbol].name : "")}</span>
+            <input inputmode="decimal" style="width:28%" data-fid="val:${i}:${j}" value="${esc(fmtInput(p.value))}" placeholder="0">
+            <button class="icon-btn" data-action="fid-pos-del" data-i="${i}" data-j="${j}" aria-label="Delete">✕</button></div>`).join("")}
+          <div class="field"><button class="link small" data-action="fid-pos-add" data-i="${i}">＋ Add fund</button></div></div>`).join("")}
+      <div class="row" style="margin-top:12px"><button class="btn small" data-action="fid-acc-add">＋ Add account</button><button class="btn small" data-action="fid-import">⬇️ Import positions CSV</button></div>
+      <div class="note">CSV: the positions file a broker exports (the private app reads Fidelity's). Account numbers are not kept, only the account name, symbol, share count and amount. Editing an amount by hand drops that fund's share count.</div>
+      <div class="section-title">Weekly plan (every Wednesday) · <span id="fid-plan-sum">${FE.money(planSum())}</span></div>
+      <div class="list">${d.plan.buys.map((b, i) => `<div class="field"><input style="text-align:left;width:26%;text-transform:uppercase;font-weight:650" data-fid="psym:${i}" value="${esc(b.symbol)}" placeholder="Symbol">
+          <input inputmode="decimal" style="width:22%" data-fid="pamt:${i}" value="${esc(fmtInput(b.amount))}" placeholder="$">
+          <span class="grow tiny muted right">starts</span><input type="date" data-fid="pfrom:${i}" value="${esc(b.from || "")}">
+          <button class="icon-btn" data-action="fid-plan-del" data-i="${i}" aria-label="Delete">✕</button></div>`).join("")}
+        <div class="field"><button class="link small" data-action="fid-plan-add">＋ Add fund to plan</button></div></div>
+      <div class="note">The estimate between two files uses this plan: every Wednesday these amounts leave the cash of the account holding the most cash and go into the funds. A line with no start date applies right away.</div>
+      <div class="bottom-bar"><div class="inner col-bar"><div class="sum"><div class="sum-wide"><span class="tiny muted">Total</span> <b class="num" id="fid-sum">${FE.money(sum())}</b></div></div>
+        <div class="row"><button class="btn" data-action="close">Cancel</button><button class="btn primary grow" data-action="fid-save">Save</button></div></div></div>`,
+    {
+      "fid-pos-add": (el) => { d.accounts[+el.dataset.i].positions.push({ symbol: "", value: 0 }); reopen(); },
+      "fid-pos-del": (el) => { d.accounts[+el.dataset.i].positions.splice(+el.dataset.j, 1); reopen(); },
+      "fid-plan-add": () => { d.plan.buys.push({ symbol: "", amount: 0 }); reopen(); },
+      "fid-plan-del": (el) => { d.plan.buys.splice(+el.dataset.i, 1); reopen(); },
+      "fid-acc-add": () => { d.accounts.push({ id: "h" + (d.accounts.length + 1), name: "New account", positions: [] }); reopen(); },
+      "fid-acc-del": (el) => { const a = d.accounts[+el.dataset.i]; if (a.positions.length && !confirm(`Delete ${a.name} and its ${a.positions.length} funds?`)) return; d.accounts.splice(+el.dataset.i, 1); reopen(); },
+      "fid-save": async () => {
+        const clean = FR.normalizeHoldings(d);
+        clean.accounts = clean.accounts.filter((a) => a.positions.length);
+        if (imported || !clean.source) clean.source = imported ? "Positions file (CSV)" : "Entered by hand";
+        if (imported) clean.note = "";
+        toast("Saving…", 20000);
+        try { F.rev = await Store.saveHoldings(clean); } catch (e) { return toast("Could not save: " + e.message, 5000); }
+        F.holdings = clean; F.error = null; toast("Saved"); closeSheet(); render();
+      },
+    },
+    (el) => {
+      el.addEventListener("input", (e) => {
+        const k = e.target.dataset.fid; if (!k) return;
+        const [kind, i, j] = k.split(":");
+        if (kind === "asof") { if (FE.parseDay(e.target.value)) d.asof = e.target.value; }
+        else if (kind === "name") d.accounts[+i].name = e.target.value;
+        else if (kind === "sym") { const p = d.accounts[+i].positions[+j]; p.symbol = e.target.value.trim().toUpperCase(); delete p.shares; }
+        else if (kind === "val") { const p = d.accounts[+i].positions[+j]; p.value = parseAmount(e.target.value) ?? 0; delete p.shares; $("#fid-sum", el).textContent = FE.money(sum()); }
+        else if (kind === "psym") d.plan.buys[+i].symbol = e.target.value.trim().toUpperCase();
+        else if (kind === "pamt") { d.plan.buys[+i].amount = parseAmount(e.target.value) ?? 0; $("#fid-plan-sum", el).textContent = FE.money(planSum()); }
+        else if (kind === "pfrom") { if (FE.parseDay(e.target.value)) d.plan.buys[+i].from = e.target.value; else delete d.plan.buys[+i].from; }
+      });
+    });
+  }
+
   // ───────────────────────── render ─────────────────────────
   function render() {
     destroyCharts();
     document.querySelectorAll(".tab, .side-link").forEach((t) => t.classList.toggle("is-active", t.dataset.tab === S.tab));
     renderSideFoot();
-    const views = { overview: overviewView, accounts: accountsView, records: recordsView, analysis: analysisView, settings: settingsView };
+    const views = { overview: overviewView, accounts: accountsView, fidelity: fidelityView, records: recordsView, analysis: analysisView, settings: settingsView };
     $("#view").innerHTML = views[S.tab]();
     if (!window.Chart) return;
     const l = latest();
@@ -478,6 +732,14 @@
     if (S.tab === "accounts" && l) {
       const accs = accounts(), acc = accs.find((a) => a.id === S.account) || accs[0];
       lineChart($("#c-acc"), acc, { plan: ["total", "fidelity", "banks"].includes(acc.id) || acc.id.startsWith("bank:") });
+    }
+    if (S.tab === "fidelity") {
+      const m = fidelityModel();
+      if (m && $("#c-sectors")) {
+        sectorChart($("#c-sectors"), m.sectors.rows.slice().sort((a, b) => (a.id === "cash") - (b.id === "cash") || b.share - a.share));
+        donutChart($("#c-classes"), FD.CLASSES.map((c) => ({ name: c.name, color: c.color, value: m.lt.classes[c.id] || 0 })).filter((c) => c.value > 0));
+      }
+      ensureHistories();
     }
     if (S.tab === "analysis") {
       barChart($("#c-net"), actualRows().filter((r) => r.change != null && inRange(r)), (r) => r.change, "Growth");
@@ -773,6 +1035,11 @@
       download(`finance_demo_${todayS()}.${fmt}`, fmt === "csv" ? FE.exportCSV(S.records, keys) : FE.exportJSON(S.records, keys), fmt === "csv" ? "text/csv" : "application/json");
     },
     plan: () => openPlan(),
+    "fid-edit": () => openFidEdit(),
+    "fid-fund": (el) => openFund(el.dataset.symbol),
+    "fid-import": () => $("#file-positions").click(),
+    "fid-refresh": () => { ensureHistories(true); render(); },
+    "fid-mode": (el) => { F.mode = el.dataset.mode; ls.set("fid.mode", F.mode); render(); },
     "bank-rename": (el) => {
       const b = S.banks.find((x) => x.key === el.dataset.key), name = prompt("Bank name", b.name);
       if (!name || !name.trim() || name.trim() === b.name) return;
@@ -817,6 +1084,14 @@
     try { openImport(FE.importAny(await file.text()), file.name); }
     catch (err) { toast(err.message || "Could not read the file", 5000); }
   });
+  $("#file-positions").addEventListener("change", async (e) => {
+    const file = e.target.files[0]; e.target.value = "";
+    if (!file) return;
+    try {
+      const names = Object.fromEntries(((F.holdings && F.holdings.accounts) || []).filter((a) => a.key).map((a) => [a.key, a.name]));
+      const imp = FR.importFidelityCSV(await file.text(), todayS(), names); imp.plan = FR.normalizePlan(F.holdings && F.holdings.plan); openFidEdit(imp, true);
+    } catch (err) { toast(err.message || "Could not read the file", 5000); }
+  });
   matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => render());
   globalThis.addEventListener("finans-sync", () => { const el = $("#sync-msg"); if (el && Store.state.sync) el.textContent = Store.state.sync.message; renderSideFoot(); });
   let wide = matchMedia("(min-width: 900px)").matches;
@@ -834,6 +1109,7 @@
     try {
       const d = await Store.load();
       S.records = d.records; S.banks = d.banks; recompute();
+      await loadHoldings();
       render();
       if (d.rejected.length) toast(`${d.rejected.length} rows could not be read`, 5000);
     } catch (e) {

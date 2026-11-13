@@ -104,7 +104,7 @@
     state.savedAt = new Date().toISOString();
     if (!storage.set({ csv, banks, savedAt: state.savedAt })) throw new Error("this browser does not allow local storage");
   }
-  async function reset() { storage.clear(); state.savedAt = null; }
+  async function reset() { storage.clear(); try { localStorage.removeItem("finans-demo.holdings.v1"); } catch { /* ignore */ } state.savedAt = null; }
   async function refreshSync() { /* no sync in the demo */ }
 
   // Market quotes: the private app fetches them from Yahoo Finance through its local server. Browsers
@@ -120,5 +120,78 @@
     return { price, changePercent: ((price - prev) / prev) * 100, time: now, points };
   }
 
-  root.Store = { load, loadIfChanged, save, reset, quote, refreshSync, state, isLocalHost: false, isDemo: true };
+  // ───────── Holdings page: fictional fund positions and generated prices ─────────
+  // The private app keeps the fund list in a file, imports the broker's positions CSV from the
+  // Downloads folder and reads real prices. Here the positions are made up and every price series is
+  // generated (same series on every visit), so the risk figures are illustrative, not market data.
+  const HKEY = "finans-demo.holdings.v1";
+  // [start price, yearly volatility, how strongly it follows the stock market, own factor]
+  const PRICES = {
+    FXAIX: [215, 0.16, 1.0], FZILX: [14, 0.15, 0.85], FPADX: [13, 0.19, 0.9], VOOG: [330, 0.21, 1.2], AVUV: [95, 0.22, 1.05],
+    LIT: [45, 0.36, 1.0], DBMF: [27, 0.11, 0.0], IAU: [52, 0.16, 0.05, "gold"], FBTC: [55, 0.55, 1.3, "btc"],
+    "^GSPC": [5600, 0.155, 1.0], XLK: [210, 0.25, 1.3], XLF: [45, 0.19, 0.95], XLC: [90, 0.2, 1.05], XLY: [190, 0.22, 1.15],
+    XLV: [140, 0.15, 0.65], XLI: [125, 0.18, 0.95], XLP: [78, 0.13, 0.5], XLE: [88, 0.25, 0.75], XLB: [85, 0.2, 0.9],
+    XLU: [70, 0.17, 0.45], XLRE: [40, 0.2, 0.75], SLV: [28, 0.3, 0.3, "gold"], "BTC-USD": [62000, 0.55, 1.3, "btc"], AGG: [98, 0.06, 0.1],
+  };
+  const dayOf = (ms) => new Date(ms).toISOString().slice(0, 10);
+  let factorCache = null, seriesCache = {};
+  /** Weekdays for about 25 months ending today, with the shared market, gold and bitcoin daily moves. */
+  function factors() {
+    if (factorCache) return factorCache;
+    const rand = rng(20261113), days = [];
+    const end = Date.parse(FE.today() + "T00:00:00Z");
+    for (let t = end - 760 * 864e5; t <= end; t += 864e5) { const wd = new Date(t).getUTCDay(); if (wd !== 0 && wd !== 6) days.push(dayOf(t)); }
+    const mk = (drift, vol) => days.map(() => drift + (vol / Math.sqrt(252)) * gauss(rand));
+    factorCache = { days, market: mk(0.0004, 0.155), gold: mk(0.0004, 0.15), btc: mk(0.0005, 0.5) };
+    return factorCache;
+  }
+  /** Daily closes for one symbol: its market loading plus its own noise (or the gold / bitcoin factor). */
+  function dailySeries(symbol) {
+    if (seriesCache[symbol]) return seriesCache[symbol];
+    const [start, vol, beta, own] = PRICES[symbol] || [100, 0.2, 1.0];
+    const f = factors(), rand = rng([...symbol].reduce((a, c) => a * 31 + c.charCodeAt(0), 11));
+    const idio = Math.sqrt(Math.max(vol * vol - (own ? 0 : beta * 0.155) ** 2, 0.0009) / 252);
+    let p = start;
+    const out = f.days.map((day, i) => {
+      const move = own ? f[own][i] * (vol / (own === "gold" ? 0.15 : 0.5)) + 0.15 * beta * f.market[i] : beta * f.market[i] + idio * gauss(rand);
+      p *= 1 + move;
+      return { day, close: p };
+    });
+    return (seriesCache[symbol] = out);
+  }
+  async function daily(symbol) { return dailySeries(symbol).slice(-130); }
+  /** Weekly closes in the same shape the private app builds from Yahoo data. */
+  async function history(symbol) {
+    const byWeek = new Map();
+    for (const p of dailySeries(symbol)) byWeek.set(Math.floor((Date.parse(p.day + "T12:00:00Z") / 864e5 + 3) / 7), p.close);
+    return [...byWeek.entries()].sort((a, b) => a[0] - b[0]).map(([week, close]) => ({ week, close }));
+  }
+
+  /** A made-up fund list worth about the latest brokerage entry, dated 12 days ago, with share counts and a weekly plan. */
+  function sampleHoldings() {
+    const records = sampleRecords(), total = records[records.length - 1].fidelity;
+    const asof = FE.addDays(FE.today(), -12);
+    const px = (sym) => { const s = dailySeries(sym); let c = s[0].close; for (const p of s) { if (p.day > asof) break; c = p.close; } return c; };
+    const pos = (symbol, weight) => { const value = Math.round(total * weight); return symbol === "SPRXX" ? { symbol, value } : { symbol, value, shares: +(value / px(symbol)).toFixed(3) }; };
+    return {
+      asof, source: "Sample positions (fictional)", note: "",
+      accounts: [
+        { id: "main", name: "Main account", positions: [pos("FXAIX", 0.26), pos("IAU", 0.1), pos("VOOG", 0.1), pos("FZILX", 0.08), pos("FBTC", 0.05), pos("AVUV", 0.04)] },
+        { id: "weekly", name: "Weekly auto-invest", positions: [pos("SPRXX", 0.1), pos("FXAIX", 0.08), pos("FZILX", 0.08), pos("FPADX", 0.06), pos("AVUV", 0.02), pos("FBTC", 0.01), pos("LIT", 0.01), pos("DBMF", 0.01)] },
+      ],
+      plan: { weekday: 3, buys: [{ symbol: "FXAIX", amount: 250 }, { symbol: "FZILX", amount: 150 }, { symbol: "FPADX", amount: 60 }, { symbol: "AVUV", amount: 60 }, { symbol: "IAU", amount: 50 }, { symbol: "FBTC", amount: 30 }] },
+    };
+  }
+  async function loadHoldings() {
+    let saved = null;
+    try { saved = JSON.parse(localStorage.getItem(HKEY) || "null"); } catch { /* start from the sample */ }
+    const holdings = saved && Array.isArray(saved.accounts) ? saved : sampleHoldings();
+    return { holdings, rev: JSON.stringify(holdings).length + ":" + (holdings.asof || ""), watch: null };
+  }
+  async function saveHoldings(holdings) {
+    try { localStorage.setItem(HKEY, JSON.stringify(holdings)); } catch { throw new Error("this browser does not allow local storage"); }
+    return JSON.stringify(holdings).length + ":" + (holdings.asof || "");
+  }
+
+  root.Store = { load, loadIfChanged, save, reset, quote, refreshSync, loadHoldings, saveHoldings, history, daily, state, isLocalHost: false, isDemo: true };
 })(globalThis);

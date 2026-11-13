@@ -10,7 +10,7 @@
   <meta name="description" content="Interactive demo of a personal investment and net worth tracker with a forecast, using fictional sample data.">
   <link rel="icon" href="favicon.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="stylesheet" href="styles.css?v=demo1">
+  <link rel="stylesheet" href="styles.css?v=demo2">
   <title>Finance · Live demo</title>
 </head>
 <body>
@@ -20,6 +20,7 @@
       <nav class="side-nav">
         <button data-action="tab" data-tab="overview" class="side-link is-active"><span>◧</span>Overview</button>
         <button data-action="tab" data-tab="accounts" class="side-link"><span>🏦</span>Accounts</button>
+        <button data-action="tab" data-tab="fidelity" class="side-link"><span>📈</span>Holdings</button>
         <button data-action="tab" data-tab="records" class="side-link"><span>☰</span>Records</button>
         <button data-action="tab" data-tab="analysis" class="side-link"><span>📊</span>Analysis</button>
         <button data-action="tab" data-tab="settings" class="side-link"><span>⚙️</span>Settings</button>
@@ -34,6 +35,7 @@
     <nav id="tabs" class="tabbar" aria-label="Tabs">
       <button data-action="tab" data-tab="overview" class="tab is-active"><span class="tab-icon">◧</span><span>Overview</span></button>
       <button data-action="tab" data-tab="accounts" class="tab"><span class="tab-icon">🏦</span><span>Accounts</span></button>
+      <button data-action="tab" data-tab="fidelity" class="tab"><span class="tab-icon">📈</span><span>Holdings</span></button>
       <button data-action="tab" data-tab="records" class="tab"><span class="tab-icon">☰</span><span>Records</span></button>
       <button data-action="tab" data-tab="analysis" class="tab"><span class="tab-icon">📊</span><span>Analysis</span></button>
       <button data-action="tab" data-tab="settings" class="tab"><span class="tab-icon">⚙️</span><span>Settings</span></button>
@@ -42,11 +44,14 @@
   <div id="sheet" class="sheet" hidden></div>
   <div id="toast" class="toast" hidden></div>
   <input id="file" type="file" accept=".csv,.json,text/csv,application/json" hidden>
+  <input id="file-positions" type="file" accept=".csv,text/csv" hidden>
 
   <script src="vendor/chart.umd.min.js"></script>
-  <script src="js/engine.js?v=demo1"></script>
-  <script src="js/store.js?v=demo1"></script>
-  <script src="js/app.js?v=demo1"></script>
+  <script src="js/engine.js?v=demo2"></script>
+  <script src="js/funds.js?v=demo2"></script>
+  <script src="js/risk.js?v=demo2"></script>
+  <script src="js/store.js?v=demo2"></script>
+  <script src="js/app.js?v=demo2"></script>
 <script data-goatcounter="https://sguven.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

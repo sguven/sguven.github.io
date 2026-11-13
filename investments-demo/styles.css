@@ -350,3 +350,16 @@ table.mini-table tfoot td { font-weight: 700; border-bottom: 0; padding-top: 12p
 .back-link { display: block; margin: 10px 10px 0; font-size: 13px; font-weight: 600; color: var(--accent); text-decoration: none; }
 .back-link:hover { text-decoration: underline; }
 @media (min-width: 900px) { .demo-bar { display: none; } }
+
+/* ───────────────────────── Holdings page ───────────────────────── */
+.story { margin: 10px 0 4px; line-height: 1.5; }
+.fund-name { margin-left: 4px; }
+.only-desktop-cell { display: none; }
+.acct { padding: 10px 0; border-top: 1px solid var(--line); }
+.acct:first-of-type { border-top: 0; }
+.acct .line.sub { cursor: pointer; border-radius: 8px; }
+.acct .line.sub:hover { background: var(--card-2); }
+.grid > .note { margin: 0 4px; line-height: 1.5; }
+code { font: 12px ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--card-2); padding: 2px 6px; border-radius: 6px; word-break: break-all; }
+@media (max-width: 899px) { .tab { padding: 6px 10px; } .fund-name { display: block; margin-left: 0; white-space: normal; } }
+@media (min-width: 900px) { .only-desktop-cell { display: table-cell; } }
