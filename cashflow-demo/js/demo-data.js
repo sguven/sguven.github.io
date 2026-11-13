@@ -44,7 +44,7 @@ export function demoData() {
   };
 
   data.incomes = [
-    { id: id('in'), name: 'Salary', amount: 13400, frequency: 'monthly', daysOfMonth: [15, -1], earlyAvailabilityBusinessDays: 0, isActive: true, adjustment: 'previousBusinessDay', biweeklyAnchor: today },
+    { id: id('in'), name: 'Salary', amount: 1000, frequency: 'weekly', daysOfMonth: [], daysOfWeek: [6], earlyAvailabilityBusinessDays: 0, isActive: true, adjustment: 'previousBusinessDay', biweeklyAnchor: today },
     { id: id('in'), name: 'Rental income', amount: 4200, frequency: 'monthly', daysOfMonth: [3], earlyAvailabilityBusinessDays: 0, isActive: true, adjustment: 'nextBusinessDay', biweeklyAnchor: today },
     { id: id('in'), name: 'Consulting', amount: 1250, frequency: 'biweekly', daysOfMonth: [], daysOfWeek: [], biweeklyAnchor: monthDay(0, 6), earlyAvailabilityBusinessDays: 1, isActive: true, adjustment: 'previousBusinessDay' },
   ];

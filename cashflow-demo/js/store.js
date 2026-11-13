@@ -4,7 +4,7 @@
 import { D } from './engine.js';
 import { demoData } from './demo-data.js';
 
-const KEY = 'cashflow-demo-v1';
+const KEY = 'cashflow-demo-v2';
 const storage = {
   get() { try { return localStorage.getItem(KEY); } catch { return null; } },
   set(v) { try { localStorage.setItem(KEY, v); return true; } catch { return false; } },
