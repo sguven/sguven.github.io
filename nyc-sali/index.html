@@ -147,6 +147,19 @@ h2{font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-.02
 .reset{background:none;border:0;color:var(--muted);text-decoration:underline;text-underline-offset:3px;font-size:14px;padding:10px}
 .finish{text-align:left}
 .finish .now-time{font-size:clamp(48px,15vw,72px)}
+
+/* yürürken okunabilirlik */
+.short{font-size:20px;line-height:1.35;font-weight:600;margin:14px 0 0;max-width:30em}
+.short-in{font-size:17.5px;line-height:1.4;font-weight:600;margin:0 0 10px}
+.btn-main,.btn-ghost{flex:1 1 100%}
+.steps li{font-size:17px;line-height:1.5;grid-template-columns:64px 1fr;padding:13px 0}
+.steps li.cur{padding:13px 10px}
+.steps .t{font-size:16px}
+.intro{font-size:16.5px}
+.mapbtn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:50px;margin:12px 0 10px;border-radius:14px;
+  background:var(--patina);color:#fff;font-weight:700;font-size:16px;text-decoration:none}
+.mapbtn.small{min-height:44px;margin:10px 0 0;font-size:15px}
+.head .n{font-size:17px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -199,19 +212,22 @@ h2{font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-.02
 const TRIP_DATE = "2026-11-24";
 const KEY = "nyc-sali-2026-11-24";
 const gm = q => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
+const nav = q => "https://www.google.com/maps/dir/?api=1&travelmode=walking&destination=" + encodeURIComponent(q);
+const mapOf = s => s.walk ? nav(s.map) : gm(s.map);
+const mapLabel = s => s.walk ? "Google Maps'te yürüyüş tarifi" : "Google Maps'te aç";
 const route = pts => "https://www.google.com/maps/dir/?api=1&travelmode=walking&origin=" + encodeURIComponent(pts[0]) +
   "&destination=" + encodeURIComponent(pts[pts.length-1]) +
   (pts.length > 2 ? "&waypoints=" + encodeURIComponent(pts.slice(1,-1).join("|")) : "");
 
 const STOPS = [
- {id:"metro", t:"08:00", title:"Metroyla Financial District'e", place:"Times Sq–42 St durağı → Wall St durağı (2 ya da 3 numaralı hat)",
+ {id:"metro", short:"2 ya da 3 numaralı tren, Downtown yönü. 6. durak Wall St'te in.", t:"08:00", title:"Metroyla Financial District'e", place:"Times Sq–42 St durağı → Wall St durağı (2 ya da 3 numaralı hat)",
   map:"Times Sq-42 St Station New York", dur:"Yol toplam 25–30 dk",
   steps:[["08:00","Port Authority'den çık. 42. sokaktan doğuya 5 dakika yürü ya da terminalin içindeki yer altı geçidini izle: <b>Times Sq–42 St</b> durağı."],
          ["08:08","Kırmızı renkli <b>2</b> ya da <b>3</b> numaralı ekspres trene bin. Tabelada <b>Downtown &amp; Brooklyn</b> yazan peron."],
          ["08:25","6. durakta, <b>Wall St</b>'te in. Sıra: 34 St, 14 St, Chambers St, Park Place, Fulton St, Wall St. Çıkış William Street'e açılır."]],
   warn:"1 numaralı tren de aynı perondan geçer ama yereldir ve Wall St'te durmaz. Yanlışlıkla binersen son durak South Ferry'de in; Battery Park'ın içindesin, kahvaltıyı oradan 8 dakika yürüyerek yaparsın."},
 
- {id:"kahvalti", t:"08:30", title:"Kahvaltı: Leo's Bagels", place:"3 Hanover Square (Stone Street köşesi)",
+ {id:"kahvalti", short:"Everything bagel + cream cheese. 08:55'te kalk.", walk:true, t:"08:30", title:"Kahvaltı: Leo's Bagels", place:"3 Hanover Square (Stone Street köşesi)",
   map:"Leo's Bagels 3 Hanover Square New York",
   intro:"Elde açılıp kazanda haşlanan, gün boyu taze çıkan klasik New York bagel'ı. Hafta içi 06:00–16:00 açık.",
   dur:"Wall St durağından 3 dk, burada 20–25 dk",
@@ -222,7 +238,7 @@ const STOPS = [
   foods:[["Financier Patisserie (kruvasan istersen)","62 Stone St, Leo's'tan 1 dakika","Financier Patisserie 62 Stone St New York",
           "Fransız pastanesi: kruvasan, pain au chocolat, kahvenin yanında minik financier keki. Bugünkü saati doğrulanmadı; kapalıysa Leo's yeter."]]},
 
- {id:"boga", t:"08:55", title:"Charging Bull'dan geçerek Battery Park'a", place:"Stone St → Bowling Green → Battery Park",
+ {id:"boga", short:"Boğada 5 dakika fotoğraf, sonra su kenarındaki yuvarlak kaleye yürü.", walk:true, t:"08:55", title:"Charging Bull'dan geçerek Battery Park'a", place:"Stone St → Bowling Green → Battery Park",
   map:"Charging Bull New York",
   intro:"Boğa heykeli sabah bu saatte en sakin halinde; öğleden sonra önünde sıra olur.",
   dur:"Toplam 18 dk (yürüyüş 12 dk + fotoğraf)",
@@ -230,7 +246,7 @@ const STOPS = [
          ["09:02","<b>Charging Bull</b>: Broadway'in en ucunda, küçük parkın önünde. 5 dakika fotoğraf."],
          ["09:08","Boğanın arkasındaki parkı (Bowling Green) geçip Battery Park'a gir, su kenarına doğru yürü. 5 dakikada yuvarlak taş kale: <b>Castle Clinton</b>."]]},
 
- {id:"feribot", t:"09:15", title:"Feribot: güvenlik ve biniş (CityPASS)", place:"Battery Park, Castle Clinton'ın yanı, su kenarı",
+ {id:"feribot", short:"QR kodu aç, güvenlikten geç, ilk kalkan vapura bin. Güvertede sağda dur.", walk:true, t:"09:15", title:"Feribot: güvenlik ve biniş (CityPASS)", place:"Battery Park, Castle Clinton'ın yanı, su kenarı",
   map:"Castle Clinton National Monument Battery Park",
   intro:"Adalara giden tek resmi şirket <b>Statue City Cruises</b>. Bilet her iki adayı ve aradaki vapurları kapsar.",
   dur:"Güvenlik 20–40 dk, vapur 15 dk",
@@ -240,7 +256,7 @@ const STOPS = [
          ["Vapurda","Üst açık güverteye çık, <b>sağ tarafta</b> dur: heykel sağdan yaklaşır. Arkanda Manhattan silüeti. Yolculuk 15 dakika. Tuvalet ve büfe vapurda var."]],
   warn:"Parkta ve metro çıkışında \"bilet\" satan kişiler sahte ya da başka tekne turu satıyor; kimseyle konuşma, senin biletin telefonunda. Büyük sırt çantası ve valiz alınmıyor."},
 
- {id:"liberty", t:"10:15", title:"Liberty Island (Özgürlük Heykeli)", place:"Vapurun ilk durağı",
+ {id:"liberty", short:"Heykelin etrafında tur (35 dk), sonra müze (25 dk). 11:30'da iskelede ol.", t:"10:15", title:"Liberty Island (Özgürlük Heykeli)", place:"Vapurun ilk durağı",
   map:"Statue of Liberty National Monument",
   intro:"Burada toplam 70 dakika. Heykelin içine (kaide ve taç) pas ile girilmiyor; çevresi ve müze dahil.",
   dur:"Adada 70 dk",
@@ -249,7 +265,7 @@ const STOPS = [
          ["10:55","<b>Statue of Liberty Museum</b>: iskeleye yakın, çatısı çimenli modern bina. İçeride heykelin <b>orijinal meşalesi</b> ve yüzünün birebir kopyası; çatı terasına da çık. 25 dakika."],
          ["11:20","Tuvalet ve istersen kafeden sıcak bir şey. Sonra iskeleye dön."]]},
 
- {id:"gecis", t:"11:30", title:"Liberty Island → Ellis Island vapuru", place:"Liberty Island iskelesi",
+ {id:"gecis", short:"New York sırasına gir. İlk durak Ellis Island'da in.", t:"11:30", title:"Liberty Island → Ellis Island vapuru", place:"Liberty Island iskelesi",
   map:"Liberty Island Ferry Dock",
   intro:"İki ada arasında ayrı bir bilet yok; aynı biletle biniyorsun.",
   dur:"Bekleme 10 dk, yolculuk 10 dk",
@@ -257,7 +273,7 @@ const STOPS = [
          ["11:40","Vapur kalkar. 10 dakika sonra ilk durak <b>Ellis Island</b>; burada <b>in</b>. İnmezsen vapur seni doğrudan Battery Park'a götürür."]],
   warn:"New Jersey vapuruna binme: o hat Liberty State Park'a, yani nehrin karşı yakasına gider. Emin değilsen binerken görevliye \"Ellis Island, then Battery Park?\" diye sor."},
 
- {id:"ellis", t:"11:50", title:"Ellis Island (Göçmenlik Müzesi)", place:"Vapurun ikinci durağı",
+ {id:"ellis", short:"2. kattaki Registry Room'a çık. 12:55'te iskeleye dön.", t:"11:50", title:"Ellis Island (Göçmenlik Müzesi)", place:"Vapurun ikinci durağı",
   map:"Ellis Island National Museum of Immigration",
   intro:"1892–1954 arasında 12 milyon göçmenin Amerika'ya giriş yaptığı bina. Burada toplam 65 dakika.",
   dur:"Adada 65 dk",
@@ -266,14 +282,14 @@ const STOPS = [
          ["12:40","Binanın arkasında, su kenarında <b>Wall of Honor</b> ve Manhattan manzarası. 10 dakika. Acıktıysan giriş katındaki kafede atıştır; öğle yemeği 13:35'te."],
          ["12:55","İskeleye dön. Yine <b>New York (Battery Park)</b> sırası."]]},
 
- {id:"donus", t:"13:05", title:"Ellis Island → Battery Park vapuru", place:"Ellis Island iskelesi",
+ {id:"donus", short:"New York vapuruna bin. 13:25 gibi Battery Park'tasın.", t:"13:05", title:"Ellis Island → Battery Park vapuru", place:"Ellis Island iskelesi",
   map:"Castle Clinton National Monument Battery Park",
   dur:"Yolculuk 15–20 dk, varış 13:25 civarı",
   steps:[["13:05","New York vapuruna bin. Bu kez Manhattan'a yaklaşırken ön güvertede dur: gökdelenler tam karşından büyür."],
          ["13:25","Battery Park'ta, sabah bindiğin yerin yanında inersin."]],
   warn:"Vapurlar ya da güvenlik uzadıysa Ellis Island'ı 45 dakikaya indir. En geç 14:00'te Battery Park'ta ol; bu durumda Wall Street durağını atla, yemekten sonra doğrudan müzeye yürü."},
 
- {id:"ogle", t:"13:35", title:"Öğle yemeği: Stone Street", place:"Stone St (Hanover Square ile Coenties Alley arası)",
+ {id:"ogle", short:"Stone Street'te otur, ye. 14:20'de kalk.", walk:true, t:"13:35", title:"Öğle yemeği: Stone Street", place:"Stone St (Hanover Square ile Coenties Alley arası)",
   map:"Stone Street New York",
   intro:"Arnavut kaldırımlı, trafiğe kapalı, şehrin en eski sokaklarından biri; iki yanı restoran ve pub. Sabah kahvaltı yaptığın meydanın yanı.",
   dur:"Battery Park'tan 8 dk, burada 45 dk",
@@ -282,7 +298,7 @@ const STOPS = [
   foods:[["Adrienne's Pizzabar","54 Stone St","Adrienne's Pizzabar 54 Stone St New York",
           "İnce hamurlu kare pizzasıyla bilinir (\"Old Fashioned\"). Küçük boy bir kişiye fazlasıyla yeter."]]},
 
- {id:"wall", t:"14:25", title:"Wall Street", place:"Wall St ve Broad St köşesi",
+ {id:"wall", short:"Federal Hall, borsa, Trinity Church. Sonra Broadway'den kuzeye, müzeye.", walk:true, t:"14:25", title:"Wall Street", place:"Wall St ve Broad St köşesi",
   map:"New York Stock Exchange",
   intro:"Üç bina aynı 200 metrede; fotoğraf çekip geçilecek bir durak.",
   dur:"Toplam 30 dk, müzeye yürüyüş dahil",
@@ -291,7 +307,7 @@ const STOPS = [
          ["14:37","Wall Street'i batıya, Broadway'e kadar yürü (2 dakika). Karşında <b>Trinity Church</b>; içi ücretsiz, 5 dakika."],
          ["14:47","Kiliseden çık, Broadway'den <b>kuzeye</b> 3 blok yürü, Liberty Street'ten sola dön. 8 dakikada anıt alanındasın."]]},
 
- {id:"muze", t:"15:00", title:"9/11 Müzesi (CityPASS)", place:"180 Greenwich St; giriş iki havuzun arasındaki cam bina",
+ {id:"muze", short:"QR kodu okut, aşağı in. 16:45'te çıkış. Çıkınca tekrar giriş yok.", walk:true, t:"15:00", title:"9/11 Müzesi (CityPASS)", place:"180 Greenwich St; giriş iki havuzun arasındaki cam bina",
   map:"9/11 Memorial & Museum New York",
   intro:"Müze yer altında, ikiz kulelerin temellerinin olduğu yerde. Normalde salıları kapalı ama 24 Kasım özel açık günlerden: 09:00–19:00, son giriş 17:30. Ağır ve etkileyici bir yer; acele etme.",
   dur:"İçeride 1 saat 45 dk, çıkınca tekrar giriş yok",
@@ -302,7 +318,7 @@ const STOPS = [
          ["16:30","<b>Memorial Exhibition (In Memoriam)</b>: hayatını kaybeden herkesin fotoğrafı. 10 dakika."],
          ["16:45","Çıkış."]]},
 
- {id:"oculus", t:"16:45", title:"Anıt havuzları + Oculus", place:"Müzenin önü; Oculus kuzeydoğu köşede",
+ {id:"oculus", short:"İki havuz ve Survivor Tree, sonra beyaz kanatlı Oculus'un içi.", walk:true, t:"16:45", title:"Anıt havuzları + Oculus", place:"Müzenin önü; Oculus kuzeydoğu köşede",
   map:"Oculus World Trade Center",
   intro:"Hava kararmış olacak; havuzlar ve Oculus ışıklı halleriyle daha etkileyici.",
   dur:"Toplam 30 dk",
@@ -311,32 +327,32 @@ const STOPS = [
   foods:[["Eataly Downtown","4 World Trade Center, 3. kat (101 Liberty St)","Eataly NYC Downtown 101 Liberty St",
           "Müzeden erken çıkarsan: İtalyan kahvesi ya da cannoli, camdan anıt havuzlarına bakarak. Katz's'a aç gitmek için fazla bir şey yeme."]]},
 
- {id:"yuruyus", t:"17:12", title:"Bara yürüyüş", place:"Oculus → Broadway → Water St",
+ {id:"yuruyus", short:"Broadway'den güneye, boğadan sola, Water St 30 numara.", walk:true, t:"17:12", title:"Bara yürüyüş", place:"Oculus → Broadway → Water St",
   map:"The Dead Rabbit 30 Water St New York", dur:"Yürüyüş 12–15 dk",
   steps:[["17:12","Oculus'tan Broadway'e çık, güneye yürü. Wall Street köşesinden geçerken borsayı bir de ışıklı haliyle görürsün."],
          ["17:22","Bowling Green'e (boğa) gelince sola dön, Broad Street üzerinden Water Street'e in. Bar 30 numarada."]]},
 
- {id:"rabbit", t:"17:30", title:"The Dead Rabbit: Serhat ile buluşma", place:"30 Water St",
+ {id:"rabbit", short:"Giriş katı Taproom. Irish Coffee söyle, yemek söyleme. Serhat buraya geliyor.", walk:true, t:"17:30", title:"The Dead Rabbit: Serhat ile buluşma", place:"30 Water St",
   map:"The Dead Rabbit 30 Water St New York",
   intro:"Dünyanın en iyi barı seçilmiş bir İrlanda pub'ı. Giriş katındaki Taproom'da otur; <b>Irish Coffee</b> meşhur, soğuktan gelince tam yerine oturur. Serhat işten buraya geliyor. Burada yemek söyleme, akşam yemeği Katz's'ta.",
   dur:"Burada 1–1,5 saat. Bugünkü saatini haritadan kontrol et.",
   steps:[]},
 
- {id:"jtreni", t:"18:45", title:"J treniyle Lower East Side'a", place:"Broad St durağı → Delancey St–Essex St",
+ {id:"jtreni", short:"Broad St'ten J treni, 5. durak Delancey St–Essex St'te inin.", t:"18:45", title:"J treniyle Lower East Side'a", place:"Broad St durağı → Delancey St–Essex St",
   map:"Broad St Station New York", dur:"Yürüyüş 6 dk, tren 10 dk. Saatler yaklaşık.",
   steps:[["18:45","Bardan <b>Broad St</b> metro durağına yürüyün: Broad Street'i kuzeye, borsanın önüne kadar, 6 dakika. Kahverengi <b>J</b> trenine binin; burası hattın ilk durağı, tek yöne gider."],
          ["19:00","5. durakta, <b>Delancey St–Essex St</b>'te inin. Sıra: Fulton St, Chambers St, Canal St, Bowery, Delancey–Essex. 10 dakika."]]},
 
- {id:"katz", t:"19:10", title:"Katz's Delicatessen", place:"205 E Houston St",
+ {id:"katz", short:"Kapıda verilen bileti kaybetme. Pastrami on rye, biri iki kişiye yeter.", walk:true, t:"19:10", title:"Katz's Delicatessen", place:"205 E Houston St",
   map:"Katz's Delicatessen 205 E Houston St New York", dur:"Essex Street'ten kuzeye 5 dk, burada yaklaşık 1 saat",
   steps:[["19:10","Kapıda herkese küçük bir bilet verirler; <b>kaybetme</b>, çıkışta onunla ödeniyor."],
          ["Sipariş","Tezgaha git, <b>pastrami on rye</b> söyle. Bir sandviç iki kişiye yeter."]]},
 
- {id:"gelato", t:"20:15", title:"Il Laboratorio del Gelato", place:"188 Ludlow St, Katz's'ın tam karşı köşesi",
+ {id:"gelato", short:"Katz's'ın karşı köşesi. Bir top gelato.", walk:true, t:"20:15", title:"Il Laboratorio del Gelato", place:"188 Ludlow St, Katz's'ın tam karşı köşesi",
   map:"Il Laboratorio del Gelato 188 Ludlow St New York", dur:"Yaklaşık 20 dk",
   intro:"Tatlı niyetine bir top.", steps:[]},
 
- {id:"backroom", t:"20:45", title:"The Back Room (gizli bar)", place:"102 Norfolk St",
+ {id:"backroom", short:"Tabela yok. \"Lower East Side Toy Company\" yazan demir kapıdan gir.", walk:true, t:"20:45", title:"The Back Room (gizli bar)", place:"102 Norfolk St",
   map:"The Back Room 102 Norfolk St New York", dur:"Gelato'dan 7 dk yürüyüş",
   intro:"İçki yasağı döneminden kalma gerçek bir gizli bar; içkiler çay fincanında gelir.",
   steps:[["20:45","Tabela yok; \"Lower East Side Toy Company\" yazan demir kapıdan gir, merdivenden in, avluyu geç, karşıdaki kapı."],
@@ -388,12 +404,14 @@ const clockStop = now => { let c = null; STOPS.forEach(s => { if (s.start <= now
 /* ---------- çizim ---------- */
 const $ = id => document.getElementById(id);
 const CHECK = '<svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.8"/></svg>';
+const PIN = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.1-7-11.2A7 7 0 0 1 12 3a7 7 0 0 1 7 6.8C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.8" r="2.4"/></svg>';
 const CHEV = '<svg class="c" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 6l4.5 4.5L12.5 6"/></svg>';
 
-function detailHTML(s, now, live){
+function detailHTML(s, now, live, inList){
   let cur = -1;
   if (live) s.steps.forEach((st,i) => { const m = toMin(st[0]); if (m !== null && m <= now.min) cur = i; });
   let h = "";
+  if (inList && s.short) h += `<p class="short-in">${s.short}</p>`;
   if (s.intro) h += `<p class="intro">${s.intro}</p>`;
   if (s.dur) h += `<p class="dur">${s.dur}</p>`;
   if (s.steps.length){
@@ -402,9 +420,9 @@ function detailHTML(s, now, live){
   }
   if (s.warn) h += `<div class="warn"><strong>Dikkat</strong>${s.warn}</div>`;
   (s.foods||[]).forEach(f => {
-    h += `<div class="food"><h4>${f[0]}</h4><div class="addr">${f[1]}</div><p>${f[3]}</p><a class="maplink" href="${gm(f[2])}" target="_blank" rel="noopener">Haritada aç</a></div>`;
+    h += `<div class="food"><h4>${f[0]}</h4><div class="addr">${f[1]}</div><p>${f[3]}</p><a class="mapbtn small" href="${gm(f[2])}" target="_blank" rel="noopener">${PIN}Google Maps'te aç</a></div>`;
   });
-  h += `<a class="maplink" href="${gm(s.map)}" target="_blank" rel="noopener">${s.title.split(":")[0]} haritada</a>`;
+  if (inList) h += `<a class="mapbtn" href="${mapOf(s)}" target="_blank" rel="noopener">${PIN}${mapLabel(s)}</a>`;
   return h;
 }
 
@@ -447,10 +465,11 @@ function render(){
       <div class="now-time">${nx.t}</div>
       <h1 class="now-title">${nx.title}</h1>
       <p class="now-place">${nx.place}</p>
+      <p class="short">${nx.short}</p>
       <div class="status ${cls}">${msg}</div>
       <div class="actions">
         <button class="btn btn-main" id="doneBtn">Yaptım, sıradakine geç</button>
-        <a class="btn btn-ghost" href="${gm(nx.map)}" target="_blank" rel="noopener">Harita</a>
+        <a class="btn btn-ghost" href="${mapOf(nx)}" target="_blank" rel="noopener">${PIN}${mapLabel(nx)}</a>
         ${catchup}
       </div>`;
     $("detail").innerHTML = `<div class="detail">${detailHTML(nx, now, tripDay && now.min < nx.end)}</div>`;
@@ -469,7 +488,7 @@ function render(){
     return `<li class="${c.join(" ")}" data-id="${s.id}">
       <button class="check" aria-pressed="${done.has(s.id)}" aria-label="${s.title}: ${done.has(s.id) ? "yapıldı, geri al" : "yapıldı olarak işaretle"}">${CHECK}</button>
       <button class="head" aria-expanded="${openId === s.id}"><span class="t">${s.t}</span><span class="n">${s.title}<small>${s.place}</small></span>${CHEV}</button>
-      <div class="body">${openId === s.id ? detailHTML(s, now, false) : ""}</div>
+      <div class="body">${openId === s.id ? detailHTML(s, now, false, true) : ""}</div>
     </li>`;
   }).join("");
 }
