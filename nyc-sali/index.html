@@ -157,6 +157,12 @@ h2{font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-.02
 .steps .t{font-size:16px}
 .intro{font-size:16.5px}
 .btn-back{flex:1 1 100%;background:transparent;color:var(--on-harbor-muted);min-height:44px;padding:8px 12px;font-size:15px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.path{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px 0;font-size:15px;font-weight:600}
+.path li{display:flex;align-items:center}
+.path li:not(:last-child)::after{content:"";width:7px;height:7px;border-top:2px solid currentColor;border-right:2px solid currentColor;transform:rotate(45deg);margin:0 11px 0 7px;opacity:.55}
+.path li:last-child{background:var(--ferry);color:#231200;padding:2px 10px;border-radius:999px}
+.now .path{color:var(--on-harbor-muted)}
+.body .path{margin:0 0 12px;color:var(--muted)}
 .mapbtn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:50px;margin:12px 0 10px;border-radius:14px;
   background:var(--patina);color:#fff;font-weight:700;font-size:16px;text-decoration:none}
 .mapbtn.small{min-height:44px;margin:10px 0 0;font-size:15px}
@@ -214,8 +220,8 @@ const TRIP_DATE = "2026-11-24";
 const KEY = "nyc-sali-2026-11-24";
 const gm = q => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
 const nav = q => "https://www.google.com/maps/dir/?api=1&travelmode=walking&destination=" + encodeURIComponent(q);
-const mapOf = s => s.walk ? nav(s.map) : gm(s.map);
-const mapLabel = s => s.walk ? "Google Maps'te yürüyüş tarifi" : "Google Maps'te aç";
+const mapOf = s => s.dir ? dirURL(s.dir) : (s.walk ? nav(s.map) : gm(s.map));
+const mapLabel = s => s.dir ? (s.dir.m === "transit" ? "Metro güzergahını Google Maps'te aç" : "Yürüyüş güzergahını Google Maps'te aç") : (s.walk ? "Google Maps'te yürüyüş tarifi" : "Google Maps'te aç");
 const route = pts => "https://www.google.com/maps/dir/?api=1&travelmode=walking&origin=" + encodeURIComponent(pts[0]) +
   "&destination=" + encodeURIComponent(pts[pts.length-1]) +
   (pts.length > 2 ? "&waypoints=" + encodeURIComponent(pts.slice(1,-1).join("|")) : "");
@@ -377,6 +383,44 @@ const TIPS = [
  "Bu hafta tatil haftası. Mekanların saatleri normalden farklı olabilir; gitmeden haritadaki güncel saate bak."
 ];
 
+
+/* her adımın güzergahı: nereden, nereye, neyle */
+const EXTRA = {
+ metro:{path:["Port Authority","Times Sq–42 St durağı","2 ya da 3 treni, 6 durak","Wall St durağı"],
+        dir:{o:"Port Authority Bus Terminal New York", d:"Wall St Station William St New York", m:"transit"}},
+ kahvalti:{path:["Wall St durağı","William St'ten güneye 3 dk","Leo's Bagels"],
+        dir:{o:"Wall St Station William St New York", d:"Leo's Bagels 3 Hanover Square New York", m:"walking"}},
+ boga:{path:["Leo's Bagels","Stone St'ten batıya","Charging Bull","Battery Park","Castle Clinton"],
+        dir:{o:"Leo's Bagels 3 Hanover Square New York", w:["Charging Bull New York"], d:"Castle Clinton National Monument Battery Park", m:"walking"}},
+ feribot:{path:["Castle Clinton","Güvenlik","İskele","Vapur, 15 dk","Liberty Island"]},
+ liberty:{path:["İskele","Bayrak meydanı","Adanın ucu","Müze","İskele"]},
+ gecis:{path:["Liberty Island iskelesi","New York sırası","Vapur, 10 dk","Ellis Island"]},
+ ellis:{path:["İskele","Baggage Room","2. kat Registry Room","Wall of Honor","İskele"]},
+ donus:{path:["Ellis Island iskelesi","New York vapuru, 15–20 dk","Battery Park"]},
+ ogle:{path:["Battery Park","Bowling Green","Broadway'den sağa","Stone Street"],
+        dir:{o:"Castle Clinton National Monument Battery Park", d:"Stone Street New York", m:"walking"}},
+ wall:{path:["Stone Street","Federal Hall ve borsa","Trinity Church","Broadway'den kuzeye","9/11 Müzesi"],
+        dir:{o:"Stone Street New York", w:["Federal Hall New York","Trinity Church Wall Street New York"], d:"9/11 Memorial & Museum New York", m:"walking"}},
+ muze:{path:["Cam giriş binası","Foundation Hall","Historical Exhibition","In Memoriam","Çıkış"]},
+ oculus:{path:["Müze çıkışı","Güney Havuzu","Survivor Tree","Kuzey Havuzu","Oculus"],
+        dir:{o:"9/11 Memorial & Museum New York", d:"Oculus World Trade Center", m:"walking"}},
+ yuruyus:{path:["Oculus","Broadway'den güneye","Bowling Green'den sola","Broad St","Water St 30"],
+        dir:{o:"Oculus World Trade Center", d:"The Dead Rabbit 30 Water St New York", m:"walking"}},
+ jtreni:{path:["The Dead Rabbit","Broad St durağı, 6 dk yürüme","J treni, 5 durak","Delancey St–Essex St"],
+        dir:{o:"The Dead Rabbit 30 Water St New York", d:"Delancey St-Essex St Station New York", m:"transit"}},
+ katz:{path:["Delancey St–Essex St","Essex St'ten kuzeye 5 dk","Katz's"],
+        dir:{o:"Delancey St-Essex St Station New York", d:"Katz's Delicatessen 205 E Houston St New York", m:"walking"}},
+ gelato:{path:["Katz's","Karşı köşe","Il Laboratorio del Gelato"],
+        dir:{o:"Katz's Delicatessen 205 E Houston St New York", d:"Il Laboratorio del Gelato 188 Ludlow St New York", m:"walking"}},
+ backroom:{path:["Gelato","7 dk yürüme","102 Norfolk St, demir kapı"],
+        dir:{o:"Il Laboratorio del Gelato 188 Ludlow St New York", d:"The Back Room 102 Norfolk St New York", m:"walking"},
+        back:{o:"The Back Room 102 Norfolk St New York", d:"Port Authority Bus Terminal New York", m:"transit"}}
+};
+STOPS.forEach(s => Object.assign(s, EXTRA[s.id] || {}));
+const dirURL = d => "https://www.google.com/maps/dir/?api=1&travelmode=" + d.m + "&origin=" + encodeURIComponent(d.o) +
+  "&destination=" + encodeURIComponent(d.d) + (d.w ? "&waypoints=" + encodeURIComponent(d.w.join("|")) : "");
+const pathHTML = s => s.path ? '<ol class="path">' + s.path.map(x => `<li>${x}</li>`).join("") + "</ol>" : "";
+
 /* ---------- zaman ---------- */
 const toMin = s => { const m = /(\d{1,2}):(\d{2})/.exec(s); return m ? (+m[1])*60 + (+m[2]) : null; };
 const fmt = m => String(Math.floor(m/60)).padStart(2,"0") + ":" + String(m%60).padStart(2,"0");
@@ -414,6 +458,7 @@ function detailHTML(s, now, live, inList){
   if (live) s.steps.forEach((st,i) => { const m = toMin(st[0]); if (m !== null && m <= now.min) cur = i; });
   let h = "";
   if (inList && s.short) h += `<p class="short-in">${s.short}</p>`;
+  if (inList) h += pathHTML(s);
   if (s.intro) h += `<p class="intro">${s.intro}</p>`;
   if (s.dur) h += `<p class="dur">${s.dur}</p>`;
   if (s.steps.length){
@@ -424,6 +469,7 @@ function detailHTML(s, now, live, inList){
   (s.foods||[]).forEach(f => {
     h += `<div class="food"><h4>${f[0]}</h4><div class="addr">${f[1]}</div><p>${f[3]}</p><a class="mapbtn small" href="${gm(f[2])}" target="_blank" rel="noopener">${PIN}Google Maps'te aç</a></div>`;
   });
+  if (s.back) h += `<a class="mapbtn small" href="${dirURL(s.back)}" target="_blank" rel="noopener">${PIN}Dönüş güzergahı: Port Authority'ye</a>`;
   if (inList) h += `<a class="mapbtn" href="${mapOf(s)}" target="_blank" rel="noopener">${PIN}${mapLabel(s)}</a>`;
   return h;
 }
@@ -470,6 +516,7 @@ function render(){
       <h1 class="now-title">${nx.title}</h1>
       <p class="now-place">${nx.place}</p>
       <p class="short">${nx.short}</p>
+      ${pathHTML(nx)}
       <div class="status ${cls}">${msg}</div>
       <div class="actions">
         <button class="btn btn-main" id="doneBtn">Yaptım, sıradakine geç</button>
