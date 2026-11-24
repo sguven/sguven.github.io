@@ -156,6 +156,7 @@ h2{font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-.02
 .steps li.cur{padding:13px 10px}
 .steps .t{font-size:16px}
 .intro{font-size:16.5px}
+.btn-back{flex:1 1 100%;background:transparent;color:var(--on-harbor-muted);min-height:44px;padding:8px 12px;font-size:15px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
 .mapbtn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:50px;margin:12px 0 10px;border-radius:14px;
   background:var(--patina);color:#fff;font-weight:700;font-size:16px;text-decoration:none}
 .mapbtn.small{min-height:44px;margin:10px 0 0;font-size:15px}
@@ -186,7 +187,7 @@ h2{font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-.02
   <div id="detail"></div>
 
   <h2>Günün tamamı</h2>
-  <p class="sub">Yaptığın adımı yuvarlağa dokunarak işaretle. Satıra dokununca detayı açılır.</p>
+  <p class="sub">Yuvarlağa dokunarak işaretle; yanlış bastıysan tekrar dokun, işaret kalkar. Satıra dokununca detayı açılır.</p>
   <ol class="list" id="list"></ol>
 
   <h2>Bugün için</h2>
@@ -405,6 +406,7 @@ const clockStop = now => { let c = null; STOPS.forEach(s => { if (s.start <= now
 const $ = id => document.getElementById(id);
 const CHECK = '<svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.8"/></svg>';
 const PIN = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.1-7-11.2A7 7 0 0 1 12 3a7 7 0 0 1 7 6.8C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.8" r="2.4"/></svg>';
+const BACK = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg>';
 const CHEV = '<svg class="c" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 6l4.5 4.5L12.5 6"/></svg>';
 
 function detailHTML(s, now, live, inList){
@@ -437,11 +439,13 @@ function render(){
   $("bar").style.width = (done.size / STOPS.length * 100) + "%";
   $("count").textContent = `${done.size} / ${STOPS.length} adım`;
 
+  const prev = (() => { const i = nx ? STOPS.indexOf(nx) : STOPS.length; for (let k = i-1; k >= 0; k--) if (done.has(STOPS[k].id)) return STOPS[k]; return null; })();
   /* sıradaki adım */
   if (!nx){
     $("now").innerHTML = `<div class="finish"><div class="now-label">Bütün adımlar tamam</div>
       <div class="now-time">Gün bitti</div>
-      <p class="now-place">Dönüş: Delancey St–Essex St durağından F treni, Uptown yönü, 42 St–Bryant Park. Oradan Port Authority 10 dakika yürüme.</p></div>`;
+      <p class="now-place">Dönüş: Delancey St–Essex St durağından F treni, Uptown yönü, 42 St–Bryant Park. Oradan Port Authority 10 dakika yürüme.</p>
+      <div class="actions">${prev ? `<button class="btn btn-back" id="backBtn">${BACK}Geri al: ${prev.t} adımına dön</button>` : ""}</div></div>`;
     $("detail").innerHTML = "";
   } else {
     let cls = "", msg = "", catchup = "";
@@ -471,12 +475,16 @@ function render(){
         <button class="btn btn-main" id="doneBtn">Yaptım, sıradakine geç</button>
         <a class="btn btn-ghost" href="${mapOf(nx)}" target="_blank" rel="noopener">${PIN}${mapLabel(nx)}</a>
         ${catchup}
+        ${prev ? `<button class="btn btn-back" id="backBtn">${BACK}Geri al: ${prev.t} adımına dön</button>` : ""}
       </div>`;
     $("detail").innerHTML = `<div class="detail">${detailHTML(nx, now, tripDay && now.min < nx.end)}</div>`;
     $("doneBtn").onclick = () => { done.add(nx.id); save(); openId = null; render(); window.scrollTo({top:0, behavior:"smooth"}); };
     const cu = $("catchup");
     if (cu) cu.onclick = () => { for (const s of STOPS){ if (s === cs) break; done.add(s.id); } save(); render(); };
   }
+
+  const bb = $("backBtn");
+  if (bb) bb.onclick = () => { done.delete(prev.id); save(); openId = null; render(); window.scrollTo({top:0, behavior:"smooth"}); };
 
   /* liste */
   $("list").innerHTML = STOPS.map(s => {
