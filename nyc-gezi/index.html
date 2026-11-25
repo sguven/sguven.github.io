@@ -85,6 +85,19 @@ b{font-weight:700}
   text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px}
 .btn-main{background:var(--ferry);color:#231200;flex:1 1 200px}
 .btn-main:active{transform:translateY(1px)}
+.btn-main:disabled{opacity:.45;cursor:not-allowed}
+.now .status.late{border-radius:14px;align-items:flex-start;line-height:1.35}
+.now .status.late::before{flex:none;margin-top:6px}
+.foot .reset{display:block;margin:0 auto}
+.opts{display:grid;gap:10px;margin-top:16px}
+.opt{display:block;width:100%;text-align:left;border:1.5px solid rgba(255,255,255,.22);background:rgba(255,255,255,.08);color:var(--on-harbor);border-radius:16px;padding:14px 16px;min-height:50px}
+.opt b{display:block;font-family:var(--display);font-size:19px;line-height:1.2}
+.opt span{display:block;font-size:15px;color:var(--on-harbor-muted);margin-top:4px;line-height:1.35}
+.opt em{display:block;font-style:normal;font-weight:700;font-size:15px;margin-top:8px;color:#FFD08A;font-variant-numeric:tabular-nums}
+.opt:active{background:rgba(255,255,255,.16)}
+.opt:disabled{opacity:.5;cursor:not-allowed}
+.opt:disabled em{color:var(--on-harbor-muted);font-weight:500}
+.foot .reset[hidden]{display:none}
 .btn-ghost{background:rgba(255,255,255,.12);color:var(--on-harbor)}
 .btn-line{background:transparent;border:1.5px solid rgba(255,255,255,.35);color:var(--on-harbor);width:100%}
 
@@ -201,7 +214,7 @@ h2{font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-.02
   <div id="detail"></div>
 
   <h2>Günün tamamı</h2>
-  <p class="sub">Yuvarlağa dokunarak işaretle; yanlış bastıysan tekrar dokun, işaret kalkar. Satıra dokununca detayı açılır.</p>
+  <p class="sub" id="listSub"></p>
   <ol class="list" id="list"></ol>
 
   <h2 id="factsTitle">Bugün için</h2>
@@ -216,6 +229,8 @@ h2{font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-.02
 
   <div class="foot">
     <button class="reset" id="reset">İşaretleri sıfırla</button>
+    <button class="reset" id="rechoose" hidden>Seçimi değiştir (müzeden sonrası)</button>
+    <button class="reset" id="restart" hidden>Başlangıç saatini sıfırla</button>
   </div>
 </main>
 
@@ -421,171 +436,412 @@ const EXTRA_SALI = {
         dir:{o:"Il Laboratorio del Gelato 188 Ludlow St New York", d:"The Back Room 102 Norfolk St New York", m:"walking"},
         back:{o:"The Back Room 102 Norfolk St New York", d:"Port Authority Bus Terminal New York", m:"transit"}}
 };
-const STOPS_CAR = [
- {id:"metro", short:"C treni, Uptown yönü. 4. durak 81 St'te in. A trenine binme, 81'de durmaz.", t:"09:10", title:"Metroyla Upper West Side'a", place:"42 St–Port Authority durağı → 81 St durağı (C treni)",
-  map:"81 St-Museum of Natural History Station New York", dur:"Yol toplam 15–20 dk",
-  steps:[["09:10","Durak Port Authority terminalinin tam altında; 8th Avenue tarafındaki merdivenlerden in."],
-         ["09:12","Mavi renkli <b>C</b> trenine bin, <b>Uptown</b> yönü. Aynı perondan A ve E de geçer: <b>A treni 81'de durmaz</b>, E başka yöne sapar. Trenin önündeki harfe bak."],
-         ["09:25","4. durakta, <b>81 St–Museum of Natural History</b>'de in. Sıra: 50 St, 59 St–Columbus Circle, 72 St, 81 St. Çıkış Central Park West'e açılır, müze hemen yanında."]],
-  warn:"Balon hazırlığı yüzünden tren 81 St'te durmazsa (anons yapılır) 72 St'te in ve Central Park West boyunca kuzeye 8 dakika yürü; müzenin ana merdiveni 79. sokak hizasında."},
-
- {id:"levain", short:"Cevizli çikolatalı kurabiye ve kahve al, yolda ye. Polis yolu kapattıysa atla, doğrudan müzeye gir.", walk:true, t:"09:30", title:"İsteğe bağlı kahvaltı: Levain Bakery", place:"351 Amsterdam Ave (77. sokak köşesi)",
-  map:"Levain Bakery 351 Amsterdam Ave New York",
-  intro:"New York'un en meşhur kurabiyesi: avuç içi kadar, dışı çıtır içi yumuşak, sıcak verilir. Cevizli çikolatalı olanı klasik; bir tanesi kahvaltı yerine geçer.",
-  dur:"Gidiş-dönüş yürüyüş 20 dk, dükkanda 10 dk",
-  steps:[["09:27","Metro çıkışından 81. sokağı batıya doğru iki avenue yürü (Columbus, sonra Amsterdam), Amsterdam'dan sola dönüp 4 blok aşağı in: 10 dakika."],
-         ["09:37","Kurabiyeni ve kahveni al, yolda ye."],
-         ["09:48","Aynı yoldan Central Park West'e dön, sağa 2 blok: müzenin ana merdiveni."]],
-  warn:"81. ve 77. sokaklar bugün balonlar için araca kapalı. Polis yayaları da çeviriyorsa uğraşma: Levain'i atla, doğrudan müzeye gir ve kahveni içerideki kafeden al."},
-
- {id:"amnh", short:"Central Park West kapısından gir. Sıra: Afrika salonu, 4. kat dinozorlar, mavi balina, uzay. 12:20'de çık.", walk:true, t:"10:00", title:"Doğa Tarihi Müzesi (CityPASS)", place:"Central Park West ve 79. sokak, geniş merdivenli ana giriş",
-  map:"American Museum of Natural History New York",
-  intro:"Çok büyük bir müze; hepsini gezmeye çalışma, aşağıdaki sırayı izle. Açılış 10:00. Girişte kağıt harita al ya da müzenin ücretsiz \"Explorer\" uygulamasını indir; içeride salondan salona yol tarifi veriyor.",
-  dur:"İçeride 2,5 saat",
-  steps:[["10:00","Ana merdivenden çık, CityPASS rezervasyon QR kodunu okut. İlk salon <b>Rotunda</b> (2. kat): ortada yavrusunu koruyan dev Barosaurus iskeleti. Vestiyer alt katta."],
-         ["10:10","Rotunda'nın hemen arkası: <b>Afrika Memelileri Salonu</b> (Akeley Hall). Ortada fil sürüsü, çevresinde gerçek gibi duran dioramalar. 15 dakika."],
-         ["10:25","Asansörle <b>4. kata</b> çık: dinozor katı. Önce girişteki 37 metrelik <b>Titanosaur</b> (kafası kapıdan dışarı taşar), sonra <b>T. rex</b> ve Apatosaurus'un olduğu salon, ardından Triceratops ve Stegosaurus. 50 dakika."],
-         ["11:15","Asansörle <b>1. kata</b> in: <b>Okyanus Salonu</b> (Milstein Hall of Ocean Life). Tavandan asılı 29 metrelik gerçek boyutlu mavi balina. 20 dakika."],
-         ["11:35","Yine 1. kat, binanın kuzey ucu: <b>Rose Center</b> (uzay bölümü). Cam küpün içindeki dev küre ve çevresindeki evren ölçeği yürüyüşü. 25 dakika."],
-         ["12:00","Vaktin kalırsa 1. katın batı ucundaki <b>Gilder Center</b>: mağara gibi oyulmuş beton atriyum, sadece mimarisi için 10 dakika. Kalmadıysa atla."],
-         ["12:20","Tuvalet, mağaza. Yine <b>Central Park West</b> kapısından çık; diğer kapılar bugün kapalı."]],
-  warn:"Pas genel girişe ek olarak bir özel gösteri ya da sergi hakkı veriyor. Rezervasyonda planetaryum gösterisini (Space Show, 25 dk) seçersen saatine göre Rose Center adımını ona denk getir ve Gilder Center'ı atla."},
-
- {id:"cmetro", short:"C treni, bu kez Downtown yönü. 7. durak 14 St'te in, 15. sokaktan batıya 5 dakika yürü.", t:"12:30", title:"Metroyla Chelsea'ye", place:"81 St durağı → 14 St durağı (C treni)",
-  map:"14 St 8 Av Station New York", dur:"Yol toplam 25–30 dk",
-  intro:"Balonları görmek isteyenlerin sırası öğlen açılıyor; çevre kalabalıklaşmadan çıkmış oluyorsun. Müzeden çıkarken sokaklardaki yarı şişmiş balonları parmaklıkların arkasından görürsün.",
-  steps:[["12:27","Sabah çıktığın durağa in: Central Park West ve 81. sokak köşesi."],
-         ["12:32","<b>C</b> trenine bu kez <b>Downtown &amp; Brooklyn</b> yönüne bin."],
-         ["12:50","7. durakta, <b>14 St</b>'te in. Sıra: 72 St, 59 St, 50 St, 42 St, 34 St, 23 St, 14 St."],
-         ["12:53","8th Avenue'ya çıkınca 15. sokağı batıya doğru bir avenue yürü: 5 dakikada 9th Avenue, Chelsea Market karşında."]]},
-
- {id:"chelsea", short:"Koridoru bir yürü, Los Tacos No. 1'de iki taco ye. 13:50'de 9th Avenue kapısından çık.", walk:true, t:"13:00", title:"Öğle yemeği: Chelsea Market", place:"75 9th Ave (15.–16. sokak arası)",
-  map:"Chelsea Market New York",
-  intro:"Eski bir bisküvi fabrikasının içinde kapalı yemek çarşısı; tek uzun koridor, iki yanı tezgah.",
-  dur:"Burada 50 dk",
-  steps:[["13:00","9th Avenue kapısından gir, koridoru baştan sona bir yürü (5 dakika), sonra seç."],
-         ["13:10","Öneri <b>Los Tacos No. 1</b>: önce kasada sipariş ve ödeme, fişle tezgahtan teslim, ayakta yenir. <b>Adobada</b> (marine domuz) ya da <b>carne asada</b> (dana); iki taco doyurur. Sıra uzun görünür, 10 dakikada biter."],
-         ["13:50","9th Avenue kapısından çık."]],
-  foods:[["Fat Witch Bakery","Chelsea Market içinde","Fat Witch Bakery Chelsea Market New York",
-          "Tatlı için küçük kare brownie'ler; cebe atıp Little Island'da yemek için de uygun."]]},
-
- {id:"whitney", short:"QR kodu okut, asansörle 8. kata çık, teraslardan kat kat aşağı in. 15:25'te çıkış.", walk:true, t:"14:00", title:"Whitney Müzesi (CityPASS)", place:"99 Gansevoort St",
-  map:"Whitney Museum of American Art New York",
-  intro:"Amerikan modern sanatı. Çarşamba 10:30–18:00 açık. Müzenin en güzel yanı katlara yayılmış açık terasları: bir yanda Hudson Nehri, bir yanda şehir.",
-  dur:"İçeride 1,5 saat",
-  steps:[["13:52","Chelsea Market'ten 9th Avenue'yu güneye 3 blok yürü, Gansevoort Street'ten sağa (nehre doğru) 2 blok: 6 dakika."],
-         ["14:00","Lobide CityPASS QR kodunu okut, montunu vestiyere bırak."],
-         ["14:05","Asansörle doğrudan <b>8. kata</b> çık; önce terasa, şehir manzarası. 15 dakika."],
-         ["14:20","<b>7. kat</b>: müzenin kendi koleksiyonu; <b>Edward Hopper</b> tabloları en bilinenleri, Georgia O'Keeffe de burada. 30 dakika. Katlar arasında dışarıdaki merdivenle terastan terasa inebilirsin."],
-         ["14:50","<b>6. ve 5. kat</b>: dönemlik sergiler. 5. katın terası en geniş olanı. 35 dakika."],
-         ["15:25","Asansörle in, montunu al, çık."]]},
-
- {id:"highline", short:"Whitney'nin yanındaki merdivenden çık, 17. sokaktaki seyir yerine kadar yürü, 14. sokak merdiveninden in.", walk:true, t:"15:30", title:"High Line (kısa tur)", place:"Giriş: Gansevoort St ve Washington St köşesi, Whitney kapısının yanı",
-  map:"High Line Gansevoort Street Entrance New York",
-  intro:"Eski yük treni hattından yapılmış, binaların arasından geçen yükseltilmiş yürüyüş parkı. Bugün tadımlık; tamamını cumartesi yürüyeceksiniz.",
-  dur:"Toplam 22 dk",
-  steps:[["15:30","Whitney'den çıkınca hemen sağdaki merdivenle (asansör de var) High Line'a çık."],
-         ["15:33","Kuzeye yürü: binanın altından geçen 14. sokak geçidi, ahşap şezlonglu güneşlenme terası, sonra 17. sokakta caddeye bakan basamaklı cam seyir yeri (<b>10th Avenue Square</b>). 10 dakika."],
-         ["15:45","Geri dön, <b>14. sokak merdiveninden</b> aşağı in: 5 dakika."]]},
-
- {id:"island", short:"Adanın en yüksek köşesine çık. Güneş 16:30'da nehrin karşısında batıyor. 16:25'te çık.", walk:true, t:"15:55", title:"Little Island: günbatımı", place:"Pier 55, Hudson River Park (13. sokak hizası)",
-  map:"Little Island New York",
-  intro:"Lale biçimli beton ayaklar üstünde, nehrin içinde küçük bir ada park. Giriş ücretsiz.",
-  dur:"Burada 30 dk",
-  steps:[["15:50","14. sokaktan nehre doğru yürü, kıyı otoyolunu ışıklı yaya geçidinden geç; adaya giden köprü 13. sokak hizasında. 5 dakika."],
-         ["15:55","Patikadan adanın en yüksek köşesine (güneybatı seyir noktası) çık. Güneş 16:30'da nehrin karşısında, New Jersey'nin üstünde batar; güneyde uzakta Özgürlük Heykeli seçilir."],
-         ["16:25","Adadan çık."]]},
-
- {id:"village", short:"Bleecker Street'ten yürü: Magnolia, Friends binası, Joe's Pizza. Sokaklar karışık, harita açık kalsın.", walk:true, t:"16:30", title:"West Village yürüyüşü", place:"Bleecker St, Grove St, Bedford St, Carmine St",
-  map:"Bleecker Street West Village New York",
-  intro:"Alçak tuğla evler, ağaçlı dar sokaklar; New York'un en \"film gibi\" mahallesi. Sokaklar burada ızgara düzenine uymaz, haritayı açık tut.",
-  dur:"Toplam 40 dk",
-  steps:[["16:27","Little Island'dan çık, 13. sokak / Gansevoort Street üzerinden doğuya, Hudson Street'e kadar yürü (6 dakika). Hudson'dan sağa dönünce küçük üçgen park Abingdon Square; <b>Bleecker Street</b> buradan başlar."],
-         ["16:38","<b>Magnolia Bakery</b>, 401 Bleecker (11. sokak köşesi). Bir banana pudding al, yürürken ye."],
-         ["16:45","Bleecker Street'ten güneydoğuya 5 blok yürü (butikler, kafeler). <b>Grove Street</b>'ten sağa dön, bir blok sonra Bedford Street köşesindeki bina <b>Friends apartmanı</b> (90 Bedford St)."],
-         ["16:55","Bedford Street'ten güneye yürü, Carmine Street'ten sola dön: 8 dakika. Köşede <b>Joe's Pizza</b>."]],
-  foods:[["Joe's Pizza (ilk şube)","7 Carmine St (6th Avenue köşesi)","Joe's Pizza 7 Carmine St New York",
-          "1975'ten beri aynı köşede; dilim pizzanın orijinal adresi. Akşam yemeği de pizza olacak; burada en fazla tek dilim, istersen atla."]]},
-
- {id:"wsp", short:"Kemere yürü, altından 5th Avenue boyunca Empire State'e bak. 17:25'te MacDougal Street'ten Dante'ye.", walk:true, t:"17:10", title:"Washington Square Park", place:"5th Avenue'nun bittiği yer",
-  map:"Washington Square Arch New York",
-  intro:"Zafer takı (kemer), ortada fıskiye, sokak müzisyenleri ve satranç masaları.",
-  dur:"Burada 15 dk",
-  steps:[["17:05","Joe's'tan 6th Avenue'yu karşıya geç, West 4th Street'ten doğuya 3 dakika: parkın batı kenarı."],
-         ["17:10","Kemere yürü. Altından kuzeye bakınca 5th Avenue boyunca ışıklı Empire State görünür."],
-         ["17:25","Parkın güneybatı köşesinden <b>MacDougal Street</b>'e gir, güneye 3 dakika. Bleecker Street'i geçince solda Dante."]],
-  foods:[["Caffe Reggio","119 MacDougal St","Caffe Reggio 119 MacDougal St New York",
-          "1927'den beri açık, Amerika'ya cappuccino'yu getirdiği söylenen kafe. Erken geldiysen buluşmaya kadar burada ısın; Dante'ye 2 dakika."]]},
-
- {id:"dante", short:"Erken gelen masa tutsun. Negroni söyle, yemek söyleme. Serhat buraya geliyor.", walk:true, t:"17:30", title:"Dante: Serhat ile buluşma", place:"79-81 MacDougal St (Bleecker ile Houston arası)",
-  map:"Dante 79 MacDougal St New York",
-  intro:"110 yılı aşkın bir Greenwich Village klasiği, <b>Negroni</b>'siyle meşhur. Serhat metroyla W 4 St durağına geliyor. Bu gece Thanksgiving arifesi, yılın en kalabalık bar gecelerinden; erken gelen masa tutsun. Burada yemek söyleme, akşam yemeği L'Industrie'de.",
-  dur:"Burada yaklaşık 1 saat. Bugünkü saatini haritadan kontrol et.",
-  steps:[]},
-
- {id:"lindustrie", short:"Sıra uzun olur ama ilerler. Burrata'lı dilimi ve prosciutto'lu L'Industrie dilimini deneyin.", walk:true, t:"18:45", title:"L'Industrie Pizzeria", place:"104 Christopher St",
-  map:"L'Industrie Pizzeria 104 Christopher St New York", dur:"Dante'den 10 dk yürüyüş, burada yaklaşık 45 dk. Saatler yaklaşık.",
-  intro:"Şu an şehrin en çok konuşulan dilim pizzacısı; 22:00'ye kadar açık.",
-  steps:[["18:35","Dante'den Bleecker Street'i batıya yürüyün, Christopher Street'ten sola: 10 dakika."],
-         ["Sipariş","<b>Burrata</b>'lı dilim ve prosciutto'lu <b>L'Industrie</b> dilimi meşhur. Akşam sıra uzun olur, sabırlı olun."]]},
-
- {id:"rocco", short:"Cannoli söyleyin; siparişte doldurulur.", walk:true, t:"19:45", title:"Pasticceria Rocco", place:"243 Bleecker St",
-  map:"Pasticceria Rocco 243 Bleecker St New York", dur:"L'Industrie'den 6 dk yürüyüş, burada yaklaşık 20 dk",
-  intro:"1974'ten beri İtalyan pastanesi. <b>Cannoli</b> siparişte doldurulur. Kapalıysa bu adımı atlayın.", steps:[]},
-
- {id:"maries", short:"Bodrum katında piyano barı. Yanınıza nakit alın. Yarın 07:00'de geçit var, geceyi uzatmayın.", walk:true, t:"20:15", title:"Marie's Crisis (piyano barı)", place:"59 Grove St",
-  map:"Marie's Crisis Cafe 59 Grove St New York", dur:"Rocco'dan 5 dk yürüyüş",
-  intro:"Piyanist Broadway şarkıları çalar, bütün bar piyanonun etrafında hep birlikte söyler. Sadece nakit olabilir.",
-  steps:[["20:15","Grove Street 59 numara, merdivenle bodrum katına inilir."],
-         ["Dönüş","Barın köşesindeki <b>Christopher St–Sheridan Sq</b> durağından kırmızı <b>1</b> treni, Uptown yönü, 6 durak: <b>Times Sq–42 St</b>. Port Authority 5 dakika. Yarın geçit için erken kalkılacak, geceyi uzatmayın."]]}
+/* ---------- Çarşamba: yol haritası. Başlangıç butonuna basılan saate göre kurulur;
+   müzeden sonra nereye gidileceği o an seçilir ve devamı o anki saatle hesaplanır. ---------- */
+const AMNH_OPEN = 600, INT_CLOSE = 1020, DANTE = 1050;
+const up5 = m => Math.ceil(m/5)*5, r5 = m => Math.round(m/5)*5;
+const slots = (t0, total, items) => { const sum = items.reduce((a,x) => a + x[0], 0); let acc = 0;
+  return items.map(x => { const t = t0 + r5(acc/sum*total); acc += x[0]; return [fmt(t), x[1]]; }); };
+const P = {
+  pa:"Port Authority Bus Terminal New York", amnh:"American Museum of Natural History New York",
+  st81:"81 St-Museum of Natural History Station New York", st50:"50 St Station 8th Ave New York",
+  mama:"Empanada Mama 765 9th Ave New York", sull:"Sullivan Street Bakery 533 W 47th St New York",
+  intrepid:"Intrepid Museum Pier 86 New York", w4:"West 4 St-Washington Sq Station New York",
+  dante:"Dante 79 MacDougal St New York", arch:"Washington Square Arch New York",
+  gugg:"Solomon R. Guggenheim Museum New York", lpq:"Le Pain Quotidien 2 W 69th St Central Park New York",
+  bethesda:"Bethesda Terrace Central Park New York", plaza:"Grand Army Plaza Manhattan New York",
+  rock:"Rockefeller Center New York", joes:"Joe's Pizza 7 Carmine St New York"
+};
+const OPTS = [
+  {k:"intrepid", title:"Intrepid: uçak gemisi", desc:"Nehirde demirli gerçek uçak gemisi; üstünde uzay mekiği, yanında denizaltı. CityPASS'in son hakkı."},
+  {k:"gugg", title:"Central Park'tan Guggenheim'a", desc:"Parkın içinden karşıya yürü; spiral binasıyla ünlü sanat müzesi. CityPASS'in son hakkı."},
+  {k:"park", title:"Central Park + 5th Avenue", desc:"Müze yok: Bethesda çeşmesi, Plaza, Noel vitrinleri, Rockefeller. Ücretsiz."},
+  {k:"village", title:"Doğrudan West Village", desc:"Yorulduysan: pizza, Friends binası, Washington Square, sonra Dante. Ücretsiz."}
 ];
+const CAFFE = ["Caffe Reggio","119 MacDougal St","Caffe Reggio 119 MacDougal St New York",
+  "1927'den beri açık, Amerika'ya cappuccino'yu getirdiği söylenen kafe. Erken bitirdiysen buluşmaya kadar burada ısın; Dante'ye 2 dakika."];
 
-const ROUTES_CAR = [
- ["Sabah: metro çıkışı ve müze çevresi", ["81 St-Museum of Natural History Station New York","Levain Bakery 351 Amsterdam Ave New York","American Museum of Natural History Central Park West entrance"]],
- ["Öğleden sonra: Chelsea Market'ten Dante'ye", ["14 St 8 Av Station New York","Chelsea Market New York","Whitney Museum of American Art","Little Island New York","Magnolia Bakery 401 Bleecker St New York","90 Bedford St New York","Joe's Pizza 7 Carmine St New York","Washington Square Arch","Dante 79 MacDougal St New York"]],
- ["Akşam: West Village", ["Dante 79 MacDougal St New York","L'Industrie Pizzeria 104 Christopher St New York","Pasticceria Rocco 243 Bleecker St New York","Marie's Crisis Cafe 59 Grove St New York","Christopher St-Sheridan Sq Station New York"]]
-];
+/* W 4 St durağına v0'da varınca Dante'ye kadar olan kısım; durak eklenirse true */
+function villageTail(st, v0, lunch){
+  if (v0 <= DANTE - 45){
+    const a = lunch ? 20 : 8;
+    st.push({id:"village", start:v0, walk:true, title: lunch ? "West Village: pizza + yürüyüş" : "West Village + Washington Square",
+      place:"Carmine St, Bedford St, Bleecker St, Washington Square Park",
+      short:`Joe's Pizza, Friends binası, Bleecker Street, sonra kemer. ${fmt(DANTE-5)} gibi MacDougal Street'ten Dante'ye.`,
+      map:"Bleecker Street West Village New York", dur:`Toplam ${span(DANTE - v0)}`,
+      intro:"Alçak tuğla evler, ağaçlı dar sokaklar; New York'un en \"film gibi\" mahallesi. Sokaklar burada ızgara düzenine uymaz, haritayı açık tut." +
+        (DANTE - v0 > 80 ? " Vaktin bol: Bleecker Street'teki dükkanlara gir, parkta otur, acele etme." : ""),
+      steps:[[fmt(v0), "6th Avenue'dan güneye 2 dakika: Carmine Street köşesinde <b>Joe's Pizza</b> (7 Carmine St), dilim pizzanın klasik adresi." +
+                (lunch ? " Öğle yemeğin burası: iki dilim, ayakta ya da kaldırımda yenir." : " Akşam yemeği de pizza; en fazla tek dilim.")],
+             [fmt(v0+a),"Carmine'den <b>Bedford Street</b>'e gir, kuzeye 6 dakika: Grove Street köşesindeki bina <b>Friends apartmanı</b> (90 Bedford St)."],
+             [fmt(v0+a+12),"Grove Street'ten Bleecker Street'e çık, sağa dön; butikler ve kafeler arasından 6th Avenue'ya yürü. Karşıya geç, W 4th Street'ten 3 dakikada <b>Washington Square Park</b>."],
+             [fmt(DANTE-20),"Kemere yürü. Altından kuzeye bakınca 5th Avenue boyunca ışıklı Empire State görünür."],
+             [fmt(DANTE-5),"Parkın güneybatı köşesinden <b>MacDougal Street</b>'e gir, güneye 3 dakika. Bleecker Street'i geçince solda Dante."]],
+      foods:[CAFFE],
+      path:["W 4 St durağı","Joe's Pizza","Friends binası","Bleecker St","Washington Square kemeri","Dante"],
+      dir:{o:P.w4, w:[P.joes,"90 Bedford St New York",P.arch], d:P.dante, m:"walking"}});
+    return true;
+  }
+  if (v0 <= DANTE - 25){
+    st.push({id:"wsp", start:v0, walk:true, title:"Washington Square Park", place:"5th Avenue'nun bittiği yer",
+      short:`Kemere yürü, altından 5th Avenue boyunca Empire State'e bak. ${fmt(DANTE-5)} gibi MacDougal Street'ten Dante'ye.`,
+      map:P.arch, dur:`Burada ${span(DANTE - v0)}`,
+      intro:"Zafer takı (kemer), ortada fıskiye, sokak müzisyenleri ve satranç masaları.",
+      steps:[[fmt(v0),"Duraktan W 4th Street üzerinden doğuya 3 dakika: parkın batı kenarı. Kemere yürü; altından kuzeye bakınca ışıklı Empire State görünür."],
+             [fmt(DANTE-5),"Parkın güneybatı köşesinden <b>MacDougal Street</b>'e gir, güneye 3 dakika. Bleecker Street'i geçince solda Dante."]],
+      foods:[CAFFE],
+      path:["W 4 St durağı","Washington Square kemeri","MacDougal St","Dante"],
+      dir:{o:P.w4, w:[P.arch], d:P.dante, m:"walking"}});
+    return true;
+  }
+  return false;
+}
+const TO_DANTE = "W 3rd Street'ten doğuya bir blok, MacDougal Street'ten sağa (güneye) dön. Bleecker Street'i geçince solda Dante. 5 dakika.";
+
+/* müzeden T'de çıkınca seçilen kola göre devam. Dönen: {ok, why, line, stops, dante, routes, rez, sunset} */
+function branch(k, T){
+  const st = [], routes = [];
+  let dante = DANTE, rez = "", sunset = "Güneş batışı.", line = "";
+  const no = why => ({ok:false, why});
+
+  if (k === "intrepid"){
+    if (T + 60 > 955) return no("Artık yetişmiyor: kapıdan son giriş 16:00.");
+    const quick = T > 860, entry = T + (quick ? 60 : 75);
+    let E = entry + Math.min(105, INT_CLOSE - entry);
+    if (E > 970 && E < 1000) E = 1000;
+    const i = E - entry, eat = quick ? T + 32 : T + 20, leave = quick ? eat + 13 : eat + 35, deckSun = E >= 1000;
+    st.push({id:"hk", start:T, title:"Metroyla Hell's Kitchen'a", place:"81 St durağı → 50 St durağı (C treni)",
+      short:"C treni, Downtown yönü. 3. durak 50 St'te in. Turuncu B trenine binme.",
+      map:P.st50, dur:`Yol toplam ${quick ? 30 : 20} dk`,
+      intro:"Çıkarken yan sokaklarda şişirilen geçit balonlarını parmaklıkların arkasından görürsün; sıraya girme, en az bir saat sürer." +
+        ` My CityPASS'ten Intrepid rezervasyonunu <b>${fmt(entry)}</b> saatine al.`,
+      steps:[[fmt(T),"Müzeden çık, geldiğin durağa in: Central Park West ve 81. sokak köşesi."],
+             [fmt(T+4),"Mavi <b>C</b> trenine bu kez <b>Downtown &amp; Brooklyn</b> yönüne bin. Aynı perondan turuncu <b>B</b> de geçer; ona binme, 59'dan sonra başka yöne sapar."],
+             [fmt(T+13),"3. durakta, <b>50 St</b>'te in. Sıra: 72 St, 59 St–Columbus Circle, 50 St. 8th Avenue'ya çıkarsın."],
+             quick ? [fmt(T+16),"8th Avenue'dan güneye 3 blok in, <b>47. sokaktan</b> sağa (batıya, nehre doğru) dön. 9th ve 10th Avenue'yu geç; fırın 10th ile 11th arasında, sağda. 12 dakika."]
+                   : [fmt(T+16),"8th Avenue'dan bir blok kuzeye, 51. sokaktan batıya bir avenue yürü: 9th Avenue köşesinde Empanada Mama. 4 dakika."]],
+      warn:"81 St durağının girişi balon kalabalığından tıkalıysa Central Park West'ten güneye 8 dakika yürü, 72 St durağından bin; aynı tren, bu kez 2. durakta in.",
+      path: quick ? ["Müze","81 St durağı","C treni, 3 durak","50 St durağı","47. sokaktan batıya 12 dk","Sullivan Street Bakery"]
+                  : ["Müze","81 St durağı","C treni, 3 durak","50 St durağı","51. sokaktan batıya 4 dk","Empanada Mama"],
+      dir:{o:P.amnh, d: quick ? P.sull : P.mama, m:"transit"}});
+    if (quick) st.push({id:"ogle", start:eat, walk:true, title:"Ayaküstü öğle yemeği: Sullivan Street Bakery", place:"533 W 47th St (10th ve 11th Avenue arası)",
+      short:`Bir sandviç ya da dilim pizza al, hızlı ye. Kalkış ${fmt(eat+13)}; Intrepid 8 dakika ileride.`,
+      map:P.sull, dur:"Burada en fazla 15 dk",
+      intro:"Vakit dar olduğu için oturmalı yemek yok. New York'un en iyi ekmekçilerinden; Intrepid yolunun tam üstünde. Tezgahtan sandviç, kare dilim pizza ve kahve.",
+      steps:[[fmt(eat),"Tezgahtan seç, içeride ya da yürürken ye."],[fmt(eat+13),"Kalk."]],
+      path:["50 St durağı","47. sokak","Sullivan Street Bakery"], dir:{o:P.st50, d:P.sull, m:"walking"}});
+    else st.push({id:"ogle", start:eat, walk:true, title:"Öğle yemeği: Empanada Mama", place:"765 9th Ave (51. sokak köşesi)",
+      short:`Kişi başı üç empanada doyurur. Kalkış ${fmt(eat+33)}; Intrepid'e 15 dakika yürüyüş var.`,
+      map:P.mama, dur:"Burada 35 dk",
+      intro:"Hell's Kitchen'ın klasiği; Kolombiya usulü içi dolu hamur işi, onlarca çeşit. Mısır unlu (corn) olanlar çıtır, buğday unlu (wheat) olanlar yumuşak. Servis hızlı.",
+      steps:[[fmt(eat),"Masaya otur ya da paket söyle. Dana (beef), tavuk ve peynirli olanlarla başla."],
+             [fmt(eat+28),"Hesabı iste."],[fmt(eat+33),"Kalk."]],
+      foods:[["Pure Thai Cookhouse (empanada istemezsen)","766 9th Ave, tam karşı kaldırım","Pure Thai Cookhouse 766 9th Ave New York",
+              "Küçük, hep dolu bir Tay erişte dükkanı. Sıra varsa bekleme, vaktin yok."],
+             ["Sullivan Street Bakery (yol üstü kahve)","533 W 47th St, 10th ve 11th Avenue arası",P.sull,
+              "Intrepid'e yürürken önünden geçeceksin. Vaktin varsa kahve ve tatlı; yoksa geç."]],
+      path:["50 St durağı","51. sokaktan batıya","Empanada Mama"], dir:{o:P.st50, d:P.mama, m:"walking"}});
+    const parts = slots(entry + 5, i - 12, [
+      [20,"Önce <b>Growler denizaltısı</b>: iskelede, geminin yanında. Soğuk Savaş'tan kalma füze denizaltısı; içi dar, kapaklardan eğilerek geçilir. Diğer bölümlerden erken kapanır, o yüzden ilk iş bu. Sıra 10 dakikayı geçiyorsa atla."],
+      [25,"Gemiye çık: <b>hangar güvertesi</b>. İkinci Dünya Savaşı'ndaki kamikaze saldırılarını anlatan film, uçaklar, mürettebatın yaşam alanları."],
+      [20,"Uçuş güvertesinin arka ucundaki <b>Space Shuttle Pavilion</b>: NASA'nın ilk uzay mekiği <b>Enterprise</b>."],
+      [30,"<b>Uçuş güvertesi</b>: açık havada 25'ten fazla uçak; en ünlüsü dünyanın en hızlı uçağı A-12 Blackbird. Kaptan köprüsüne de çık." +
+          (deckSun ? " Güneş 16:30'da tam karşında, nehrin öbür yakasında batıyor." : "")]]);
+    st.push({id:"intrepid", start:entry, walk:true, title:"Intrepid: uçak gemisi müzesi (CityPASS)", place:"Pier 86, W 46th St ve 12th Avenue",
+      short:`QR kodu okut. Sıra: denizaltı, hangar, uzay mekiği, uçuş güvertesi. Çıkış ${fmt(E)}.`,
+      map:P.intrepid, dur:`İçeride ${span(i)}`,
+      intro:"İkinci Dünya Savaşı ve Vietnam'da görev yapmış gerçek bir uçak gemisi; Hudson Nehri'nde demirli. Bugün 10:00–17:00 açık, <b>son giriş 16:00</b>.",
+      steps:[[fmt(leave), quick ? "Fırından çık, 47. sokaktan batıya, nehre doğru yürümeye devam et: 8 dakika. 12th Avenue'yu <b>46. sokaktaki</b> ışıklı yaya geçidinden geç; gemi karşında."
+                                : "9th Avenue'dan güneye 4 blok in, <b>47. sokaktan</b> sağa (batıya) dön ve nehre kadar dümdüz yürü: üç uzun avenue, 15 dakika. 12th Avenue'yu <b>46. sokaktaki</b> ışıklı yaya geçidinden geç; gemi karşında."],
+             [fmt(entry),"İskeledeki cam <b>Welcome Center</b>'da CityPASS rezervasyon QR kodunu okut, güvenlikten geç."]]
+             .concat(parts, [[fmt(E - 5), "Çıkışa in." + (E >= INT_CLOSE ? " Müze 17:00'de kapanıyor." : "") + " İskelede duran British Airways <b>Concorde</b>'u çıkarken dışarıdan görürsün."]]),
+      warn: entry >= 900 ? `Kapıda en geç 16:00'da olmalısın, sonra içeri almıyorlar. Plan ${fmt(entry)}; gecikiyorsan yemeği kısa kes.` : null,
+      path:[quick ? "Sullivan Street Bakery" : "Empanada Mama","47. sokaktan nehre","46. sokak yaya geçidi","Pier 86","Intrepid"],
+      dir:{o: quick ? P.sull : P.mama, d:P.intrepid, m:"walking"}});
+    const tail = [];
+    const hasV = villageTail(tail, E + 35, false);
+    const tr = [[fmt(E),"İskeleden çık, 12th Avenue'yu geç. <b>46. sokaktan</b> doğuya, 8th Avenue'ya kadar yürü, sağa dön: 42. sokak köşesinde Port Authority. 22 dakika."],
+                [fmt(E+22),"<b>42 St–Port Authority</b> durağında mavi trenlerden hangisi önce gelirse bin: <b>A, C ya da E</b>, <b>Downtown</b> yönü."],
+                [fmt(E+32),"<b>W 4 St–Washington Sq</b>'da in: A ile 3. durak (34, 14, W 4), C ya da E ile 4. durak (34, 23, 14, W 4). Peronun güney ucundaki <b>W 3rd St</b> çıkışından çık."]];
+    if (!hasV) tr.push([fmt(E+35), TO_DANTE]);
+    st.push({id:"vgecis", start:E, title:"Metroyla Greenwich Village'a", place:"Intrepid → 42 St–Port Authority → W 4 St (A, C ya da E treni)",
+      short:"46. sokaktan Port Authority'ye yürü. A, C ya da E treni, Downtown yönü. W 4 St'te in.",
+      map:P.w4, dur:`Yol toplam ${hasV ? 35 : 40} dk`, steps:tr,
+      path:["Intrepid","46. sokaktan doğuya 22 dk","42 St–Port Authority","A, C ya da E treni","W 4 St"].concat(hasV ? [] : ["Dante"]),
+      dir:{o:P.intrepid, d: hasV ? P.w4 : P.dante, m:"transit"}});
+    st.push(...tail);
+    dante = hasV ? DANTE : Math.max(DANTE, up5(E + 40));
+    routes.push(["Öğle: metro çıkışından Intrepid'e", [P.st50, quick ? P.sull : P.mama, P.intrepid]]);
+    rez = `Intrepid: My CityPASS'ten <strong>${fmt(entry)}</strong> saatine rezervasyon al; tam saat yoksa en yakın sonrakini seç (son giriş 16:00).`;
+    sunset = deckSun ? "Güneş batışı, Intrepid'in uçuş güvertesinden." : "Güneş batışı, West Village'da yürürken.";
+    line = `Kapıda ${fmt(entry)}, çıkış ${fmt(E)} · Dante ${fmt(dante)}` + (quick ? " · yemek ayaküstü" : "");
+  }
+
+  else if (k === "gugg"){
+    const lunch = T <= 885, G0 = T + (lunch ? 60 : 30), g = Math.min(90, 1005 - G0);
+    if (g < 45) return no("Artık yetişmiyor: müze 17:30'da kapanıyor, gezmeye vakit kalmıyor.");
+    const Ge = G0 + g;
+    st.push({id:"gyol", start:T, walk:true, title:"Central Park'ın içinden karşıya", place:"81. sokak kapısı → Belvedere Castle → Great Lawn → 5th Avenue",
+      short:"Parka 81. sokaktan gir, şatoya çık, Great Lawn'ın kenarından 5th Avenue'ya geç, kuzeye dön.",
+      map:"Belvedere Castle Central Park New York", dur:`Yürüyüş 30 dk${lunch ? ", kahve ve yemek 30 dk" : ""}`,
+      intro:"Park burada yaklaşık 800 metre genişliğinde; karşıya geçmek başlı başına bir gezi." + ` My CityPASS'te Guggenheim rezervasyon istiyorsa <b>${fmt(G0)}</b> saatine al.`,
+      steps:[[fmt(T),"Müzeden çık, Central Park West'i karşıya geç, <b>81. sokak kapısından</b> parka gir. Polis başka kapıya yönlendirirse 86. sokak kapısını kullan."],
+             [fmt(T+6),"Patikayı doğuya izle: sağda açık hava tiyatrosu (Delacorte), tepede küçük taş şato <b>Belvedere Castle</b>. Terasından gölet ve Great Lawn manzarası. 6 dakika."],
+             [fmt(T+14),"Büyük çimenliğin (Great Lawn) güney kenarından doğuya devam et. Metropolitan Müzesi'nin arkasındaki Mısır dikilitaşını geçince 5th Avenue'ya çık."],
+             [fmt(T+24),"5th Avenue'dan <b>kuzeye</b> yürü; 88. sokak köşesindeki beyaz spiral bina Guggenheim. 6 dakika."]]
+             .concat(lunch ? [[fmt(T+30),"Müzenin bir blok kuzeyinde, kilisenin içindeki <b>Bluestone Lane</b> kafesinde yemek molası. 30 dakika."]] : []),
+      foods: lunch ? [["Bluestone Lane (kilisenin içindeki kafe)","1085 5th Ave (90. sokak köşesi)","Bluestone Lane 1085 5th Ave New York",
+        "Avokadolu tost, sandviç, iyi kahve. Masalar az; sıra uzunsa tezgahtan paket al ya da Guggenheim'in içindeki kafede ye."]] : null,
+      path:["Müze","81. sokak kapısı","Belvedere Castle","Great Lawn","5th Avenue","Guggenheim"],
+      dir:{o:P.amnh, w:["Belvedere Castle Central Park New York"], d:P.gugg, m:"walking"}});
+    st.push({id:"gugg", start:G0, walk:true, title:"Guggenheim Müzesi (CityPASS)", place:"1071 5th Ave (88.–89. sokak arası)",
+      short:`Asansörle en üste çık, spiral rampadan yürüyerek in. Çıkış ${fmt(Ge)}.`,
+      map:P.gugg, dur:`İçeride ${span(g)}`,
+      intro:"Frank Lloyd Wright'ın 1959'da açılan spiral binası; müzenin en ünlü eseri binanın kendisi. Bugün 10:30–17:30 açık.",
+      steps:slots(G0, g - 5, [
+        [10,"Girişte CityPASS QR kodunu okut. Önce ortadaki boşluktan yukarı bak: altı kat boyunca dönen rampa ve cam kubbe."],
+        [45,"Asansörle <b>en üst kata</b> çık, rampadan aşağı doğru yürü. Dönemlik sergi rampa boyunca asılı; her dönüşte boşluğa bir daha bak."],
+        [25,"2. kattaki <b>Thannhauser Koleksiyonu</b>: Picasso, Van Gogh, Cézanne, Manet. Müzenin kalıcı ve en bilinen bölümü; atlama."]])
+        .concat([[fmt(Ge-5),"Vestiyer, çıkış. Binayı bir de karşı kaldırımdan, parkın duvarının önünden çek."]]),
+      path:["Giriş","Asansörle en üst kat","Spiral rampa","2. kat Thannhauser","Çıkış"]});
+    const v0 = Ge + 42, tail = [];
+    let hasW = false;
+    if (v0 <= DANTE - 25){ hasW = true;
+      tail.push({id:"wsp", start:v0, walk:true, title:"Washington Square Park", place:"5th Avenue'nun bittiği yer",
+        short:`Kemere yürü, altından 5th Avenue boyunca Empire State'e bak. ${fmt(DANTE-5)} gibi MacDougal Street'ten Dante'ye.`,
+        map:P.arch, dur:`Burada ${span(DANTE - v0)}`,
+        intro:"Zafer takı (kemer), ortada fıskiye, sokak müzisyenleri ve satranç masaları." + (DANTE - v0 > 50 ? " Vaktin bol: MacDougal ve Bleecker sokaklarında dolaş, aşağıdaki kafede otur." : ""),
+        steps:[[fmt(v0),"Kemere yürü; altından kuzeye bakınca ışıklı Empire State görünür."],
+               [fmt(DANTE-5),"Parkın güneybatı köşesinden <b>MacDougal Street</b>'e gir, güneye 3 dakika. Bleecker Street'i geçince solda Dante."]],
+        foods:[CAFFE], path:["Washington Square kemeri","MacDougal St","Dante"],
+        dir:{o:P.arch, d:P.dante, m:"walking"}});
+    }
+    st.push({id:"vgecis", start:Ge, title:"Metroyla Greenwich Village'a", place:"Guggenheim → 86 St durağı → Bleecker St (6 treni)",
+      short:"86. sokaktan Lexington Avenue'ya yürü. Yeşil 6 treni, Downtown yönü. Bleecker St'te in.",
+      map:"86 St Station Lexington Ave New York", dur:"Yol toplam 45 dk",
+      steps:[[fmt(Ge),"5th Avenue'dan güneye 86. sokağa in, sola (doğuya) dön; Madison ve Park Avenue'yu geç: <b>Lexington Avenue</b> köşesinde <b>86 St</b> durağı. 10 dakika."],
+             [fmt(Ge+12),"Yeşil <b>6</b> treni, <b>Downtown</b> yönü. Aynı duraktan geçen <b>4 ve 5 ekspres</b>tir, Bleecker'da durmaz; onlara binme."],
+             [fmt(Ge+35),"11. durakta, <b>Bleecker St</b>'te in. Sıra: 77, 68, 59, 51, 42, 33, 28, 23, 14, Astor Pl, Bleecker St."],
+             [fmt(Ge+37), hasW ? "Bleecker Street'ten batıya 5 dakika, LaGuardia Place'ten sağa dön: iki blok sonra Washington Square Park." 
+                               : "Bleecker Street'ten batıya 8 dakika; MacDougal Street'ten sola dön, Dante solda."]],
+      path:["Guggenheim","86. sokaktan doğuya 10 dk","86 St durağı","6 treni, 11 durak","Bleecker St", hasW ? "Washington Square" : "Dante"],
+      dir:{o:P.gugg, d: hasW ? P.arch : P.dante, m:"transit"}});
+    st.push(...tail);
+    dante = hasW ? DANTE : Math.max(DANTE, up5(Ge + 46));
+    routes.push(["Parkın içinden Guggenheim'a", [P.amnh,"Belvedere Castle Central Park New York",P.gugg]]);
+    rez = `Guggenheim: My CityPASS'te rezervasyon isteniyorsa <strong>${fmt(G0)}</strong> saatine al. Müze 17:30'da kapanıyor.`;
+    sunset = "Güneş batışı; o sırada Guggenheim'in içinde ya da çıkışındasın.";
+    line = `Müzede ${fmt(G0)}–${fmt(Ge)} · Dante ${fmt(dante)}` + (lunch ? "" : " · yemek molası yok");
+  }
+
+  else if (k === "park"){
+    if (T > 960) return no("Bu saatten sonra hava kararıyor ve Dante'ye yetişmek zorlaşıyor.");
+    const lunch = T <= 880, P1 = T + (lunch ? 85 : 55);
+    const R = P1 + 35 > 1030 ? P1 + 30 : Math.max(P1 + 35, Math.min(1025, P1 + 75));
+    const b = lunch ? 30 : 0;
+    st.push({id:"park", start:T, walk:true, title:"Central Park: 72. sokaktan Plaza'ya", place:"Strawberry Fields → Bethesda Terrası → The Mall → 59. sokak",
+      short:"72. sokaktan parka gir: Imagine mozaiği, Bethesda çeşmesi, ağaçlı yol. 59. sokak ve 5th Avenue köşesinden çık.",
+      map:P.bethesda, dur:`Toplam ${span(P1 - T)}`,
+      intro:"Parkın en bilinen yarısı; neredeyse her köşesi bir filmden tanıdık gelir. Güneş 16:30'da batıyor, hava ondan sonra hızla kararır.",
+      steps:[[fmt(T),"Müzeden çık, Central Park West boyunca <b>güneye</b> 72. sokağa yürü (10 dakika). Sağdaki kale gibi bina <b>Dakota</b>, John Lennon'ın evi. Tam karşısındaki kapıdan parka gir: yerde <b>Imagine</b> mozaiği (Strawberry Fields)."]]
+        .concat(lunch ? [[fmt(T+15),"Patikadan güneye 3 dakika: büyük çimenliğin (Sheep Meadow) kuzey ucundaki <b>Le Pain Quotidien</b>. Çorba, sandviç, kahve. 30 dakika."]] : [],
+        [[fmt(T+15+b),"Doğuya yürü: göl kenarında <b>Bethesda Terrası</b>, kemerli geçit ve melekli çeşme. 10 dakika."],
+         [fmt(T+27+b),"Merdivenden çık, güneye uzanan geniş ağaçlı yola gir: <b>The Mall</b>. İki yanı heykel ve bank."],
+         [fmt(T+40+b),"Yolun sonundan güneydoğuya devam et; sağda buz pisti (Wollman Rink), arkasında gökdelenler. Parkın güneydoğu köşesinden çık: 59. sokak ve 5th Avenue."]]),
+      foods: lunch ? [["Le Pain Quotidien (parkın içinde)","W 69th St hizası, Sheep Meadow'un kuzeyi",P.lpq,
+        "Belçika fırın-kafesi; bugün 18:00'e kadar açık. Servis yavaşsa tezgahtan paket al, bankta ye."]] : null,
+      path:["Müze","Central Park West'ten güneye","Strawberry Fields"].concat(lunch ? ["Le Pain Quotidien"] : [], ["Bethesda Terrası","The Mall","59. sokak / 5th Avenue"]),
+      dir:{o:P.amnh, w:["Strawberry Fields Central Park New York",P.bethesda], d:P.plaza, m:"walking"}});
+    st.push({id:"fifth", start:P1, walk:true, title:"5th Avenue: Plaza'dan Rockefeller'a", place:"59. sokaktan 49. sokağa, güneye",
+      short:`Plaza, Noel vitrinleri, St. Patrick's Katedrali, Rockefeller. ${fmt(R)} gibi metroya.`,
+      map:P.rock, dur:`Toplam ${span(R - P1)}`,
+      intro:"On blok boyunca Noel süslemeleri. " + (R - P1 > 50 ? "Vaktin bol: mağazalara gir; Rockefeller'dan 6 blok güneyde Bryant Park'ın Noel pazarı da var, oradan da aynı trenlere binilir." : "Vakit dar; durmadan yürü, katedralin içine iki dakika gir."),
+      steps:slots(P1, R - P1, [
+        [6,"Köşedeki şato gibi bina <b>Plaza Hotel</b> (Evde Tek Başına 2'nin oteli), önünde Pulitzer çeşmesi."],
+        [10,"5th Avenue'dan güneye: 58. sokakta <b>Bergdorf Goodman</b>'ın Noel vitrinleri, 57. sokakta Tiffany."],
+        [8,"50. sokakta <b>St. Patrick's Katedrali</b>: içi ücretsiz, iki dakika gir."],
+        [12,"Tam karşısı <b>Rockefeller Center</b>: melekli Channel Gardens'tan buz pistine in. Noel ağacı dikilmiş olur ama ışıkları aralık başındaki törenle yanıyor."]]),
+      path:["Plaza Hotel","Bergdorf vitrinleri","St. Patrick's","Rockefeller Center"],
+      dir:{o:P.plaza, w:["St. Patrick's Cathedral New York"], d:P.rock, m:"walking"}});
+    const tail = [], hasV = villageTail(tail, R + 17, false);
+    st.push({id:"vgecis", start:R, title:"Metroyla Greenwich Village'a", place:"47–50 Sts–Rockefeller Ctr durağı → W 4 St (B, D, F ya da M)",
+      short:"6th Avenue'daki duraktan turuncu trenlerden biri, Downtown yönü. W 4 St'te in.",
+      map:"47-50 Sts-Rockefeller Ctr Station New York", dur:"Yol toplam 20 dk",
+      steps:[[fmt(R),"Buz pistinden batıya, 6th Avenue'ya yürü: 49. sokak köşesinde <b>47–50 Sts–Rockefeller Ctr</b> durağı. 4 dakika."],
+             [fmt(R+5),"Turuncu trenlerden hangisi önce gelirse: <b>B, D, F ya da M</b>, <b>Downtown</b> yönü."],
+             [fmt(R+15),"<b>W 4 St–Washington Sq</b>'da in: B ya da D ile 3. durak (42, 34, W 4), F ya da M ile 5. durak. <b>W 3rd St</b> çıkışından çık."]]
+             .concat(hasV ? [] : [[fmt(R+17), TO_DANTE]]),
+      path:["Rockefeller Center","6th Avenue durağı","B, D, F ya da M","W 4 St"].concat(hasV ? [] : ["Dante"]),
+      dir:{o:P.rock, d: hasV ? P.w4 : P.dante, m:"transit"}});
+    st.push(...tail);
+    dante = hasV ? DANTE : Math.max(DANTE, up5(R + 22));
+    routes.push(["Park ve 5th Avenue yürüyüşü", [P.amnh,"Strawberry Fields Central Park New York",P.bethesda,P.plaza,P.rock]]);
+    rez = "Bu kolda rezervasyon yok. CityPASS'in kalan hakkı başka güne kalıyor.";
+    sunset = "Güneş batışı; parktan çıkarken ya da 5th Avenue'da.";
+    line = `Parktan çıkış ${fmt(P1)}, Rockefeller ${fmt(R)} · Dante ${fmt(dante)}`;
+  }
+
+  else { /* village */
+    const v0 = T + 30, tail = [], hasV = villageTail(tail, v0, T <= 930);
+    st.push({id:"vgecis", start:T, title:"Metroyla Greenwich Village'a", place:"81 St durağı → W 4 St (B ya da C treni)",
+      short:"B ya da C treni, Downtown yönü; ikisi de olur. W 4 St'te in.",
+      map:P.w4, dur:`Yol toplam ${hasV ? 30 : 35} dk`,
+      steps:[[fmt(T),"Müzeden çık, geldiğin durağa in: Central Park West ve 81. sokak köşesi."],
+             [fmt(T+4),"Turuncu <b>B</b> ya da mavi <b>C</b> treni, <b>Downtown &amp; Brooklyn</b> yönü; hangisi önce gelirse."],
+             [fmt(T+26),"<b>W 4 St–Washington Sq</b>'da in: B ile 7., C ile 8. durak. Peronun güney ucundaki <b>W 3rd St</b> çıkışından çık."]]
+             .concat(hasV ? [] : [[fmt(T+29), TO_DANTE]]),
+      warn:"81 St durağının girişi balon kalabalığından tıkalıysa Central Park West'ten güneye 8 dakika yürü, 72 St durağından bin.",
+      path:["Müze","81 St durağı","B ya da C treni","W 4 St"].concat(hasV ? [] : ["Dante"]),
+      dir:{o:P.amnh, d: hasV ? P.w4 : P.dante, m:"transit"}});
+    st.push(...tail);
+    dante = hasV ? DANTE : Math.max(DANTE, up5(T + 35));
+    rez = "Bu kolda rezervasyon yok. CityPASS'in kalan hakkı başka güne kalıyor.";
+    sunset = "Güneş batışı, West Village'da yürürken.";
+    line = `Village'da ${fmt(v0)} · Dante ${fmt(dante)}`;
+  }
+  return {ok:true, line, stops:st, dante, routes, rez, sunset};
+}
+
+function buildCar(S, choice){
+  const arr = S + 20;
+  const a0 = Math.max(AMNH_OPEN, up5(arr));
+  const late = a0 > 975;
+  const st = [], sum = [];
+  let dante = DANTE, routes = [], rez, sunset = "Güneş batışı.", note = "", pick = null;
+
+  if (!late){
+    st.push({id:"metro", start:S, title:"Metroyla Doğa Tarihi Müzesi'ne", place:"42 St–Port Authority durağı → 81 St durağı (C treni)",
+      short:"C treni, Uptown yönü. 4. durak 81 St'te in. A trenine binme, 81'de durmaz.",
+      map:P.st81, dur:"Yol toplam 15–20 dk",
+      intro:`Şimdi (${fmt(S)}) çıkarsan müzeye ${fmt(arr)} gibi varırsın.` + (arr < AMNH_OPEN ? " Müze 10:00'da açılıyor; erken varırsan aşağıdaki kurabiyeciye uğra." : "") +
+        ` Trene binmeden My CityPASS uygulamasından müze rezervasyonunu <b>${fmt(a0)}</b> saatine al ya da değiştir.`,
+      steps:[[fmt(S),"Durak Port Authority terminalinin tam altında; 8th Avenue tarafındaki merdivenlerden in. Turnikede temassız kartını ya da telefonunu okut."],
+             [fmt(S+3),"Mavi renkli <b>C</b> trenine bin, <b>Uptown</b> yönü. Aynı perondan A ve E de geçer: <b>A treni 81'de durmaz</b>, E başka yöne sapar. Trenin önündeki harfe bak."],
+             [fmt(S+16),"4. durakta, <b>81 St–Museum of Natural History</b>'de in. Sıra: 50 St, 59 St–Columbus Circle, 72 St, 81 St. Çıkış Central Park West'e açılır; müzenin geniş merdivenli ana girişi 2 blok güneyde, 79. sokak hizasında."]],
+      warn:"Balon hazırlığı yüzünden tren 81 St'te durmazsa (anons yapılır) 72 St'te in ve Central Park West boyunca kuzeye 8 dakika yürü.",
+      foods: arr < 585 ? [["Levain Bakery (erken vardıysan)","351 Amsterdam Ave (77. sokak köşesi)","Levain Bakery 351 Amsterdam Ave New York",
+        "Avuç içi kadar, sıcak verilen meşhur kurabiye. Müzeden 10 dakika yürüme; polis sokağı kapattıysa uğraşma."]] : null,
+      path:["Port Authority","42 St–Port Authority durağı","C treni, 4 durak","81 St durağı","Müze"],
+      dir:{o:P.pa, d:P.amnh, m:"transit"}});
+
+    /* müzeden önerilen çıkış; seçim yapıldıysa gerçek çıkış saati */
+    let x1 = a0 <= 660 ? a0 + 150 : Math.min(a0 + 120, Math.max(a0 + 75, 880));
+    x1 = Math.min(x1, 1015);
+    const m = x1 - a0;
+    const halls = [[8,"Ana merdivenden çık, CityPASS QR kodunu okut. İlk salon <b>Rotunda</b> (2. kat): ortada yavrusunu koruyan dev Barosaurus iskeleti. Vestiyer alt katta."]];
+    const order = [];
+    if (m >= 75){ halls.push([12,"Rotunda'nın hemen arkası: <b>Afrika Memelileri Salonu</b>. Ortada fil sürüsü, çevresinde gerçek gibi duran dioramalar."]); order.push("Afrika salonu"); }
+    halls.push([45,"Asansörle <b>4. kata</b> çık: dinozor katı. Girişte 37 metrelik <b>Titanosaur</b> (kafası kapıdan dışarı taşar), sonra <b>T. rex</b>, ardından Triceratops ve Stegosaurus."]); order.push("4. kat dinozorlar");
+    halls.push([18,"Asansörle <b>1. kata</b> in: <b>Okyanus Salonu</b>. Tavandan asılı 29 metrelik gerçek boyutlu mavi balina."]); order.push("mavi balina");
+    if (m >= 110){ halls.push([22,"Yine 1. kat, binanın kuzey ucu: <b>Rose Center</b> (uzay bölümü). Cam küpün içindeki dev küre ve çevresindeki evren ölçeği yürüyüşü."]); order.push("uzay"); }
+    if (m >= 145) halls.push([10,"Vaktin kalırsa 1. katın batı ucundaki <b>Gilder Center</b>: mağara gibi oyulmuş beton atriyum, mimarisi için kısa bir bakış. Kalmadıysa atla."]);
+    const hs = slots(a0, m - 8, halls);
+    hs.push([fmt(x1 - 8),"Tuvalet, vestiyer. Yine <b>Central Park West</b> kapısından çık; diğer kapılar bugün kapalı. Çıkınca bu sayfada \"Yaptım\"a bas: sonra nereye gideceğini soracak."]);
+    const canInt = a0 + 45 + 60 <= 955;
+    st.push({id:"amnh", start:a0, walk:true, title:"Doğa Tarihi Müzesi (CityPASS)", place:"Central Park West ve 79. sokak, geniş merdivenli ana giriş",
+      short:`Central Park West kapısından gir. Sıra: ${order.join(", ")}. Önerilen çıkış ${fmt(x1)}.`,
+      map:P.amnh, dur:`İçeride yaklaşık ${span(m)}; ne zaman çıkacağın sana kalmış`,
+      intro:"Çok büyük bir müze; hepsini gezmeye çalışma, aşağıdaki sırayı izle. Bugün 17:30'a kadar açık. Girişte kağıt harita al ya da müzenin ücretsiz \"Explorer\" uygulamasını indir." +
+        (x1 >= 825 ? " Öğle yemeği geç kalıyor; acıktıysan alt kattaki kafeden bir şey al." : ""),
+      steps:hs,
+      warn: canInt ? "Sonra Intrepid'e gitmek istersen buradan en geç <b>14:55</b>'te çıkmış ol (kapısı 16:00'da kapanıyor); 14:20'den sonra çıkarsan yemek ayaküstü olur. Guggenheim için en geç 15:30. Park ve Village için acele yok."
+                   : "Bu saatte Intrepid'e yetişilmiyor (son giriş 16:00). Guggenheim için buradan en geç 15:30'da çık; park ve Village için acele yok.",
+      path:["Rotunda"].concat(order.map(x => x[0].toUpperCase() + x.slice(1)), ["Central Park West kapısı"])});
+    sum.push(["Müze", a0]);
+    if (!canInt) note = "Bu saatte başlayınca Intrepid'e yetişilmiyor (son giriş 16:00); müzeden sonra diğer seçenekler kalıyor.";
+    rez = `Doğa Tarihi Müzesi: My CityPASS'ten <strong>${fmt(a0)}</strong> saatine al. Whitney rezervasyonu varsa iptal et.`;
+
+    const br = choice ? branch(choice.k, choice.t) : null;
+    if (br && br.ok){
+      pick = choice.k;
+      st[st.length-1].short = `Central Park West kapısından gir. Sıra: ${order.join(", ")}.`;
+      st.push(...br.stops); dante = br.dante; routes = br.routes; sunset = br.sunset; rez += " " + br.rez;
+      sum.push([OPTS.find(o => o.k === pick).title.split(":")[0], choice.t]);
+    } else {
+      st.push({id:"secim", start:x1, title:"Sonra nereye? Seçim senin", place:"Müzeden çıkınca dört seçenekten birini seçeceksin",
+        short:"Müzeyi \"Yaptım\" diye işaretleyince seçenekler çıkar; devamı o anki saate göre kurulur.",
+        map:P.amnh,
+        intro:"Seçenekler: " + OPTS.map(o => `<b>${o.title}</b>`).join(", ") + ". Hangisini seçersen seç akşam Dante'de buluşuyorsunuz.",
+        dur:"Intrepid için müzeden en geç 14:55'te, Guggenheim için 15:30'da çıkmış olman gerekiyor."});
+      sum.push(["Seçim", x1]);
+      rez += " İkinci durak müzeden çıkınca seçilecek; Intrepid ya da Guggenheim seçilirse sayfa rezervasyon saatini o an söyler.";
+    }
+  } else {
+    note = "Bu saatte müzelere yetişilmiyor (Intrepid'e son giriş 16:00, Doğa Tarihi 17:30'da kapanıyor); program doğrudan Greenwich Village'dan başlıyor.";
+    rez = "Bugün müzelere yetişilmiyor. My CityPASS'teki Doğa Tarihi ve Whitney rezervasyonlarını iptal edin; haklar yanmaz, başka gün kullanılır.";
+    dante = Math.max(DANTE, up5(S + 45));
+    st.push({id:"metro", start:S, title:"Metroyla Greenwich Village'a", place:"42 St–Port Authority durağı → W 4 St (A, C ya da E treni)",
+      short:"A, C ya da E treni, Downtown yönü. W 4 St'te in.",
+      map:P.w4, dur:"Yol toplam 20 dk",
+      steps:[[fmt(S),"Durak Port Authority terminalinin tam altında; 8th Avenue tarafındaki merdivenlerden in."],
+             [fmt(S+3),"Mavi trenlerden hangisi önce gelirse bin: <b>A, C ya da E</b>, <b>Downtown</b> yönü."],
+             [fmt(S+13),"<b>W 4 St–Washington Sq</b>'da in: A ile 3., C ya da E ile 4. durak. Doğuya 3 dakika: Washington Square Park."]],
+      path:["Port Authority","A, C ya da E treni","W 4 St","Washington Square Park"],
+      dir:{o:P.pa, d:P.arch, m:"transit"}});
+    sum.push(["Washington Square", S+20]);
+    st.push({id:"wsp", start:S+20, walk:true, title:"Washington Square Park", place:"5th Avenue'nun bittiği yer",
+      short:"Kemere yürü, altından 5th Avenue boyunca Empire State'e bak. Sonra MacDougal Street'ten Dante'ye.",
+      map:P.arch, dur:`Toplam ${span(dante - S - 20)}`,
+      intro:"Zafer takı (kemer), ortada fıskiye, sokak müzisyenleri ve satranç masaları.",
+      steps:[[fmt(S+20),"Kemere yürü. Altından kuzeye bakınca 5th Avenue boyunca ışıklı Empire State görünür."],
+             [fmt(dante-5),"Parkın güneybatı köşesinden <b>MacDougal Street</b>'e gir, güneye 3 dakika. Bleecker Street'i geçince solda Dante."]],
+      foods:[CAFFE], path:["W 4 St durağı","Washington Square kemeri","MacDougal St","Dante"],
+      dir:{o:P.w4, w:[P.arch], d:P.dante, m:"walking"}});
+  }
+
+  /* akşam: Dante ve sonrası */
+  st.push({id:"dante", start:dante, walk:true, title:"Dante: Serhat ile buluşma", place:"79-81 MacDougal St (Bleecker ile Houston arası)",
+    short:"Erken gelen masa tutsun. Negroni söyle, yemek söyleme. Serhat buraya geliyor.",
+    map:P.dante,
+    intro:"110 yılı aşkın bir Greenwich Village klasiği, <b>Negroni</b>'siyle meşhur. Serhat 17:30'dan itibaren burada" + (dante > DANTE ? `; sen ${fmt(dante)} gibi varırsın, yoldayken haber ver` : "") +
+      ". Bu gece Thanksgiving arifesi, yılın en kalabalık bar gecelerinden; erken gelen masa tutsun. Burada yemek söyleme, akşam yemeği L'Industrie'de.",
+    dur:"Burada yaklaşık 1 saat. Bugünkü saatini haritadan kontrol et.",
+    path:["MacDougal St","Bleecker'ı geç","Dante"]});
+  st.push({id:"lindustrie", start:dante+75, walk:true, title:"L'Industrie Pizzeria", place:"104 Christopher St",
+    short:"Sıra uzun olur ama ilerler. Burrata'lı dilimi ve prosciutto'lu L'Industrie dilimini deneyin.",
+    map:"L'Industrie Pizzeria 104 Christopher St New York", dur:"Dante'den 10 dk yürüyüş, burada yaklaşık 45 dk. Saatler yaklaşık.",
+    intro:"Şu an şehrin en çok konuşulan dilim pizzacısı; 22:00'ye kadar açık.",
+    steps:[[fmt(dante+65),"Dante'den Bleecker Street'i batıya yürüyün, Christopher Street'ten sola: 10 dakika."],
+           ["Sipariş","<b>Burrata</b>'lı dilim ve prosciutto'lu <b>L'Industrie</b> dilimi meşhur. Akşam sıra uzun olur, sabırlı olun."]],
+    path:["Dante","Bleecker St'ten batıya","Christopher St'ten sola","L'Industrie"],
+    dir:{o:P.dante, d:"L'Industrie Pizzeria 104 Christopher St New York", m:"walking"}});
+  st.push({id:"rocco", start:dante+135, walk:true, title:"Pasticceria Rocco", place:"243 Bleecker St",
+    short:"Cannoli söyleyin; siparişte doldurulur.",
+    map:"Pasticceria Rocco 243 Bleecker St New York", dur:"L'Industrie'den 6 dk yürüyüş, burada yaklaşık 20 dk",
+    intro:"1974'ten beri İtalyan pastanesi. <b>Cannoli</b> siparişte doldurulur. Kapalıysa bu adımı atlayın.",
+    path:["L'Industrie","Bleecker St'ten geri 6 dk","Pasticceria Rocco"],
+    dir:{o:"L'Industrie Pizzeria 104 Christopher St New York", d:"Pasticceria Rocco 243 Bleecker St New York", m:"walking"}});
+  st.push({id:"maries", start:dante+165, walk:true, title:"Marie's Crisis (piyano barı)", place:"59 Grove St",
+    short:"Bodrum katında piyano barı. Yanınıza nakit alın. Yarın 07:00'de geçit var, geceyi uzatmayın.",
+    map:"Marie's Crisis Cafe 59 Grove St New York", dur:"Rocco'dan 5 dk yürüyüş",
+    intro:"Piyanist Broadway şarkıları çalar, bütün bar piyanonun etrafında hep birlikte söyler. Sadece nakit olabilir.",
+    steps:[[fmt(dante+165),"Grove Street 59 numara, merdivenle bodrum katına inilir."],
+           ["Dönüş","Barın köşesindeki <b>Christopher St–Sheridan Sq</b> durağından kırmızı <b>1</b> treni, Uptown yönü, 6 durak: <b>Times Sq–42 St</b>. Port Authority 5 dakika. Yarın geçit için erken kalkılacak, geceyi uzatmayın."]],
+    path:["Rocco","5 dk yürüme","59 Grove St, bodrum kat"],
+    dir:{o:"Pasticceria Rocco 243 Bleecker St New York", d:"Marie's Crisis Cafe 59 Grove St New York", m:"walking"},
+    back:{o:"Marie's Crisis Cafe 59 Grove St New York", d:P.pa, m:"transit"}});
+  sum.push(["Dante", dante]);
+  routes = routes.concat([["Akşam: West Village", [P.dante,"L'Industrie Pizzeria 104 Christopher St New York","Pasticceria Rocco 243 Bleecker St New York","Marie's Crisis Cafe 59 Grove St New York","Christopher St-Sheridan Sq Station New York"]]]);
+
+  st.forEach((s,k) => { s.t = fmt(s.start); s.steps = s.steps || []; s.end = k < st.length-1 ? st[k+1].start : dante + 300; });
+  return {stops:st, routes, note, sum, pick, endMin:dante + 300,
+    facts:[["2–8°C","Bulutlu, yağış ihtimali düşük. Park ve nehir kenarı rüzgarlı: bere, eldiven."],
+           ["16:30", sunset],
+           ["Rezervasyonlar", rez, 1]]};
+}
 
 const TIPS_CAR = [
- "Tuvaletler: Doğa Tarihi Müzesi, Chelsea Market (alt kat), Whitney, Little Island girişi.",
- "Doğa Tarihi Müzesi'nde fazla kalırsan High Line turunu atla; Whitney'nin teraslarını ve günbatımını kaçırma.",
- "Thanksgiving arifesi: bazı mekanlar erken kapanabilir. Müzelerin bugünkü saatini sabah uygulamadan bir kez kontrol et.",
- "Balonları yakından görmek istersen ayrı bir iş: 72. sokak ve Columbus Avenue'dan sıraya girilir, en az 1 saat sürer ve Whitney'ye yetişemezsin. Yarın geçitte hepsini havada göreceksin.",
+ "Bu sayfa yol haritası gibi çalışır: başlangıç saatini sen belirlersin, müzeden sonra nereye gideceğini de o an seçersin; saatler ve yol tarifi ona göre kurulur.",
+ "Yanlış bastıysan sayfanın en altında \"Seçimi değiştir\" ve \"Başlangıç saatini sıfırla\" var.",
+ "Doğa Tarihi Müzesi, Intrepid ve Guggenheim CityPASS ile; pasta bugün için tek hak kaldı, yani Intrepid ya da Guggenheim'dan biri.",
+ "Intrepid'in kapısı 16:00'da kapanıyor, Guggenheim ve Doğa Tarihi Müzesi 17:30'a kadar açık.",
+ "Balonları yakından görmek ayrı bir iş: 72. sokak ve Columbus Avenue'dan sıraya girilir, en az 1 saat sürer. Yarın geçitte hepsini havada göreceksin.",
+ "Thanksgiving arifesi: bazı mekanlar erken kapanabilir. Gitmeden haritadaki güncel saate bak.",
  "Metroya temassız kartını ya da telefonunu turnikede okutarak binebilirsin, ayrıca bilet almana gerek yok. Perona inmeden önce tabelada yönü kontrol et: Downtown güneye, Uptown kuzeye gider.",
  "İki sokak arası yaklaşık 1 dakika, iki avenue arası 3–4 dakika. West Village'da bu kural tutmaz, haritaya bak.",
  "Barlarda girişte kimlik soruluyor (21 yaş); pasaportun yanında olsun.",
  "Telefonun gün boyu bilet, harita ve kamera olacak; powerbank al."
 ];
-
-const EXTRA_CAR = {
- metro:{path:["Port Authority","42 St–Port Authority durağı","C treni, 4 durak","81 St durağı"],
-        dir:{o:"Port Authority Bus Terminal New York", d:"81 St-Museum of Natural History Station New York", m:"transit"}},
- levain:{path:["81 St durağı","81. sokaktan batıya","Amsterdam Ave'den 4 blok aşağı","Levain Bakery","Müzenin ana merdiveni"],
-        dir:{o:"81 St-Museum of Natural History Station New York", w:["Levain Bakery 351 Amsterdam Ave New York"], d:"American Museum of Natural History New York", m:"walking"}},
- amnh:{path:["Rotunda","Afrika salonu","4. kat dinozorlar","Mavi balina","Rose Center","Central Park West kapısı"]},
- cmetro:{path:["Müze","81 St durağı","C treni, 7 durak","14 St durağı","15. sokaktan batıya 5 dk","Chelsea Market"],
-        dir:{o:"American Museum of Natural History New York", d:"Chelsea Market New York", m:"transit"}},
- chelsea:{path:["9th Avenue kapısı","Koridor","Los Tacos No. 1","9th Avenue kapısı"],
-        dir:{o:"14 St 8 Av Station New York", d:"Chelsea Market New York", m:"walking"}},
- whitney:{path:["Chelsea Market","9th Ave'den güneye 3 blok","Gansevoort St'ten sağa","Whitney","8. kattan aşağı"],
-        dir:{o:"Chelsea Market New York", d:"Whitney Museum of American Art New York", m:"walking"}},
- highline:{path:["Whitney","Merdivenle High Line","Kuzeye, 17. sokak seyir yeri","Geri dön","14. sokak merdiveni"]},
- island:{path:["14. sokak merdiveni","Nehre doğru","Yaya geçidi","13. sokak köprüsü","Little Island"],
-        dir:{o:"W 14th St & 10th Ave New York", d:"Little Island New York", m:"walking"}},
- village:{path:["Little Island","Hudson St","Bleecker St: Magnolia","Grove St: Friends binası","Carmine St: Joe's Pizza"],
-        dir:{o:"Little Island New York", w:["Magnolia Bakery 401 Bleecker St New York","90 Bedford St New York"], d:"Joe's Pizza 7 Carmine St New York", m:"walking"}},
- wsp:{path:["Joe's Pizza","W 4th St'ten doğuya 3 dk","Washington Square kemeri"],
-        dir:{o:"Joe's Pizza 7 Carmine St New York", d:"Washington Square Arch New York", m:"walking"}},
- dante:{path:["Washington Square","MacDougal St'ten güneye 3 dk","Dante"],
-        dir:{o:"Washington Square Arch New York", d:"Dante 79 MacDougal St New York", m:"walking"}},
- lindustrie:{path:["Dante","Bleecker St'ten batıya","Christopher St'ten sola","L'Industrie"],
-        dir:{o:"Dante 79 MacDougal St New York", d:"L'Industrie Pizzeria 104 Christopher St New York", m:"walking"}},
- rocco:{path:["L'Industrie","Bleecker St'ten geri 6 dk","Pasticceria Rocco"],
-        dir:{o:"L'Industrie Pizzeria 104 Christopher St New York", d:"Pasticceria Rocco 243 Bleecker St New York", m:"walking"}},
- maries:{path:["Rocco","5 dk yürüme","59 Grove St, bodrum kat"],
-        dir:{o:"Pasticceria Rocco 243 Bleecker St New York", d:"Marie's Crisis Cafe 59 Grove St New York", m:"walking"},
-        back:{o:"Marie's Crisis Cafe 59 Grove St New York", d:"Port Authority Bus Terminal New York", m:"transit"}}
-};
 
 const DAYS = {
  sali:{tab:"Salı 24", date:"2026-11-24", key:"nyc-sali-2026-11-24-v2", stops:STOPS_SALI, routes:ROUTES_SALI, tips:TIPS_SALI, extra:EXTRA_SALI,
@@ -594,12 +850,10 @@ const DAYS = {
   facts:[["2–9°C","Yağış beklenmiyor. Vapur ve adalar rüzgarlı: bere, eldiven, kalın mont."],
          ["16:30","Güneş batışı, dönüş vapuruna denk geliyor. Yürüyüş yaklaşık 6 km, artı adalar."],
          ["Biletler","Feribot bileti 12:30: kalkış saati değil, güvenlik sırasına giriş saatin; 12:00'de sırada ol. 9/11 Müzesi rezervasyonu 15:00'teydi; My CityPASS uygulamasından 16:30 ya da 17:00'ye değiştir.",1]]},
- carsamba:{tab:"Çarşamba 25", date:"2026-11-25", key:"nyc-carsamba-2026-11-25-v1", stops:STOPS_CAR, routes:ROUTES_CAR, tips:TIPS_CAR, extra:EXTRA_CAR,
-  endMin:22*60+30, startMsg:"Gezi 25 Kasım Çarşamba, 09:10'da başlıyor",
+ carsamba:{tab:"Çarşamba 25", date:"2026-11-25", key:"nyc-carsamba-2026-11-25-v2", dynamic:true, stops:[], routes:[], tips:TIPS_CAR, extra:{},
+  endMin:22*60+30, startMsg:"25 Kasım Çarşamba; saat serbest, butona basınca başlar",
   finish:"Dönüş: Christopher St–Sheridan Sq durağından 1 treni, Uptown yönü, 6 durak: Times Sq–42 St. Oradan Port Authority 5 dakika yürüme. Yarın 07:00'de geçit var.",
-  facts:[["2–7°C","Yağış ihtimali düşük. Günbatımını nehir kenarında izleyeceksin; rüzgar için bere al."],
-         ["16:30","Güneş batışı, Little Island'da. Yürüyüş yaklaşık 5 km, artı müze içleri."],
-         ["Rezervasyonlar","My CityPASS uygulamasından: Doğa Tarihi Müzesi 10:00 (rezervasyon şart), Whitney 14:00. Müzeye bugün sadece Central Park West kapılarından giriliyor; yan sokaklar geçit balonları için kapalı.",1]]}
+  facts:[]}
 };
 const ORDER = ["sali","carsamba"];
 ORDER.forEach(k => DAYS[k].stops.forEach(s => Object.assign(s, DAYS[k].extra[s.id] || {})));
@@ -648,6 +902,25 @@ function nyNow0(){
   return {date:`${p.year}-${p.month}-${p.day}`, min:(+p.hour)*60 + (+p.minute)};
 }
 setDay(initialDay());
+/* Çarşamba: başlangıç saati (butona basılınca kaydedilir) */
+const STARTKEY = "nyc-carsamba-2026-11-25-basla" + (demo ? "-demo" : "");
+const getStart = () => { try { const v = JSON.parse(localStorage.getItem(STARTKEY) || "null"); return Number.isFinite(v) ? v : null; } catch(e){ return memStart; } };
+let memStart = null;
+const setStart = v => { memStart = v; try { v === null ? localStorage.removeItem(STARTKEY) : localStorage.setItem(STARTKEY, JSON.stringify(v)); } catch(e){} };
+const CHOICEKEY = "nyc-carsamba-2026-11-25-secim" + (demo ? "-demo" : "");
+let memChoice = null;
+const getChoice = () => { try { const v = JSON.parse(localStorage.getItem(CHOICEKEY) || "null"); return v && v.k ? v : memChoice; } catch(e){ return memChoice; } };
+const setChoice = v => { memChoice = v; try { v === null ? localStorage.removeItem(CHOICEKEY) : localStorage.setItem(CHOICEKEY, JSON.stringify(v)); } catch(e){} };
+function syncDynamic(now){
+  if (!D.dynamic) return;
+  const st = getStart() ?? memStart;
+  const live = now.date === TRIP_DATE && now.min >= 420 && now.min <= 1080;
+  D.preview = st === null;
+  D.S = st !== null ? st : (live ? now.min : 720);
+  D.liveGuess = live;
+  const plan = buildCar(D.S, st !== null ? getChoice() : null);
+  D.plan = plan; D.stops = STOPS = plan.stops; D.routes = ROUTES = plan.routes; D.facts = plan.facts; D.endMin = plan.endMin;
+}
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify([...done])); } catch(e){} };
 let openId = null;
 
@@ -684,6 +957,7 @@ function detailHTML(s, now, live, inList){
 
 function render(){
   const now = nyNow();
+  syncDynamic(now);
   const tripDay = now.date === TRIP_DATE;
   const before = now.date < TRIP_DATE;
   const nx = nextStop();
@@ -699,8 +973,46 @@ function render(){
   $("count").textContent = `${done.size} / ${STOPS.length} adım`;
 
   const prev = (() => { const i = nx ? STOPS.indexOf(nx) : STOPS.length; for (let k = i-1; k >= 0; k--) if (done.has(STOPS[k].id)) return STOPS[k]; return null; })();
+  const pre = D.dynamic && D.preview;
+  $("listSub").textContent = pre
+    ? (D.liveGuess ? "Şu an başlarsan saatler böyle olur. Butona basınca kesinleşir; o zamana kadar bu liste saatle birlikte kayar."
+                   : "Örnek plan: 12:00'de başlanırsa saatler böyle olur. Çarşamba günü butona basılan saate göre yeniden kurulur.")
+    : "Yuvarlağa dokunarak işaretle; yanlış bastıysan tekrar dokun, işaret kalkar. Satıra dokununca detayı açılır.";
+  $("restart").hidden = !(D.dynamic && !D.preview);
+  $("rechoose").hidden = !(D.dynamic && !D.preview && D.plan.pick);
   /* sıradaki adım */
-  if (!nx){
+  if (pre){
+    const pl = D.plan;
+    $("now").innerHTML = `
+      <div class="now-label">Çarşamba, 25 Kasım</div>
+      <div class="now-time">${tripDay ? fmt(now.min) : "Serbest"}</div>
+      <h1 class="now-title">Hazır olunca butona bas</h1>
+      <p class="short">Program bastığın saate göre kurulur: Port Authority'den Doğa Tarihi Müzesi'ne nasıl gideceğin, sonra Intrepid, akşam Dante.</p>
+      <p class="now-place" style="margin-top:14px">${D.liveGuess ? "Şimdi başlarsan" : "12:00'de başlarsan"}:</p>
+      <ol class="path" style="margin-top:6px">${pl.sum.map(x => `<li>${x[0]} ${fmt(x[1])}</li>`).join("")}</ol>
+      ${pl.note ? `<div class="status late">${pl.note}</div>` : ""}
+      <div class="actions">
+        <button class="btn btn-main" id="startBtn" ${tripDay ? "" : "disabled"}>Şimdi başlamak istiyorum</button>
+      </div>
+      ${tripDay ? "" : `<div class="status">Buton 25 Kasım Çarşamba günü açılır</div>`}`;
+    $("detail").innerHTML = "";
+    const sb = $("startBtn");
+    if (tripDay) sb.onclick = () => { done.clear(); save(); setChoice(null); setStart(nyNow().min); openId = null; render(); window.scrollTo({top:0, behavior:"smooth"}); };
+  } else if (nx && nx.id === "secim"){
+    const T = now.min;
+    const cards = OPTS.map(o => { const b = branch(o.k, T);
+      return `<button class="opt" data-k="${o.k}" ${b.ok ? "" : "disabled"}><b>${o.title}</b><span>${o.desc}</span><em>${b.ok ? b.line : b.why}</em></button>`; }).join("");
+    $("now").innerHTML = `
+      <div class="now-label">Müze tamam</div>
+      <div class="now-time">${fmt(T)}</div>
+      <h1 class="now-title">Sonra nereye gitmek istersin?</h1>
+      <p class="now-place">Birini seç; yol tarifi ve saatler şu andan itibaren kurulur. Hepsi akşam Dante'de bitiyor.</p>
+      <div class="opts" id="opts">${cards}</div>
+      <div class="actions">${prev ? `<button class="btn btn-back" id="backBtn">${BACK}Geri al: müzeye dön</button>` : ""}</div>`;
+    $("detail").innerHTML = "";
+    $("opts").onclick = e => { const b = e.target.closest(".opt"); if (!b || b.disabled) return;
+      setChoice({k:b.dataset.k, t:nyNow().min}); openId = null; render(); window.scrollTo({top:0, behavior:"smooth"}); };
+  } else if (!nx){
     $("now").innerHTML = `<div class="finish"><div class="now-label">Bütün adımlar tamam</div>
       <div class="now-time">Gün bitti</div>
       <p class="now-place">${D.finish}</p>
@@ -731,6 +1043,7 @@ function render(){
       <p class="short">${nx.short}</p>
       ${pathHTML(nx)}
       <div class="status ${cls}">${msg}</div>
+      ${D.dynamic && D.plan.note && !done.size ? `<div class="status late">${D.plan.note}</div>` : ""}
       <div class="actions">
         <button class="btn btn-main" id="doneBtn">Yaptım, sıradakine geç</button>
         <a class="btn btn-ghost" href="${mapOf(nx)}" target="_blank" rel="noopener">${PIN}${mapLabel(nx)}</a>
@@ -740,7 +1053,7 @@ function render(){
     $("detail").innerHTML = `<div class="detail">${detailHTML(nx, now, tripDay && now.min < nx.end)}</div>`;
     $("doneBtn").onclick = () => { done.add(nx.id); save(); openId = null; render(); window.scrollTo({top:0, behavior:"smooth"}); };
     const cu = $("catchup");
-    if (cu) cu.onclick = () => { for (const s of STOPS){ if (s === cs) break; done.add(s.id); } save(); render(); };
+    if (cu) cu.onclick = () => { for (const s of STOPS){ if (s === cs) break; if (s.id !== "secim") done.add(s.id); } save(); render(); };
   }
 
   const bb = $("backBtn");
@@ -764,6 +1077,7 @@ function render(){
 $("list").addEventListener("click", e => {
   const li = e.target.closest(".item"); if (!li) return;
   const id = li.dataset.id;
+  if (id === "secim"){ if (e.target.closest(".head")){ openId = openId === id ? null : id; render(); } else window.scrollTo({top:0, behavior:"smooth"}); return; }
   if (e.target.closest(".check")){ done.has(id) ? done.delete(id) : done.add(id); save(); render(); }
   else if (e.target.closest(".head")){ openId = openId === id ? null : id; render(); }
 });
@@ -771,6 +1085,14 @@ let armed = 0;
 $("reset").onclick = () => {
   if (Date.now() - armed < 4000){ done.clear(); save(); openId = null; armed = 0; $("reset").textContent = "İşaretleri sıfırla"; render(); window.scrollTo({top:0}); }
   else { armed = Date.now(); $("reset").textContent = "Emin misin? Silmek için tekrar dokun"; setTimeout(() => { if (armed){ armed = 0; $("reset").textContent = "İşaretleri sıfırla"; } }, 4000); }
+};
+
+$("rechoose").onclick = () => { setChoice(null); done = new Set([...done].filter(x => x === "metro" || x === "amnh")); save(); openId = null; render(); window.scrollTo({top:0}); };
+let armed2 = 0;
+$("restart").onclick = () => {
+  const b = $("restart");
+  if (Date.now() - armed2 < 4000){ armed2 = 0; b.textContent = "Başlangıç saatini sıfırla"; done.clear(); save(); setChoice(null); setStart(null); openId = null; render(); window.scrollTo({top:0}); }
+  else { armed2 = Date.now(); b.textContent = "Emin misin? Program baştan kurulacak; tekrar dokun"; setTimeout(() => { if (armed2){ armed2 = 0; b.textContent = "Başlangıç saatini sıfırla"; } }, 4000); }
 };
 
 $("days").addEventListener("click", e => {
