@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#0E2A3B">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="NYC Gezi">
-<title>New York: Salı ve Çarşamba</title>
+<title>New York Gezisi: 24 Kasım – 1 Aralık</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E2A3B'/%3E%3Cpath d='M10 40h44l-6 10H16z' fill='%23F28C28'/%3E%3Cpath d='M22 40V28h20v12' fill='none' stroke='%237CC4B0' stroke-width='4'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,9 +58,12 @@ b{font-weight:700}
 .bar i{display:block;height:100%;width:0;background:var(--ferry);border-radius:3px;transition:width .35s ease}
 .count{font-size:13px;color:var(--on-harbor-muted);font-variant-numeric:tabular-nums;white-space:nowrap}
 
-.days{display:flex;gap:4px;background:rgba(255,255,255,.1);border-radius:12px;padding:3px}
+.days{display:flex;gap:4px;background:rgba(255,255,255,.1);border-radius:12px;padding:3px;flex:1 1 auto;min-width:0;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity}
+.days::-webkit-scrollbar{display:none}
+.days button{flex:none;scroll-snap-align:center}
+.clock{flex:none}
 .days button{border:0;background:none;color:var(--on-harbor-muted);font-family:var(--display);font-weight:700;font-size:15px;
-  padding:8px 12px;border-radius:9px;min-height:40px;white-space:nowrap}
+  padding:8px 11px;border-radius:9px;min-height:40px;white-space:nowrap}
 .days button[aria-pressed="true"]{background:var(--ferry);color:#231200}
 .top-row{align-items:center}
 .clock small{display:block;margin:0;text-align:right;line-height:1.1}
@@ -234,12 +237,14 @@ h2{font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-.02
   </div>
 </main>
 
+<script src="gunler.js?v=1"></script>
 <script>
 const gm = q => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
 const nav = q => "https://www.google.com/maps/dir/?api=1&travelmode=walking&destination=" + encodeURIComponent(q);
-const mapOf = s => s.dir ? dirURL(s.dir) : (s.walk ? nav(s.map) : gm(s.map));
-const mapLabel = s => s.dir ? (s.dir.m === "transit" ? "Metro güzergahını Google Maps'te aç" : "Yürüyüş güzergahını Google Maps'te aç") : (s.walk ? "Google Maps'te yürüyüş tarifi" : "Google Maps'te aç");
-const route = pts => "https://www.google.com/maps/dir/?api=1&travelmode=walking&origin=" + encodeURIComponent(pts[0]) +
+const drv = q => "https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=" + encodeURIComponent(q);
+const mapOf = s => s.dir ? dirURL(s.dir) : (s.drive ? drv(s.map) : (s.walk ? nav(s.map) : gm(s.map)));
+const mapLabel = s => s.dir ? (s.dir.m === "transit" ? "Metro güzergahını Google Maps'te aç" : s.dir.m === "driving" ? "Araba güzergahını Google Maps'te aç" : "Yürüyüş güzergahını Google Maps'te aç") : (s.drive ? "Google Maps'te araba tarifi" : (s.walk ? "Google Maps'te yürüyüş tarifi" : "Google Maps'te aç"));
+const route = (pts, mode) => "https://www.google.com/maps/dir/?api=1&travelmode=" + (mode || "walking") + "&origin=" + encodeURIComponent(pts[0]) +
   "&destination=" + encodeURIComponent(pts[pts.length-1]) +
   (pts.length > 2 ? "&waypoints=" + encodeURIComponent(pts.slice(1,-1).join("|")) : "");
 
@@ -844,18 +849,19 @@ const TIPS_CAR = [
 ];
 
 const DAYS = {
- sali:{tab:"Salı 24", date:"2026-11-24", key:"nyc-sali-2026-11-24-v2", stops:STOPS_SALI, routes:ROUTES_SALI, tips:TIPS_SALI, extra:EXTRA_SALI,
+ sali:{tab:"Sal 24", name:"Salı", date:"2026-11-24", key:"nyc-sali-2026-11-24-v2", stops:STOPS_SALI, routes:ROUTES_SALI, tips:TIPS_SALI, extra:EXTRA_SALI,
   endMin:23*60+15, startMsg:"Gezi 24 Kasım Salı, 09:45'te başlıyor",
   finish:"Dönüş: Delancey St–Essex St durağından F treni, Uptown yönü, 42 St–Bryant Park. Oradan Port Authority 10 dakika yürüme.",
   facts:[["2–9°C","Yağış beklenmiyor. Vapur ve adalar rüzgarlı: bere, eldiven, kalın mont."],
          ["16:30","Güneş batışı, dönüş vapuruna denk geliyor. Yürüyüş yaklaşık 6 km, artı adalar."],
          ["Biletler","Feribot bileti 12:30: kalkış saati değil, güvenlik sırasına giriş saatin; 12:00'de sırada ol. 9/11 Müzesi rezervasyonu 15:00'teydi; My CityPASS uygulamasından 16:30 ya da 17:00'ye değiştir.",1]]},
- carsamba:{tab:"Çarşamba 25", date:"2026-11-25", key:"nyc-carsamba-2026-11-25-v2", dynamic:true, stops:[], routes:[], tips:TIPS_CAR, extra:{},
+ carsamba:{tab:"Çar 25", name:"Çarşamba", date:"2026-11-25", key:"nyc-carsamba-2026-11-25-v2", dynamic:true, stops:[], routes:[], tips:TIPS_CAR, extra:{},
   endMin:22*60+30, startMsg:"25 Kasım Çarşamba; saat serbest, butona basınca başlar",
   finish:"Dönüş: Christopher St–Sheridan Sq durağından 1 treni, Uptown yönü, 6 durak: Times Sq–42 St. Oradan Port Authority 5 dakika yürüme. Yarın 07:00'de geçit var.",
   facts:[]}
 };
-const ORDER = ["sali","carsamba"];
+Object.assign(DAYS, GUNLER);
+const ORDER = ["sali","carsamba", ...GUNLER_SIRA];
 ORDER.forEach(k => DAYS[k].stops.forEach(s => Object.assign(s, DAYS[k].extra[s.id] || {})));
 const dirURL = d => "https://www.google.com/maps/dir/?api=1&travelmode=" + d.m + "&origin=" + encodeURIComponent(d.o) +
   "&destination=" + encodeURIComponent(d.d) + (d.w ? "&waypoints=" + encodeURIComponent(d.w.join("|")) : "");
@@ -893,7 +899,9 @@ function initialDay(){
   if (DAYS[q]) return q;
   const today = nyNow0().date;
   try { const p = JSON.parse(localStorage.getItem(DAYPICK) || "null"); if (p && p.on === today && DAYS[p.k]) return p.k; } catch(e){}
-  return today >= DAYS.carsamba.date ? "carsamba" : "sali";
+  let k = ORDER[0];
+  ORDER.forEach(x => { if (DAYS[x].date <= today) k = x; });
+  return k;
 }
 function nyNow0(){
   const p = {};
@@ -964,10 +972,15 @@ function render(){
   const cs = tripDay ? clockStop(now) : null;
 
   $("clock").textContent = fmt(now.min);
-  $("days").innerHTML = ORDER.map(k => `<button data-k="${k}" aria-pressed="${k === D.id}">${DAYS[k].tab}</button>`).join("");
-  $("factsTitle").textContent = tripDay ? "Bugün için" : DAYS[D.id].tab.split(" ")[0] + " için";
+  if ($("days").dataset.k !== D.id){
+    $("days").dataset.k = D.id;
+    $("days").innerHTML = ORDER.map(k => `<button data-k="${k}" aria-pressed="${k === D.id}">${DAYS[k].tab}</button>`).join("");
+    const act = $("days").querySelector('[aria-pressed="true"]');
+    if (act) $("days").scrollLeft = act.offsetLeft - ($("days").clientWidth - act.offsetWidth) / 2;
+  }
+  $("factsTitle").textContent = tripDay ? "Bugün için" : D.name + " için";
   $("facts").innerHTML = D.facts.map(f => `<div class="fact${f[2] ? " wide" : ""}"><b>${f[0]}</b>${f[1]}</div>`).join("");
-  $("routes").innerHTML = ROUTES.map(r => `<a href="${route(r[1])}" target="_blank" rel="noopener">${r[0]}<span>Rotayı aç</span></a>`).join("");
+  $("routes").innerHTML = ROUTES.map(r => `<a href="${route(r[1], r[2])}" target="_blank" rel="noopener">${r[0]}<span>Rotayı aç</span></a>`).join("");
   $("tips").innerHTML = TIPS.map(t => `<li>${t}</li>`).join("");
   $("bar").style.width = (done.size / STOPS.length * 100) + "%";
   $("count").textContent = `${done.size} / ${STOPS.length} adım`;
