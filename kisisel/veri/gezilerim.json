@@ -1,0 +1,422 @@
+{
+  "_nasil": "Her yer için 'tarih', 'ozet', 'aciklama', 'fotograflar' ve 'etiketler' alanlarını doldurun. Fotoğrafları kisisel/img/ klasörüne koyup 'fotograflar' listesine {\"src\": \"img/dosya.jpg\", \"aciklama\": \"...\"} şeklinde ekleyin. Yeni il eklemek için 'iller' listesine aynı yapıda bir kayıt açın (il adı haritadaki adla aynı olmalı). Yeni ilçe/şehir için 'ilceler' listesine enlem-boylam ile ekleyin.",
+  "iller": [
+    {
+      "ad": "Kırıkkale",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Adana",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Şanlıurfa",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Adıyaman",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Batman",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Erzurum",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Siirt",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Hakkari",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Şırnak",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Mardin",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Diyarbakır",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Gümüşhane",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Artvin",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Trabzon",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Ordu",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Giresun",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Samsun",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Rize",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Sinop",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Tokat",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Amasya",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Bartın",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Kastamonu",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Balıkesir",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Çanakkale",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "İstanbul",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Kocaeli",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "İzmir",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Muğla",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Antalya",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Mersin",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Afyonkarahisar",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Bolu",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Nevşehir",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Aksaray",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Niğde",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Kırşehir",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Kayseri",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Isparta",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Burdur",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Denizli",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Sivas",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Malatya",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Konya",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Bursa",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Sakarya",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Zonguldak",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    }
+  ],
+  "ilceler": [
+    {
+      "ad": "Alanya",
+      "il": "Antalya",
+      "konum": [
+        36.544,
+        31.999
+      ],
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "Marmaris",
+      "il": "Muğla",
+      "konum": [
+        36.855,
+        28.274
+      ],
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    },
+    {
+      "ad": "İnegöl",
+      "il": "Bursa",
+      "konum": [
+        40.078,
+        29.513
+      ],
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [],
+      "etiketler": []
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Serhat Güven</title>
+<meta name="description" content="Serhat Güven: gezdiğim yerler, yemeklerim, eserlerim ve ben.">
+<meta property="og:title" content="Serhat Güven">
+<meta property="og:description" content="Gezdiğim yerler, yemeklerim, eserlerim ve ben.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23c2410c'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='16' font-weight='700' fill='white' text-anchor='middle'%3ESG%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/stil.css">
+</head>
+<body>
+<header class="ust">
+  <div class="kap ust-ic">
+    <a class="marka" href="#gezilerim"><span class="logo">SG</span><span>Serhat Güven</span></a>
+    <nav class="sekmeler" aria-label="Sekmeler">
+      <a href="#gezilerim" data-sekme="gezilerim">Gezdiğim Yerler</a>
+      <a href="#yemeklerim" data-sekme="yemeklerim">Yemeklerim</a>
+      <a href="#eserlerim" data-sekme="eserlerim">Eserlerim</a>
+      <a href="#ben" data-sekme="ben">Ben</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- GEZDİĞİM YERLER -->
+  <section id="gezilerim" class="sayfa">
+    <div class="kap">
+      <div class="baslik">
+        <h1>Gezdiğim Yerler</h1>
+        <p class="giris">Türkiye'de ayak bastığım yerler. Boyalı iller gezdiklerim, iğneler de ayrıca uğradığım ilçeler. Bir yerin üstüne gelin ya da tıklayın.</p>
+        <div class="sayaclar">
+          <div><b id="s-il">0</b><span>il</span></div>
+          <div><b id="s-ilce">0</b><span>ilçe</span></div>
+          <div><b id="s-oran">0%</b><span>Türkiye'nin</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="harita-kap">
+      <div class="harita-cerceve">
+        <svg id="harita" role="img" aria-label="Türkiye haritası, gezdiğim iller boyalı"></svg>
+        <div id="ipucu" class="ipucu" hidden></div>
+      </div>
+      <div class="lejant">
+        <span><i class="l-gez"></i>Gezdim</span>
+        <span><i class="l-yok"></i>Henüz gitmedim</span>
+        <span><i class="l-pin"></i>İlçe / şehir</span>
+      </div>
+    </div>
+    <div class="kap">
+      <h2 class="ara-baslik">Liste</h2>
+      <div id="liste" class="cipler"></div>
+    </div>
+  </section>
+
+  <!-- YEMEKLERİM -->
+  <section id="yemeklerim" class="sayfa" hidden>
+    <div class="kap">
+      <div class="baslik">
+        <h1>Yemeklerim</h1>
+        <p class="giris">Yaptığım, sevdiğim ve tekrar tekrar döndüğüm yemekler. Yakında tarifleriyle burada.</p>
+      </div>
+      <div id="yemek-izgara" class="izgara"></div>
+    </div>
+  </section>
+
+  <!-- ESERLERİM -->
+  <section id="eserlerim" class="sayfa" hidden>
+    <div class="kap">
+      <div class="baslik">
+        <h1>Eserlerim</h1>
+        <p class="giris">Yazdıklarım, çektiklerim, ürettiklerim. Bu sayfa doldukça büyüyecek.</p>
+      </div>
+      <div id="eser-izgara" class="izgara"></div>
+    </div>
+  </section>
+
+  <!-- BEN -->
+  <section id="ben" class="sayfa" hidden>
+    <div class="kap ben">
+      <div class="ben-foto" aria-hidden="true">SG</div>
+      <div>
+        <h1>Ben</h1>
+        <p class="giris">Merhaba, ben Serhat. Bu sayfaya kendimi anlatan birkaç paragraf gelecek: nereliyim, ne yaparım, nelerden hoşlanırım.</p>
+        <p>Gezmeyi, yemek yapmayı ve bir şeyler üretmeyi seviyorum. Bu site de o üç şeyin bir defteri gibi.</p>
+        <div class="ben-linkler">
+          <a href="https://github.com/sguven" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://sguven.github.io/" target="_blank" rel="noopener">Projelerim</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Yer detay paneli -->
+<div id="perde" class="perde" hidden></div>
+<aside id="panel" class="panel" aria-hidden="true" aria-labelledby="p-ad" role="dialog">
+  <button class="kapat" id="p-kapat" aria-label="Kapat">×</button>
+  <div class="p-ust">
+    <span class="p-tur" id="p-tur"></span>
+    <h2 id="p-ad"></h2>
+    <div class="p-tarih" id="p-tarih"></div>
+  </div>
+  <div id="p-govde"></div>
+</aside>
+
+<footer class="alt"><div class="kap">© <span id="yil"></span> Serhat Güven</div></footer>
+
+<script src="js/iller.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>
