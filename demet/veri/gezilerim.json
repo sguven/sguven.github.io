@@ -1,5 +1,5 @@
 {
-  "_nasil": "Her yer için 'tarih', 'ozet', 'aciklama', 'fotograflar' ve 'etiketler' alanlarını doldurun. Fotoğrafları kisisel/img/ klasörüne koyup 'fotograflar' listesine {\"src\": \"img/dosya.jpg\", \"aciklama\": \"...\"} şeklinde ekleyin. Yeni il eklemek için 'iller' listesine aynı yapıda bir kayıt açın (il adı haritadaki adla aynı olmalı). Yeni ilçe/şehir için 'ilceler' listesine enlem-boylam ile ekleyin.",
+  "_nasil": "Her yer için 'tarih', 'ozet', 'aciklama', 'fotograflar' ve 'etiketler' alanlarını doldurun. Fotoğrafları demet/img/ klasörüne koyup 'fotograflar' listesine {\"src\": \"img/dosya.jpg\", \"aciklama\": \"...\"} şeklinde ekleyin. Yeni il eklemek için 'iller' listesine aynı yapıda bir kayıt açın (il adı haritadaki adla aynı olmalı). Yeni ilçe/şehir için 'ilceler' listesine enlem-boylam ile ekleyin.",
   "iller": [
     {
       "ad": "Kırıkkale",

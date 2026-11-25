@@ -1,4 +1,4 @@
-# Kişisel site (sguven.github.io/kisisel/)
+# Demet Güven kişisel site (sguven.github.io/demet/)
 
 Sekmeler: Gezdiğim Yerler, Yemeklerim, Eserlerim, Ben.
 
