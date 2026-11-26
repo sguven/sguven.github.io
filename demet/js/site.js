@@ -41,6 +41,8 @@
 
   function haritaKur(veri) {
     svg.setAttribute("viewBox", window.TR_VIEWBOX);
+    svg.innerHTML = '<defs><pattern id="tarama" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">' +
+      '<rect class="tarama-zemin" width="7" height="7"/><line class="tarama-cizgi" x1="0" y1="0" x2="0" y2="7"/></pattern></defs>';
     var gIl = document.createElementNS(SVGNS, "g");
     var gPin = document.createElementNS(SVGNS, "g");
     svg.appendChild(gIl); svg.appendChild(gPin);
@@ -54,14 +56,20 @@
       p.setAttribute("class", "il");
       p.dataset.ad = ad;
       if (ilKayit[ad]) {
-        p.classList.add("gez");
+        p.classList.add("gez", "r" + renk(ad));
         p.setAttribute("tabindex", "0");
         p.setAttribute("role", "button");
         p.setAttribute("aria-label", ad + ", detayları aç");
       }
       gIl.appendChild(p);
       ilElem[ad] = p;
+      if (ilKayit[ad]) {
+        var bb = p.getBBox();
+        p.style.setProperty("--d", ((bb.x + bb.width / 2) / 1000 * 1.1).toFixed(2) + "s");
+      }
     });
+    svg.classList.add("giris");
+    setTimeout(function () { svg.classList.remove("giris"); }, 2200);
 
     veri.ilceler.forEach(function (k) {
       if (!k.konum) return;
@@ -73,7 +81,7 @@
       g.setAttribute("role", "button");
       g.setAttribute("aria-label", k.ad + ", detayları aç");
       g.dataset.ilce = k.ad;
-      g.innerHTML = '<circle class="vur" r="' + (window.innerWidth < 700 ? 26 : 14) + '"/><circle class="dis" r="9"/><circle class="ic" r="4.5"/><text x="8" y="-7">' + esc(k.ad) + "</text>";
+      g.innerHTML = '<circle class="vur" r="' + (window.innerWidth < 700 ? 26 : 14) + '"/><circle class="dalga" r="6"/><circle class="ic" r="5.5"/><text x="8" y="-7">' + esc(k.ad) + "</text>";
       gPin.appendChild(g);
       pinElem[k.ad] = g;
     });
@@ -85,8 +93,14 @@
       var r = cerceve.getBoundingClientRect();
       ipucu.style.left = (e.clientX - r.left) + "px";
       ipucu.style.top = (e.clientY - r.top) + "px";
+      ipucu.style.setProperty("--ip", hedef.renk);
       ipucu.innerHTML = esc(hedef.ad) + "<small>" + esc(hedef.alt) + "</small>";
       ipucu.hidden = false;
+    });
+    // Üstüne gelinen ili öne al, büyürken komşularının altında kalmasın
+    svg.addEventListener("mouseover", function (e) {
+      var t = e.target;
+      if (t.classList && t.classList.contains("gez") && t.parentNode.lastChild !== t) t.parentNode.appendChild(t);
     });
     svg.addEventListener("mouseleave", function () { ipucu.hidden = true; });
     svg.addEventListener("click", function (e) {
@@ -104,15 +118,19 @@
     var pin = el.closest && el.closest(".pin");
     if (pin) {
       var k = ilceKayit[pin.dataset.ilce];
-      return { ad: k.ad, alt: k.il + " · tıkla", ac: function () { detayAc("ilce", k.ad); } };
+      return { ad: k.ad, alt: k.il + " · tıkla", renk: renkVar(k.il), ac: function () { detayAc("ilce", k.ad); } };
     }
     if (el.classList && el.classList.contains("il")) {
       var ad = el.dataset.ad;
-      if (ilKayit[ad]) return { ad: ad, alt: (ilKayit[ad].ozet || "Gezdim") + " · tıkla", ac: function () { detayAc("il", ad); } };
-      return { ad: ad, alt: "Henüz gitmedim" };
+      if (ilKayit[ad]) return { ad: ad, alt: (ilKayit[ad].ozet || "Gezdim") + " · tıkla", renk: renkVar(ad), ac: function () { detayAc("il", ad); } };
+      return { ad: ad, alt: "Sırada", renk: "var(--soluk)" };
     }
     return null;
   }
+
+  var RENKLER = ["var(--nar)", "var(--safran)", "var(--turkuaz)", "var(--civit)", "var(--kiremit)"];
+  function renk(ad) { var r = (window.TR_RENK || {})[ad]; return r == null ? 0 : r; }
+  function renkVar(ad) { return RENKLER[renk(ad)]; }
 
   /* ---------- Detay paneli ---------- */
   var panel = $("panel"), perde = $("perde"), sonOdak = null;
@@ -135,6 +153,7 @@
     secili = tur === "il" ? ilElem[ad] : pinElem[ad];
     if (secili) secili.classList.add("secili");
 
+    panel.style.setProperty("--p", renkVar(tur === "il" ? ad : k.il));
     $("p-tur").textContent = tur === "il" ? "İl" : "İlçe · " + k.il;
     $("p-ad").textContent = k.ad;
     $("p-tarih").textContent = k.tarih ? "Ziyaret: " + k.tarih : "";
@@ -192,10 +211,12 @@
   function listeKur(veri) {
     var tr = function (a, b) { return a.ad.localeCompare(b.ad, "tr"); };
     var html = veri.iller.slice().sort(tr).map(function (k) {
-      return '<button class="cip" data-il="' + esc(k.ad) + '">' + esc(k.ad) + "</button>";
+      return '<button class="cip" style="--r:' + renkVar(k.ad) + '" data-il="' + esc(k.ad) + '">' + esc(k.ad) + "</button>";
     }).concat(veri.ilceler.slice().sort(tr).map(function (k) {
-      return '<button class="cip ilce" data-ilce="' + esc(k.ad) + '"><span class="nokta"></span>' + esc(k.ad) + "</button>";
+      return '<button class="cip ilce" style="--r:' + renkVar(k.il) + '" data-ilce="' + esc(k.ad) + '"><span class="nokta"></span>' + esc(k.ad) + "</button>";
     })).join("");
+    var adlar = veri.iller.concat(veri.ilceler).map(function (k) { return "<span>" + esc(k.ad) + "</span><i>✦</i>"; }).join("");
+    $("kayan").innerHTML = adlar + adlar;
     $("liste").innerHTML = html;
     sayac($("s-il"), veri.iller.length, "");
     sayac($("s-ilce"), veri.ilceler.length, "");
@@ -215,7 +236,7 @@
   /* ---------- Yemekler / Eserler ---------- */
   function kartlar(el, liste, ust, linkAlan) {
     el.innerHTML = liste.map(function (k) {
-      var foto = k.foto ? '<img loading="lazy" src="' + esc(k.foto) + '" alt="' + esc(k.ad) + '">' : esc((k.ad || "?").charAt(0));
+      var foto = k.foto ? '<img loading="lazy" src="' + esc(k.foto) + '" alt="' + esc(k.ad) + '">' : "<span>" + esc((k.ad || "?").charAt(0)) + "</span>";
       var u = ust(k);
       return '<article class="kart"><div class="kart-foto">' + foto + '</div><div class="kart-ic">' +
         (u ? '<div class="ust-yazi">' + esc(u) + "</div>" : "") +
