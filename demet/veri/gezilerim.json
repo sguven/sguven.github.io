@@ -6,7 +6,24 @@
       "tarih": "",
       "ozet": "",
       "aciklama": "",
-      "fotograflar": [],
+      "fotograflar": [
+        {
+          "src": "img/kirikkale-at.jpg",
+          "aciklama": "Kırıkkale"
+        },
+        {
+          "src": "img/kirikkale-dinek-atv.jpg",
+          "aciklama": "Dinek Dağı"
+        },
+        {
+          "src": "img/kirikkale-dinek.jpg",
+          "aciklama": "Dinek Dağı"
+        },
+        {
+          "src": "img/kirikkale-karaahmetli-lavanta.jpg",
+          "aciklama": "Karaahmetli lavanta bahçesi"
+        }
+      ],
       "etiketler": []
     },
     {
@@ -139,7 +156,12 @@
       "tarih": "",
       "ozet": "",
       "aciklama": "",
-      "fotograflar": [],
+      "fotograflar": [
+        {
+          "src": "img/trabzon-uzungol.jpg",
+          "aciklama": "Uzungöl"
+        }
+      ],
       "etiketler": []
     },
     {
@@ -155,7 +177,12 @@
       "tarih": "",
       "ozet": "",
       "aciklama": "",
-      "fotograflar": [],
+      "fotograflar": [
+        {
+          "src": "img/giresun-travertenler.jpg",
+          "aciklama": "Giresun"
+        }
+      ],
       "etiketler": []
     },
     {
@@ -184,7 +211,12 @@
       "tarih": "",
       "ozet": "",
       "aciklama": "",
-      "fotograflar": [],
+      "fotograflar": [
+        {
+          "src": "img/sinop-erfelek.jpg",
+          "aciklama": "Erfelek şelaleleri"
+        }
+      ],
       "etiketler": []
     },
     {
@@ -213,7 +245,20 @@
       "tarih": "",
       "ozet": "",
       "aciklama": "",
-      "fotograflar": [],
+      "fotograflar": [
+        {
+          "src": "img/bartin-inkumu.jpg",
+          "aciklama": "İnkumu"
+        },
+        {
+          "src": "img/bartin-plaj.jpg",
+          "aciklama": "Bartın sahili"
+        },
+        {
+          "src": "img/bartin-amasra.jpg",
+          "aciklama": "Amasra"
+        }
+      ],
       "etiketler": []
     },
     {
@@ -274,6 +319,10 @@
         {
           "src": "img/izmir-saat-kulesi.jpg",
           "aciklama": "Konak Saat Kulesi"
+        },
+        {
+          "src": "img/izmir-cesme.jpg",
+          "aciklama": "Çeşme Kalesi"
         }
       ],
       "etiketler": []
@@ -291,7 +340,12 @@
       "tarih": "",
       "ozet": "",
       "aciklama": "",
-      "fotograflar": [],
+      "fotograflar": [
+        {
+          "src": "img/antalya-tekne-turu.jpg",
+          "aciklama": "Tekne turu"
+        }
+      ],
       "etiketler": []
     },
     {
@@ -328,6 +382,14 @@
         {
           "src": "img/bolu-goynuk.jpg",
           "aciklama": "Göynük"
+        },
+        {
+          "src": "img/bolu-yedigoller.jpg",
+          "aciklama": "Yedigöller"
+        },
+        {
+          "src": "img/bolu-travertenler.jpg",
+          "aciklama": "Bolu"
         }
       ],
       "etiketler": []
@@ -378,6 +440,10 @@
         {
           "src": "img/kayseri-sultan-sazligi.jpg",
           "aciklama": "Sultan Sazlığı, arkada Erciyes"
+        },
+        {
+          "src": "img/kayseri-asma-kopru.jpg",
+          "aciklama": "Kanyonda asma köprü"
         }
       ],
       "etiketler": []
@@ -445,7 +511,12 @@
       "tarih": "",
       "ozet": "",
       "aciklama": "",
-      "fotograflar": [],
+      "fotograflar": [
+        {
+          "src": "img/bursa-gemlik.jpg",
+          "aciklama": "Gemlik"
+        }
+      ],
       "etiketler": []
     },
     {
@@ -453,7 +524,12 @@
       "tarih": "",
       "ozet": "",
       "aciklama": "",
-      "fotograflar": [],
+      "fotograflar": [
+        {
+          "src": "img/sakarya-sapanca.jpg",
+          "aciklama": "Sapanca"
+        }
+      ],
       "etiketler": []
     },
     {
@@ -465,6 +541,45 @@
         {
           "src": "img/zonguldak-eregli.jpg",
           "aciklama": "Karadeniz Ereğli, Sevgi Barış Dostluk Köprüsü"
+        }
+      ],
+      "etiketler": []
+    },
+    {
+      "ad": "Eskişehir",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [
+        {
+          "src": "img/eskisehir-gonul-dagi.jpg",
+          "aciklama": "Gönül Dağı hatırası"
+        }
+      ],
+      "etiketler": []
+    },
+    {
+      "ad": "Çankırı",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [
+        {
+          "src": "img/cankiri-ilgaz.jpg",
+          "aciklama": "Ilgaz"
+        }
+      ],
+      "etiketler": []
+    },
+    {
+      "ad": "Yalova",
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [
+        {
+          "src": "img/yalova.jpg",
+          "aciklama": "Yalova"
         }
       ],
       "etiketler": []
@@ -494,7 +609,12 @@
       "tarih": "",
       "ozet": "",
       "aciklama": "",
-      "fotograflar": [],
+      "fotograflar": [
+        {
+          "src": "img/marmaris-marina.jpg",
+          "aciklama": "Marmaris"
+        }
+      ],
       "etiketler": []
     },
     {
