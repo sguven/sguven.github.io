@@ -49,6 +49,24 @@
 
     veri.iller.forEach(function (k) { ilKayit[k.ad] = k; });
     veri.ilceler.forEach(function (k) { ilceKayit[k.ad] = k; });
+    (veri.yurtdisi || []).forEach(function (k) { k.yd = true; k.il = k.ulke; ilceKayit[k.ad] = k; });
+
+    // Yurt dışında gidilen ülkeler (yalnızca gidilenler çizilir)
+    var gidilenUlke = {};
+    (veri.yurtdisi || []).forEach(function (k) { gidilenUlke[k.ulke] = gidilenUlke[k.ulke] || k.ad; });
+    Object.keys(gidilenUlke).forEach(function (ulke) {
+      var d = (window.TR_ULKELER || {})[ulke];
+      if (!d) return;
+      var p = document.createElementNS(SVGNS, "path");
+      p.setAttribute("d", d);
+      p.setAttribute("class", "il gez ulke r" + renk(ulke));
+      p.setAttribute("tabindex", "0");
+      p.setAttribute("role", "button");
+      p.setAttribute("aria-label", ulke + ", detayları aç");
+      p.dataset.ulke = ulke;
+      p.dataset.sehir = gidilenUlke[ulke];
+      gIl.appendChild(p);
+    });
 
     Object.keys(window.TR_ILLER).forEach(function (ad) {
       var p = document.createElementNS(SVGNS, "path");
@@ -71,7 +89,7 @@
     svg.classList.add("giris");
     setTimeout(function () { svg.classList.remove("giris"); }, 2200);
 
-    veri.ilceler.forEach(function (k) {
+    veri.ilceler.concat(veri.yurtdisi || []).forEach(function (k) {
       if (!k.konum) return;
       var xy = proj(k.konum[0], k.konum[1]);
       var g = document.createElementNS(SVGNS, "g");
@@ -100,7 +118,7 @@
     // Üstüne gelinen ili öne al, büyürken komşularının altında kalmasın
     svg.addEventListener("mouseover", function (e) {
       var t = e.target;
-      if (t.classList && t.classList.contains("gez") && t.parentNode.lastChild !== t) t.parentNode.appendChild(t);
+      if (t.classList && t.classList.contains("gez") && !t.dataset.ulke && t.parentNode.lastChild !== t) t.parentNode.appendChild(t);
     });
     svg.addEventListener("mouseleave", function () { ipucu.hidden = true; });
     svg.addEventListener("click", function (e) {
@@ -119,6 +137,10 @@
     if (pin) {
       var k = ilceKayit[pin.dataset.ilce];
       return { ad: k.ad, alt: k.il + " · tıkla", renk: renkVar(k.il), ac: function () { detayAc("ilce", k.ad); } };
+    }
+    if (el.dataset && el.dataset.ulke) {
+      var sehir = el.dataset.sehir;
+      return { ad: el.dataset.ulke, alt: "Yurt dışı · tıkla", renk: renkVar(el.dataset.ulke), ac: function () { detayAc("ilce", sehir); } };
     }
     if (el.classList && el.classList.contains("il")) {
       var ad = el.dataset.ad;
@@ -154,7 +176,7 @@
     if (secili) secili.classList.add("secili");
 
     panel.style.setProperty("--p", renkVar(tur === "il" ? ad : k.il));
-    $("p-tur").textContent = tur === "il" ? "İl" : "İlçe · " + k.il;
+    $("p-tur").textContent = tur === "il" ? "İl" : (k.yd ? "Yurt dışı · " : "İlçe · ") + k.il;
     $("p-ad").textContent = k.ad;
     $("p-tarih").textContent = k.tarih ? "Ziyaret: " + k.tarih : "";
 
@@ -212,7 +234,7 @@
     var tr = function (a, b) { return a.ad.localeCompare(b.ad, "tr"); };
     var html = veri.iller.slice().sort(tr).map(function (k) {
       return '<button class="cip" style="--r:' + renkVar(k.ad) + '" data-il="' + esc(k.ad) + '">' + esc(k.ad) + "</button>";
-    }).concat(veri.ilceler.slice().sort(tr).map(function (k) {
+    }).concat(veri.ilceler.concat(veri.yurtdisi || []).slice().sort(tr).map(function (k) {
       return '<button class="cip ilce" style="--r:' + renkVar(k.il) + '" data-ilce="' + esc(k.ad) + '"><span class="nokta"></span>' + esc(k.ad) + "</button>";
     })).join("");
     var adlar = veri.iller.concat(veri.ilceler).map(function (k) { return "<span>" + esc(k.ad) + "</span><i>✦</i>"; }).join("");
@@ -220,6 +242,8 @@
     $("liste").innerHTML = html;
     sayac($("s-il"), veri.iller.length, "");
     sayac($("s-ilce"), veri.ilceler.length, "");
+    var ulkeler = {}; (veri.yurtdisi || []).forEach(function (k) { ulkeler[k.ulke] = 1; });
+    if ($("s-ulke")) sayac($("s-ulke"), Object.keys(ulkeler).length, "");
     sayac($("s-oran"), Math.round(veri.iller.length / 81 * 100), "%");
   }
   function sayac(el, hedef, ek) {

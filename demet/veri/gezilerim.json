@@ -1,5 +1,5 @@
 {
-  "_nasil": "Her yer için 'tarih', 'ozet', 'aciklama', 'fotograflar' ve 'etiketler' alanlarını doldurun. Fotoğrafları demet/img/ klasörüne koyup 'fotograflar' listesine {\"src\": \"img/dosya.jpg\", \"aciklama\": \"...\"} şeklinde ekleyin. Yeni il eklemek için 'iller' listesine aynı yapıda bir kayıt açın (il adı haritadaki adla aynı olmalı). Yeni ilçe/şehir için 'ilceler' listesine enlem-boylam ile ekleyin.",
+  "_nasil": "Her yer için 'tarih', 'ozet', 'aciklama', 'fotograflar' ve 'etiketler' alanlarını doldurun. Fotoğrafları demet/img/ klasörüne koyup 'fotograflar' listesine {\"src\": \"img/dosya.jpg\", \"aciklama\": \"...\"} şeklinde ekleyin. Yeni il eklemek için 'iller' listesine aynı yapıda bir kayıt açın (il adı haritadaki adla aynı olmalı). Yeni ilçe/şehir için 'ilceler' listesine enlem-boylam ile ekleyin. Yurt dışı şehirler için 'yurtdisi' listesine ad, ulke ve konum ile ekleyin (ülkenin haritada çizilmesi için sınırının js/iller.js içindeki TR_ULKELER'e eklenmesi gerekir).",
   "iller": [
     {
       "ad": "Kırıkkale",
@@ -508,6 +508,30 @@
       "ozet": "",
       "aciklama": "",
       "fotograflar": [],
+      "etiketler": []
+    }
+  ],
+  "yurtdisi": [
+    {
+      "ad": "Batum",
+      "ulke": "Gürcistan",
+      "konum": [
+        41.6417,
+        41.6339
+      ],
+      "tarih": "",
+      "ozet": "",
+      "aciklama": "",
+      "fotograflar": [
+        {
+          "src": "img/batum-sahil.jpg",
+          "aciklama": "Batum sahilinden şehir manzarası"
+        },
+        {
+          "src": "img/batum-ali-nino.jpg",
+          "aciklama": "Ali ve Nino heykeli"
+        }
+      ],
       "etiketler": []
     }
   ]
