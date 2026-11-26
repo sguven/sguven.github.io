@@ -31,6 +31,10 @@
         {
           "src": "img/sanliurfa-balikligol.jpg",
           "aciklama": "Balıklıgöl"
+        },
+        {
+          "src": "img/sanliurfa-gobeklitepe.jpg",
+          "aciklama": "Göbeklitepe"
         }
       ],
       "etiketler": []
@@ -167,7 +171,12 @@
       "tarih": "",
       "ozet": "",
       "aciklama": "",
-      "fotograflar": [],
+      "fotograflar": [
+        {
+          "src": "img/rize-cay-bahcesi.jpg",
+          "aciklama": "Çay bahçelerinde"
+        }
+      ],
       "etiketler": []
     },
     {
@@ -365,7 +374,12 @@
       "tarih": "",
       "ozet": "",
       "aciklama": "",
-      "fotograflar": [],
+      "fotograflar": [
+        {
+          "src": "img/kayseri-sultan-sazligi.jpg",
+          "aciklama": "Sultan Sazlığı, arkada Erciyes"
+        }
+      ],
       "etiketler": []
     },
     {
