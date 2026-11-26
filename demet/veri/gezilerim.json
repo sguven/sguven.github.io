@@ -14,7 +14,12 @@
       "tarih": "",
       "ozet": "",
       "aciklama": "",
-      "fotograflar": [],
+      "fotograflar": [
+        {
+          "src": "img/adana-taskopru.jpg",
+          "aciklama": "Taşköprü, arkada Sabancı Camii"
+        }
+      ],
       "etiketler": []
     },
     {
@@ -22,7 +27,12 @@
       "tarih": "",
       "ozet": "",
       "aciklama": "",
-      "fotograflar": [],
+      "fotograflar": [
+        {
+          "src": "img/sanliurfa-balikligol.jpg",
+          "aciklama": "Balıklıgöl"
+        }
+      ],
       "etiketler": []
     },
     {
@@ -226,7 +236,16 @@
       "tarih": "",
       "ozet": "",
       "aciklama": "",
-      "fotograflar": [],
+      "fotograflar": [
+        {
+          "src": "img/istanbul-tramvay.jpg",
+          "aciklama": "Taksim–Tünel nostaljik tramvayı"
+        },
+        {
+          "src": "img/istanbul-misir-carsisi.jpg",
+          "aciklama": "Mısır Çarşısı"
+        }
+      ],
       "etiketler": []
     },
     {
@@ -242,7 +261,12 @@
       "tarih": "",
       "ozet": "",
       "aciklama": "",
-      "fotograflar": [],
+      "fotograflar": [
+        {
+          "src": "img/izmir-saat-kulesi.jpg",
+          "aciklama": "Konak Saat Kulesi"
+        }
+      ],
       "etiketler": []
     },
     {
@@ -274,7 +298,12 @@
       "tarih": "",
       "ozet": "",
       "aciklama": "",
-      "fotograflar": [],
+      "fotograflar": [
+        {
+          "src": "img/afyon-eski-evler.jpg",
+          "aciklama": "Eski Afyon evleri, tepede kale"
+        }
+      ],
       "etiketler": []
     },
     {
@@ -282,7 +311,16 @@
       "tarih": "",
       "ozet": "",
       "aciklama": "",
-      "fotograflar": [],
+      "fotograflar": [
+        {
+          "src": "img/bolu-golcuk.jpg",
+          "aciklama": "Karlar altında Gölcük"
+        },
+        {
+          "src": "img/bolu-goynuk.jpg",
+          "aciklama": "Göynük"
+        }
+      ],
       "etiketler": []
     },
     {
@@ -290,7 +328,12 @@
       "tarih": "",
       "ozet": "",
       "aciklama": "",
-      "fotograflar": [],
+      "fotograflar": [
+        {
+          "src": "img/nevsehir-kapadokya.jpg",
+          "aciklama": "Karlı Kapadokya"
+        }
+      ],
       "etiketler": []
     },
     {
@@ -346,7 +389,12 @@
       "tarih": "",
       "ozet": "",
       "aciklama": "",
-      "fotograflar": [],
+      "fotograflar": [
+        {
+          "src": "img/denizli-pamukkale.jpg",
+          "aciklama": "Pamukkale"
+        }
+      ],
       "etiketler": []
     },
     {
@@ -370,7 +418,12 @@
       "tarih": "",
       "ozet": "",
       "aciklama": "",
-      "fotograflar": [],
+      "fotograflar": [
+        {
+          "src": "img/konya.jpg",
+          "aciklama": "Mevlana Müzesi önünde"
+        }
+      ],
       "etiketler": []
     },
     {
@@ -394,7 +447,12 @@
       "tarih": "",
       "ozet": "",
       "aciklama": "",
-      "fotograflar": [],
+      "fotograflar": [
+        {
+          "src": "img/zonguldak-eregli.jpg",
+          "aciklama": "Karadeniz Ereğli, Sevgi Barış Dostluk Köprüsü"
+        }
+      ],
       "etiketler": []
     }
   ],
