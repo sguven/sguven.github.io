@@ -163,7 +163,7 @@
     if (k.aciklama) {
       h += String(k.aciklama).split(/\n\s*\n/).map(function (p) { return "<p>" + esc(p) + "</p>"; }).join("");
     }
-    if (!k.ozet && !k.aciklama) {
+    if (!k.ozet && !k.aciklama && !(k.fotograflar && k.fotograflar.length)) {
       h += '<div class="bos-not">Bu yer için henüz not yazılmadı. Detaylar yakında burada olacak.</div>';
     }
     h += fotolar(k.fotograflar);

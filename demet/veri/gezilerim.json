@@ -30,7 +30,12 @@
       "tarih": "",
       "ozet": "",
       "aciklama": "",
-      "fotograflar": [],
+      "fotograflar": [
+        {
+          "src": "img/adiyaman-nemrut.jpg",
+          "aciklama": "Nemrut Dağı'nda gün batımı"
+        }
+      ],
       "etiketler": []
     },
     {
@@ -38,7 +43,12 @@
       "tarih": "",
       "ozet": "",
       "aciklama": "",
-      "fotograflar": [],
+      "fotograflar": [
+        {
+          "src": "img/batman-hasankeyf.jpg",
+          "aciklama": "Hasankeyf, Mezopotamya'nın kalbi"
+        }
+      ],
       "etiketler": []
     },
     {
@@ -78,7 +88,12 @@
       "tarih": "",
       "ozet": "",
       "aciklama": "",
-      "fotograflar": [],
+      "fotograflar": [
+        {
+          "src": "img/mardin.jpg",
+          "aciklama": "Mardin"
+        }
+      ],
       "etiketler": []
     },
     {
@@ -166,7 +181,12 @@
       "tarih": "",
       "ozet": "",
       "aciklama": "",
-      "fotograflar": [],
+      "fotograflar": [
+        {
+          "src": "img/amasya.jpg",
+          "aciklama": "Amasya, arkada kral kaya mezarları"
+        }
+      ],
       "etiketler": []
     },
     {
