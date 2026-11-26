@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Yönetim · Demet Güven</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 1l4.4 4.4h6.2v6.2L31 16l-4.4 4.4v6.2h-6.2L16 31l-4.4-4.4H5.4v-6.2L1 16l4.4-4.4V5.4h6.2z' fill='%23b5523b'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,600&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/stil.css">
+<style>
+.panel-sayfa{padding:36px 0 90px}
+.panel-sayfa h1{font-size:clamp(32px,5vw,48px);margin:0 0 6px;font-weight:600}
+.alt-not{color:var(--soluk);margin:0 0 26px}
+.kutu{background:var(--kart);border:1px solid var(--cizgi);border-radius:18px;padding:22px}
+.giris-kutu{max-width:460px}
+label{display:block;font-weight:600;font-size:14px;color:var(--murekkep);margin:16px 0 6px}
+label small{font-weight:400;color:var(--soluk)}
+input[type=text],input[type=password],input[type=number],textarea,select{width:100%;font:16px var(--sans);color:var(--murekkep);background:var(--bg);border:1px solid var(--cizgi);border-radius:12px;padding:11px 13px}
+textarea{min-height:140px;resize:vertical;line-height:1.55}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--vurgu);outline-offset:1px}
+.dugme{display:inline-flex;align-items:center;gap:8px;font:600 15px var(--sans);border:0;border-radius:999px;padding:11px 20px;cursor:pointer;background:var(--murekkep);color:var(--bg)}
+.dugme.ikincil{background:var(--yok);color:var(--murekkep)}
+.dugme.tehlike{background:transparent;color:#b3261e;border:1px solid currentColor}
+.dugme:disabled{opacity:.5;cursor:wait}
+.satir{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:20px}
+.durum{margin-top:14px;font-size:15px;min-height:1.4em}
+.durum.hata{color:#b3261e}.durum.iyi{color:#2f7d5b}
+.duzen{display:grid;grid-template-columns:280px 1fr;gap:24px;align-items:start}
+@media (max-width:820px){.duzen{grid-template-columns:1fr}.yerler{max-height:38vh}}
+.yerler{max-height:70vh;overflow:auto;padding:6px}
+.yerler .cip{display:block;width:100%;text-align:left;margin-bottom:6px}
+.yerler .cip.secili{border-color:var(--vurgu);color:var(--vurgu);background:color-mix(in srgb,var(--vurgu) 6%,var(--kart))}
+.yerler .grup{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--soluk);margin:14px 4px 8px}
+.ara{margin-bottom:8px}
+.foto-duzen{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-top:8px}
+.foto-duzen .f{background:var(--bg);border:1px solid var(--cizgi);border-radius:12px;overflow:hidden}
+.foto-duzen img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+.foto-duzen .f input{border:0;border-top:1px solid var(--cizgi);border-radius:0;font-size:14px;padding:8px 10px}
+.foto-duzen .f .alt{display:flex;justify-content:space-between;align-items:center;padding:4px 8px;font-size:12px;color:var(--soluk)}
+.foto-duzen .f button{border:0;background:none;color:#b3261e;font:600 13px var(--sans);cursor:pointer;padding:4px}
+.foto-duzen .yeni{outline:2px dashed var(--vurgu);outline-offset:-2px}
+.yukle{display:grid;place-items:center;aspect-ratio:4/3;border:2px dashed var(--cizgi);border-radius:12px;color:var(--soluk);cursor:pointer;font-weight:600;text-align:center;padding:10px}
+.yukle:hover{border-color:var(--vurgu);color:var(--vurgu)}
+.bos{color:var(--soluk);padding:30px 0;text-align:center}
+.kart-liste{display:grid;gap:10px}
+.kart-liste .oge{display:flex;gap:12px;align-items:center;background:var(--bg);border:1px solid var(--cizgi);border-radius:12px;padding:10px;cursor:pointer}
+.kart-liste .oge.secili{border-color:var(--vurgu)}
+.kart-liste .oge img,.kart-liste .oge .yer-tut{width:56px;height:42px;border-radius:8px;object-fit:cover;background:var(--yok);flex:none}
+.tek-foto{max-width:260px}
+.ipucu-yazi{font-size:13px;color:var(--soluk);margin-top:6px}
+</style>
+</head>
+<body>
+<header class="ust">
+  <div class="kap ust-ic">
+    <a class="marka" href="../">
+      <span class="logo" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16 1l4.4 4.4h6.2v6.2L31 16l-4.4 4.4v6.2h-6.2L16 31l-4.4-4.4H5.4v-6.2L1 16l4.4-4.4V5.4h6.2z"/></svg><b>DG</b></span>
+      <span class="marka-ad">Yönetim</span>
+    </a>
+    <nav class="sekmeler" id="sekmeler" aria-label="Bölümler" hidden>
+      <a href="#gezilerim" data-sekme="gezilerim">Gezdiğim Yerler</a>
+      <a href="#yemeklerim" data-sekme="yemeklerim">Yemeklerim</a>
+      <a href="#eserlerim" data-sekme="eserlerim">Eserlerim</a>
+      <a href="../" id="siteye">Siteye dön ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main class="kap panel-sayfa">
+  <!-- Giriş -->
+  <section id="giris" hidden>
+    <h1>Merhaba Demet</h1>
+    <p class="alt-not">Siteye fotoğraf ve yazı eklemek için bu cihazda bir kez giriş yapman yeterli.</p>
+    <div class="kutu giris-kutu">
+      <label for="anahtar">Giriş anahtarı <small>(Serhat verecek)</small></label>
+      <input id="anahtar" type="password" autocomplete="off" spellcheck="false" placeholder="github_pat_…">
+      <div class="satir"><button class="dugme" id="giris-dugme">Giriş yap</button></div>
+      <div class="durum" id="giris-durum"></div>
+    </div>
+  </section>
+
+  <!-- Gezilerim -->
+  <section id="gezilerim" hidden>
+    <h1>Gezdiğim Yerler</h1>
+    <p class="alt-not">Soldan bir yer seç, yazını yaz, fotoğraflarını ekle ve “Kaydet” de. Sitede bir iki dakika içinde görünür.</p>
+    <div class="duzen">
+      <div class="kutu">
+        <input class="ara" id="ara" type="text" placeholder="Yer ara…">
+        <div class="yerler" id="yerler"></div>
+        <button class="dugme ikincil" id="yeni-yer-ac" style="width:100%;justify-content:center;margin-top:8px">+ Yeni yer ekle</button>
+      </div>
+      <div class="kutu" id="yer-duzen"><div class="bos">Soldan bir yer seç.</div></div>
+    </div>
+  </section>
+
+  <!-- Yemeklerim / Eserlerim (ortak düzenleyici) -->
+  <section id="liste-bolum" hidden>
+    <h1 id="liste-baslik"></h1>
+    <p class="alt-not" id="liste-not"></p>
+    <div class="duzen">
+      <div class="kutu">
+        <div class="kart-liste" id="kart-liste"></div>
+        <button class="dugme ikincil" id="kart-yeni" style="width:100%;justify-content:center;margin-top:10px">+ Yeni ekle</button>
+      </div>
+      <div class="kutu" id="kart-duzen"><div class="bos">Soldan birini seç ya da yenisini ekle.</div></div>
+    </div>
+  </section>
+</main>
+
+<script src="../js/iller.js"></script>
+<script src="ayar.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
