@@ -81,7 +81,7 @@
       g.setAttribute("role", "button");
       g.setAttribute("aria-label", k.ad + ", detayları aç");
       g.dataset.ilce = k.ad;
-      g.innerHTML = '<circle class="vur" r="' + (window.innerWidth < 700 ? 26 : 14) + '"/><circle class="dalga" r="6"/><circle class="ic" r="5.5"/><text x="8" y="-7">' + esc(k.ad) + "</text>";
+      g.innerHTML = '<circle class="vur" r="' + (window.innerWidth < 700 ? 26 : 14) + '"/><circle class="ic" r="5.5"/><text x="8" y="-7">' + esc(k.ad) + "</text>";
       gPin.appendChild(g);
       pinElem[k.ad] = g;
     });
@@ -128,7 +128,7 @@
     return null;
   }
 
-  var RENKLER = ["var(--nar)", "var(--safran)", "var(--turkuaz)", "var(--civit)", "var(--kiremit)"];
+  var RENKLER = ["var(--m0)", "var(--m1)", "var(--m2)", "var(--m3)", "var(--m4)"];
   function renk(ad) { var r = (window.TR_RENK || {})[ad]; return r == null ? 0 : r; }
   function renkVar(ad) { return RENKLER[renk(ad)]; }
 
@@ -216,7 +216,7 @@
       return '<button class="cip ilce" style="--r:' + renkVar(k.il) + '" data-ilce="' + esc(k.ad) + '"><span class="nokta"></span>' + esc(k.ad) + "</button>";
     })).join("");
     var adlar = veri.iller.concat(veri.ilceler).map(function (k) { return "<span>" + esc(k.ad) + "</span><i>✦</i>"; }).join("");
-    $("kayan").innerHTML = adlar + adlar;
+    if ($("kayan")) $("kayan").innerHTML = adlar + adlar;
     $("liste").innerHTML = html;
     sayac($("s-il"), veri.iller.length, "");
     sayac($("s-ilce"), veri.ilceler.length, "");
